@@ -1,23 +1,48 @@
-// Start of code block
+// Load environment variables from .env file
+require('dotenv').config();
 
-// Import Express framework and create an Express application
-// Written by Vishnu Prasad S
+// Import necessary libraries
 const express = require('express');
 const crypto = require('crypto');
+const { Container } = require('rhea-promise');
+
+// Initialize Express app
 const app = express();
 const port = 3000;
 
 // Middleware to parse JSON bodies
-// Written by Vishnu Prasad S
 app.use(express.json());
 
-// Define a POST route for /api/submitData
-// Written by Vishnu Prasad S
-app.post('/api/submitData', (req, res) => {
-  
-  // Initialize an empty string for the constructed URL
-  // Written by Vishnu Prasad S
+// Function to send message to ActiveMQ queue
+const sendMessageToQueue = async (queueName, messageBody) => {
+  const container = new Container();
+  try {
+    const connection = await container.connect({
+      host: process.env.ACTIVE_MQ_HOST,
+      port: parseInt(process.env.ACTIVE_MQ_PORT, 10),
+      username: process.env.ACTIVE_MQ_USERNAME,
+      password: process.env.ACTIVE_MQ_PASSWORD,
+      transport: 'tcp', // Change to 'ssl' for SSL connections
+    });
+
+    const sender = await connection.createSender(queueName);
+    await sender.send({ body: messageBody });
+    console.log(`Message sent to ${queueName}`);
+
+    await sender.close();
+    await connection.close();
+  } catch (error) {
+    console.error('Failed to send message to queue:', error);
+  }
+};
+
+// POST route for /api/submitData
+app.post('/api/submitData', async (req, res) => {
   let constructedUrl = '';
+
+
+  // Define a headers object that will be populated as needed
+let headers = {};
 
   // Switch based on the DeviceMake field in the request body, converted to lower case
   // Written by Vishnu Prasad S
@@ -44,44 +69,34 @@ app.post('/api/submitData', (req, res) => {
             break;
     // Case for 'solis' devices
     // Written by Vishnu Prasad S
-    case 'solis': {
-      // Updated case for 'solis' devices to construct headers and body for the API request
-      const apiId = req.body.API_Key;
-      const contentMd5 = JSON.parse(req.body.HeaderforApi1)["Content-MD5"];
-      const contentType = 'application/json';
-      const date = new Date().toUTCString(); // Current date and time in GMT format
-      const requestBody = JSON.parse(req.body.Api1Body);
-      
-      // Assuming this is the endpoint for the request
-      const apiEndpoint = '/v1/api/userStationList'; 
-    
-      // Concatenate parts to form the string to sign
-      const stringToSign = `POST\n${contentMd5}\n${contentType}\n${date}\n${apiEndpoint}`;
-    
-      // Secret key for HMAC
-      const secretKey = '2a9ea6b1f88f47f6a0362a51dbe65e6f';
-    
-      // Create HMAC signature
-      const signature = crypto.createHmac('sha1', secretKey).update(stringToSign).digest('base64');
-    
-      // Construct the full URL with API key
-      constructedUrl = `${req.body.EndpointApi1}?api_key=${apiId}`;
-    
-      console.log('Constructed URL for Solis:', constructedUrl);
-      console.log('Content-MD5:', contentMd5);
-      console.log('Content-Type:', contentType);
-      console.log('Date:', date);
-      console.log('Signature:', signature);
-      console.log('Request Body:', requestBody);
-      // Note: In a real application, you would use these values (headers and body)
-      // to make the API request to the Solis service.
-      break;
-    }
-  
-  
+    case 'solis':
+    // Construct headers and body for the Solis devices API request
+    const apiId = req.body.API_Key;
+    const contentMd5 = JSON.parse(req.body.HeaderforApi1)["Content-MD5"];
+    const contentType = 'application/json';
+    const date = new Date().toUTCString();
+    const requestBody = JSON.parse(req.body.Api1Body);
 
-      
-      
+    const apiEndpoint = process.env.API_URL;
+    const stringToSign = `POST\n${contentMd5}\n${contentType}\n${date}\n${apiEndpoint}`;
+    
+    const secretKey = process.env.SECRET_KEY;
+    const signature = crypto.createHmac('sha1', secretKey).update(stringToSign).digest('base64');
+
+    constructedUrl = `${req.body.EndpointApi1}`;
+
+    // Populate the headers object with necessary details for Solis
+    headers = {
+      "Content-MD5": contentMd5,
+      "Content-Type": contentType,
+      "Date": date,
+      "Signature": signature,
+      "Api_key"  : apiId,
+      "body": requestBody
+        };
+
+    console.log('Constructed URL for Solis:', constructedUrl, 'Headers:', headers, 'Request Body:', requestBody);
+    break;
     // Case for 'solarman' devices, assuming similar URL construction for demonstration
     // Written by Vishnu Prasad S
     case 'solarman':
@@ -105,15 +120,27 @@ app.post('/api/submitData', (req, res) => {
   // Written by Vishnu Prasad S
   console.log('Data with constructed URL:', responseData);
 
-  // Respond with a success status code
-  // Written by Vishnu Prasad S
-  res.status(200).send('Data received successfully');
+
+ // Constructing message for the queue
+ const messageData = {
+  deviceMake: req.body.DeviceMake,
+  constructedUrl: constructedUrl,
+    headers: headers,
+  
+};
+
+// Sending message to the /request queue
+try {
+  await sendMessageToQueue('/request', JSON.stringify(messageData));
+  console.log('Data enqueued successfully.');
+  res.status(200).send('Data received and enqueued successfully.');
+} catch (error) {
+  console.error('Error enqueuing data:', error);
+  res.status(500).send('Failed to enqueue data.');
+}
 });
 
-// Start the Express server
-// Written by Vishnu Prasad S
+// Starting the Express server
 app.listen(port, () => {
-  console.log(`mon2 service listening at http://localhost:${port}`);
+console.log(`Mon2 service listening at http://localhost:${port}`);
 });
-
-// End of code block

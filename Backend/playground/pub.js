@@ -1,13 +1,40 @@
-const mqtt = require('mqtt');
+const { Container } = require('rhea-promise');
 
-// Replace 'mqtt://<your-ec2-instance-ip>' with the actual IP address of your EC2 instance running ActiveMQ
-const client = mqtt.connect('mqtt://172.31.2.216');
+async function sendMessage() {
+    const container = new Container();
+    let connection;
 
-client.on('connect', function () {
-    console.log('Publisher connected to MQTT broker');
-    setInterval(() => {
-        const message = 'Hello, MQTT!';
-        client.publish('test', message);
-        console.log('Message published:', message);
-    }, 2000); // Publish a message every 2 seconds
-});
+    try {
+        connection = await container.connect({
+            host: '89.116.122.98',
+            port: 5672, // Default AMQP port, adjust if different
+            username: 'root',
+            password: 'itsVishnu@12345678',
+            transport: 'tcp' // or 'ssl' for secure connections
+        });
+
+        const senderOptions = {
+            target: {
+                address: 'exampleQueue'
+            }
+        };
+
+        const sender = await connection.createSender(senderOptions);
+
+        const message = {
+            body: 'Hello, ActiveMQ!',
+            content_type: 'text/plain'
+        };
+
+        await sender.send(message);
+        console.log('Message sent to exampleQueue');
+    } catch (error) {
+        console.error('Error in sending message:', error);
+    } finally {
+        if (connection) {
+            await connection.close();
+        }
+    }
+}
+
+sendMessage().catch(console.error);
