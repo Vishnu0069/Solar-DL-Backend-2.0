@@ -79,11 +79,11 @@ let headers = {};
 
     const apiEndpoint = process.env.API_URL;
     const stringToSign = `POST\n${contentMd5}\n${contentType}\n${date}\n${apiEndpoint}`;
-
+    
     const secretKey = process.env.SECRET_KEY;
     const signature = crypto.createHmac('sha1', secretKey).update(stringToSign).digest('base64');
 
-    constructedUrl = `${req.body.EndpointApi1}?api_key=${apiId}`;
+    constructedUrl = `${req.body.EndpointApi1}`;
 
     // Populate the headers object with necessary details for Solis
     headers = {
@@ -91,7 +91,9 @@ let headers = {};
       "Content-Type": contentType,
       "Date": date,
       "Signature": signature,
-    };
+      "Api_key"  : apiId,
+      "body": requestBody
+        };
 
     console.log('Constructed URL for Solis:', constructedUrl, 'Headers:', headers, 'Request Body:', requestBody);
     break;

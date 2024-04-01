@@ -150,7 +150,7 @@ function manageMon2() {
 // Schedule a cron job to activate Monitor 2 and push data every 3 minutes
 // This ensures data is regularly fetched and sent without manual intervention.
 // Written by Vishnu Prasad S
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('*/3 * * * *', () => {
   console.log('Activating Monitor 2 and pushing data every 3 minutes');
   manageMon2();
 });
