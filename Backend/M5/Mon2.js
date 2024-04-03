@@ -111,22 +111,26 @@ let headers = {};
 
   // Construct response data including the constructed URL
   // Written by Vishnu Prasad S
-  const responseData = {
-    ...req.body,
-    constructedUrl: constructedUrl ? constructedUrl : 'Not applicable'
-  };
+ // Construct response data including the constructed URL and additional metadata
+// Written by Vishnu Prasad S
+const responseData = {
+  ...req.body,
+  constructedUrl: constructedUrl ? constructedUrl : 'Not applicable',
+    
+  
+};
 
   // Log the response data including the URL
   // Written by Vishnu Prasad S
   console.log('Data with constructed URL:', responseData);
 
-
- // Constructing message for the queue
- const messageData = {
+// Constructing message for the queue including metadata
+const messageData = {
   deviceMake: req.body.DeviceMake,
   constructedUrl: constructedUrl,
-    headers: headers,
-  
+  headers: headers,
+  integratorId : req.body.IntegratorID,//adding integratorId
+  PlantID:req.body.PlantID//adding plantid
 };
 
 // Sending message to the /request queue

@@ -102,7 +102,9 @@ async function logDeviceDetails() {
         ...device,
         ...plant[0],
         requestTime: timeVariable,
-        requestSerialNumber: generateRequestSerial(requestSerialCounter++)
+        requestSerialNumber: generateRequestSerial(requestSerialCounter++),
+        integratorId: plant[0].IntegratorID,  // Added field for integratorId
+        PlantId: device.PlantID              // Added field for PlantId
       };
 
       await axios.post('http://localhost:3000/api/submitData', requestData)
@@ -111,6 +113,7 @@ async function logDeviceDetails() {
     }
   }
 }
+
 
 // Manages the Monitor 2 process
 // Starts or restarts the Monitor 2 service as needed to ensure it's running fresh for each data push.
