@@ -67,18 +67,27 @@ const listenToQueue = async () => {
                         });
                     }).on('error', (err) => { console.error('Error calling SolarEdge API:', err); });
                     break;
-                case 'solis':
-                    const requestBody = JSON.stringify(body);
-                    const authHeader = `API ${headers.Api_key}:${headers.Signature}`;
-
-                    axios.post(constructedUrl, requestBody, {
-                        headers: {
-                            'Content-MD5': headers['Content-MD5'],
-                            'Content-Type': headers['Content-Type'],
-                            'Date': headers.Date,
-                            'Authorization': authHeader
-                        }
-                    })
+                // Placeholder for other device makes
+        case 'solis': {
+            // Extracting necessary data from the received message
+            const { constructedUrl, headers } = messageBody;
+            const { 'Content-MD5': contentMD5, 'Content-Type': contentType, Date: date, Signature: signature, Api_key: apiKey, body } = headers;
+          
+            // Convert the body object to JSON string as axios will automatically set Content-Type to json
+            const requestBody = JSON.stringify(body);
+          
+            // Preparing the Authorization header
+            const authHeader = `API ${apiKey}:${signature}`;
+          
+            // Making the POST request to the Solis API
+            axios.post(constructedUrl, requestBody, {
+              headers: {
+                'Content-MD5': contentMD5,
+                'Content-Type': contentType,
+                'Date': date,
+                'Authorization': authHeader
+              }
+            })
                     .then(async (response) => {
                         console.log('Response from Solis API:', JSON.stringify(response.data, null, 2));
                         const responsePayload = {
@@ -93,6 +102,7 @@ const listenToQueue = async () => {
                         console.error('Error making API call to Solis:', error.message);
                     });
                     break;
+                }
                 default:
                     console.log('DeviceMake not recognized. No API call made.');
                     break;
