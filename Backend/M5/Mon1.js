@@ -56,14 +56,19 @@ async function getDeviceMetadataMaster() {
 // Gets serial number, model number, and plant ID for devices of a given type.
 // Written by Vishnu Prasad S
 async function getDeviceMaster(deviceTypeId) {
-  return query('SELECT DeviceSerialNumber, ModelNo, PlantID FROM DeviceMaster WHERE DeviceTypeID = ?', [deviceTypeId]);
+  return query(
+    'SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase FROM DeviceMaster WHERE DeviceTypeID = ?', 
+    [deviceTypeId]
+  );
 }
-
 // Retrieves plant details by plant ID
 // Fetches plant ID, integrator ID, and API key for a given plant.
 // Written by Vishnu Prasad S
 async function getPlantMaster(plantId) {
-  return query('SELECT PlantID, IntegratorID, API_Key FROM PlantMaster WHERE PlantID = ?', [plantId]);
+  return query(
+    'SELECT PlantID, IntegratorID, API_Key, PlantName, Latitude, Longitude, PlantID FROM PlantMaster WHERE PlantID = ?', 
+    [plantId]
+  );
 }
 
 // Generates a request serial number based on the current date and counter
@@ -89,7 +94,7 @@ function calculateNewTime() {
 // Main function to log device details
 // Fetches device data, constructs requests, and sends them to an endpoint.
 // Written by Vishnu Prasad S
-async function logDeviceDetails() {
+/*async function logDeviceDetails() {
   let requestSerialCounter = 1;
   const metadataList = await getDeviceMetadataMaster();
   for (const metadata of metadataList) {
@@ -105,7 +110,36 @@ async function logDeviceDetails() {
         requestSerialNumber: generateRequestSerial(requestSerialCounter++),
         integratorId: plant[0].IntegratorID,  // Added field for integratorId
         PlantId: device.PlantID              // Added field for PlantId
-      };
+
+      };*/
+      async function logDeviceDetails() {
+        let requestSerialCounter = 1;
+        const metadataList = await getDeviceMetadataMaster();
+        for (const metadata of metadataList) {
+          const deviceList = await getDeviceMaster(metadata.DeviceTypeID);
+          for (const device of deviceList) {
+            const plant = await getPlantMaster(device.PlantID);
+            const timeVariable = calculateNewTime();
+            const requestData = {
+              ...metadata,
+              ...device,
+              ...plant[0],
+              requestTime: timeVariable,
+              requestSerialNumber: generateRequestSerial(requestSerialCounter++),
+              metadata: {
+                integratorId: plant[0].IntegratorID,
+                plantName: plant[0].PlantName,
+                latitude: plant[0].Latitude,
+                longitude: plant[0].Longitude,
+                PlantID: plant[0].PlantID,
+                deviceUUID: device.DeviceSerialNumber,
+                deviceMake: metadata.DeviceMake,
+                deviceType: device.DeviceType,
+                capacity: device.Capacity,
+                phase: device.Phase
+              }
+            }
+      //updated block to send the correct metadata
 
       await axios.post('http://localhost:3000/api/submitData', requestData)
         .then(response => console.log('Data submitted to Mon2:', response.data))

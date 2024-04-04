@@ -129,8 +129,17 @@ const messageData = {
   deviceMake: req.body.DeviceMake,
   constructedUrl: constructedUrl,
   headers: headers,
+  metadata: { // Sending additional metadata
   integratorId : req.body.IntegratorID,//adding integratorId
-  PlantID:req.body.PlantID//adding plantid
+  PlantID:req.body.PlantID,//adding plantid
+  DeviceUUID:req.body.DeviceSerialNumber,//adding DeviceSerialNumber
+  DeviceType:req.body.DeviceType,//adding Devicetype
+  Capacity:req.body.Capacity,//adding capacity
+  Phase:req.body.Phase,//adding phase
+  Latitude:req.body.Latitude,//adding Latitude
+  Longitude:req.body.Longitude//adding Longitude
+  }
+
 };
 
 // Sending message to the /request queue
