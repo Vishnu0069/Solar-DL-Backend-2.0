@@ -57,10 +57,13 @@ async function getDeviceMetadataMaster() {
 // Written by Vishnu Prasad S
 async function getDeviceMaster(deviceTypeId) {
   return query(
-    'SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase FROM DeviceMaster WHERE DeviceTypeID = ?', 
+    `SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase, DeviceUUID, modelno 
+     FROM DeviceMaster 
+     WHERE DeviceTypeID = ?`, 
     [deviceTypeId]
   );
 }
+
 // Retrieves plant details by plant ID
 // Fetches plant ID, integrator ID, and API key for a given plant.
 // Written by Vishnu Prasad S
@@ -132,21 +135,23 @@ function calculateNewTime() {
                 latitude: plant[0].Latitude,
                 longitude: plant[0].Longitude,
                 PlantID: plant[0].PlantID,
-                deviceUUID: device.DeviceSerialNumber,
+                deviceUUID: device.DeviceUUID, // Use the DeviceUUID from the query
                 deviceMake: metadata.DeviceMake,
                 deviceType: device.DeviceType,
                 capacity: device.Capacity,
-                phase: device.Phase
+                phase: device.Phase,
+                modelno:device.modelno
               }
-            }
+            };
       //updated block to send the correct metadata
-
-      await axios.post('http://localhost:3000/api/submitData', requestData)
-        .then(response => console.log('Data submitted to Mon2:', response.data))
-        .catch(error => console.error('Error submitting data to Mon2:', error));
-    }
-  }
-}
+            await axios.post('http://localhost:3000/api/submitData', requestData)
+              .then(response => console.log('Data submitted to Mon2:', response.data))
+              .catch(error => console.error('Error submitting data to Mon2:', error));
+          }
+        }
+      }
+      
+      
 
 
 // Manages the Monitor 2 process

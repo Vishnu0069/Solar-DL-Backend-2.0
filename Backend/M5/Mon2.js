@@ -131,13 +131,17 @@ const messageData = {
   headers: headers,
   metadata: { // Sending additional metadata
   integratorId : req.body.IntegratorID,//adding integratorId
+  PlantName : req.body.PlantName,
   PlantID:req.body.PlantID,//adding plantid
-  DeviceUUID:req.body.DeviceSerialNumber,//adding DeviceSerialNumber
+  deviceUUID:req.body.DeviceUUID,
+  modelno:req.body.modelno,
+  deviceSN: req.body.DeviceSerialNumber,//adding DeviceSerialNumber
   DeviceType:req.body.DeviceType,//adding Devicetype
   Capacity:req.body.Capacity,//adding capacity
   Phase:req.body.Phase,//adding phase
   Latitude:req.body.Latitude,//adding Latitude
   Longitude:req.body.Longitude//adding Longitude
+
   }
 
 };

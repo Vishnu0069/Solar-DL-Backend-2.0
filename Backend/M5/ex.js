@@ -35,10 +35,13 @@ async function getDeviceMetadataMaster() {
 
 async function getDeviceMaster(deviceTypeId) {
   return query(
-    'SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase FROM DeviceMaster WHERE DeviceTypeID = ?', 
+    `SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase, DeviceUUID, modelno 
+     FROM DeviceMaster 
+     WHERE DeviceTypeID = ?`, 
     [deviceTypeId]
   );
 }
+
 
 async function getPlantMaster(plantId) {
   return query(
@@ -81,11 +84,12 @@ async function logDeviceDetails() {
           latitude: plant[0].Latitude,
           longitude: plant[0].Longitude,
           PlantID: plant[0].PlantID,
-          deviceUUID: device.DeviceSerialNumber,
+          deviceUUID: device.DeviceUUID, // Use the DeviceUUID from the query
           deviceMake: metadata.DeviceMake,
           deviceType: device.DeviceType,
           capacity: device.Capacity,
-          phase: device.Phase
+          phase: device.Phase,
+          modelno:device.modelno
         }
       };
 
@@ -95,6 +99,7 @@ async function logDeviceDetails() {
     }
   }
 }
+
 
 let mon2Process = null;
 function manageMon2() {
