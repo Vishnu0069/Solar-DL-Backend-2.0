@@ -9,23 +9,24 @@ const listenToTopic = async () => {
       port: parseInt(process.env.ACTIVE_MQ_PORT, 10),
       username: process.env.ACTIVE_MQ_USERNAME,
       password: process.env.ACTIVE_MQ_PASSWORD,
-      transport: process.env.ACTIVE_MQ_TRANSPORT // 'tcp' or 'ssl'
+      transport: 'tcp' // or 'ssl' for secure connections
     });
 
     const receiverOptions = {
       source: {
-        address: 'topic://response', // Ensure this matches the topic used in M5
-        durable: 2, // For durable subscriptions, if needed
-        expiry_policy: 'never' // To keep the subscription active
+        address: '/response', // The topic name you want to subscribe to
+        durable: 2, // Use durable subscription if needed
+        expiry_policy: 'never'
       }
     };
 
     const receiver = await connection.createReceiver(receiverOptions);
 
     receiver.on('message', context => {
+      // Enhanced logging for clarity
       const messageBody = context.message.body ? JSON.parse(context.message.body.toString()) : {};
       console.log('Received message on /response topic:', JSON.stringify(messageBody, null, 2));
-      context.delivery.accept(); // Acknowledge the message if required
+      // This will print the message body in a more readable format
     });
 
     console.log('Subscribed to /response topic and waiting for messages...');
