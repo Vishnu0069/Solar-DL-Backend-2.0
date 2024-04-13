@@ -1,0 +1,13 @@
+2024-04-06T00:27:38.225Z	Mon6	database	success	Connected to MongoDB.
+2024-04-06T00:27:38.438Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-06T00:29:08.551Z	Mon6	database	success	Connected to MongoDB.
+2024-04-06T00:29:08.854Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-06T00:33:31.871Z	Mon6	database	success	Received message:
+2024-04-06T00:33:31.900Z	Mon6	database	success	Received message:
+2024-04-06T00:33:31.926Z	Mon6	database	success	Inserted document with _id: 6610985bb101eb376016c62b
+2024-04-06T00:33:32.082Z	Mon6	shutdown	success	Processed a message and exiting.
+2024-04-06T00:33:45.542Z	Mon6	database	success	Connected to MongoDB.
+2024-04-06T00:33:45.755Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-06T00:33:45.827Z	Mon6	database	success	Received message:
+2024-04-06T00:33:45.910Z	Mon6	database	success	Inserted document with _id: 66109869c70daa4e3dc29e94
+2024-04-06T00:33:45.985Z	Mon6	shutdown	success	Processed a message and exiting.

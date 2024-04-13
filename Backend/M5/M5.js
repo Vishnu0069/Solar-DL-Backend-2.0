@@ -10,6 +10,17 @@ require('dotenv').config();
 const { Container } = require('rhea-promise');
 const https = require('https');
 const axios = require('axios');
+const fs = require('fs');
+// Updated Logging function with improved datetime formatting
+function logToFile(serviceName, operationType, status, message) {
+    const now = new Date();
+    const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
+    const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+  
+    fs.appendFile('M5.log', logMessage, (err) => {
+      if (err) console.error('Failed to write to log file:', err);
+    });
+  }
 
 // Function to send a message to a topic
 // This function establishes a connection to ActiveMQ, sends a message, and then closes the connection.
@@ -34,8 +45,8 @@ const sendMessageToTopic = async (messageBody) => {
         // Send the message with the provided message body
         // Written by Vishnu Prasad S
         await sender.send({ body: messageBody });
-        console.log('Message sent to /response topic');
-
+        //console.log('Message sent to /response topic');
+        logToFile("M5", "write", "success", "Message sent to /response topic");
         // Close the sender and connection to clean up resources
         // Written by Vishnu Prasad S
         await sender.close();
@@ -44,7 +55,8 @@ const sendMessageToTopic = async (messageBody) => {
     // Log any errors encountered during message sending
     // Written by Vishnu Prasad S
     catch (error) {
-        console.error('Failed to send message to /response topic:', error);
+        //console.error('Failed to send message to /response topic:', error);
+        logToFile("M5", "write", "error", "Failed to send message to /response topic: " + error.message);
     }
 };
 // End of code block
@@ -85,8 +97,10 @@ const listenToQueue = async () => {
         // Written by Vishnu Prasad S
         receiver.on('message', async (context) => {
             // Parse the message body to a JSON object
+            
             const messageBody = context.message.body ? JSON.parse(context.message.body.toString()) : {};
-            console.log('Received message:', messageBody);
+            logToFile("M5", "read", "success", "Received message: " + JSON.stringify(messageBody));
+            //console.log('Received message:', messageBody);
             // Destructure necessary information from the message body
             // Written by Vishnu Prasad S
             const { deviceMake, constructedUrl, metadata, integratorId, PlantID,DeviceSerialNumber } = messageBody;
@@ -98,7 +112,8 @@ const listenToQueue = async () => {
                         let data = '';
                         res.on('data', (chunk) => { data += chunk; });
                         res.on('end', async () => {
-                            console.log('Response from SolarEdge API:', data);
+                            //logToFile("M5", "read", "success", "Response from SolarEdge API: " + data);
+                            //console.log('Response from SolarEdge API:', data);
                             const responsePayload = {
                                 deviceMake: 'solaredge',
                                 metadata,
@@ -107,7 +122,8 @@ const listenToQueue = async () => {
                             };
                             await sendMessageToTopic(JSON.stringify(responsePayload));
                         });
-                    }).on('error', (err) => { console.error('Error calling SolarEdge API:', err); });
+                    }).on('error', (err) => { //console.error('Error calling SolarEdge API:', err); 
+                        logToFile("M5", "read", "error", "Error calling SolarEdge API: " + err.message); });
                     break;
                 // Placeholder for other device makes
         case 'solis': {
@@ -131,7 +147,8 @@ const listenToQueue = async () => {
               }
             })
                     .then(async (response) => {
-                        console.log('Response from Solis API:', JSON.stringify(response.data, null, 2));
+                        //console.log('Response from Solis API:', JSON.stringify(response.data, null, 2));
+                        //logToFile("M5", "read", "success", "Response from Solis API: " + JSON.stringify(response.data, null, 2));
                         const responsePayload = {
                             deviceMake: 'solis',
                             metadata,
@@ -140,20 +157,23 @@ const listenToQueue = async () => {
                         await sendMessageToTopic(JSON.stringify(responsePayload));
                     })
                     .catch(error => {
-                        console.error('Error making API call to Solis:', error.message);
+                        logToFile("M5", "read", "error", "Error making API call to Solis: " + error.message);
+                        //console.error('Error making API call to Solis:', error.message);
                     });
                     break;
                 }
                 default:
-                    console.log('DeviceMake not recognized. No API call made.');
+                    logToFile("M5", "read", "error", "DeviceMake not recognized. No API call made.");
+                    //console.log('DeviceMake not recognized. No API call made.');
                     break;
             }
             context.delivery.accept();
         });
-
-        console.log('M5 is listening for messages on /request...');
+        logToFile("M5", "listen", "success", "M5 is listening for messages on /request...");
+        //console.log('M5 is listening for messages on /request...');
     } catch (error) {
-        console.error('Failed to connect or listen to queue:', error);
+        logToFile("M5", "connect", "error", "Failed to connect or listen to queue: " + error.message);
+        //console.error('Failed to connect or listen to queue:', error);
     }
 };
 

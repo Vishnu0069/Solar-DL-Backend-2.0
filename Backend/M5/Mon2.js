@@ -5,7 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const crypto = require('crypto');
 const { Container } = require('rhea-promise');
-
+const fs = require('fs');
 // Initialize Express app
 const app = express();
 const port = 3000;
@@ -13,6 +13,16 @@ const port = 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// Updated Logging function with improved datetime formatting
+function logToFile(serviceName, operationType, status, message) {
+  const now = new Date();
+  const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
+  const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+
+  fs.appendFile('M5.log', logMessage, (err) => {
+    if (err) console.error('Failed to write to log file:', err);
+  });
+}
 // Function to send message to ActiveMQ queue
 const sendMessageToQueue = async (queueName, messageBody) => {
   const container = new Container();
@@ -27,12 +37,14 @@ const sendMessageToQueue = async (queueName, messageBody) => {
 
     const sender = await connection.createSender(queueName);
     await sender.send({ body: messageBody });
-    console.log(`Message sent to ${queueName}`);
+    logToFile("Mon2", "write", "success", `Message sent to ${queueName}`);
+    //console.log(`Message sent to ${queueName}`);
 
     await sender.close();
     await connection.close();
   } catch (error) {
-    console.error('Failed to send message to queue:', error);
+    logToFile("Mon2", "write", "error", `Failed to send message to queue: ${error.message}`);
+    //console.error('Failed to send message to queue:', error);
   }
 };
 
@@ -122,8 +134,8 @@ const responseData = {
 
   // Log the response data including the URL
   // Written by Vishnu Prasad S
-  console.log('Data with constructed URL:', responseData);
-
+  //console.log('Data with constructed URL:', responseData);
+  logToFile("Mon2", "write", "success", `Data with constructed URL: ${JSON.stringify(responseData)}`);
 // Constructing message for the queue including metadata
 const messageData = {
   deviceMake: req.body.DeviceMake,
@@ -149,15 +161,16 @@ const messageData = {
 // Sending message to the /request queue
 try {
   await sendMessageToQueue('/request', JSON.stringify(messageData));
-  console.log('Data enqueued successfully.');
+  logToFile("Mon2", "write", "success", "Data enqueued successfully.");
+  //console.log('Data enqueued successfully.');
   res.status(200).send('Data received and enqueued successfully.');
 } catch (error) {
-  console.error('Error enqueuing data:', error);
+  logToFile("Mon2", "write", "error", `Error enqueuing data: ${error.message}`);
+  //console.error('Error enqueuing data:', error);
   res.status(500).send('Failed to enqueue data.');
 }
 });
-
 // Starting the Express server
 app.listen(port, () => {
-console.log(`Mon2 service listening at http://localhost:${port}`);
-});
+  console.log(`Mon2 service listening at http://localhost:${port}`);
+  });

@@ -1,36 +1,31 @@
+const { Container, ReceiverEvents } = require('rhea-promise');
 require('dotenv').config();
-const { Container } = require('rhea-promise');
 
-const listenToTopic = async () => {
-  const container = new Container();
+const container = new Container();
+const queueName = '/request'; // Ensure this matches your queue name in the broker
+
+async function main() {
   try {
     const connection = await container.connect({
       host: process.env.ACTIVE_MQ_HOST,
       port: parseInt(process.env.ACTIVE_MQ_PORT, 10),
       username: process.env.ACTIVE_MQ_USERNAME,
       password: process.env.ACTIVE_MQ_PASSWORD,
-      transport: 'tcp' // or 'ssl' for secure connections
+      transport: 'tcp', // Use 'ssl' if your broker connection is secured
     });
 
-    const receiverOptions = {
-      source: {
-        address: '/response', // The topic name you want to subscribe to
-        durable: 2, // Use durable subscription if needed
-        expiry_policy: 'never'
-      }
-    };
+    const receiver = await connection.createReceiver({ source: queueName });
 
-    const receiver = await connection.createReceiver(receiverOptions);
-
-    receiver.on('message', context => {
-      const messageBody = context.message.body ? JSON.parse(context.message.body.toString()) : {};
-      console.log('Received message on /response topic:', messageBody);
+    receiver.on(ReceiverEvents.message, (context) => {
+      const incomingMessage = context.message;
+      console.log(`Received message: ${incomingMessage.body}`);
+      // Process the message as needed
     });
 
-    console.log('Subscribed to /response topic and waiting for messages...');
+    console.log(`Listening for messages on ${queueName}...`);
   } catch (error) {
-    console.error('Failed to connect or listen to topic:', error);
+    console.error('Failed to listen to queue:', error);
   }
-};
+}
 
-listenToTopic().catch(console.error);
+main().catch(console.error);

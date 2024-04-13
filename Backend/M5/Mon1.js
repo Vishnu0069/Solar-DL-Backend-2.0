@@ -12,6 +12,20 @@ const axios = require('axios');
 const cron = require('node-cron');
 const { spawn } = require('child_process');
 
+
+const fs = require('fs');
+
+// Updated Logging function with improved datetime formatting
+function logToFile(serviceName, operationType, status, message) {
+  const now = new Date();
+  const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
+  const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+
+  fs.appendFile('M5.log', logMessage, (err) => {
+    if (err) console.error('Failed to write to log file:', err);
+  });
+}
+
 // Create a MySQL database connection
 // Establishes connection with the MySQL database using credentials from .env file.
 // Written by Vishnu Prasad S
@@ -26,11 +40,12 @@ const db = mysql.createConnection({
 // Written by Vishnu Prasad S
 db.connect(err => {
   if (err) {
-    console.error('Error connecting: ' + err.stack);
+    logToFile("Mon1", "read", "error", `Error connecting: ${err.stack}`);
     return;
   }
-  console.log('Connected to database.');
+  logToFile("Mon1", "read", "success", "Connected to database.");
 });
+
 
 // Function to perform database queries and return a promise
 // Allows for asynchronous database operations.
@@ -57,7 +72,7 @@ async function getDeviceMetadataMaster() {
 // Written by Vishnu Prasad S
 async function getDeviceMaster(deviceTypeId) {
   return query(
-    `SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase, DeviceUUID, modelno 
+    `SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase, DeviceUUID, modelno, API_Key
      FROM DeviceMaster 
      WHERE DeviceTypeID = ?`, 
     [deviceTypeId]
@@ -140,13 +155,20 @@ function calculateNewTime() {
                 deviceType: device.DeviceType,
                 capacity: device.Capacity,
                 phase: device.Phase,
-                modelno:device.modelno
+                modelno:device.modelno,
+                API_Key: device.API_Key // Use the API_Key from the deviceList result
               }
             };
       //updated block to send the correct metadata
             await axios.post('http://localhost:3000/api/submitData', requestData)
-              .then(response => console.log('Data submitted to Mon2:', response.data))
-              .catch(error => console.error('Error submitting data to Mon2:', error));
+              //.then(response => console.log('Data submitted to Mon2:', response.data))
+              //.catch(error => console.error('Error submitting data to Mon2:', error));
+              .then(response => {
+                logToFile("Mon1", "write", "success", `Data submitted to Mon2: ${JSON.stringify(response.data)}`);
+              })
+              .catch(error => {
+                logToFile("Mon1", "write", "error", `Error submitting data to Mon2: ${error.message}`);
+              });
           }
         }
       }
@@ -161,24 +183,27 @@ let mon2Process = null;
 function manageMon2() {
   // Check if Monitor 2 process is already running
   if (mon2Process) {
-    console.log('Monitor 2 is already running. Ensuring it is fresh.');
+    //console.log('Monitor 2 is already running. Ensuring it is fresh.');
     // Kill the existing process to restart it
     mon2Process.kill();
     mon2Process = null;
   }
 
   // Log starting of Monitor 2 and spawn a new process for Monitor 2
-  console.log('Starting Monitor 2...');
+  //console.log('Starting Monitor 2...');
+  logToFile("Mon1", "start", "success", "Starting Monitor 2...");
   mon2Process = spawn('node', ['./Mon2.js'], { stdio: 'inherit' });
 
   // Handle any errors that occur when starting Monitor 2
   mon2Process.on('error', (error) => {
-    console.error('Failed to start Monitor 2:', error);
+    logToFile("Mon1", "start", "error", "Failed to start Monitor 2: " + error.message);
+    //console.error('Failed to start Monitor 2:', error);
   });
 
   // Log when Monitor 2 process exits and set the process variable to null
   mon2Process.on('close', (code) => {
-    console.log(`Monitor 2 process exited with code ${code}`);
+    logToFile("Mon1", "exit", "success", `Monitor 2 process exited with code ${code}`);
+    //console.log(`Monitor 2 process exited with code ${code}`);
     mon2Process = null;
   });
 
@@ -192,12 +217,14 @@ function manageMon2() {
 // Schedule a cron job to activate Monitor 2 and push data every 3 minutes
 // This ensures data is regularly fetched and sent without manual intervention.
 // Written by Vishnu Prasad S
-cron.schedule('*/1 * * * *', () => {
-  console.log('Activating Monitor 2 and pushing data every 3 minutes');
+cron.schedule('*/15 * * * *', () => {
+  logToFile("Mon1", "activate", "success", "Activating Monitor 2 and pushing data every  minutes");
+  //console.log('Activating Monitor 2 and pushing data every 3 minutes');
   manageMon2();
 });
 
 // Initial log to indicate that the scheduler has been set up successfully
 // Indicates readiness to execute scheduled tasks.
 // Written by Vishnu Prasad S
-console.log('Scheduler set to activate Monitor 2 and push data every 3 minutes. Ready to execute.');
+//console.log('Scheduler set to activate Monitor 2 and push data every 3 minutes. Ready to execute.');
+logToFile("Mon1", "schedule", "success", "Scheduler set to activate Monitor 2 and push data every 3 minutes. Ready to execute.");

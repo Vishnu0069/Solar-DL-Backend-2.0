@@ -1,105 +1,164 @@
 require('dotenv').config();
-const { Container } = require('rhea-promise');
-const https = require('https');
-const axios = require('axios');
+const mysql = require('mysql');
+const fs = require('fs');
+const { MongoClient } = require('mongodb');
+const cron = require('node-cron');
 
-// Function to send a message to a topic
-const sendMessageToTopic = async (messageBody) => {
-  const container = new Container();
+// Logging function
+function logToFile(serviceName, operationType, status, message) {
+  const now = new Date();
+  const timestamp = now.toISOString();
+  const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+  fs.appendFileSync('M5.log', logMessage, (err) => {
+    if (err) {
+      console.error('Failed to write to log file:', err);
+    }
+  });
+}
+
+// MongoDB setup
+const mongoClient = new MongoClient(process.env.MONGO_URI);
+let deviceCollection;
+let greatestCreationDate = new Date(0); // Initialize with a minimum date
+
+async function connectMongoDB() {
   try {
-    const connection = await container.connect({
-      host: process.env.ACTIVE_MQ_HOST,
-      port: parseInt(process.env.ACTIVE_MQ_PORT, 10),
-      username: process.env.ACTIVE_MQ_USERNAME,
-      password: process.env.ACTIVE_MQ_PASSWORD,
-      transport: 'tcp'
-    });
-    const sender = await connection.createSender('/response');
-    await sender.send({ body: messageBody });
-    console.log('Message sent to /response topic');
-
-    await sender.close();
-    await connection.close();
+    await mongoClient.connect();
+    logToFile("Mon1", "database", "success", "Connected to MongoDB.");
+    const db = mongoClient.db(process.env.MONGO_DB_NAME);
+    deviceCollection = db.collection(process.env.MONGO_COLLECTION_NAME);
+    await fetchLatestCreationDate(); // Fetch and set the greatest creation date
   } catch (error) {
-    console.error('Failed to send message to /response topic:', error);
+    logToFile("Mon1", "database", "error", `MongoDB connection error: ${error.message}`);
+    process.exit(1); // Exit if cannot connect to MongoDB
   }
-};
+}
 
-const listenToQueue = async () => {
-  const container = new Container();
+// Fetch the latest creation date from MySQL
+async function fetchLatestCreationDate() {
   try {
-    const connection = await container.connect({
-      host: process.env.ACTIVE_MQ_HOST,
-      port: parseInt(process.env.ACTIVE_MQ_PORT, 10),
-      username: process.env.ACTIVE_MQ_USERNAME,
-      password: process.env.ACTIVE_MQ_PASSWORD,
-      transport: 'tcp'
+    const result = await query('SELECT MAX(Creation_Date_time) AS LatestDate FROM DeviceMaster');
+    greatestCreationDate = new Date(result[0].LatestDate);
+    logToFile("Mon1", "read", "success", `Latest creation date set to ${greatestCreationDate.toISOString()}`);
+  } catch (error) {
+    logToFile("Mon1", "read", "error", `Failed to fetch latest creation date: ${error.message}`);
+  }
+}
+
+// MySQL database setup
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
+});
+
+db.connect(err => {
+  if (err) {
+    logToFile("Mon1", "read", "error", `Error connecting to MySQL: ${err.stack}`);
+    return;
+  }
+  logToFile("Mon1", "read", "success", "Connected to MySQL database.");
+});
+
+// Function to perform MySQL queries and return a promise
+function query(sql, params) {
+  return new Promise((resolve, reject) => {
+    db.query(sql, params, (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
     });
+  });
+}
 
-    const receiverOptions = {
-      source: { address: '/request' }
-    };
+function calculateNewTime() {
+  let now = new Date();
+  now.setMinutes(now.getMinutes() - 14);
+  let hours = now.getHours().toString().padStart(2, '0');
+  let minutes = now.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+}
 
-    const receiver = await connection.createReceiver(receiverOptions);
+async function fetchAndInsertGreaterDeviceData() {
+  logToFile("Fetching and inserting greater device data...");
+  try {
+    let maxCreationDate = greatestCreationDate; // Start with the current greatestCreationDate
+    const metadataList = await query('SELECT EndpointApi1, DeviceTypeID, DeviceMake, Api1Body, HeaderforApi1 FROM DeviceMetadataMaster');
+    for (const metadata of metadataList) {
+      const deviceList = await query('SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase, DeviceUUID, modelno, API_Key, Creation_Date_time FROM DeviceMaster WHERE DeviceTypeID = ? AND Creation_Date_time > ?', [metadata.DeviceTypeID, greatestCreationDate]);
+      for (const device of deviceList) {
+        const plant = await query('SELECT PlantID, IntegratorID, API_Key, PlantName, Latitude, Longitude FROM PlantMaster WHERE PlantID = ?', [device.PlantID]);
+        
+        const document = {
+          ...metadata,
+          ...device,
+          plant: plant[0], // Assuming there is at least one plant record
+          requestTime: calculateNewTime(),
+          metadata: {
+            integratorId: plant[0].IntegratorID,
+            plantName: plant[0].PlantName,
+            latitude: plant[0].Latitude,
+            longitude: plant[0].Longitude,
+            PlantID: plant[0].PlantID,
+            deviceUUID: device.DeviceUUID,
+            deviceMake: metadata.DeviceMake,
+            deviceType: device.DeviceType,
+            capacity: device.Capacity,
+            phase: device.Phase,
+            modelno: device.modelno,
+            API_Key: device.API_Key
+          }
+        };
 
-    receiver.on('message', async (context) => {
-      const messageBody = context.message.body ? JSON.parse(context.message.body.toString()) : {};
-      console.log('Received message:', messageBody);
-
-      const { deviceMake, constructedUrl, headers, body, metadata } = messageBody;
-
-      switch (deviceMake.toLowerCase()) {
-        case 'solaredge':
-          https.get(constructedUrl, (res) => {
-            let data = '';
-            res.on('data', (chunk) => { data += chunk; });
-            res.on('end', async () => {
-              console.log('Response from SolarEdge API:', data);
-              const responsePayload = {
-                deviceMake,
-                responseData: JSON.parse(data),
-                metadata
-              };
-              await sendMessageToTopic(JSON.stringify(responsePayload));
-            });
-          }).on('error', (err) => { console.error('Error calling SolarEdge API:', err); });
-          break;
-        case 'solis':
-          const requestBody = JSON.stringify(body);
-          const authHeader = `API ${headers.Api_key}:${headers.Signature}`;
-
-          axios.post(constructedUrl, requestBody, {
-            headers: {
-              'Content-MD5': headers['Content-MD5'],
-              'Content-Type': headers['Content-Type'],
-              'Date': headers.Date,
-              'Authorization': authHeader
-            }
-          })
-          .then(async (response) => {
-            console.log('Response from Solis API:', JSON.stringify(response.data, null, 2));
-            const responsePayload = {
-              deviceMake,
-              responseData: response.data,
-              metadata
-            };
-            await sendMessageToTopic(JSON.stringify(responsePayload));
-          })
-          .catch(error => {
-            console.error('Error making API call to Solis:', error.message);
-          });
-          break;
-        default:
-          console.log('DeviceMake not recognized. No API call made.');
-          break;
+        await deviceCollection.insertOne(document);
+        logToFile("Mon1", "write", "success", `Document inserted to MongoDB: ${JSON.stringify(document)}`);
+        
+        if (device.Creation_Date_time > maxCreationDate) {
+          maxCreationDate = device.Creation_Date_time;
+        }
       }
-      context.delivery.accept();
-    });
-
-    console.log('M5 is listening for messages on /request...');
+    }
+    greatestCreationDate = maxCreationDate;
   } catch (error) {
-    console.error('Failed to connect or listen to queue:', error);
+    console.error("Error during greater data fetch/insert:", error);
+    logToFile("Mon1", "database", "error", `Error during greater data fetch/insert: ${error.message}`);
   }
-};
+}
 
-listenToQueue().catch(console.error);
+async function latestCreationDate() {
+  try {
+    const latestDevices = await query('SELECT DeviceSerialNumber, ModelNo, PlantID, DeviceType, Capacity, Phase, DeviceUUID, modelno, API_Key, Creation_Date_time FROM DeviceMaster WHERE Creation_Date_time > ?', [greatestCreationDate]);
+    if (latestDevices.length > 0) {
+      await fetchAndInsertGreaterDeviceData();
+    } else {
+      logToFile("Mon1", "latestCreationDate", "info", "No new devices found.");
+    }
+  } catch (error) {
+    console.error("Error during latestCreationDate:", error);
+    logToFile("Mon1", "latestCreationDate", "error", `Error during latestCreationDate: ${error.message}`);
+  }
+}
+
+// Start the process
+connectMongoDB().then(() => {
+  fetchAndInsertGreaterDeviceData();
+});
+
+// Schedule the function to run every 3 minutes
+cron.schedule('*/3 * * * *', () => {
+  latestCreationDate();
+});
+
+// Listen on a port to keep the script alive
+const PORT = process.env.PORT || 3000;
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('MON-1.js is running and listening.');
+});
+
+server.listen(PORT, () => {
+  console.log(`MON-1.js is running and listening on port ${PORT}`);
+});
