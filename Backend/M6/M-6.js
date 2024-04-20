@@ -1,4 +1,4 @@
-/*require('dotenv').config();
+require('dotenv').config();
 const { Container } = require('rhea-promise');
 const { MongoClient } = require('mongodb');
 const fs = require('fs');
@@ -17,7 +17,7 @@ const listenToTopic = async () => {
     // Connect to MongoDB
     await client.connect();
     const database = client.db(process.env.MONGODB_DB_NAME);
-    const collection = database.collection(process.env.MONGODB_MAPPINGS_COLLECTION);
+    const collection = database.collection(process.env.MONGODB_COLLECTION_NAME);
     logToFile("Mon6", "database", "success", "Connected to MongoDB.");
 
     const connection = await container.connect({
@@ -60,9 +60,9 @@ const listenToTopic = async () => {
   }
 };
 
-listenToTopic().catch(console.error);*/
+listenToTopic().catch(console.error);
 //to terminate itself
-require('dotenv').config();
+/*require('dotenv').config();
 const { Container } = require('rhea-promise');
 const { MongoClient } = require('mongodb');
 const fs = require('fs');
@@ -81,7 +81,7 @@ const listenToTopic = async () => {
     // Connect to MongoDB
     await client.connect();
     const database = client.db(process.env.MONGODB_DB_NAME);
-    const collection = database.collection(process.env.MONGODB_MAPPINGS_COLLECTION);
+    const collection = database.collection(process.env.MONGODB_MAPPINGS_COLLECTION);//MONGODB_COLLECTION_NAME
     logToFile("M6", "database", "success", "Connected to MongoDB.");
 
     const connection = await container.connect({
@@ -127,4 +127,4 @@ const listenToTopic = async () => {
   }
 };
 
-listenToTopic().catch(console.error);
+listenToTopic().catch(console.error);*/

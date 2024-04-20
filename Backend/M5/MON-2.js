@@ -112,15 +112,24 @@ async function fetchAndProcessData() {
         }
 
         const messageData = {
-            deviceMake: DeviceMake,
+            deviceMake: document.DeviceMake,
             constructedUrl,
             headers,
-            // Ensure all necessary metadata is included as in the old Mon2
             metadata: {
-                
+                integratorId: document.metadata.integratorId,
+                PlantName: document.metadata.plantName, // Note the capitalization of 'plantName'
+                PlantID: document.PlantID,
+                deviceUUID: document.DeviceUUID,
+                modelno: document.modelno,
+                deviceSN: document.DeviceSerialNumber,
+                DeviceType: document.DeviceType,
+                Capacity: document.Capacity,
+                Phase: document.Phase,
+                Latitude: document.metadata.latitude,
+                Longitude: document.metadata.longitude
             }
         };
-
+        
         await sendMessageToQueue('/request', messageData);
     }
     await mongoClient.close();

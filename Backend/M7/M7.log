@@ -1,0 +1,34 @@
+2024-04-19T05:30:15.158Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-19T05:30:15.311Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-19T05:30:15.396Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-19T05:30:15.500Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b
+2024-04-19T05:30:15.570Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b
+2024-04-19T05:30:15.620Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-19 11-00
+2024-04-19T05:30:15.635Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-19T08:58:17.156Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-19T08:58:17.343Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-19T08:58:17.455Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-19T08:58:17.613Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-19 14-28
+2024-04-19T08:58:17.666Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-19 14-28
+2024-04-19T08:58:17.727Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-19 14-28
+2024-04-19T08:58:17.735Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-19T17:40:14.358Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-19T17:40:14.616Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-19T17:40:14.701Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-19T17:40:14.888Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b
+2024-04-19T17:40:15.001Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b
+2024-04-19T17:40:15.051Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-19 23-10
+2024-04-19T17:40:15.061Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-19T18:07:03.876Z	PlantDataCollection	Insert	Success	Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-19T18:07:03.915Z	PlantDataCollection	Insert	Success	Inserted data for plant 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-19T18:13:54.280Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-19T18:13:54.320Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-19T18:16:52.938Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-19T18:16:52.978Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-20T06:39:53.819Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-20T06:39:53.926Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-20T06:39:53.998Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-20T06:39:54.051Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-20 12-09
+2024-04-20T06:39:54.094Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-20 12-09
+2024-04-20T06:39:54.139Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-20 12-09
+2024-04-20T06:39:54.154Z	Closed MongoDB connection	undefined	undefined	undefined

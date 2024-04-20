@@ -1,9 +1,18 @@
-2024-04-06T01:06:00.180Z	M6	database	success	Received message:
-2024-04-06T01:06:00.264Z	M6	database	success	Received message:
-2024-04-06T01:06:00.289Z	M6	database	success	Inserted document with _id: 66109ff81fc9b8a4066984ed
-2024-04-06T01:06:01.163Z	M6	shutdown	success	Processed a message and exiting.
-2024-04-06T01:07:11.842Z	M6	database	success	Connected to MongoDB.
-2024-04-06T01:07:14.908Z	M6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
-2024-04-06T01:07:15.262Z	M6	database	success	Received message:
-2024-04-06T01:07:15.391Z	M6	database	success	Inserted document with _id: 6610a043f1c190a4c7a44b73
-2024-04-06T01:07:16.102Z	M6	shutdown	success	Processed a message and exiting.
+2024-04-19T17:40:08.876Z	Mon6	database	success	Connected to MongoDB.
+2024-04-19T17:40:09.593Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-19T17:40:09.660Z	Mon6	database	success	Received message:
+2024-04-19T17:40:09.995Z	Mon6	database	success	Received message:
+2024-04-19T17:40:10.008Z	Mon6	database	success	Received message:
+2024-04-19T17:40:10.062Z	Mon6	database	success	Inserted document with _id: 6622ac7961260c762f4be8a6
+2024-04-19T17:40:10.371Z	Mon6	database	success	Inserted document with _id: 6622ac7961260c762f4be8a7
+2024-04-20T06:38:40.490Z	Mon6	database	success	Connected to MongoDB.
+2024-04-20T06:38:41.006Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-20T06:38:41.055Z	Mon6	database	success	Received message:
+2024-04-20T06:38:41.235Z	Mon6	database	success	Received message:
+2024-04-20T06:38:41.245Z	Mon6	database	success	Received message:
+2024-04-20T06:38:41.276Z	Mon6	database	success	Inserted document with _id: 662362f19c278cd654c1488e
+2024-04-20T06:38:41.482Z	Mon6	database	success	Inserted document with _id: 662362f19c278cd654c1488f
+2024-04-20T06:39:16.975Z	Mon6	database	success	Connected to MongoDB.
+2024-04-20T06:39:17.385Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-20T06:39:34.422Z	Mon6	database	success	Connected to MongoDB.
+2024-04-20T06:39:34.801Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...

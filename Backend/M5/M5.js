@@ -112,7 +112,7 @@ const listenToQueue = async () => {
                         let data = '';
                         res.on('data', (chunk) => { data += chunk; });
                         res.on('end', async () => {
-                            //logToFile("M5", "read", "success", "Response from SolarEdge API: " + data);
+                            logToFile("M5", "read", "success", "Response from SolarEdge API: " + data);
                             //console.log('Response from SolarEdge API:', data);
                             const responsePayload = {
                                 deviceMake: 'solaredge',
@@ -121,6 +121,7 @@ const listenToQueue = async () => {
                                 responseData: JSON.parse(data)
                             };
                             await sendMessageToTopic(JSON.stringify(responsePayload));
+                            //logToFile("M5", "read", "Success", "Success Solaredge " + responsePayload )
                         });
                     }).on('error', (err) => { //console.error('Error calling SolarEdge API:', err); 
                         logToFile("M5", "read", "error", "Error calling SolarEdge API: " + err.message); });
@@ -155,6 +156,7 @@ const listenToQueue = async () => {
                             responseData: response.data
                         };
                         await sendMessageToTopic(JSON.stringify(responsePayload));
+                        //logToFile("M5", "read", "Success", "Success Solis " + responsePayload )
                     })
                     .catch(error => {
                         logToFile("M5", "read", "error", "Error making API call to Solis: " + error.message);
