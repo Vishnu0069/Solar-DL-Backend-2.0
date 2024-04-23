@@ -1,18 +1,58 @@
-2024-04-19T17:40:08.876Z	Mon6	database	success	Connected to MongoDB.
-2024-04-19T17:40:09.593Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
-2024-04-19T17:40:09.660Z	Mon6	database	success	Received message:
-2024-04-19T17:40:09.995Z	Mon6	database	success	Received message:
-2024-04-19T17:40:10.008Z	Mon6	database	success	Received message:
-2024-04-19T17:40:10.062Z	Mon6	database	success	Inserted document with _id: 6622ac7961260c762f4be8a6
-2024-04-19T17:40:10.371Z	Mon6	database	success	Inserted document with _id: 6622ac7961260c762f4be8a7
-2024-04-20T06:38:40.490Z	Mon6	database	success	Connected to MongoDB.
-2024-04-20T06:38:41.006Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
-2024-04-20T06:38:41.055Z	Mon6	database	success	Received message:
-2024-04-20T06:38:41.235Z	Mon6	database	success	Received message:
-2024-04-20T06:38:41.245Z	Mon6	database	success	Received message:
-2024-04-20T06:38:41.276Z	Mon6	database	success	Inserted document with _id: 662362f19c278cd654c1488e
-2024-04-20T06:38:41.482Z	Mon6	database	success	Inserted document with _id: 662362f19c278cd654c1488f
-2024-04-20T06:39:16.975Z	Mon6	database	success	Connected to MongoDB.
-2024-04-20T06:39:17.385Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
-2024-04-20T06:39:34.422Z	Mon6	database	success	Connected to MongoDB.
-2024-04-20T06:39:34.801Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-22T15:19:57.568Z	Mon6	database	success	Connected to MongoDB.
+2024-04-22T15:19:57.957Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-22T15:19:58.007Z	Mon6	database	success	Received message:
+2024-04-22T15:19:58.055Z	Mon6	database	success	Received message:
+2024-04-22T15:19:58.067Z	Mon6	database	success	Received message:
+2024-04-22T15:19:58.068Z	Mon6	read	error	DeviceMake not recognized. No API call made.
+2024-04-22T15:19:58.106Z	Mon6	database	success	Inserted document with _id: 6626801ea8c3406a22a1b364
+2024-04-22T15:19:58.337Z	Mon6	database	success	Inserted document with _id: 6626801ea8c3406a22a1b365
+2024-04-23T10:19:23.803Z	Mon6	database	success	Connected to MongoDB.
+2024-04-23T10:19:24.193Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-23T10:19:24.244Z	Mon6	database	success	Received message:
+2024-04-23T10:19:24.405Z	Mon6	database	success	Received message:
+2024-04-23T10:19:24.408Z	Mon6	database	success	Received message:
+2024-04-23T10:19:24.409Z	Mon6	read	error	DeviceMake not recognized. No API call made.
+2024-04-23T10:19:24.445Z	Mon6	database	success	Inserted document with _id: 66278b2cbbaf29a2cde149de
+2024-04-23T10:19:24.640Z	Mon6	database	success	Inserted document with _id: 66278b2cbbaf29a2cde149df
+2024-04-23T10:24:06.654Z	Mon6	database	success	Connected to MongoDB.
+2024-04-23T10:24:07.148Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-23T10:24:07.204Z	Mon6	database	success	Received message:
+2024-04-23T10:24:07.235Z	Mon6	database	success	Received message:
+2024-04-23T10:24:07.268Z	Mon6	database	success	Received message:
+2024-04-23T10:24:07.269Z	Mon6	read	error	DeviceMake not recognized. No API call made.
+2024-04-23T10:24:07.344Z	Mon6	database	success	Inserted document with _id: 66278c47e8bd8da192b3b37c
+2024-04-23T10:24:07.684Z	Mon6	database	success	Inserted document with _id: 66278c47e8bd8da192b3b37d
+2024-04-23T10:30:06.729Z	Mon6	database	success	Connected to MongoDB.
+2024-04-23T10:30:07.088Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-23T10:31:35.133Z	Mon6	database	success	Connected to MongoDB.
+2024-04-23T10:31:35.646Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-23T10:31:35.698Z	Mon6	database	success	Received message:
+2024-04-23T10:31:35.758Z	Mon6	database	success	Received message:
+2024-04-23T10:31:35.768Z	Mon6	database	success	Received message:
+2024-04-23T10:31:35.773Z	Mon6	read	error	DeviceMake not recognized. No API call made.
+2024-04-23T10:31:35.821Z	Mon6	database	success	Inserted document with _id: 66278e0760da067447e0f1ba
+2024-04-23T10:31:36.090Z	Mon6	database	success	Inserted document with _id: 66278e0760da067447e0f1bb
+2024-04-23T10:33:06.425Z	Mon6	database	success	Connected to MongoDB.
+2024-04-23T10:33:06.913Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-23T10:33:06.958Z	Mon6	database	success	Received message:
+2024-04-23T10:33:06.996Z	Mon6	database	success	Received message:
+2024-04-23T10:33:07.029Z	Mon6	database	success	Received message:
+2024-04-23T10:33:07.030Z	Mon6	read	error	DeviceMake not recognized. No API call made.
+2024-04-23T10:33:07.034Z	Mon6	database	success	Inserted document with _id: 66278e62d870a26bfacd6dc7
+2024-04-23T10:33:07.215Z	Mon6	database	success	Inserted document with _id: 66278e62d870a26bfacd6dc8
+2024-04-23T10:34:24.417Z	Mon6	database	success	Connected to MongoDB.
+2024-04-23T10:34:24.812Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-23T10:34:24.913Z	Mon6	database	success	Received message:
+2024-04-23T10:34:24.943Z	Mon6	database	success	Received message:
+2024-04-23T10:34:24.967Z	Mon6	database	success	Received message:
+2024-04-23T10:34:24.967Z	Mon6	read	error	DeviceMake not recognized. No API call made.
+2024-04-23T10:34:24.996Z	Mon6	database	success	Inserted document with _id: 66278eb025fbb2675561b9f1
+2024-04-23T10:34:25.195Z	Mon6	database	success	Inserted document with _id: 66278eb025fbb2675561b9f2
+2024-04-23T10:37:39.492Z	Mon6	database	success	Connected to MongoDB.
+2024-04-23T10:37:39.900Z	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2024-04-23T10:37:39.953Z	Mon6	database	success	Received message:
+2024-04-23T10:37:39.984Z	Mon6	database	success	Received message:
+2024-04-23T10:37:40.005Z	Mon6	database	success	Received message:
+2024-04-23T10:37:40.005Z	Mon6	read	error	DeviceMake not recognized. No API call made.
+2024-04-23T10:37:40.021Z	Mon6	database	success	Inserted document with _id: 66278f73b2aa537685968360
+2024-04-23T10:37:40.219Z	Mon6	database	success	Inserted document with _id: 66278f73b2aa537685968361

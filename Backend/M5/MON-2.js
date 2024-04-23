@@ -48,7 +48,7 @@ async function fetchAndProcessData() {
         let constructedUrl = '', headers = {};
         const { DeviceMake, API_Key, EndpointApi1, DeviceSerialNumber, ModelNo } = document;
 
-        switch (DeviceMake.toLowerCase()) {
+        /*switch (DeviceMake.toLowerCase()) {
           case 'solaredge':
             // Adapted for MongoDB document structure
             const today = new Date().toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
@@ -68,8 +68,59 @@ async function fetchAndProcessData() {
             // Constructs the full URL with API key
             // Assuming `EndpointApi1`, `ModelNo`, `DeviceSerialNumber`, and `API_Key` are correctly extracted from the MongoDB document
             constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
-            break;
-        
+            break;*/
+            switch (DeviceMake.toLowerCase()) {
+          /*case 'solaredge':
+            
+            const now = new Date(); // Gets the current time
+            const today = now.toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
+    
+            // Format the current start time to HH:mm:00
+            const currentStartTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
+            const formattedStartTime = `${today}%20${currentStartTime}`; // Formats start time with %20 for space
+    
+            // Calculates and formats end time by adding 15 minutes to the current time
+            now.setMinutes(now.getMinutes() + 15);
+            const endTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
+            const formattedEndTime = `${today}%20${endTime}`;
+            
+            
+
+            
+            // Constructs the full URL with API key
+            // Assuming `EndpointApi1`, `ModelNo`, `DeviceSerialNumber`, and `API_Key` are correctly extracted from the MongoDB document
+            constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
+            break;*/
+            case 'solaredge':
+    /*const now = new Date(); // Gets the current time
+    const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000); // Converts local time to UTC time
+
+    const today = utcNow.toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
+
+    // Format the current start time to HH:mm:00 in UTC timezone
+    const currentStartTime = `${utcNow.getUTCHours().toString().padStart(2, '0')}:${utcNow.getUTCMinutes().toString().padStart(2, '0')}:00`;
+    const formattedStartTime = `${today}%20${currentStartTime}`; // Formats start time with %20 for space
+
+    // Calculates and formats end time by adding 15 minutes to the current time
+    const endTime = new Date(utcNow.getTime() + 15 * 60000); // Adds 15 minutes to the current UTC time
+    const formattedEndTime = `${endTime.getUTCFullYear()}-${(endTime.getUTCMonth() + 1).toString().padStart(2, '0')}-${endTime.getUTCDate().toString().padStart(2, '0')}%20${endTime.getUTCHours().toString().padStart(2, '0')}:${endTime.getUTCMinutes().toString().padStart(2, '0')}:00`;
+ */
+// Get current UTC date and time
+const nowUtc = new Date();
+
+// Formats the current start time to YYYY-MM-DD%20HH:MM:00 in UTC
+const formattedStartTime = `${nowUtc.getUTCFullYear()}-${(nowUtc.getUTCMonth() + 1).toString().padStart(2, '0')}-${nowUtc.getUTCDate().toString().padStart(2, '0')}%20${nowUtc.getUTCHours().toString().padStart(2, '0')}:${nowUtc.getUTCMinutes().toString().padStart(2, '0')}:00`;
+
+// Calculate and format end time by adding 15 minutes to the current UTC time
+const endTimeUtc = new Date(nowUtc.getTime() + 15 * 60000); // Adds 15 minutes to the current UTC time
+const formattedEndTime = `${endTimeUtc.getUTCFullYear()}-${(endTimeUtc.getUTCMonth() + 1).toString().padStart(2, '0')}-${endTimeUtc.getUTCDate().toString().padStart(2, '0')}%20${endTimeUtc.getUTCHours().toString().padStart(2, '0')}:${endTimeUtc.getUTCMinutes().toString().padStart(2, '0')}:00`;
+
+    // Constructs the full URL with API key
+    // Assuming `EndpointApi1`, `ModelNo`, `DeviceSerialNumber`, and `API_Key` are correctly extracted from the MongoDB document
+    constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
+    break;
+
+                  
             case 'solis':
     // Assuming API_Key, HeaderforApi1, and Api1Body are available in the MongoDB document
     const apiId = document.API_Key;

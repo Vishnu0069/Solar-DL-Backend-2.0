@@ -8,15 +8,21 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const dbName = process.env.MONGODB_DB_NAME;
 const deviceDataCollectionName = process.env.MONGODB_DEVICE_DATA_COLLECTION_NAME;
 const plantDataCollectionName = process.env.MONGODB_TEMP_PLANT_COLLECTION_NAME;
-
+// Calculate current LocalDateTime in IST (UTC+5:30)
+const currentUtcDate = new Date();
+const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
+const istDate = new Date(currentUtcDate.getTime() + istOffset);
+const currentLocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
 async function main() {
   try {
     await client.connect();
     console.log("Connected correctly to server");
     const db = client.db(dbName);
-
+  
+    
     // The date and time for the query
-    const queryDateTime = "2024-04-19 11-45";
+    const queryDateTime = currentLocalDateTime;
+    //const queryDateTime = "2024-04-19 11-45";
 
     // Accessing the collection
     const deviceDataCollection = db.collection(deviceDataCollectionName);
@@ -71,11 +77,11 @@ main();*/
 //This Blocks works justfine creates a object just as we need or inerts the new data into the collection if an object already exists
 
 //to query and get data for currect dateand time
-/*const currentUtcDate = new Date();
+const currentUtcDate = new Date();
 const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours and 30 minutes converted to milliseconds
 const istDate = new Date(currentUtcDate.getTime() + istOffset);
 const LocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
-*/
+
 const plantOutputs = {};
 
     await cursor.forEach(doc => {
@@ -89,7 +95,7 @@ const plantOutputs = {};
 
     for (const [plantId, outputEnergy] of Object.entries(plantOutputs)) {
       const newData = {
-        LocalDateTime: "2024-04-19 11-45",
+        LocalDateTime: LocalDateTime,
         OutputEnergy: outputEnergy,
         EnergyUOM: "KWH"
       };
@@ -106,6 +112,8 @@ const plantOutputs = {};
         await logToFile('PlantDataCollection', 'UpdateInsert', 'NoChange', `No changes made for plant ${plantId}`);
       }
     }
+
+    
 
     console.log("Data processed and inserted/updated successfully.");
   } catch (err) {

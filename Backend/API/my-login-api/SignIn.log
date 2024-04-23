@@ -1,0 +1,5 @@
+2024-04-23T12:34:48.950Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.
+2024-04-23T12:40:25.305Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.
+2024-04-23T12:42:36.862Z	UserService	Login	Failure	Password is inccorect
+2024-04-23T12:42:52.215Z	UserService	Login	Failure	No user Found with that email
+2024-04-23T12:43:02.383Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.

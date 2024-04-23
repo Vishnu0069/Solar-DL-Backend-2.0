@@ -46,7 +46,7 @@ const sendMessageToTopic = async (messageBody) => {
         // Written by Vishnu Prasad S
         await sender.send({ body: messageBody });
         //console.log('Message sent to /response topic');
-        logToFile("M5", "write", "success", "Message sent to /response topic");
+        logToFile("M5", "write", "success", `Message successfully sent to /response topic`);//${(messageBody)}
         // Close the sender and connection to clean up resources
         // Written by Vishnu Prasad S
         await sender.close();
@@ -117,7 +117,6 @@ const listenToQueue = async () => {
                             const responsePayload = {
                                 deviceMake: 'solaredge',
                                 metadata,
-
                                 responseData: JSON.parse(data)
                             };
                             await sendMessageToTopic(JSON.stringify(responsePayload));
@@ -180,3 +179,91 @@ const listenToQueue = async () => {
 };
 
 listenToQueue().catch(console.error);
+
+/*require('dotenv').config();
+const { Container } = require('rhea-promise');
+const https = require('https');
+const axios = require('axios');
+const fs = require('fs');
+
+function logToFile(serviceName, operationType, status, message) {
+    const now = new Date();
+    const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
+    const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+
+    fs.appendFile('M5.log', logMessage, (err) => {
+        if (err) console.error('Failed to write to log file:', err);
+    });
+}
+
+const sendMessageToTopic = async (messageBody) => {
+    const container = new Container();
+    try {
+        const connection = await container.connect({
+            host: process.env.ACTIVE_MQ_HOST,
+            port: parseInt(process.env.ACTIVE_MQ_PORT, 10),
+            username: process.env.ACTIVE_MQ_USERNAME,
+            password: process.env.ACTIVE_MQ_PASSWORD,
+            transport: 'tcp'
+        });
+        const sender = await connection.createSender('/response');
+        await sender.send({ body: messageBody });
+        logToFile("M5", "write", "success", `Message sent to /response topic: ${messageBody}`);
+        await sender.close();
+        await connection.close();
+    } catch (error) {
+        logToFile("M5", "write", "error", "Failed to send message to /response topic: " + error.message);
+    }
+};
+
+const listenToQueue = async () => {
+    const container = new Container();
+    try {
+        const connection = await container.connect({
+            host: process.env.ACTIVE_MQ_HOST,
+            port: parseInt(process.env.ACTIVE_MQ_PORT, 10),
+            username: process.env.ACTIVE_MQ_USERNAME,
+            password: process.env.ACTIVE_MQ_PASSWORD,
+            transport: 'tcp'
+        });
+        const receiverOptions = {
+            source: { address: '/request' }
+        };
+        const receiver = await connection.createReceiver(receiverOptions);
+        receiver.on('message', async (context) => {
+            const messageBody = context.message.body ? JSON.parse(context.message.body.toString()) : {};
+            logToFile("M5", "read", "success", "Received message: " + JSON.stringify(messageBody));
+            const { deviceMake, constructedUrl } = messageBody;
+
+            if (deviceMake.toLowerCase() === 'solaredge') {
+                https.get(constructedUrl, (res) => {
+                    let data = '';
+                    res.on('data', (chunk) => { data += chunk; });
+                    res.on('end', async () => {
+                        logToFile("M5", "read", "success", "Response from SolarEdge API: " + data);
+                        const responsePayload = { deviceMake: 'solaredge', responseData: JSON.parse(data) };
+                        await sendMessageToTopic(JSON.stringify(responsePayload));
+                    });
+                }).on('error', (err) => {
+                    logToFile("M5", "read", "error", "Error calling SolarEdge API: " + err.message);
+                });
+            }
+            context.delivery.accept();
+
+            // Check if it's time to shut down the service after handling the message
+            // This is a simple example where we close after a specific condition or message
+            if (messageBody.shouldTerminate) {
+                await receiver.close();
+                await connection.close();
+                process.exit(0); // Exit the process once all operations are completed
+            }
+        });
+
+        logToFile("M5", "listen", "success", "M5 is listening for messages on /request...");
+    } catch (error) {
+        logToFile("M5", "connect", "error", "Failed to connect or listen to queue: " + error.message);
+    }
+};
+
+listenToQueue().catch(console.error);
+*/
