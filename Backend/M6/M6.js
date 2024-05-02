@@ -220,7 +220,7 @@ const listenToTopic = async () => {
                                 ACPowerUOM: "KWH",
                                 ACPhasenumberTargetFields: Phase,
                                 inverterTempTargetFields: responseData.data.telemetries.map(telemetry => telemetry.temperature),
-                                inverterTempUnitTargetFields: 'Celcius',
+                                inverterTempUnitTargetFields: 'Celsius',
                                 WeatherTargetFields: []
                             }
                         });
