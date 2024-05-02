@@ -14,10 +14,10 @@ const https = require('https');
 const axios = require('axios');
 const fs = require('fs');
 // Updated Logging function with improved datetime formatting
-function logToFile(serviceName, operationType, status, message) {
+function logToFile(serviceName, logLevel,operationType, status, message) {
     const now = new Date();
     const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
-    const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+    const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
 
     fs.appendFile('M5.log', logMessage, (err) => {
         if (err) console.error('Failed to write to log file:', err);
@@ -53,7 +53,8 @@ const sendMessageToTopic = async (messageBody) => {
         //Written at date: 29-03-2024
         await sender.send({ body: messageBody });
         //console.log('Message sent to /response topic');
-        logToFile("M5", "write", "success", `Message successfully sent to /response topic`);//${(messageBody)}
+        logToFile("M5", "L1","M5 Service", "success", "Started Successfully...")
+        logToFile("M5", "L2","write", "success", `Message successfully sent to /response topic`);//${(messageBody)}
         // Close the sender and connection to clean up resources
         // Written by Vishnu Prasad S
         //Written at date: 29-03-2024
@@ -65,7 +66,8 @@ const sendMessageToTopic = async (messageBody) => {
     //Written at date: 29-03-2024
     catch (error) {
         //console.error('Failed to send message to /response topic:', error);
-        logToFile("M5", "write", "error", "Failed to send message to /response topic: " + error.message);
+        logToFile("M5", "L1","M5 Service", "success", "Error executing...")
+        logToFile("M5", "L2","write", "error", "Failed to send message to /response topic: " + error.message);
     }
 };
 // End of code block
@@ -117,7 +119,8 @@ const listenToQueue = async () => {
             // Parse the message body to a JSON object
 
             const messageBody = context.message.body ? JSON.parse(context.message.body.toString()) : {};
-            logToFile("M5", "read", "success", "Received message: " + JSON.stringify(messageBody));
+            logToFile("M5", "L1","M5 Service", "success", "Started Successfully...")
+            logToFile("M5","L2", "read", "success", "Received message: " + JSON.stringify(messageBody));
             //console.log('Received message:', messageBody);
             // Destructure necessary information from the message body
             // Written by Vishnu Prasad S
@@ -132,7 +135,7 @@ const listenToQueue = async () => {
                         let data = '';
                         res.on('data', (chunk) => { data += chunk; });
                         res.on('end', async () => {
-                            logToFile("M5", "read", "success", "Response from SolarEdge API: " + data);
+                            logToFile("M5","L2", "read", "success", "Response from SolarEdge API: " + data);
                             //console.log('Response from SolarEdge API:', data);
                             const responsePayload = {
                                 deviceMake: 'solaredge',
@@ -143,7 +146,7 @@ const listenToQueue = async () => {
                             //logToFile("M5", "read", "Success", "Success Solaredge " + responsePayload )
                         });
                     }).on('error', (err) => { //console.error('Error calling SolarEdge API:', err); 
-                        logToFile("M5", "read", "error", "Error calling SolarEdge API: " + err.message);
+                        logToFile("M5", "L2","read", "error", "Error calling SolarEdge API: " + err.message);
                     });
                     break;
                 // Placeholder for other device makes
@@ -179,22 +182,22 @@ const listenToQueue = async () => {
                             //logToFile("M5", "read", "Success", "Success Solis " + responsePayload )
                         })
                         .catch(error => {
-                            logToFile("M5", "read", "error", "Error making API call to Solis: " + error.message);
+                            logToFile("M5", "L2","read", "error", "Error making API call to Solis: " + error.message);
                             //console.error('Error making API call to Solis:', error.message);
                         });
                     break;
                 }
                 default:
-                    logToFile("M5", "read", "error", "DeviceMake not recognized. No API call made.");
+                    logToFile("M5", "L2","read", "error", "DeviceMake not recognized. No API call made.");
                     //console.log('DeviceMake not recognized. No API call made.');
                     break;
             }
             context.delivery.accept();
         });
-        logToFile("M5", "listen", "success", "M5 is listening for messages on /request...");
+        logToFile("M5", "L2","listen", "success", "M5 is listening for messages on /request...");
         //console.log('M5 is listening for messages on /request...');
     } catch (error) {
-        logToFile("M5", "connect", "error", "Failed to connect or listen to queue: " + error.message);
+        logToFile("M5", "L2","connect", "error", "Failed to connect or listen to queue: " + error.message);
         //console.error('Failed to connect or listen to queue:', error);
     }
 };

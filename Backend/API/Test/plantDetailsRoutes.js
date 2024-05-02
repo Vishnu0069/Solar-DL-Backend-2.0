@@ -196,7 +196,7 @@ module.exports = router;*/
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
-const connection = require('../db/database'); // This path must correctly point to your database configuration
+const connection = require('../my-login-api/db/database'); // This path must correctly point to your database configuration
 
 // Endpoint to handle plant details retrieval
 router.post('/GetPlantDetails', (req, res) => {

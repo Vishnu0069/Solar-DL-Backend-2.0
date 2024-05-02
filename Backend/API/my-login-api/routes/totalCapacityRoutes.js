@@ -1,8 +1,17 @@
+// Start of code block
+
+// Import required modules and setup the Express router
+// Express for routing and a custom module for database connectivity
+// Written by Vishnu Prasad S
+// Written on Date 29-04-2024
 const express = require('express');
 const router = express.Router();
 const connection = require('../db/database'); // Make sure this path is correct
 
-// Route to get total capacity for a specific IntegratorID
+// Define a POST route to calculate the total capacity of all plants associated with a specific IntegratorID
+// This route expects a POST request with IntegratorID in the request body
+// Written by Vishnu Prasad S
+// Written on Date 29-04-2024
 router.post('/totalCapacity', (req, res) => {
     const { userData } = req.body;
     const { integratorid } = userData;
@@ -19,10 +28,15 @@ router.post('/totalCapacity', (req, res) => {
             res.status(500).send('Internal server error');
             return;
         }
-        // Ensure that there's a result and that it's not null
+        // Retrieve the total capacity from the query result
+        // Ensures that the result exists and defaults to 0 if null
         const totalCapacity = results[0].TotalCapacity || 0;
+        // Send the total capacity back to the client in a JSON format
         res.json({ TotalCapacity: totalCapacity });
     });
 });
+// Export the router to be mounted by the main application
 
 module.exports = router;
+// End of code block
+

@@ -12,9 +12,9 @@ const fs = require('fs');
 // Logs are critical for monitoring the application's behavior and troubleshooting
 // Written by Vishnu Prasad S
 // Written at date: 13-03-2024
-async function logToFile(serviceName, operationType, status, message) {
+async function logToFile(serviceName,logLevel, operationType, status, message) {
     const timestamp = new Date().toISOString();
-    const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+    const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
     fs.appendFileSync('M6.log', logMessage);
 }
 
@@ -33,7 +33,8 @@ const listenToTopic = async () => {
         // Written at date: 13-03-2024        await client.connect();
         const database = client.db(process.env.MONGODB_DB_NAME);
         const collection = database.collection(process.env.MONGODB_COLLECTION_NAME);
-        logToFile("Mon6", "database", "success", "Connected to MongoDB.");
+        
+        logToFile("Mon6", "L2","database", "success", "Connected to MongoDB.");
 
         // Connect to ActiveMQ and set up a receiver for the /response topic
         // This section handles message reception and logging of the subscription status
@@ -56,7 +57,7 @@ const listenToTopic = async () => {
         };
 
         const receiver = await connection.createReceiver(receiverOptions);
-        logToFile("Mon6", "ActiveMQ", "subscribe", 'Subscribed to /response topic and waiting for messages...');
+        logToFile("Mon6","L2", "ActiveMQ", "subscribe", 'Subscribed to /response topic and waiting for messages...');
 
         // Event handler for processing each received message
         // Extracts and processes data from messages, and stores results in MongoDB
@@ -65,7 +66,7 @@ const listenToTopic = async () => {
         receiver.on('message', async context => {
             try {
                 const messageBody = context.message.body ? JSON.parse(context.message.body.toString()) : {};
-                logToFile("Mon6", "database", "success", 'Received message:', JSON.stringify(messageBody, null, 2));
+                logToFile("Mon6", "L2","database", "success", 'Received message:', JSON.stringify(messageBody, null, 2));
 
                 // Additional processing logic for different device makes, using data to calculate and store results
                 // Written by Vishnu Prasad S
@@ -225,25 +226,28 @@ const listenToTopic = async () => {
                             }
                         });
 
-                        logToFile("Mon6", "database", "success", `Inserted document with _id: ${result.insertedId}`);
+                        logToFile("Mon6", "L2","database", "success", `Inserted document with _id: ${result.insertedId}`);
                         break;
 
                     default:
-                        logToFile("Mon6", "read", "error", "DeviceMake not recognized. No API call made.");
+                        logToFile("Mon6", "L2","read", "error", "DeviceMake not recognized. No API call made.");
+                        logToFile("Mon6", "L1","M6 Service", "success", "Executed Successfully...")
                         break;
                 }
             } catch (err) {
                 console.error('Error processing message:', err);
-                logToFile("Mon6", "database", "error", `Error processing message: ${err.message}`);
+                logToFile("Mon6","L2", "database", "error", `Error processing message: ${err.message}`);
             }
         });
     } catch (error) {
         console.error('Failed to connect to MongoDB or listen to topic:', error);
-        logToFile("Mon6", "connect", "error", `Failed to connect or listen to topic: ${error.message}`);
+        logToFile("Mon6","L2", "connect", "error", `Failed to connect or listen to topic: ${error.message}`);
+
     }
 };
 // Start the listener and handle any uncaught exceptions
 // Written by Vishnu Prasad S
 // Written at date: 13-03-2024
+logToFile("Mon6", "L1","M6 Service", "success", "started Successfully...")
 listenToTopic().catch(console.error);
 // End of code block

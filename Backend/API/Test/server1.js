@@ -2,11 +2,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const loginRoutes = require('./routes/loginRoutes');
-const plantDetailsRoutes = require('./routes/plantDetailsRoutes'); // Import plant details routes
-const installationRoutes = require('./routes/installationRoutes');
-const plantRoutes = require('./routes/PlantCountForm'); // adjust path as necessary
-const totalCapacityRoutes = require('./routes/totalCapacityRoutes'); // Adjust the path as necessary
+const loginRoutes = require('../my-login-api/routes/loginRoutesVp');
+const plantDetailsRoutes = require('./plantDetailsRoutes'); // Import plant details routes
+const installationRoutes = require('../my-login-api/routes/installationRoutes');
+const plantRoutes = require('../my-login-api/routes/PlantCountForm'); // adjust path as necessary
+const totalCapacityRoutes = require('../my-login-api/routes/totalCapacityRoutes'); // Adjust the path as necessary
 
 
 const app = express();

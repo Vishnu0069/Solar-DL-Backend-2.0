@@ -2,7 +2,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
-const connection = require('../db/database');
+const connection = require('../my-login-api/db/database');
 
 router.post('/login', (req, res) => {
   const { email, password } = req.body;

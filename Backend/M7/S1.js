@@ -12,9 +12,9 @@ const fs = require('fs').promises;
 // Useful for tracking application behavior and diagnosing issues
 // Written by Vishnu Prasad S
 // Written at date: 10-04-2024
-async function logToFile(serviceName, operationType, status, message) {
+async function logToFile(serviceName, logLevel,operationType, status, message) {
     const timestamp = new Date().toISOString();
-    const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+    const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
     try {
         await fs.appendFile('M7.log', logMessage);
     } catch (err) {
@@ -62,7 +62,7 @@ async function aggregateDeviceData(database)
 {
     const sourceCollection = database.collection(process.env.MONGODB_COLLECTION_NAME);
     const tempCollection = database.collection(process.env.MONGODB_TEMP_COLLECTION_NAME);
-
+    logToFile("M7(S1)", "L1","S1 Service", "success", "Started Successfully...")
     // Define the aggregation pipeline to group data by PlantID and collect associated DeviceUUIDs
     // This operation groups all device identifiers under their respective plant identifiers
     // Written by Vishnu Prasad S
@@ -107,9 +107,9 @@ async function aggregateDeviceData(database)
                 DeviceId: result.DeviceUUIDs
             };
             await tempCollection.insertOne(document);
-            await logToFile("MongoDB", "Insert", "Success", `Aggregated data inserted for PlantId: ${result._id}`);
+            await logToFile("M7(S1)", "L2","S1 Service", "Success", `Aggregated data inserted for PlantId: ${result._id}`);
         } else {
-            await logToFile("MongoDB", "Insert", "Skipped", `Aggregated data already exists for PlantId: ${result._id} at LocalDateTime: ${LocalDateTime}`);
+            await logToFile("M7(S1)", "L2","S1 Service", "Skipped", `Aggregated data already exists for PlantId: ${result._id} at LocalDateTime: ${LocalDateTime}`);
         }
     }
 }
@@ -334,13 +334,13 @@ async function dfn_temp_devicedata(database)
                     // Written by Vishnu Prasad S
                     // Written at date: 10-04-2024
                     await deviceDataCollection.insertOne(newDoc);
-                    await logToFile("DeviceDataInsert", "Insert", "Info", `Inserted calculated data for DeviceUUID: ${trimmedUuid} into Temp_devicedata`);
+                    await logToFile("M7(S1)", "L2","S1 Service", "Info", `Inserted calculated data for DeviceUUID: ${trimmedUuid} into Temp_devicedata`);
                 } else {
-                    await logToFile("DeviceDataCalc", "DataPrep", "Error", `ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: ${trimmedUuid} at LocaldateTime: ${device.LocalDateTime}`);
+                    await logToFile("M7(S1)", "L2","S1 Service", "Error", `ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: ${trimmedUuid} at LocaldateTime: ${device.LocalDateTime}`);
                 }
 
             } else {
-                await logToFile("DeviceDataCalc", "DataPrep", "Error", `No raw data found for DeviceUUID: ${trimmedUuid} at LocalDateTime: ${device.LocalDateTime}`);
+                await logToFile("M7(S1)", "L2","S1 Service", "Error", `No raw data found for DeviceUUID: ${trimmedUuid} at LocalDateTime: ${device.LocalDateTime}`);
             }
         }
     }
@@ -357,16 +357,17 @@ async function main() {
 
     try {
         await client.connect();
-        logToFile("Connected to MongoDB");
+        logToFile("M7(S1)", "L2","S1 Service", "success","Connected to MongoDB");
         const database = client.db(dbName);
         await aggregateDeviceData(database);
         await dfn_temp_devicedata(database);
 
     } catch (err) {
-        logToFile("Error in main:", err);
+        logToFile("M7(S1)", "L1","S1 Service","Error","Error in main:", err);
     } finally {
         await client.close();
-        logToFile("Closed MongoDB connection");
+        logToFile("M7(S1)", "L2","S1 Service","database","Closed MongoDB connection");
+        logToFile("M7(S1)", "L1","S1 Service", "success", "Executed Successfully...")
     }
 }
 // Execute the main function and handle any uncaught exceptions

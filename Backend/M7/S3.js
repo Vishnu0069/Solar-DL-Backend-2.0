@@ -28,9 +28,9 @@ const deviceEnergyCollectionName = process.env.MONGODB_DEVICE_ENERGY_COLLECTION_
 // Logs include service name, operation type, status, and detailed messages for auditing purposes
 // Written by Vishnu Prasad S
 // Written at date: 23-04-2024
-async function logToFile(serviceName, operationType, status, message) {
+async function logToFile(serviceName,logLevel, operationType, status, message) {
     const timestamp = new Date().toISOString();
-    const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+    const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
     try {
         await fs.appendFile('M7.log', logMessage);
     } catch (err) {
@@ -44,8 +44,9 @@ async function logToFile(serviceName, operationType, status, message) {
 // Written at date: 23-04-2024
 async function main() {
     try {
+        console.log("M7(S3)", "L1","S3 Service", "success","Started Successfully..");
         await client.connect();
-        console.log("Connected correctly to server");
+        console.log("M7(S3)", "L2","S3 Service", "success","Connected correctly to server");
         const db = client.db(dbName);
         // Calculate the current LocalDateTime in IST (UTC+5:30) to be used in subsequent operations
 
@@ -58,10 +59,10 @@ async function main() {
         await calculateAndStorePlantTotalEnergy(db, currentLocalDateTime);
         await calculateAndStoreDeviceTotalEnergy(db, currentLocalDateTime);
 
-        console.log("Operations completed successfully.");
+        logToFile("M7(S3)", "L2","S3 Service", "success","Operations completed successfully.");
     } catch (err) {
-        console.error('An error occurred:', err);
-        await logToFile('DatabaseOperation', 'Error', 'Failure', err.message);
+        //console.error('An error occurred:', err);
+        await logToFile("M7(S3)", "L2","S3 Service", "Error", err.message);
     } finally {
         await client.close();
     }
@@ -100,7 +101,7 @@ async function main() {
 */
 
 async function calculateAndStorePlantTotalEnergy(db, specifiedDate) {
-    logToFile('calculateAndStorePlantTotalEnergy started'); // Log start
+    logToFile("M7(S3)", "L2","S3 Service", "success",'calculateAndStorePlantTotalEnergy started'); // Log start
     // Retrieve the MongoDB collections for plant data and energy
     // These collections are utilized to fetch raw plant data and store aggregated energy results
     // Written by Vishnu Prasad S
@@ -181,9 +182,9 @@ async function calculateAndStorePlantTotalEnergy(db, specifiedDate) {
         );
         // Log the successful update or insertion of plant energy data
 
-        await logToFile('PlantEnergyCollection', 'UpdateInsert', 'Success', `Processed total energy and PR for plant ${result.Plantid}`);
+        await logToFile("M7(S3)", "L2","S3 Service", "success", `Processed total energy and PR for plant ${result.Plantid}`);
     }
-    logToFile('calculateAndStorePlantTotalEnergy finished'); // Log finish
+    logToFile("M7(S3)", "L2","S3 Service", "success",'calculateAndStorePlantTotalEnergy finished'); // Log finish
 }
 
 
@@ -294,7 +295,7 @@ async function calculateAndStoreDeviceTotalEnergy(db, specifiedDate)
         // Logging provides traceability and helps in monitoring the operation's success
         // Written by Vishnu Prasad S
         // Written at date: 23-04-2024
-        await logToFile('DeviceEnergyCollection', 'UpdateInsert', 'Success', `Processed total energy for device ${result.DeviceID} on ${result.Date}`);
+        await logToFile("M7(S3)", "L2","S3 Service", "success", `Processed total energy for device ${result.DeviceID} on ${result.Date}`);
     }
 }
 

@@ -26,9 +26,9 @@ const plantDataCollectionName = process.env.MONGODB_TEMP_PLANT_COLLECTION_NAME;
 // This function captures service operations, statuses, and messages, appending them to a log file
 // Written by Vishnu Prasad S
 // Written at date: 20-04-2024
-async function logToFile(serviceName, operationType, status, message) {
+async function logToFile(serviceName,logLevel, operationType, status, message) {
   const timestamp = new Date().toISOString();
-  const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+  const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
   try {
     await fs.appendFile('M7.log', logMessage);
   } catch (err) {
@@ -43,10 +43,12 @@ async function logToFile(serviceName, operationType, status, message) {
 // Written at date: 20-04-2024
 async function main() {
   try {
+    logToFile("M7(S2)", "L1","S2 Service", "success", "Started Successfully...")
     // Connect to the MongoDB server using the client
 
     await client.connect();
-    console.log("Connected correctly to server");
+    
+    logToFile("M7(S2)", "L2","S2 Service", "success","Connected correctly to server");
     const db = client.db(dbName);
 
     // Access device and plant data collections from the database
@@ -103,18 +105,19 @@ async function main() {
       );
 
       if (updateResult.upsertedCount > 0 || updateResult.modifiedCount > 0) {
-        await logToFile('PlantDataCollection', 'UpdateInsert', 'Success', `Updated/Inserted data for plant ${plantId}`);
+        await logToFile("M7(S2)", "L2","S2 Service", "success", `Updated/Inserted data for plant ${plantId}`);
       } else {
-        await logToFile('PlantDataCollection', 'UpdateInsert', 'NoChange', `No changes made for plant ${plantId}`);
+        await logToFile("M7(S2)", "L2","S2 Service", 'NoChange', `No changes made for plant ${plantId}`);
       }
     }
 
-    console.log("Data processed and inserted/updated successfully.");
+    logToFile("M7(S2)", "L2","S2 Service", "success","Data processed and inserted/updated successfully.");
   } catch (err) {
-    console.error('An error occurred:', err);
-    await logToFile('DatabaseOperation', 'Error', 'Failure', err.message);
+    //console.error('An error occurred:', err);
+    await logToFile("M7(S2)", "L2","S2 Service", "error",'DatabaseOperation', 'Error', 'Failure', err.message);
   } finally {
     await client.close();
+    await logToFile("M7(S2)", "L2","S2 Service", "success","Executed successfully")
   }
 }
 // Execute the main function and handle any uncaught exceptions

@@ -158,10 +158,10 @@ const cron = require('node-cron');
 // Writes each log entry with a timestamp to 'M5.log'.
 // Written by Vishnu Prasad S
 // Written at date: 16-02-2024
-function logToFile(serviceName, operationType, status, message) {
+function logToFile(serviceName, logLevel,operationType, status, message) {
   const now = new Date();
   const timestamp = now.toISOString();
-  const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+  const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
   fs.appendFileSync('M5.log', logMessage, (err) => {
     if (err) {
       console.error('Failed to write to log file:', err);
@@ -180,11 +180,12 @@ let greatestCreationDate = new Date(0); // Initialize with a minimum date
 async function connectMongoDB() {
   try {
     await mongoClient.connect();
-    logToFile("Mon1", "database", "success", "Connected to MongoDB.");
+    logToFile("Mon1", "L1","MON-1 Service", "success", "Started Successfully...")
+    logToFile("Mon1", "L2","database", "success", "Connected to MongoDB.");
     const db = mongoClient.db(process.env.MONGO_DB_NAME);
     deviceCollection = db.collection(process.env.MONGO_COLLECTION_NAME);
   } catch (error) {
-    logToFile("Mon1", "database", "error", `MongoDB connection error: ${error.message}`);
+    logToFile("Mon1", "L2","database", "error", `MongoDB connection error: ${error.message}`);
     process.exit(1); // Exit if cannot connect to MongoDB
   }
 }
@@ -202,10 +203,10 @@ const db = mysql.createConnection({
 
 db.connect(err => {
   if (err) {
-    logToFile("Mon1", "read", "error", `Error connecting to MySQL: ${err.stack}`);
+    logToFile("Mon1", "L2","read", "error", `Error connecting to MySQL: ${err.stack}`);
     return;
   }
-  logToFile("Mon1", "read", "success", "Connected to MySQL database.");
+  logToFile("Mon1", "L2","read", "success", "Connected to MySQL database.");
 });
 
 // Function to execute MySQL queries and return results as a promise
@@ -295,8 +296,9 @@ async function fetchAndInsertGreaterDeviceData() {
         };
 
         await deviceCollection.insertOne(document);
-        logToFile("Mon1", "write", "success", `Document inserted to MongoDB: ${JSON.stringify(document)}`);
-
+        
+        logToFile("Mon1","L2", "write", "success", `Document inserted to MongoDB: ${JSON.stringify(document)}`);
+        logToFile("Mon1", "L1","MON-1 Service", "success", "Executed Successfully...")
         // Update maxCreationDate if the current Creation_Date_time is greater
         if (device.Creation_Date_time > maxCreationDate) {
           maxCreationDate = device.Creation_Date_time;
@@ -307,7 +309,7 @@ async function fetchAndInsertGreaterDeviceData() {
     greatestCreationDate = maxCreationDate;
   } catch (error) {
     console.error("Error during greater data fetch/insert:", error);
-    logToFile("Mon1", "database", "error", `Error during greater data fetch/insert: ${error.message}`);
+    logToFile("Mon1","L2", "database", "error", `Error during greater data fetch/insert: ${error.message}`);
   }
 }
 
@@ -327,18 +329,19 @@ async function latestCreationDate() {
     } else {
       // Log information if no new devices are found since the last check
       // This log entry helps in monitoring the activity and ensuring the system is functioning as expected
-      logToFile("Mon1", "latestCreationDate", "info", "No new devices found.");
+      logToFile("Mon1", "L2","latestCreationDate", "info", "No new devices found.");
     }
   } catch (error) {
     // Log any errors that occur during the operation
     // Errors here could indicate issues with the database connection or the query execution
     console.error("Error during latestCreationDate:", error);
-    logToFile("Mon1", "latestCreationDate", "error", `Error during latestCreationDate: ${error.message}`);
+    logToFile("Mon1","L2", "latestCreationDate", "error", `Error during latestCreationDate: ${error.message}`);
   }
 }
 
 // Start the process
 connectMongoDB().then(() => {
+
   fetchAndInsertGreaterDeviceData();
 });
 

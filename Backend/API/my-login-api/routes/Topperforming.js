@@ -47,6 +47,13 @@ app.listen(PORT, () => {
 
 module.exports = app; // Exports the app for testing or further modularization
 */
+
+// Start of code block
+
+// Import necessary modules
+// Express for routing, MongoClient for database interactions, and dotenv for environment variables
+// Written by Vishnu Prasad S
+// Written on Date 28-04-2024
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const router = express.Router();
@@ -55,13 +62,18 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
+// Retrieve MongoDB URI from environment variables and create a MongoDB client
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Define database and collection names from environment variables
 const dbName = process.env.MONGODB_DB_NAME;
 const collectionName = process.env.MONGODB_TOP_PERFORMING_NAME;
 
-// Route to get top performing plants within a date range for a specific IntegratorID
+// Route to get top performing plants based on Performance Ratio (PR%) within a date range for a specific IntegratorID
+// This endpoint handles POST requests and expects integratorid, fromDate, and toDate in the request body
+// Written by Vishnu Prasad S
+// Written on Date 28-04-2024
 router.post('/top-plants', async (req, res) => {
     const { userData, fromDate, toDate } = req.body;
     const { integratorid } = userData;
@@ -84,15 +96,16 @@ router.post('/top-plants', async (req, res) => {
             }
         };
 
+                // Define the aggregation pipeline for calculating average PR%
         const aggregation = [
             { $match: query },
             { $group: {
                 _id: "$plantId",
-                avgPR: { $avg: "$prPercent" },
+                avgPR: { $avg: "$prPercent" }, // Calculate the average PR%
                 details: { $first: "$$ROOT" } // Grab the first document to use its details
             }},
-            { $sort: { avgPR: -1 } },
-            { $project: {
+            { $sort: { avgPR: -1 } }, // Sort by average PR% in descending order
+            { $project: {// Define the fields to return
                 _id: 0,
                 plantId: "$_id",
                 avgPR: 1,
@@ -105,19 +118,21 @@ router.post('/top-plants', async (req, res) => {
             }}
         ];
 
+                // Execute the aggregation pipeline
         const plants = await collection.aggregate(aggregation).toArray();
 
-        
-
+                // Send the results as a JSON response
         res.status(200).json(plants);
     } catch (error) {
+                // Log and handle database query errors
         console.error('Database query error:', error);
         res.status(500).send('Internal server error');
     } finally {
+                // Ensure the MongoDB client is closed after the query
         await client.close();
     }
 });
 
-
+// Export the router module for use in other parts of the application
 module.exports = router;
-
+// End of code block

@@ -22,9 +22,9 @@ const mongoClient = new MongoClient(process.env.MONGO_URI);
 // Logs service name, operation type, status, and messages with a timestamp for troubleshooting and monitoring.
 // Written by Vishnu Prasad S
 // Written on Date 25-02-2024
-async function logToFile(serviceName, operationType, status, message) {
+async function logToFile(serviceName,logLevel, operationType, status, message) {
     const timestamp = new Date().toISOString();
-    const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+    const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
     fs.appendFileSync('M5.log', logMessage);
 }
 // Function to send constructed message data to an ActiveMQ queue
@@ -43,11 +43,12 @@ async function sendMessageToQueue(queueName, messageData) {
         });
         const sender = await connection.createSender(queueName);
         await sender.send({ body: JSON.stringify(messageData) });
-        await logToFile("Mon2", "write", "success", `Message sent to ${queueName}: ${JSON.stringify(messageData)}`);
+        await logToFile("Mon2", "L1","MON-2 Service", "success", "Executed Successfully...");
+        await logToFile("Mon2", "L2","write", "success", `Message sent to ${queueName}: ${JSON.stringify(messageData)}`);
         await sender.close();
         await connection.close();
     } catch (error) {
-        await logToFile("Mon2", "write", "error", `Failed to send message to queue: ${error.message}`);
+        await logToFile("Mon2","L2", "write", "error", `Failed to send message to queue: ${error.message}`);
     }
 }
 
@@ -236,6 +237,7 @@ async function fetchAndProcessData() {
         //Written by Vishnu Prasad S
         //Written on Date 25-02-2024
         await sendMessageToQueue('/request', messageData);
+        logToFile("Mon2", "L1","MON-2 Service", "success", "Started Successfully...")
     }
     await mongoClient.close();
 }
