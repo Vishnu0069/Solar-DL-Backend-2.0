@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../db/database');
 
-router.post('/PlantCount', (req, res) => {
+router.post('/PlantCountD', (req, res) => {
     const { IntegratorID } = req.body;
 
     const query = 'SELECT COUNT(PlantID) AS PlantCount FROM PlantMaster WHERE IntegratorID = ?';

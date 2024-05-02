@@ -1,3 +1,11 @@
+
+// Start of code block
+
+// Load environment variables from .env file
+// This line is essential for accessing sensitive data securely.
+// Written by Vishnu Prasad S 
+//Written on Date 25-02-2024
+
 require('dotenv').config();
 const express = require('express');
 const crypto = require('crypto');
@@ -10,13 +18,19 @@ const port = 3000;
 app.use(express.json());
 
 const mongoClient = new MongoClient(process.env.MONGO_URI);
-
+// Function to append log entries to a file
+// Logs service name, operation type, status, and messages with a timestamp for troubleshooting and monitoring.
+// Written by Vishnu Prasad S
+// Written on Date 25-02-2024
 async function logToFile(serviceName, operationType, status, message) {
     const timestamp = new Date().toISOString();
     const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
     fs.appendFileSync('M5.log', logMessage);
 }
-
+// Function to send constructed message data to an ActiveMQ queue
+// This function prepares and sends data crucial for making subsequent API calls to retrieve device data.
+// Written by Vishnu Prasad S
+// Written on Date 25-02-2024
 async function sendMessageToQueue(queueName, messageData) {
     const container = new Container();
     try {
@@ -37,6 +51,10 @@ async function sendMessageToQueue(queueName, messageData) {
     }
 }
 
+// Function to fetch and process data from MongoDB
+// Retrieves device data from the MongoDB collection and processes it to extract essential information for API calls.
+// Written by Vishnu Prasad S
+// Written on Date 25-02-2024
 async function fetchAndProcessData() {
     await mongoClient.connect();
     const db = mongoClient.db(process.env.MONGO_DB_NAME);
@@ -69,89 +87,89 @@ async function fetchAndProcessData() {
             // Assuming `EndpointApi1`, `ModelNo`, `DeviceSerialNumber`, and `API_Key` are correctly extracted from the MongoDB document
             constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
             break;*/
-            switch (DeviceMake.toLowerCase()) {
-          /*case 'solaredge':
-            
-            const now = new Date(); // Gets the current time
-            const today = now.toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
-    
-            // Format the current start time to HH:mm:00
-            const currentStartTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
-            const formattedStartTime = `${today}%20${currentStartTime}`; // Formats start time with %20 for space
-    
-            // Calculates and formats end time by adding 15 minutes to the current time
-            now.setMinutes(now.getMinutes() + 15);
-            const endTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
-            const formattedEndTime = `${today}%20${endTime}`;
-            
-            
-
-            
-            // Constructs the full URL with API key
-            // Assuming `EndpointApi1`, `ModelNo`, `DeviceSerialNumber`, and `API_Key` are correctly extracted from the MongoDB document
-            constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
-            break;*/
+        switch (DeviceMake.toLowerCase()) {
+            /*case 'solaredge':
+              
+              const now = new Date(); // Gets the current time
+              const today = now.toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
+      
+              // Format the current start time to HH:mm:00
+              const currentStartTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
+              const formattedStartTime = `${today}%20${currentStartTime}`; // Formats start time with %20 for space
+      
+              // Calculates and formats end time by adding 15 minutes to the current time
+              now.setMinutes(now.getMinutes() + 15);
+              const endTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
+              const formattedEndTime = `${today}%20${endTime}`;
+              
+              
+  
+              
+              // Constructs the full URL with API key
+              // Assuming `EndpointApi1`, `ModelNo`, `DeviceSerialNumber`, and `API_Key` are correctly extracted from the MongoDB document
+              constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
+              break;*/
             case 'solaredge':
-    /*const now = new Date(); // Gets the current time
-    const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000); // Converts local time to UTC time
+                /*const now = new Date(); // Gets the current time
+                const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000); // Converts local time to UTC time
+            
+                const today = utcNow.toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
+            
+                // Format the current start time to HH:mm:00 in UTC timezone
+                const currentStartTime = `${utcNow.getUTCHours().toString().padStart(2, '0')}:${utcNow.getUTCMinutes().toString().padStart(2, '0')}:00`;
+                const formattedStartTime = `${today}%20${currentStartTime}`; // Formats start time with %20 for space
+            
+                // Calculates and formats end time by adding 15 minutes to the current time
+                const endTime = new Date(utcNow.getTime() + 15 * 60000); // Adds 15 minutes to the current UTC time
+                const formattedEndTime = `${endTime.getUTCFullYear()}-${(endTime.getUTCMonth() + 1).toString().padStart(2, '0')}-${endTime.getUTCDate().toString().padStart(2, '0')}%20${endTime.getUTCHours().toString().padStart(2, '0')}:${endTime.getUTCMinutes().toString().padStart(2, '0')}:00`;
+             */
 
-    const today = utcNow.toISOString().split('T')[0]; // Gets today's date in YYYY-MM-DD format
+                // Get current UTC date and time
+                const nowUtc = new Date();
 
-    // Format the current start time to HH:mm:00 in UTC timezone
-    const currentStartTime = `${utcNow.getUTCHours().toString().padStart(2, '0')}:${utcNow.getUTCMinutes().toString().padStart(2, '0')}:00`;
-    const formattedStartTime = `${today}%20${currentStartTime}`; // Formats start time with %20 for space
+                // Formats the current start time to YYYY-MM-DD%20HH:MM:00 in UTC
+                const formattedStartTime = `${nowUtc.getUTCFullYear()}-${(nowUtc.getUTCMonth() + 1).toString().padStart(2, '0')}-${nowUtc.getUTCDate().toString().padStart(2, '0')}%20${nowUtc.getUTCHours().toString().padStart(2, '0')}:${nowUtc.getUTCMinutes().toString().padStart(2, '0')}:00`;
 
-    // Calculates and formats end time by adding 15 minutes to the current time
-    const endTime = new Date(utcNow.getTime() + 15 * 60000); // Adds 15 minutes to the current UTC time
-    const formattedEndTime = `${endTime.getUTCFullYear()}-${(endTime.getUTCMonth() + 1).toString().padStart(2, '0')}-${endTime.getUTCDate().toString().padStart(2, '0')}%20${endTime.getUTCHours().toString().padStart(2, '0')}:${endTime.getUTCMinutes().toString().padStart(2, '0')}:00`;
- */
-// Get current UTC date and time
-const nowUtc = new Date();
+                // Calculate and format end time by adding 15 minutes to the current UTC time
+                const endTimeUtc = new Date(nowUtc.getTime() + 15 * 60000); // Adds 15 minutes to the current UTC time
+                const formattedEndTime = `${endTimeUtc.getUTCFullYear()}-${(endTimeUtc.getUTCMonth() + 1).toString().padStart(2, '0')}-${endTimeUtc.getUTCDate().toString().padStart(2, '0')}%20${endTimeUtc.getUTCHours().toString().padStart(2, '0')}:${endTimeUtc.getUTCMinutes().toString().padStart(2, '0')}:00`;
 
-// Formats the current start time to YYYY-MM-DD%20HH:MM:00 in UTC
-const formattedStartTime = `${nowUtc.getUTCFullYear()}-${(nowUtc.getUTCMonth() + 1).toString().padStart(2, '0')}-${nowUtc.getUTCDate().toString().padStart(2, '0')}%20${nowUtc.getUTCHours().toString().padStart(2, '0')}:${nowUtc.getUTCMinutes().toString().padStart(2, '0')}:00`;
+                // Constructs the full URL with API key
+                constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
+                break;
 
-// Calculate and format end time by adding 15 minutes to the current UTC time
-const endTimeUtc = new Date(nowUtc.getTime() + 15 * 60000); // Adds 15 minutes to the current UTC time
-const formattedEndTime = `${endTimeUtc.getUTCFullYear()}-${(endTimeUtc.getUTCMonth() + 1).toString().padStart(2, '0')}-${endTimeUtc.getUTCDate().toString().padStart(2, '0')}%20${endTimeUtc.getUTCHours().toString().padStart(2, '0')}:${endTimeUtc.getUTCMinutes().toString().padStart(2, '0')}:00`;
 
-    // Constructs the full URL with API key
-    // Assuming `EndpointApi1`, `ModelNo`, `DeviceSerialNumber`, and `API_Key` are correctly extracted from the MongoDB document
-    constructedUrl = `${document.EndpointApi1}/${document.ModelNo}/${document.DeviceSerialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.API_Key}`;
-    break;
-
-                  
             case 'solis':
-    // Assuming API_Key, HeaderforApi1, and Api1Body are available in the MongoDB document
-    const apiId = document.API_Key;
-    const contentMd5 = JSON.parse(document.HeaderforApi1)["Content-MD5"];
-    const contentType = 'application/json';
-    const currentDate = new Date().toUTCString();
-    const requestBody = JSON.parse(document.Api1Body);
 
-    // Use the API endpoint from environment variable or document if it's stored there
-    const apiEndpoint = process.env.API_URL;
-    const stringToSign = `POST\n${contentMd5}\n${contentType}\n${currentDate}\n${apiEndpoint}`;
-    
-    const secretKey = process.env.SECRET_KEY;
-    const signature = crypto.createHmac('sha1', secretKey).update(stringToSign).digest('base64');
+                const apiId = document.API_Key;
+                const contentMd5 = JSON.parse(document.HeaderforApi1)["Content-MD5"];
+                const contentType = 'application/json';
+                const currentDate = new Date().toUTCString();
+                const requestBody = JSON.parse(document.Api1Body);
 
-    // Constructed URL using data from the MongoDB document
-    constructedUrl = `${document.EndpointApi1}`;
+                // Use the API endpoint from environment variable or document if it's stored there
+                const apiEndpoint = process.env.API_URL;
+                const stringToSign = `POST\n${contentMd5}\n${contentType}\n${currentDate}\n${apiEndpoint}`;
 
-    // Populate the headers object with necessary details for Solis, extracted from the document
-    headers = {
-        "Content-MD5": contentMd5,
-        "Content-Type": contentType,
-        "Date": currentDate,
-        "Signature": signature,
-        "Api_key": apiId,
-        "body": requestBody // Ensure that requestBody is in the correct format expected by the endpoint
-    };
+                const secretKey = process.env.SECRET_KEY;
+                const signature = crypto.createHmac('sha1', secretKey).update(stringToSign).digest('base64');
 
-    // Log the constructed URL and headers for debugging
-    //console.log('Constructed URL for Solis:', constructedUrl, 'Headers:', headers, 'Request Body:', JSON.stringify(requestBody));
-    break;
+                // Constructed URL using data from the MongoDB document
+                constructedUrl = `${document.EndpointApi1}`;
+
+                // Populate the headers object with necessary details for Solis, extracted from the document
+                headers = {
+                    "Content-MD5": contentMd5,
+                    "Content-Type": contentType,
+                    "Date": currentDate,
+                    "Signature": signature,
+                    "Api_key": apiId,
+                    "body": requestBody // Ensure that requestBody is in the correct format expected by the endpoint
+                };
+
+                // Log the constructed URL and headers for debugging
+                //console.log('Constructed URL for Solis:', constructedUrl, 'Headers:', headers, 'Request Body:', JSON.stringify(requestBody));
+                break;
 
             case 'solarman':
                 // Replicate Solarman URL construction logic
@@ -162,12 +180,15 @@ const formattedEndTime = `${endTimeUtc.getUTCFullYear()}-${(endTimeUtc.getUTCMon
                 continue;
         }
 
+        //Constructing the messagedata to be sent into the Queue
+        //Written by Vishnu Prasad S
+        //Written on Date 25-02-2024
         const messageData = {
             deviceMake: document.DeviceMake,
             constructedUrl,
             headers,
             metadata: {
-                integratorId: document.metadata.integratorId,
+                /*integratorId: document.metadata.integratorId,
                 PlantName: document.metadata.plantName, // Note the capitalization of 'plantName'
                 PlantID: document.PlantID,
                 deviceUUID: document.DeviceUUID,
@@ -177,20 +198,58 @@ const formattedEndTime = `${endTimeUtc.getUTCFullYear()}-${(endTimeUtc.getUTCMon
                 Capacity: document.Capacity,
                 Phase: document.Phase,
                 Latitude: document.metadata.latitude,
-                Longitude: document.metadata.longitude
+                Longitude: document.metadata.longitude*/
+
+                //New updated Metadata with Everything from int id to Capaciyu UOM of Device
+                //Written by Vishnu Prasad S
+                //Written on Date 07-03-2024
+
+                integratorId: document.metadata.integratorId,
+                PlantName: document.metadata.plantName,
+                PlantSL_NO: document.metadata.PlantSL_NO, // Serial number of the plant
+                PlantID: document.metadata.PlantID,
+                PlantType: document.metadata.PlantType,
+                PlantCapacity: document.metadata.Plant_capacity,
+                PlantSystemType: document.metadata.PlantSystemType,
+                Latitude: document.metadata.latitude,
+                Longitude: document.metadata.longitude,
+                Country: document.metadata.Country,
+                Region: document.metadata.Region,
+                State: document.metadata.State,
+                District: document.metadata.District,
+                AzimuthalAngle: document.metadata.Azimuthal_angle, // Naming convention adjusted
+                TiltAngle: document.metadata.Tilt_angle, // Naming convention adjusted
+                DeviceUUID: document.metadata.deviceUUID, // Corrected to match your latest metadata key names
+                DeviceMake: document.metadata.deviceMake, // Device manufacturer
+                ModelNo: document.metadata.deviceModelno, // Adjusted to 'ModelNo' for consistency
+                DeviceSN: document.metadata.deviceSrialno, // Adjusted to 'DeviceSN' for consistency
+                DeviceType: document.metadata.deviceType,
+                Capacity: document.metadata.deviceCapacity,
+                CapacityUOM: document.metadata.deviceCapacity_uom, // Added Capacity Unit of Measure
+                //Phase: document.metadata.Phase,
+
+
+
             }
         };
-        
+        //Send the message to the /request Queue
+        //Written by Vishnu Prasad S
+        //Written on Date 25-02-2024
         await sendMessageToQueue('/request', messageData);
     }
     await mongoClient.close();
 }
 
-function generateSolisHeaders(API_Key, document) {
-    // Implement the Solis headers generation logic exactly as in the old Mon2
-}
 
-// Start processing
+
+// calling the function to Start processing
+// Written by Vishnu Prasad S 
+//Written on Date 25-02-2024
 fetchAndProcessData().catch(console.error);
+//End of the code
+/*In SUmmary the above Code gets the device data essential for Making Api call like Api endpoint
+Api Key,Devoce Slno and model Number etc which are cruscial for making a Api call and constructs a Url to which the next
+M5.js service will make a call over internet to get the latest data from that device... */
+// Written by Vishnu Prasad S
 
 

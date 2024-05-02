@@ -4,15 +4,16 @@ const connection = require('../db/database'); // Make sure this path is correct
 
 // Route to get total capacity for a specific IntegratorID
 router.post('/totalCapacity', (req, res) => {
-    const { IntegratorID } = req.body;
+    const { userData } = req.body;
+    const { integratorid } = userData;
 
     const query = `
-        SELECT SUM(capacity) AS TotalCapacity
+        SELECT SUM(Capacity) AS TotalCapacity
         FROM PlantMaster
         WHERE IntegratorID = ?;
     `;
 
-    connection.query(query, [IntegratorID], (err, results) => {
+    connection.query(query, [integratorid], (err, results) => {
         if (err) {
             console.error('Database query error:', err);
             res.status(500).send('Internal server error');

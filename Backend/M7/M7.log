@@ -1,19 +1,146 @@
-2024-04-23T10:33:11.062Z	Connected to MongoDB	undefined	undefined	undefined
-2024-04-23T10:33:11.227Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:33:11.355Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:33:11.514Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:33:11.565Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:33:11.661Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-23 16-03
-2024-04-23T10:33:11.667Z	Closed MongoDB connection	undefined	undefined	undefined
-2024-04-23T10:34:29.862Z	Connected to MongoDB	undefined	undefined	undefined
-2024-04-23T10:34:30.218Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:34:30.306Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:34:30.374Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b at LocaldateTime: 2024-04-23 16-04
-2024-04-23T10:34:30.410Z	DeviceDataCalc	DataPrep	Error	ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b at LocaldateTime: 2024-04-23 16-04
-2024-04-23T10:34:30.439Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-23 16-04
-2024-04-23T10:34:30.445Z	Closed MongoDB connection	undefined	undefined	undefined
-2024-04-23T10:37:43.799Z	Connected to MongoDB	undefined	undefined	undefined
-2024-04-23T10:37:44.086Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:37:44.175Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
-2024-04-23T10:37:44.257Z	Error in main:	ReferenceError: energyOutput is not defined	undefined	undefined
-2024-04-23T10:37:44.261Z	Closed MongoDB connection	undefined	undefined	undefined
+    2024-04-29T17:27:19.296Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-29T17:27:19.419Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-29T17:27:28.650Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-29T17:27:28.728Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-29T17:27:42.925Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-29T17:27:42.998Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-29T17:46:32.765Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-29T17:46:32.857Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-29T17:49:07.883Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-29T17:49:08.020Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T17:49:08.082Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-29T17:49:08.190Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-29T17:49:08.254Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-29T17:49:08.284Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-29 23-19
+2024-04-29T17:49:08.290Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-29T17:49:11.744Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T17:49:14.898Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T17:49:14.976Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-29 00-00
+2024-04-29T17:49:15.012Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-29 00-00
+2024-04-29T17:56:30.481Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-29T17:56:30.605Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T17:56:30.672Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-29T17:56:30.777Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-29T17:56:30.848Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-29T17:56:30.888Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-29 23-26
+2024-04-29T17:56:30.894Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-29T17:56:40.231Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T18:10:39.372Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-29T18:10:39.535Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-29T18:10:39.623Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T18:10:39.747Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-29 23-40
+2024-04-29T18:10:39.872Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-29T18:10:39.990Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-29T18:10:40.015Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-29T18:10:45.434Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T18:10:51.473Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-29T18:10:51.565Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-29 00-00
+2024-04-29T18:10:51.608Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-29 00-00
+2024-04-30T03:57:09.630Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-30T03:57:09.799Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T03:57:09.889Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-30T03:57:10.044Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T03:57:10.150Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T03:57:10.193Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-30 09-27
+2024-04-30T03:57:10.198Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-30T03:57:12.697Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T03:57:15.995Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T03:57:16.095Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T03:57:16.145Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:14:16.430Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-30T06:14:16.605Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:14:16.733Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:14:16.846Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-30 11-44
+2024-04-30T06:14:16.942Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:14:17.048Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:14:17.053Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-30T06:14:20.157Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:14:22.506Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:14:22.609Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:14:22.675Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:16:31.617Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-30T06:16:31.820Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:16:31.930Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:16:32.022Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-30 11-46
+2024-04-30T06:16:32.131Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:16:32.235Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:16:32.239Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-30T06:16:34.706Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:16:37.856Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:16:37.962Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:16:38.008Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:19:08.054Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-30T06:19:08.229Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:19:08.349Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:19:08.443Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-30 11-49
+2024-04-30T06:19:08.565Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:19:08.668Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:19:08.672Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-30T06:19:11.170Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:19:14.007Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:19:14.110Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:19:14.160Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:20:35.981Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-30T06:20:36.095Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:20:36.164Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:20:36.230Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-30 11-50
+2024-04-30T06:20:36.323Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:20:36.392Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:20:36.397Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-30T06:20:39.008Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:20:42.301Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:20:42.394Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:20:42.439Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:26:16.012Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-30T06:26:16.180Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:26:16.244Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:26:16.299Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-30 11-56
+2024-04-30T06:26:16.375Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:26:16.438Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T06:26:16.444Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-30T06:26:20.174Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:26:23.590Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T06:26:23.661Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T06:26:23.694Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T07:41:16.427Z	Connected to MongoDB	undefined	undefined	undefined
+2024-04-30T07:41:16.577Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T07:41:16.667Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-04-30T07:41:16.858Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T07:41:17.006Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-04-30T07:41:17.041Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-04-30 13-11
+2024-04-30T07:41:17.047Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-04-30T07:41:20.162Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T07:41:24.349Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-04-30T07:41:24.473Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-04-30T07:41:24.519Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-04-30 00-00
+2024-05-01T07:54:25.171Z	Connected to MongoDB	undefined	undefined	undefined
+2024-05-01T07:54:25.314Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-01T07:54:25.421Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-05-01T07:54:25.598Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-01T07:54:25.689Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-01T07:54:25.826Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-05-01 13-24
+2024-05-01T07:54:25.832Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-05-01T07:54:37.159Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-01T07:54:41.132Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-01T07:54:41.272Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-05-01 00-00
+2024-05-01T07:54:41.324Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-05-01 00-00
+2024-05-02T07:54:13.599Z	Connected to MongoDB	undefined	undefined	undefined
+2024-05-02T07:54:13.744Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-05-02T07:54:13.824Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-02T07:54:13.826Z	Error in main:	ReferenceError: currentUtcDate is not defined	undefined	undefined
+2024-05-02T07:54:13.830Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-05-02T07:54:23.852Z	calculateAndStorePlantTotalEnergy started	undefined	undefined	undefined
+2024-05-02T07:54:23.906Z	calculateAndStorePlantTotalEnergy finished	undefined	undefined	undefined
+2024-05-02T07:58:08.074Z	Connected to MongoDB	undefined	undefined	undefined
+2024-05-02T07:58:08.203Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-02T07:58:08.297Z	MongoDB	Insert	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-05-02T07:58:08.446Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-02T07:58:08.532Z	DeviceDataInsert	Insert	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-02T07:58:08.588Z	DeviceDataCalc	DataPrep	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-05-02 13-28
+2024-05-02T07:58:08.594Z	Closed MongoDB connection	undefined	undefined	undefined
+2024-05-02T07:58:13.383Z	PlantDataCollection	UpdateInsert	Success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-02T07:58:17.987Z	calculateAndStorePlantTotalEnergy started	undefined	undefined	undefined
+2024-05-02T07:58:18.073Z	PlantEnergyCollection	UpdateInsert	Success	Processed total energy and PR for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-02T07:58:18.074Z	calculateAndStorePlantTotalEnergy finished	undefined	undefined	undefined
+2024-05-02T07:58:18.166Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-05-02 00-00
+2024-05-02T07:58:18.206Z	DeviceEnergyCollection	UpdateInsert	Success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-05-02 00-00

@@ -1,68 +1,31 @@
+// Start of code block
+
+// Import necessary modules for MongoDB operations and asynchronous file operations
+// Configures environment variables and sets up MongoDB client
+// Written by Vishnu Prasad S
+// Written at date: 20-04-2024
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const fs = require('fs').promises;
 
+// MongoDB URI and client setup for database connections
+// Utilizes environment variables for secure access to database resources
+// Written by Vishnu Prasad S
+// Written at date: 20-04-2024
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Retrieve MongoDB database and collection names from environment variables
+// Written by Vishnu Prasad S
+// Written at date: 20-04-2024
 const dbName = process.env.MONGODB_DB_NAME;
 const deviceDataCollectionName = process.env.MONGODB_DEVICE_DATA_COLLECTION_NAME;
 const plantDataCollectionName = process.env.MONGODB_TEMP_PLANT_COLLECTION_NAME;
-// Calculate current LocalDateTime in IST (UTC+5:30)
-const currentUtcDate = new Date();
-const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
-const istDate = new Date(currentUtcDate.getTime() + istOffset);
-const currentLocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
-async function main() {
-  try {
-    await client.connect();
-    console.log("Connected correctly to server");
-    const db = client.db(dbName);
-  
-    
-    // The date and time for the query
-    const queryDateTime = currentLocalDateTime;
-    //const queryDateTime = "2024-04-19 11-45";
 
-    // Accessing the collection
-    const deviceDataCollection = db.collection(deviceDataCollectionName);
-    const plantDataCollection = db.collection(plantDataCollectionName);
-
-    // Query for the data
-    const cursor = deviceDataCollection.find({ "Localdatetime": queryDateTime });
-
-    /*const plantOutputs = {};
-
-    await cursor.forEach(doc => {
-      const plantId = doc.Plantid;
-      if (plantOutputs[plantId]) {
-        plantOutputs[plantId] += doc.Energyoutput;
-      } else {
-        plantOutputs[plantId] = doc.Energyoutput;
-      }
-    });
-
-    // Insert or update the plant data
-    for (const [plantId, outputEnergy] of Object.entries(plantOutputs)) {
-      const newDoc = {
-        Plantid: plantId,
-        LocalDateTime: "24-04-19 11-00",  // Example date/time format
-        OutputEnergy: outputEnergy,
-        EnergyUOM: "KWH"
-      };
-      await plantDataCollection.insertOne(newDoc);
-      await logToFile('PlantDataCollection', 'Insert', 'Success', `Inserted data for plant ${plantId}`);
-    }
-
-    console.log("Data processed and inserted successfully.");
-  } catch (err) {
-    console.error('An error occurred:', err);
-    await logToFile('DatabaseOperation', 'Error', 'Failure', err.message);
-  } finally {
-    await client.close();
-  }
-}
-
+// Function to log messages to a file, enhancing traceability and error handling
+// This function captures service operations, statuses, and messages, appending them to a log file
+// Written by Vishnu Prasad S
+// Written at date: 20-04-2024
 async function logToFile(serviceName, operationType, status, message) {
   const timestamp = new Date().toISOString();
   const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
@@ -73,36 +36,69 @@ async function logToFile(serviceName, operationType, status, message) {
   }
 }
 
-main();*/
-//This Blocks works justfine creates a object just as we need or inerts the new data into the collection if an object already exists
 
-//to query and get data for currect dateand time
-const currentUtcDate = new Date();
-const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours and 30 minutes converted to milliseconds
-const istDate = new Date(currentUtcDate.getTime() + istOffset);
-const LocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
+// Main function to execute MongoDB operations and data processing
+// Connects to the database, processes device data, and updates plant data collections
+// Written by Vishnu Prasad S
+// Written at date: 20-04-2024
+async function main() {
+  try {
+    // Connect to the MongoDB server using the client
 
-const plantOutputs = {};
+    await client.connect();
+    console.log("Connected correctly to server");
+    const db = client.db(dbName);
 
+    // Access device and plant data collections from the database
+    const deviceDataCollection = db.collection(deviceDataCollectionName);
+    const plantDataCollection = db.collection(plantDataCollectionName);
+
+    // Calculate the current local date and time in IST (Indian Standard Time, UTC+5:30)
+    // This timestamp is crucial for filtering and processing data relevant to the specific time
+    // Written by Vishnu Prasad S
+    // Written at date: 20-04-2024
+    const currentUtcDate = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istDate = new Date(currentUtcDate.getTime() + istOffset);
+    const currentLocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
+
+    // Retrieve data for the current local date and time, summing energy outputs by plant
+    // Written by Vishnu Prasad S
+    // Written at date: 20-04-2024
+    const cursor = deviceDataCollection.find({ "Localdatetime": currentLocalDateTime });
+
+    const plantOutputs = {};
     await cursor.forEach(doc => {
       const plantId = doc.Plantid;
+      const header = doc.Header || {}; // Retrieve header if available
       if (plantOutputs[plantId]) {
-        plantOutputs[plantId] += doc.Energyoutput;
+        plantOutputs[plantId].outputEnergy += doc.Energyoutput;
+        plantOutputs[plantId].header = header; // Store header information
       } else {
-        plantOutputs[plantId] = doc.Energyoutput;
+        plantOutputs[plantId] = { outputEnergy: doc.Energyoutput, header };
       }
     });
 
-    for (const [plantId, outputEnergy] of Object.entries(plantOutputs)) {
-      const newData = {
-        LocalDateTime: LocalDateTime,
-        OutputEnergy: outputEnergy,
-        EnergyUOM: "KWH"
+    // Update each plant's data in the plant data collection, inserting new data as needed
+    // Logs the outcome of each operation, indicating successful updates or insertions
+    // Written by Vishnu Prasad S
+    // Written at date: 20-04-2024
+    for (const [plantId, data] of Object.entries(plantOutputs)) {
+      const { outputEnergy, header } = data;
+      const updateDoc = {
+        $set: { "Header": header },
+        $push: {
+          "Plantdata": {
+            LocalDateTime: currentLocalDateTime,
+            OutputEnergy: outputEnergy,
+            EnergyUOM: "KWH"
+          }
+        }
       };
 
       const updateResult = await plantDataCollection.updateOne(
         { Plantid: plantId },
-        { $push: { Plantdata: newData } },
+        updateDoc,
         { upsert: true }
       );
 
@@ -113,8 +109,6 @@ const plantOutputs = {};
       }
     }
 
-    
-
     console.log("Data processed and inserted/updated successfully.");
   } catch (err) {
     console.error('An error occurred:', err);
@@ -123,15 +117,9 @@ const plantOutputs = {};
     await client.close();
   }
 }
-
-async function logToFile(serviceName, operationType, status, message) {
-  const timestamp = new Date().toISOString();
-  const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
-  try {
-    await fs.appendFile('M7.log', logMessage);
-  } catch (err) {
-    console.error('Error writing to log file:', err);
-  }
-}
-
-main();
+// Execute the main function and handle any uncaught exceptions
+// This execution block serves as the entry point for the script, ensuring that database operations are performed
+// Written by Vishnu Prasad S
+// Written at date: 20-04-2024
+main().catch(console.error);
+// End of code block
