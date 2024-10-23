@@ -34,6 +34,7 @@ async function calculateAndStoreTopPerformingPlants() {
         state: Header.State,
         district: Header.District,
         plantType: Header.PlantType,
+        gridStatus:Header.Gridstatus,
         systemType: Header.PlantSystemType,
         date: Date,
         prPercent: PRPercent

@@ -12,16 +12,43 @@ const fs = require('fs').promises;
 // Useful for tracking application behavior and diagnosing issues
 // Written by Vishnu Prasad S
 // Written at date: 10-04-2024
-async function logToFile(serviceName, logLevel,operationType, status, message) {
+// async function logToFile(serviceName, logLevel,operationType, status, message) {
+//     const timestamp = new Date().toISOString();
+//     const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+//     try {
+//         await fs.appendFile('M7.log', logMessage);
+//     } catch (err) {
+//         console.error('Error writing to log file:', err);
+//     }
+// }
+
+async function logToFile(serviceName, logLevel, operationType, status, message) {
     const timestamp = new Date().toISOString();
     const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+
+    // Ensure the logs directory exists
+    const logDirectory = path.join(__dirname, 'logs');
     try {
-        await fs.appendFile('M7.log', logMessage);
+        if (!await fs.access(logDirectory)) {
+            await fs.mkdir(logDirectory);
+        }
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            await fs.mkdir(logDirectory);
+        } else {
+            console.error('Error creating logs directory:', err);
+            return;
+        }
+    }
+
+    // Write the log message to M7.log inside the logs directory
+    const logFilePath = path.join(logDirectory, 'M7.log');
+    try {
+        await fs.appendFile(logFilePath, logMessage);
     } catch (err) {
         console.error('Error writing to log file:', err);
     }
 }
-
 /*async function aggregateDeviceData(database) {
     const sourceCollection = database.collection(process.env.MONGODB_COLLECTION_NAME);
     const tempCollection = database.collection(process.env.MONGODB_TEMP_COLLECTION_NAME);
@@ -325,6 +352,7 @@ async function dfn_temp_devicedata(database)
                         Deviceuid: trimmedUuid,
                         Localdatetime: device.LocalDateTime,
                         Plantid: device.PlantId,
+                        GridStatus:device.GridStatus,
                         Energyoutput: parseFloat(energyOutput.toFixed(2)),
                         EnergyUOM: "KWH",
                         Header: header // Directly passing the header object

@@ -22,10 +22,28 @@ const mongoClient = new MongoClient(process.env.MONGO_URI);
 // Logs service name, operation type, status, and messages with a timestamp for troubleshooting and monitoring.
 // Written by Vishnu Prasad S
 // Written on Date 25-02-2024
-async function logToFile(serviceName,logLevel, operationType, status, message) {
-    const timestamp = new Date().toISOString();
+// async function logToFile(serviceName,logLevel, operationType, status, message) {
+//     const timestamp = new Date().toISOString();
+//     const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+//     fs.appendFileSync('M5.log', logMessage);
+// }
+// Updated Logging function with improved datetime formatting
+function logToFile(serviceName, logLevel, operationType, status, message) {
+    const now = new Date();
+    const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
     const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
-    fs.appendFileSync('M5.log', logMessage);
+
+    // Ensure the logs directory exists
+    const logDirectory = path.join(__dirname, 'logs');
+    if (!fs.existsSync(logDirectory)) {
+        fs.mkdirSync(logDirectory);
+    }
+
+    // Write the log message to M5.log inside the logs directory
+    const logFilePath = path.join(logDirectory, 'mon2.log');
+    fs.appendFile(logFilePath, logMessage, (err) => {
+        if (err) console.error('Failed to write to log file:', err);
+    });
 }
 // Function to send constructed message data to an ActiveMQ queue
 // This function prepares and sends data crucial for making subsequent API calls to retrieve device data.

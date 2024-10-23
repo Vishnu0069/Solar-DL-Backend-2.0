@@ -26,15 +26,32 @@ const plantDataCollectionName = process.env.MONGODB_TEMP_PLANT_COLLECTION_NAME;
 // This function captures service operations, statuses, and messages, appending them to a log file
 // Written by Vishnu Prasad S
 // Written at date: 20-04-2024
-async function logToFile(serviceName,logLevel, operationType, status, message) {
+async function logToFile(serviceName, logLevel, operationType, status, message) {
   const timestamp = new Date().toISOString();
-  const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+  const logLevelL1 = process.env.LOG_LEVEL_L1 || 'INFO';
+  const logLevelL2 = process.env.LOG_LEVEL_L2 || 'DEBUG';
+  const enableDetailedLogging = process.env.ENABLE_DETAILED_LOGGING === 'true'; // Corrected
+
+  let logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+
+  if (logLevel === 'L1' || !enableDetailedLogging) {
+    logMessage = `${timestamp}\t${serviceName}\t${status}\t${message}\n`;
+  }
+
+  if (logLevel === 'L2' && enableDetailedLogging) {
+    logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+  }
+
   try {
     await fs.appendFile('M7.log', logMessage);
   } catch (err) {
     console.error('Error writing to log file:', err);
   }
 }
+
+
+
+  
 
 
 // Main function to execute MongoDB operations and data processing

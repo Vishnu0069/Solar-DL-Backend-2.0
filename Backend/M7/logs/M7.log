@@ -1,0 +1,40 @@
+2024-05-14T12:28:17.373Z	L2	M7(S1)	S1 Service	success	Connected to MongoDB
+2024-05-14T12:28:17.381Z	L1	M7(S1)	S1 Service	success	Started Successfully...
+2024-05-14T12:28:17.515Z	L2	M7(S1)	S1 Service	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-05-14T12:28:17.587Z	L2	M7(S1)	S1 Service	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-14T12:28:17.652Z	L2	M7(S1)	S1 Service	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-05-14 17-58
+2024-05-14T12:28:17.743Z	L2	M7(S1)	S1 Service	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-14T12:28:17.815Z	L2	M7(S1)	S1 Service	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-14T12:28:17.824Z	L2	M7(S1)	S1 Service	database	Closed MongoDB connection
+2024-05-14T12:28:17.825Z	L1	M7(S1)	S1 Service	success	Executed Successfully...
+2024-05-14T12:28:20.868Z	M7(S2)	success	Started Successfully...
+2024-05-14T12:28:21.313Z	M7(S2)	S2 Service	success	Connected correctly to server
+2024-05-14T12:28:21.428Z	M7(S2)	S2 Service	success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-14T12:28:21.431Z	M7(S2)	S2 Service	success	Data processed and inserted/updated successfully.
+2024-05-14T12:28:21.443Z	M7(S2)	S2 Service	success	Executed successfully
+2024-05-14T12:28:24.261Z	L2	M7(S3)	S3 Service	success	calculateAndStorePlantTotalEnergy started
+2024-05-14T12:28:24.340Z	L2	M7(S3)	S3 Service	success	Processed total energy for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b with latest output at 2024-05-14 17-54
+2024-05-14T12:28:24.341Z	L2	M7(S3)	S3 Service	complete	calculateAndStorePlantTotalEnergy finished
+2024-05-14T12:28:24.415Z	L2	M7(S3)	S3 Service	success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-05-14 00-00
+2024-05-14T12:28:24.459Z	L2	M7(S3)	S3 Service	success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-05-14 00-00
+2024-05-14T12:28:24.460Z	L2	M7(S3)	S3 Service	success	Operations completed successfully.
+2024-05-14T12:30:26.419Z	L2	M7(S1)	S1 Service	success	Connected to MongoDB
+2024-05-14T12:30:26.425Z	L1	M7(S1)	S1 Service	success	Started Successfully...
+2024-05-14T12:30:26.551Z	L2	M7(S1)	S1 Service	Success	Aggregated data inserted for PlantId: 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-14T12:30:26.624Z	L2	M7(S1)	S1 Service	Success	Aggregated data inserted for PlantId: 9867bc09-e905-11ee-8d11-892f4ffe0f4b
+2024-05-14T12:30:26.730Z	L2	M7(S1)	S1 Service	Info	Inserted calculated data for DeviceUUID: cce8005e-e7b0-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-14T12:30:26.800Z	L2	M7(S1)	S1 Service	Info	Inserted calculated data for DeviceUUID: f66eefb0-eb62-11ee-8d11-892f4ffe0f4b into Temp_devicedata
+2024-05-14T12:30:26.840Z	L2	M7(S1)	S1 Service	Error	No raw data found for DeviceUUID: d814991c-e905-11ee-8d11-892f4ffe0f4b at LocalDateTime: 2024-05-14 18-00
+2024-05-14T12:30:26.849Z	L2	M7(S1)	S1 Service	database	Closed MongoDB connection
+2024-05-14T12:30:26.849Z	L1	M7(S1)	S1 Service	success	Executed Successfully...
+2024-05-14T12:30:28.909Z	M7(S2)	success	Started Successfully...
+2024-05-14T12:30:29.329Z	M7(S2)	S2 Service	success	Connected correctly to server
+2024-05-14T12:30:29.405Z	M7(S2)	S2 Service	success	Updated/Inserted data for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b
+2024-05-14T12:30:29.406Z	M7(S2)	S2 Service	success	Data processed and inserted/updated successfully.
+2024-05-14T12:30:29.410Z	M7(S2)	S2 Service	success	Executed successfully
+2024-05-14T12:30:32.431Z	L2	M7(S3)	S3 Service	success	calculateAndStorePlantTotalEnergy started
+2024-05-14T12:30:32.528Z	L2	M7(S3)	S3 Service	complete	calculateAndStorePlantTotalEnergy finished
+2024-05-14T12:30:32.528Z	L2	M7(S3)	S3 Service	success	Processed total energy for plant 37c12996-e7ae-11ee-8d11-892f4ffe0f4b with latest output at 2024-05-14 17-54
+2024-05-14T12:30:32.602Z	L2	M7(S3)	S3 Service	success	Processed total energy for device cce8005e-e7b0-11ee-8d11-892f4ffe0f4b on 2024-05-14 00-00
+2024-05-14T12:30:32.642Z	L2	M7(S3)	S3 Service	success	Processed total energy for device f66eefb0-eb62-11ee-8d11-892f4ffe0f4b on 2024-05-14 00-00
+2024-05-14T12:30:32.644Z	L2	M7(S3)	S3 Service	success	Operations completed successfully.

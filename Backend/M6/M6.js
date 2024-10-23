@@ -12,10 +12,19 @@ const fs = require('fs');
 // Logs are critical for monitoring the application's behavior and troubleshooting
 // Written by Vishnu Prasad S
 // Written at date: 13-03-2024
-async function logToFile(serviceName,logLevel, operationType, status, message) {
+async function logToFile(serviceName, logLevel, operationType, status, message) {
     const timestamp = new Date().toISOString();
     const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
-    fs.appendFileSync('M6.log', logMessage);
+
+    // Ensure the logs directory exists
+    const logDirectory = path.join(__dirname, 'logs');
+    if (!fs.existsSync(logDirectory)) {
+        fs.mkdirSync(logDirectory);
+    }
+
+    // Write the log message to M6.log inside the logs directory
+    const logFilePath = path.join(logDirectory, 'M6.log');
+    fs.appendFileSync(logFilePath, logMessage);
 }
 
 // Main function to set up a listener on the /response topic and process incoming messages
@@ -176,6 +185,10 @@ const listenToTopic = async () => {
                             return total + powerPerEntry;
                         }, 0);
 
+                        // Determine grid status based on total power
+const gridStatus = totalPower !== null && !isNaN(totalPower) && totalPower !== 0 ? 'Online' : 'Offline';
+
+
                         // Insert the mapped data into MongoDB
                         const result = await collection.insertOne({
                             DeviceUUIDMap: {
@@ -185,6 +198,7 @@ const listenToTopic = async () => {
                                 DeviceMake,
                                 LocalDateTime: currentLocalDateTime,
                                 HeaderTarget: {
+                                    
                                     integratorId,
                                     PlantName,
                                     PlantSL_NO,
@@ -200,6 +214,7 @@ const listenToTopic = async () => {
                                     District,
                                     AzimuthalAngle,
                                     TiltAngle,
+                                    GridStatus: gridStatus, // Add Grid Status field
                                     DeviceUUID,
                                     DeviceMake,
                                     ModelNo,
@@ -218,6 +233,7 @@ const listenToTopic = async () => {
                                 ACCurrentTargetFields: avgACCurrent,
                                 //adding AC power
                                 ACPowerTargetFields: totalPower,
+                                
                                 ACPowerUOM: "KWH",
                                 ACPhasenumberTargetFields: Phase,
                                 inverterTempTargetFields: responseData.data.telemetries.map(telemetry => telemetry.temperature),
@@ -228,6 +244,66 @@ const listenToTopic = async () => {
 
                         logToFile("Mon6", "L2","database", "success", `Inserted document with _id: ${result.insertedId}`);
                         break;
+
+                        /*case 'solis':
+                            DCVoltageTargetFields = Array(responseData.data.telemetries.length).fill(0);
+                            DCCurrentTargetFields = Array(responseData.data.telemetries.length).fill(0);
+                            avgACVoltage = { vACR: 0, vACS: 0, vACT: 0 };
+                            avgACCurrent = { iACR: 0, iACS: 0, iACT: 0 };
+                            totalPower = 0;
+
+        // Determine grid status based on total power
+const gridStatus1 = totalPower !== null && !isNaN(totalPower) && totalPower !== 0 ? 'Online' : 'Offline';
+
+        // Determine grid status based on total power
+        // Insert the mapped data into MongoDB
+        const result1 = await collection.insertOne({
+            DeviceUUIDMap: {
+                DeviceUUID,
+                DeviceMake,
+                LocalDateTime: currentLocalDateTime,
+                HeaderTarget: {
+                    integratorId,
+                    PlantName,
+                    PlantSL_NO,
+                    PlantID,
+                    PlantType,
+                    PlantCapacity,
+                    PlantSystemType,
+                    Latitude,
+                    Longitude,
+                    Country,
+                    Region,
+                    State,
+                    District,
+                    AzimuthalAngle,
+                    TiltAngle,
+                    DeviceUUID,
+                    DeviceMake,
+                    ModelNo,
+                    DeviceSN,
+                    DeviceType,
+                    Capacity,
+                    CapacityUOM,
+                    LocalDate: new Date().toLocaleDateString('en-GB'),
+                    UTCDateTime: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
+                },
+                DCVoltageTargetFields,
+                DCCurrentTargetFields,
+                ACVoltageTargetFields: avgACVoltage,
+                ACCurrentTargetFields: avgACCurrent,
+                ACPowerTargetFields: totalPower,
+                GridStatus: gridStatus1,
+                ACPowerUOM: "KWH",
+                ACPhasenumberTargetFields: Phase,
+                inverterTempTargetFields: responseData.data.telemetries.map(telemetry => telemetry.temperature),
+                inverterTempUnitTargetFields: 'Celsius',
+                WeatherTargetFields: []
+            }
+        });
+
+        logToFile("Mon6", "L2", "database", "success", `Inserted document with _id: ${result1.insertedId}`);
+        break;*/
 
                     default:
                         logToFile("Mon6", "L2","read", "error", "DeviceMake not recognized. No API call made.");

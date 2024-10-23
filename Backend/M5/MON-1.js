@@ -158,14 +158,34 @@ const cron = require('node-cron');
 // Writes each log entry with a timestamp to 'M5.log'.
 // Written by Vishnu Prasad S
 // Written at date: 16-02-2024
-function logToFile(serviceName, logLevel,operationType, status, message) {
+// function logToFile(serviceName, logLevel,operationType, status, message) {
+//   const now = new Date();
+//   const timestamp = now.toISOString();
+//   const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+//   fs.appendFileSync('M5.log', logMessage, (err) => {
+//     if (err) {
+//       console.error('Failed to write to log file:', err);
+//     }
+//   });
+// }
+
+const path = require('path');
+
+function logToFile(serviceName, logLevel, operationType, status, message) {
   const now = new Date();
-  const timestamp = now.toISOString();
+  const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
   const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
-  fs.appendFileSync('M5.log', logMessage, (err) => {
-    if (err) {
-      console.error('Failed to write to log file:', err);
-    }
+
+  // Ensure the logs directory exists
+  const logDirectory = path.join(__dirname, 'logs');
+  if (!fs.existsSync(logDirectory)) {
+    fs.mkdirSync(logDirectory);
+  }
+
+  // Write the log message to Mon1.log inside the logs directory
+  const logFilePath = path.join(logDirectory, 'Mon1.log');
+  fs.appendFile(logFilePath, logMessage, (err) => {
+    if (err) console.error('Failed to write to log file:', err);
   });
 }
 

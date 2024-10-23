@@ -13,13 +13,31 @@ const { Container } = require('rhea-promise');
 const https = require('https');
 const axios = require('axios');
 const fs = require('fs');
+// // Updated Logging function with improved datetime formatting
+// function logToFile(serviceName, logLevel,operationType, status, message) {
+//     const now = new Date();
+//     const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
+//     const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+
+//     fs.appendFile('M5.log', logMessage, (err) => {
+//         if (err) console.error('Failed to write to log file:', err);
+//     });
+// }
 // Updated Logging function with improved datetime formatting
-function logToFile(serviceName, logLevel,operationType, status, message) {
+function logToFile(serviceName, logLevel, operationType, status, message) {
     const now = new Date();
     const timestamp = now.toISOString(); // UTC datetime in ISO format, e.g., "2023-04-01T12:00:00.000Z"
     const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
 
-    fs.appendFile('M5.log', logMessage, (err) => {
+    // Ensure the logs directory exists
+    const logDirectory = path.join(__dirname, 'logs');
+    if (!fs.existsSync(logDirectory)) {
+        fs.mkdirSync(logDirectory);
+    }
+
+    // Write the log message to M5.log inside the logs directory
+    const logFilePath = path.join(logDirectory, 'M5.log');
+    fs.appendFile(logFilePath, logMessage, (err) => {
         if (err) console.error('Failed to write to log file:', err);
     });
 }

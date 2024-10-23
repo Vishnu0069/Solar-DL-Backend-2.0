@@ -1,0 +1,29 @@
+2024-05-05T11:53:42.823Z	UserService	ChangePassword	Success	Password changed successfully for user kiran1@greentekindia.co.in
+2024-05-05T11:54:03.984Z	UserService	Login	Failure	Password is inccorect
+2024-05-05T11:54:31.543Z	UserService	Login	Failure	Email and password required
+2024-05-05T11:54:40.575Z	UserService	Login	Failure	Email and password required
+2024-05-05T11:55:03.449Z	UserService	Login	Success	User kiran1@greentekindia.co.in logged in successfully.
+2024-05-05T12:16:10.818Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-05T12:22:14.099Z	UserService	GetProfile	Failure	Database query error: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM UserMaster WHERE User_Email = 'kiran@greentekindia.co.in'' at line 1
+2024-05-05T12:23:44.109Z	UserService	GetProfile	Failure	Database query error: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM UserMaster WHERE User_Email = 'kiran@greentekindia.co.in'' at line 1
+2024-05-05T12:25:15.912Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-06T02:11:32.653Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-06T05:37:59.429Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-06T05:44:40.534Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-06T05:48:34.614Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-06T05:53:21.107Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran1@greentekindia.co.in
+2024-05-06T05:55:04.141Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran1@greentekindia.co.in
+2024-05-06T05:56:02.373Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran1@greentekindia.co.in
+2024-05-06T05:56:13.031Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-06T14:11:36.287Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-06T14:11:55.589Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran1@greentekindia.co.in
+2024-05-06T14:12:04.266Z	UserService	GetProfile	Success	Profile fetched successfully for user kiran@greentekindia.co.in
+2024-05-07T07:44:30.695Z	UserService	Login	Failure	Database query error:
+2024-05-07T07:44:36.227Z	UserService	Login	Failure	Database query error:
+2024-05-07T07:44:47.581Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.
+2024-05-09T05:30:12.023Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.
+2024-05-09T06:19:20.500Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.
+2024-05-09T08:23:15.878Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.
+2024-05-09T13:28:47.581Z	UserService	Login	Success	User kiran@greentekindia.co.in logged in successfully.
+2024-05-14T12:34:36.890Z	UserService	Login	Failure	Database query error:
+2024-05-14T12:38:16.704Z	UserService	Login	Failure	Error fetching user roles:
