@@ -1,87 +1,43 @@
-// Start of code block
-
-// Import necessary modules and initialize Express application
-// This setup includes essential middleware and routes for handling different aspects of the plant management system
-// Written by Vishnu Prasad S
-// Written on Date 25-04-2024
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mysql = require('mysql');
+const pool = require('./db');  // Use the DB connection from db folder
 const loginRoutes = require('./routes/loginRoutesVp');
-//const plantDetailsRoutes = require('./routes/plantDetailsRoutes');
 const installationRoutes = require('./routes/installationRoutes');
 const plantRoutes = require('./routes/PlantCountForm');
-const totalCapacityRoutes = require('./routes/totalCapacityRoutes');
-const top_performers = require('./routes/Topperforming');
-const top_energy = require('./routes/Top-Energy');
-const esti_actual = require('./routes/Esti-Actual');
-const total_plants = require('./routes/totalPlantsRoutes');
-const states = require('./routes/States')
-const district = require('./routes/District')
-const plant_type = require('./routes/plant-type')
-const sys_type = require('./routes/sys-type')
-const change_pass = require('./routes/Channge-pass');
 const profile = require('./routes/profile');
-const all_plants = require('./routes/all-plants')
-const sync=require('./routes/sync');
-require('dotenv').config(); // Load environment variables from .env file
+const sync = require('./routes/sync');
+const signup = require('./routes/signup');
+const verifyToken = require('./middleware/auth');  // JWT middleware
+const sendOtp = require('./routes/sendOtp');
+const verifyOtp = require('./routes/verifyOtp');
+require('dotenv').config();  // Load environment variables
 
 const app = express();
-const port = 3001;// Define the port number to listen on
+const port = 3001;  // Define the port number to listen on
 
-// Setup a MySQL database connection pool
-// Configuration is pulled from environment variables for security
-const pool = mysql.createPool({
-    connectionLimit: 100000, // the number of connections Node.js will open to our MySQL server
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
+
+// Test route to check if the server is responding
+app.get('/test', (req, res) => {
+    res.status(200).json({ message: 'Test route is working' });
 });
 
-// Middleware to use database connection for each request
-app.use((req, res, next) => {
-    pool.getConnection((err, connection) => {
-        if (err) throw err; // Handle connection errors immediately
-        console.log('connected as id ' + connection.threadId);
+// Use JWT middleware for specific routes that require authentication
+app.use('/profile', verifyToken, profile);  // Example: profile route is protected
+app.use('/sync', sync);  // Example: public route without JWT
 
-        // Attach connection to request and ensure it's released after response
-        req.db = connection;
-        next();
-        res.on('finish', () => {
-            req.db.release();
-        });
-    });
-});
-
-// Middleware setup
-app.use(bodyParser.json());// Parses incoming request bodies in a middleware before your handlers, available under the req.body property.
-app.use(cors());// Enables CORS with various options.
-
-// Mounting route modules to the application
+// Mount routes
 app.use('/', loginRoutes);
-//app.use('/', plantDetailsRoutes);
 app.use('/', installationRoutes);
 app.use('/', plantRoutes);
-app.use('/', totalCapacityRoutes);
-app.use('/', top_performers);
-app.use('/', top_energy);
-app.use('/', esti_actual);
-app.use('/',total_plants);
-app.use('/',states);
-app.use('/',district);
-app.use('/',plant_type);
-app.use('/',sys_type);
-app.use('/',change_pass);
-app.use('/',profile);
-app.use('/',all_plants);
-app.use('/',sync);
+app.use('/', signup);
+app.use('/send-otp', sendOtp);  // Uncomment OTP routes
+app.use('/verify-otp', verifyOtp);
 
-
-
-// Start the server on the defined port
+// Start server
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
-// End of code block
