@@ -7,3 +7,11 @@
 2024-10-24T14:34:33.252Z	UserService	GetProfile	Failure	Database query error: Error: ER_NO_SUCH_TABLE: Table 'u141865929_solis_dev.UserMaster' doesn't exist
 2024-10-24T14:34:46.478Z	UserService	GetProfile	Failure	Database query error: Error: ER_NO_SUCH_TABLE: Table 'u141865929_solis_dev.UserMaster' doesn't exist
 2024-10-24T15:09:10.218Z	UserService	Login	Failure	Error fetching user roles:
+2024-10-25T03:56:56.829Z	UserService	Login	Failure	Database query error:
+2024-10-25T04:06:29.164Z	UserService	Login	Failure	Database query error:
+2024-10-25T04:09:17.097Z	UserService	Login	Failure	Database query error:
+2024-10-25T04:10:08.147Z	UserService	Login	Failure	Database query error:
+2024-10-25T04:16:55.452Z	UserService	Login	Failure	Error fetching user roles
+2024-10-25T04:22:16.804Z	UserService	Login	Failure	Error fetching user roles
+2024-10-25T04:25:19.635Z	UserService	Login	Failure	Internal server error
+2024-10-25T04:25:38.864Z	UserService	Login	Success	User sumanthkumar@antsai.in logged in successfully.

@@ -15,12 +15,15 @@ router.post('/signup', async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10); // 10 salt rounds
 
+        // Set otp_status field value to 1 if true, otherwise keep the original value
+        const otpStatusValue = otp_status === true ? 1 : 0;
+
         // SQL Query to insert user data into the database
         const sql = `
-            INSERT INTO gsai_user (first_name, last_name, email, password, mobile_number, pin_code, country, entity_name, user_role, otp_status) 
+            INSERT INTO gsai_user (first_name, last_name, email, passwordhashcode, mobile_number, pin_code, country, entity_name, user_role, otp_status) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-        const values = [firstName, lastName, email, hashedPassword, mobileNumber, pinCode, country, entityName, userRole, otp_status];
+        const values = [firstName, lastName, email, hashedPassword, mobileNumber, pinCode, country, entityName, userRole, otpStatusValue];
 
         await pool.query(sql, values);
         res.status(201).json({ message: 'User registered successfully!' });

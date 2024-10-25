@@ -30,7 +30,7 @@ app.use('/profile', verifyToken, profile);  // Example: profile route is protect
 app.use('/sync', sync);  // Example: public route without JWT
 
 // Mount routes
-app.use('/', loginRoutes);
+app.use('/login', loginRoutes);
 app.use('/', installationRoutes);
 app.use('/', plantRoutes);
 app.use('/', signup);

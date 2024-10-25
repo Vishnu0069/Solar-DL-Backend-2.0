@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const connection = require('../config/database'); // Ensure this path correctly points to your configured database connection module
+const connection = require('../db/index'); // Ensure this path correctly points to your configured database connection module
 
 // Route to get state data and record numbers
 router.get('/states', (req, res) => {
