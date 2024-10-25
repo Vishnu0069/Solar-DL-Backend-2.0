@@ -22,5 +22,23 @@
 2024-10-25T06:03:17.404Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
 2024-10-25T06:12:56.230Z	UserService	Login	Failure	Incorrect password
 2024-10-25T06:13:10.535Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
+<<<<<<< HEAD
 2024-10-25T06:42:19.834Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
 2024-10-25T08:36:34.523Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
+=======
+2024-10-25T06:29:28.183Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:29:34.249Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:29:48.372Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:29:53.143Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:29:59.493Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:31:49.091Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:44:29.296Z	UserService	Login	Failure	Email and password required
+2024-10-25T06:45:09.358Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
+2024-10-25T06:55:26.297Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:56:22.781Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
+2024-10-25T08:09:22.346Z	UserService	Login	Failure	Incorrect password
+2024-10-25T08:09:37.258Z	UserService	Login	Failure	No user found with that email
+2024-10-25T08:09:49.283Z	UserService	Login	Failure	No user found with that email
+2024-10-25T08:09:58.196Z	UserService	Login	Success	User shashidharnalavadi761@gmail.com logged in successfully.
+2024-10-25T09:28:52.951Z	UserService	Login	Success	User sumanth.k.0202@gmail.com logged in successfully.
+>>>>>>> 37586aa (Committing local changes before merge)
