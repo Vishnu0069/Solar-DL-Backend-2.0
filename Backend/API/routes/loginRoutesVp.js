@@ -161,7 +161,8 @@ const router = express.Router();
 const pool = require('../db');  // Import the new MySQL2 pool from db.js
 require('dotenv').config();
 
-// Logging function for debugging
+// Logging function for debugging (commented out)
+/*
 function logToFile(serviceName, operationType, status, message) {
   const now = new Date();
   const timestamp = now.toISOString();
@@ -170,13 +171,14 @@ function logToFile(serviceName, operationType, status, message) {
     if (err) console.error('Failed to write to log file:', err);
   });
 }
+*/
 
 // POST endpoint for user login
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    logToFile('UserService', 'Login', 'Failure', 'Email and password required');
+    // logToFile('UserService', 'Login', 'Failure', 'Email and password required');
     return res.status(400).json({ message: 'Email and password are required.' });
   }
 
@@ -188,7 +190,7 @@ router.post('/', async (req, res) => {
     const [users] = await pool.query('SELECT user_id, first_name, last_name, passwordhashcode, user_role FROM gsai_user WHERE email = ?', [email]);
 
     if (users.length === 0) {
-      logToFile('UserService', 'Login', 'Failure', 'No user found with that email');
+      // logToFile('UserService', 'Login', 'Failure', 'No user found with that email');
       return res.status(401).json({ message: 'No user found with that email.' });
     }
 
@@ -196,7 +198,7 @@ router.post('/', async (req, res) => {
     const passwordIsValid = await bcrypt.compare(password, user.passwordhashcode);
 
     if (!passwordIsValid) {
-      logToFile('UserService', 'Login', 'Failure', 'Incorrect password');
+      // logToFile('UserService', 'Login', 'Failure', 'Incorrect password');
       return res.status(401).json({ message: 'Password is incorrect.' });
     }
 
@@ -221,13 +223,12 @@ router.post('/', async (req, res) => {
       userData: userData
     });
 
-    logToFile('UserService', 'Login', 'Success', `User ${email} logged in successfully.`);
+    // logToFile('UserService', 'Login', 'Success', `User ${email} logged in successfully.`);
   } catch (err) {
-    logToFile('UserService', 'Login', 'Failure', 'Internal server error');
+    // logToFile('UserService', 'Login', 'Failure', 'Internal server error');
     console.error('Internal server error:', err);
     res.status(500).json({ message: 'Internal server error.', error: err });
   }
 });
 
 module.exports = router;
-
