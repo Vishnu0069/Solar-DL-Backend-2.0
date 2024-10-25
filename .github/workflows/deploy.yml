@@ -3,26 +3,29 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main  # This will trigger the workflow whenever code is pushed to the 'main' branch
+      - main  # Trigger the workflow on pushes to the 'main' branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Set up SSH to connect to your VPS using the private SSH key stored in GitHub secrets
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
 
+      # Deploy to VPS and run necessary commands to update dependencies and restart the server
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no root@145.223.18.97 "
             cd /var/www/Solar-DL-Backend-2.0 && \
             git pull origin main && \
-            npm install && \
+            npm install --production && \
             pm2 restart all
           "

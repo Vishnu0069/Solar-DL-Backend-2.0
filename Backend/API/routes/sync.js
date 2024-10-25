@@ -4,7 +4,7 @@ const router = express.Router();
 require('dotenv').config(); // Load environment variables from .env
 
 // A POST route to handle make and plantSerialNumber and make API call to SolarEdge
-router.post('/sync', async (req, res) => {
+router.post('/', async (req, res) => {
     const { make, plantSerialNumber } = req.body; // Extract make and plantSerialNumber from request body
 
     if (!make || !plantSerialNumber) {
