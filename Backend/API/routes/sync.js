@@ -177,7 +177,7 @@ router.post('/', verifyToken, async (req, res) => {
             // Return the link to download the CSV file
             res.json({
                 message: 'CSV file generated successfully',
-                downloadLink: `http://localhost:3001/sync/equipment_data.csv`  // Link to access the CSV file
+                downloadLink: `https://solar-api.antsai.in/sync/equipment_data.csv`  // Link to access the CSV file
             });
         } catch (error) {
             if (error.response) {
