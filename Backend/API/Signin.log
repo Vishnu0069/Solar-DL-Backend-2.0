@@ -22,3 +22,5 @@
 2024-10-25T06:03:17.404Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
 2024-10-25T06:12:56.230Z	UserService	Login	Failure	Incorrect password
 2024-10-25T06:13:10.535Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
+2024-10-25T06:42:19.834Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
+2024-10-25T08:36:34.523Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.

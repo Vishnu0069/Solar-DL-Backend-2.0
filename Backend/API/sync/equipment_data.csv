@@ -1,0 +1,4 @@
+"device_type","make","model_no","serial_no","version","firmware_ver_1","firmware_ver_2","rating","master_device_serial"
+"datalogger","SolarEdge","SE27.6K-IN000NNN2",,,,,5,
+"inverter","SolarEdge",,"7E13A813-4C",,,,,"SE27.6K-IN000NNN2"
+"inverter","SolarEdge",,"7E13A7F5-2D",,,,,"SE27.6K-IN000NNN2"
