@@ -11,6 +11,7 @@ const signup = require('./routes/signup');
 const verifyToken = require('./middleware/auth');  // JWT middleware
 const sendOtp = require('./routes/sendOtp');
 const verifyOtp = require('./routes/verifyOtp');
+const forgot = require('./routes/forgot-pass');
 require('dotenv').config();  // Load environment variables
 
 const app = express();
@@ -36,6 +37,7 @@ app.use('/', plantRoutes);
 app.use('/', signup);
 app.use('/send-otp', sendOtp);  // Uncomment OTP routes
 app.use('/verify-otp', verifyOtp);
+app.use('/forgot-pass',forgot);
 
 // Start server
 app.listen(port, () => {

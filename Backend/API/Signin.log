@@ -15,3 +15,10 @@
 2024-10-25T04:22:16.804Z	UserService	Login	Failure	Error fetching user roles
 2024-10-25T04:25:19.635Z	UserService	Login	Failure	Internal server error
 2024-10-25T04:25:38.864Z	UserService	Login	Success	User sumanthkumar@antsai.in logged in successfully.
+2024-10-25T05:41:29.333Z	UserService	Login	Failure	No user found with that email
+2024-10-25T05:43:37.642Z	UserService	Login	Failure	No user found with that email
+2024-10-25T06:02:31.862Z	UserService	Login	Failure	No user found with that email
+2024-10-25T06:02:59.170Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:03:17.404Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.
+2024-10-25T06:12:56.230Z	UserService	Login	Failure	Incorrect password
+2024-10-25T06:13:10.535Z	UserService	Login	Success	User itsvishnups@gmail.com logged in successfully.

@@ -150,6 +150,9 @@
 
 // module.exports = router;
 // // End of code block
+
+
+
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -174,7 +177,7 @@ router.post('/', async (req, res) => {
 
   if (!email || !password) {
     logToFile('UserService', 'Login', 'Failure', 'Email and password required');
-    return res.status(400).send('Email and password are required.');
+    return res.status(400).json({ message: 'Email and password are required.' });
   }
 
   try {
@@ -182,11 +185,11 @@ router.post('/', async (req, res) => {
     console.log('Email:', email, 'Password:', password);
 
     // Query to check user email and get password hash
-    const [users] = await pool.query('SELECT user_id, first_name, last_name, passwordhashcode FROM gsai_user WHERE email = ?', [email]);
+    const [users] = await pool.query('SELECT user_id, first_name, last_name, passwordhashcode, user_role FROM gsai_user WHERE email = ?', [email]);
 
     if (users.length === 0) {
       logToFile('UserService', 'Login', 'Failure', 'No user found with that email');
-      return res.status(401).send('No user found with that email.');
+      return res.status(401).json({ message: 'No user found with that email.' });
     }
 
     const user = users[0];
@@ -194,7 +197,7 @@ router.post('/', async (req, res) => {
 
     if (!passwordIsValid) {
       logToFile('UserService', 'Login', 'Failure', 'Incorrect password');
-      return res.status(401).send('Password is incorrect.');
+      return res.status(401).json({ message: 'Password is incorrect.' });
     }
 
     // Generate JWT token valid for 24 hours
@@ -204,19 +207,16 @@ router.post('/', async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    // Query user role information
-    const [roles] = await pool.query('SELECT user_role FROM gsai_user WHERE user_id = ?', [user.user_id]);
-
     // Prepare the response with the user's details, role, and JWT token
     const userData = {
       firstName: user.first_name,
       lastName: user.last_name,
       email: user.email,
-      role: roles.length ? roles[0].role : null,
+      role: user.user_role,  // Use user.user_role from the original query
       token: token
     };
 
-    res.json({
+    res.status(200).json({
       message: 'Login successful!',
       userData: userData
     });
@@ -225,8 +225,9 @@ router.post('/', async (req, res) => {
   } catch (err) {
     logToFile('UserService', 'Login', 'Failure', 'Internal server error');
     console.error('Internal server error:', err);
-    res.status(500).send('Internal server error.');
+    res.status(500).json({ message: 'Internal server error.', error: err });
   }
 });
 
 module.exports = router;
+
