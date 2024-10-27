@@ -17,6 +17,9 @@ const fetchEntitiesRoute = require('./routes/Entity/fetchEntities');
 const fetchEntityByIdRoute = require('./routes/Entity/fetchEntityById');
 const fetchEntityIdsRoute = require('./routes/Entity/fetchEntityIds');
 const fetchEntityNamesRoute = require('./routes/Entity/fetchEntityNames');
+const fetchAllRecordsRoute = require('./routes/Entity/fetchAllRecords');
+
+
 require('dotenv').config();  // Load environment variables
 
 const app = express();
@@ -49,7 +52,7 @@ app.use('/api/entity', fetchEntitiesRoute);
 app.use('/api/entity', fetchEntityByIdRoute);
 app.use('/api/entity', fetchEntityIdsRoute);
 app.use('/api/entity', fetchEntityNamesRoute);
-
+app.use('/api/entity', fetchAllRecordsRoute);
 // Start server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
