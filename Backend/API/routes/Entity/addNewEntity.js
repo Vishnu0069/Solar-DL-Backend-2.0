@@ -3,7 +3,7 @@ const express = require('express');
 const pool = require('../../db');
 const router = express.Router();
 
-router.post('/add', async (req, res) => {
+router.post('/', async (req, res) => {
   const { 
     entityid, entityname, category, contactfirstname, contactlastname, 
     email, mobile, country, state, district, city, pincode, 
