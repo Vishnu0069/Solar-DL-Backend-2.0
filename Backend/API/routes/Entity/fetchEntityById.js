@@ -1,7 +1,7 @@
-// fetchEntities.js
+// In routes/Entity/fetchEntityById.js
 const express = require('express');
-const pool = require('../../db'); // Adjust this path if necessary
-const router = express.Router(); // Initialize router
+const pool = require('../../db');
+const router = express.Router();
 
 router.get('/fetchEntity', async (req, res) => {
   const { search } = req.query;
@@ -21,4 +21,5 @@ router.get('/fetchEntity', async (req, res) => {
     res.status(500).json({ message: 'Error fetching entity', error: error.message });
   }
 });
+
 module.exports = router;
