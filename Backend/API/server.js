@@ -12,6 +12,11 @@ const verifyToken = require('./middleware/auth');  // JWT middleware
 const sendOtp = require('./routes/sendOtp');
 const verifyOtp = require('./routes/verifyOtp');
 const forgot = require('./routes/forgot-pass');
+const addNewEntityRoute = require('./routes/Entity/addNewEntity');
+const fetchEntitiesRoute = require('./routes/Entity/fetchEntities');
+const fetchEntityByIdRoute = require('./routes/Entity/fetchEntityById');
+const fetchEntityIdsRoute = require('./routes/Entity/fetchEntityIds');
+const fetchEntityNamesRoute = require('./routes/Entity/fetchEntityNames');
 require('dotenv').config();  // Load environment variables
 
 const app = express();
@@ -38,6 +43,12 @@ app.use('/', signup);
 app.use('/send-otp', sendOtp);  // Uncomment OTP routes
 app.use('/verify-otp', verifyOtp);
 app.use('/forgot-pass',forgot);
+app.use('/api/entity', addNewEntityRoute);
+app.use('/add-entity',addNewEntityRoute);
+app.use('/api/entity', fetchEntitiesRoute);
+app.use('/api/entity', fetchEntityByIdRoute);
+app.use('/api/entity', fetchEntityIdsRoute);
+app.use('/api/entity', fetchEntityNamesRoute);
 
 // Start server
 app.listen(port, () => {
