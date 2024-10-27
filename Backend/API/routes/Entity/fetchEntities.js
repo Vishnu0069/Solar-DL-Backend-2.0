@@ -17,3 +17,4 @@ router.get('/fetchEntities', async (req, res) => {
     res.status(500).json({ message: 'Error fetching entities', error: error.message });
   }
 });
+module.exports = router;
