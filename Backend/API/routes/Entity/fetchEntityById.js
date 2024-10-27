@@ -1,3 +1,8 @@
+// fetchEntities.js
+const express = require('express');
+const pool = require('../../db'); // Adjust this path if necessary
+const router = express.Router(); // Initialize router
+
 router.get('/fetchEntity', async (req, res) => {
   const { search } = req.query;
 
