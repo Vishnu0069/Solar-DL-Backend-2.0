@@ -153,6 +153,88 @@
 
 
 
+// const express = require('express');
+// const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
+// const fs = require('fs');
+// const router = express.Router();
+// const pool = require('../db');  // Import the new MySQL2 pool from db.js
+// require('dotenv').config();
+
+// // Logging function for debugging (commented out)
+// /*
+// function logToFile(serviceName, operationType, status, message) {
+//   const now = new Date();
+//   const timestamp = now.toISOString();
+//   const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+//   fs.appendFile('Signin.log', logMessage, (err) => {
+//     if (err) console.error('Failed to write to log file:', err);
+//   });
+// }
+// */
+
+// // POST endpoint for user login
+// router.post('/', async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     // logToFile('UserService', 'Login', 'Failure', 'Email and password required');
+//     return res.status(400).json({ message: 'Email and password are required.' });
+//   }
+
+//   try {
+//     // Log email and password for debugging
+//     console.log('Email:', email, 'Password:', password);
+
+//     // Query to check user email and get password hash
+//     const [users] = await pool.query('SELECT user_id, first_name, last_name, passwordhashcode, user_role FROM gsai_user WHERE email = ?', [email]);
+
+//     if (users.length === 0) {
+//       // logToFile('UserService', 'Login', 'Failure', 'No user found with that email');
+//       return res.status(401).json({ message: 'No user found with that email.' });
+//     }
+
+//     const user = users[0];
+//     const passwordIsValid = await bcrypt.compare(password, user.passwordhashcode);
+
+//     if (!passwordIsValid) {
+//       // logToFile('UserService', 'Login', 'Failure', 'Incorrect password');
+//       return res.status(401).json({ message: 'Password is incorrect.' });
+//     }
+
+//     // Generate JWT token valid for 24 hours
+//     const token = jwt.sign(
+//       { userId: user.user_id, email: user.email },
+//       process.env.JWT_SECRET,
+//       { expiresIn: '24h' }
+//     );
+
+//     // Prepare the response with the user's details, role, and JWT token
+//     const userData = {
+//       firstName: user.first_name,
+//       lastName: user.last_name,
+//       email: user.email,
+//       role: user.user_role,  // Use user.user_role from the original query
+//       token: token
+//     };
+
+//     res.status(200).json({
+//       message: 'Login successful!',
+//       userData: userData
+//     });
+
+//     // logToFile('UserService', 'Login', 'Success', `User ${email} logged in successfully.`);
+//   } catch (err) {
+//     // logToFile('UserService', 'Login', 'Failure', 'Internal server error');
+//     console.error('Internal server error:', err);
+//     res.status(500).json({ message: 'Internal server error.', error: err });
+//   }
+// });
+
+// module.exports = router;
+
+
+//28/10/2024
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -161,36 +243,25 @@ const router = express.Router();
 const pool = require('../db');  // Import the new MySQL2 pool from db.js
 require('dotenv').config();
 
-// Logging function for debugging (commented out)
-/*
-function logToFile(serviceName, operationType, status, message) {
-  const now = new Date();
-  const timestamp = now.toISOString();
-  const logMessage = `${timestamp}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
-  fs.appendFile('Signin.log', logMessage, (err) => {
-    if (err) console.error('Failed to write to log file:', err);
-  });
-}
-*/
-
 // POST endpoint for user login
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    // logToFile('UserService', 'Login', 'Failure', 'Email and password required');
     return res.status(400).json({ message: 'Email and password are required.' });
   }
 
   try {
-    // Log email and password for debugging
-    console.log('Email:', email, 'Password:', password);
-
-    // Query to check user email and get password hash
-    const [users] = await pool.query('SELECT user_id, first_name, last_name, passwordhashcode, user_role FROM gsai_user WHERE email = ?', [email]);
+    // Query to check user email and get password hash, user_id, masterEntityId, etc.
+    const [users] = await pool.query(`
+      SELECT u.user_id, u.first_name, u.last_name, u.passwordhashcode, u.user_role, 
+             u.entityid, e.masterentityid 
+      FROM gsai_user u
+      LEFT JOIN EntityMaster e ON u.entityid = e.entityid
+      WHERE u.email = ?
+    `, [email]);
 
     if (users.length === 0) {
-      // logToFile('UserService', 'Login', 'Failure', 'No user found with that email');
       return res.status(401).json({ message: 'No user found with that email.' });
     }
 
@@ -198,7 +269,6 @@ router.post('/', async (req, res) => {
     const passwordIsValid = await bcrypt.compare(password, user.passwordhashcode);
 
     if (!passwordIsValid) {
-      // logToFile('UserService', 'Login', 'Failure', 'Incorrect password');
       return res.status(401).json({ message: 'Password is incorrect.' });
     }
 
@@ -209,12 +279,14 @@ router.post('/', async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    // Prepare the response with the user's details, role, and JWT token
+    // Prepare the response with the user's details, role, masterEntityId, and JWT token
     const userData = {
       firstName: user.first_name,
       lastName: user.last_name,
-      email: user.email,
-      role: user.user_role,  // Use user.user_role from the original query
+      email: email,
+      role: user.user_role,
+      userId: user.user_id,                // user_id from gsai_user
+      masterEntityId: user.masterentityid,  // masterEntityId from EntityMaster
       token: token
     };
 
@@ -222,10 +294,8 @@ router.post('/', async (req, res) => {
       message: 'Login successful!',
       userData: userData
     });
-
-    // logToFile('UserService', 'Login', 'Success', `User ${email} logged in successfully.`);
+    
   } catch (err) {
-    // logToFile('UserService', 'Login', 'Failure', 'Internal server error');
     console.error('Internal server error:', err);
     res.status(500).json({ message: 'Internal server error.', error: err });
   }

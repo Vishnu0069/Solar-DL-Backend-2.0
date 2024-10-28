@@ -91,21 +91,35 @@ router.post('/signup', async (req, res) => {
             counter++;
         }
 
-        // Insert `entityid` in EntityMaster if it doesn’t exist
-        const entitySql = `
-            INSERT IGNORE INTO EntityMaster (
-                entityid, entityname, namespace, masterentityid, country, contactfirstname, 
-                contactlastname, email, mobile, address_line_1, address_line_2, GSTIN, Region
-            ) VALUES (?, ?, ?, '1111', ?, ?, ?, ?, ?, NULL, NULL, NULL, NULL)`;
+        // Generate a dynamic masterEntityId in the format ENTITYNAME-1111, ENTITYNAME-1112, etc.
+        let masterEntityId = `${entityIdBase}-1111`;
+        let masterCounter = 1111;
         
+        while (true) {
+            const [existingMasterEntity] = await connection.query('SELECT masterentityid FROM EntityMaster WHERE masterentityid = ?', [masterEntityId]);
+            if (existingMasterEntity.length === 0) break; // Unique masterEntityId found
+            masterCounter++;
+            masterEntityId = `${entityIdBase}-${masterCounter}`;
+        }
+
+        // Define the namespace
         const namespace = `gsai.greentek.${entityName.toLowerCase().replace(/\s+/g, '')}`;
+
+        // Insert entity details into EntityMaster, including otp_status and other fields
+        const entitySql = `
+            INSERT INTO EntityMaster (
+                entityid, entityname, masterentityid, namespace, country, contactfirstname, 
+                contactlastname, email, mobile, address_line_1, address_line_2, pincode,  GSTIN, Region
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, ?,  NULL, NULL) 
+            ON DUPLICATE KEY UPDATE entityid = entityid`;  // No-op if already exists
+
         const entityValues = [
-            entityId, entityName, namespace, country, firstName, lastName, email, mobileNumber
+            entityId, entityName, masterEntityId, namespace, country, firstName, lastName, email, mobileNumber, pinCode
         ];
 
         await connection.query(entitySql, entityValues);
         
-        // Commit the insertion of EntityMaster to make `entityid` available for `gsai_user`
+        // Commit the insertion of EntityMaster to make entityid available for gsai_user
         await connection.commit();
         console.log("Debug: EntityMaster insertion committed for entityId:", entityId);
 
@@ -120,14 +134,17 @@ router.post('/signup', async (req, res) => {
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
-        const otpStatusValue = otp_status === true ? 1 : 0;
 
         // Insert user data into gsai_user with generated entityId as foreign key
         const userSql = `
-            INSERT INTO gsai_user (user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, pin_code, country, entity_name, user_role, otp_status) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sysadmin', ?)`;
+            INSERT INTO gsai_user (
+                user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, pin_code, country, entity_name, user_role, otp_status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sysadmin', ?)`;
 
-        const userValues = [userId, entityId, firstName, lastName, email, hashedPassword, mobileNumber, pinCode, country, entityName, otpStatusValue];
+        const userValues = [
+            userId, entityId, firstName, lastName, email, hashedPassword, mobileNumber, pinCode, country, entityName, otp_status ? 1 : 0
+        ];
+
         const [userResult] = await connection.query(userSql, userValues);
 
         if (userResult.affectedRows === 0) {
@@ -141,7 +158,7 @@ router.post('/signup', async (req, res) => {
         // Re-enable foreign key checks
         await connection.query('SET FOREIGN_KEY_CHECKS=1');
 
-        res.status(201).json({ message: 'User and Entity registered successfully!', entityId });
+        res.status(201).json({ message: 'User and Entity registered successfully!', entityId, masterEntityId });
 
     } catch (error) {
         await connection.rollback(); // Rollback the transaction in case of error
