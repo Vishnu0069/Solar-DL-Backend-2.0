@@ -6,7 +6,7 @@ const router = express.Router();
 router.put('/edit', async (req, res) => {
   const { 
     entityid, entityname, category, contactfirstname, contactlastname, 
-    email, mobile, country, state, district, city, pincode, 
+    email, mobile, country, state, district, pincode, 
     address_line_1 = null, address_line_2 = null, GSTIN = null, Region = null, disable = 0 
   } = req.body;
 
@@ -20,14 +20,14 @@ router.put('/edit', async (req, res) => {
       UPDATE EntityMaster 
       SET 
         entityname = ?, category = ?, contactfirstname = ?, contactlastname = ?, 
-        email = ?, mobile = ?, country = ?, state = ?, district = ?, city = ?, 
+        email = ?, mobile = ?, country = ?, state = ?, district = ?,  
         pincode = ?, address_line_1 = ?, address_line_2 = ?, GSTIN = ?, Region = ?
     `;
 
     // Include mark_deletion update if disable is set to 1
     const updateValues = [
       entityname, category, contactfirstname, contactlastname, email, mobile, 
-      country, state, district, city, pincode, address_line_1, address_line_2, GSTIN, Region
+      country, state, district,  pincode, address_line_1, address_line_2, GSTIN, Region
     ];
     
     if (disable === 1) {

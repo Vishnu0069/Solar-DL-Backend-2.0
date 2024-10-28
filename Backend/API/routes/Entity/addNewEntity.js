@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const { 
     entityid, entityname, category, contactfirstname, contactlastname, 
-    email, mobile, country, state, district, city, pincode, 
+    email, mobile, country, state, district,  pincode, 
     masterentityid, user_id, address_line_1 = null, address_line_2 = null, 
     GSTIN = null, Region = null 
   } = req.body;
@@ -21,12 +21,12 @@ router.post('/', async (req, res) => {
     const [result] = await pool.query(
       `INSERT INTO EntityMaster (
          entityid, entityname, category, contactfirstname, contactlastname, email, mobile, 
-         country, state, district, city, pincode, masterentityid, namespace, 
+         country, state, district,  pincode, masterentityid, namespace, 
          creation_date, created_by_user_id, last_update_date, mark_deletion, 
          address_line_1, address_line_2, GSTIN, Region
        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [entityid, entityname, category, contactfirstname, contactlastname, email, mobile, 
-       country, state, district, city, pincode, masterentityid, namespace, 
+       country, state, district,  pincode, masterentityid, namespace, 
        creation_date, created_by_user_id, last_update_date, mark_deletion, 
        address_line_1, address_line_2, GSTIN, Region]
     );
