@@ -238,12 +238,10 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
 const router = express.Router();
-const pool = require('../db');  // Import the new MySQL2 pool from db.js
+const pool = require('../db');
 require('dotenv').config();
 
-// POST endpoint for user login
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
 
@@ -252,13 +250,11 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // Query to check user email and get password hash, user_id, masterEntityId, etc.
+    // Step 1: Retrieve user details from gsai_user
     const [users] = await pool.query(`
-      SELECT u.user_id, u.first_name, u.last_name, u.passwordhashcode, u.user_role, 
-             u.entityid, e.masterentityid 
-      FROM gsai_user u
-      LEFT JOIN EntityMaster e ON u.entityid = e.entityid
-      WHERE u.email = ?
+      SELECT user_id, first_name, last_name, passwordhashcode, user_role, entityid 
+      FROM gsai_user 
+      WHERE email = ?
     `, [email]);
 
     if (users.length === 0) {
@@ -271,6 +267,15 @@ router.post('/', async (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).json({ message: 'Password is incorrect.' });
     }
+
+    // Step 2: Retrieve masterentityid from EntityMaster using the user's entityid
+    const [entityResult] = await pool.query(`
+      SELECT masterentityid 
+      FROM EntityMaster 
+      WHERE entityid = ?
+    `, [user.entityid]);
+
+    const masterEntityId = entityResult.length > 0 ? entityResult[0].masterentityid : null;
 
     // Generate JWT token valid for 24 hours
     const token = jwt.sign(
@@ -285,8 +290,8 @@ router.post('/', async (req, res) => {
       lastName: user.last_name,
       email: email,
       role: user.user_role,
-      userId: user.user_id,                // user_id from gsai_user
-      masterEntityId: user.masterentityid,  // masterEntityId from EntityMaster
+      userId: user.user_id,
+      masterEntityId: masterEntityId,  // This is the masterEntityId from EntityMaster
       token: token
     };
 
