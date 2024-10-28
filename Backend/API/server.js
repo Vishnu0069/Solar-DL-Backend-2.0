@@ -23,6 +23,14 @@ const checkEmailRoute = require('./routes/checkemail');
 const states = require('./routes/States');
 const Dis = require('./routes/District');
 const getEntityDetailsRoute = require('./routes/Entity/getEntityDetails');
+const getCategories = require('./routes/Entity/category');
+const getCountry = require('./routes/getCountry');
+const getRegion = require('./routes/getRegion');
+const getState = require('./routes/getState');
+const getDistrict = require('./routes/getDistrict');
+
+
+
 
 
 
@@ -64,6 +72,13 @@ app.use('/api/entity', getEntityDetailsRoute);
 app.use('/', checkEmailRoute);
 app.use('/',states);
 app.use('/',Dis);
+app.use('/api', getCategories);
+app.use('/api', getCountry);
+app.use('/api', getRegion);
+app.use('/api', getState);
+app.use('/api', getDistrict);
+
+
 // Start server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

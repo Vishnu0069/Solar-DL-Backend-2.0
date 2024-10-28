@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
          country, state, district,  pincode, masterentityid, namespace, 
          creation_date, created_by_user_id, last_update_date, mark_deletion, 
          address_line_1, address_line_2, GSTIN, Region
-       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [entityid, entityname, category, contactfirstname, contactlastname, email, mobile, 
        country, state, district,  pincode, masterentityid, namespace, 
        creation_date, created_by_user_id, last_update_date, mark_deletion, 
