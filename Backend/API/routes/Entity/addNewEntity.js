@@ -48,17 +48,26 @@ const pool = require('../../db');
 const router = express.Router();
 require('dotenv').config();  // Load environment variables from .env file
 
-// Email configuration using Hostinger's SMTP and environment variables
+// // Email configuration using Hostinger's SMTP and environment variables
+// const transporter = nodemailer.createTransport({
+//     host: process.env.SMTP_HOST,
+//     port: process.env.SMTP_PORT,
+//     secure: true, // Use SSL
+//     auth: {
+//         user: process.env.SMTP_USER,
+//         pass: process.env.SMTP_PASS
+//     }
+// });
+// Email configuration using Hostinger's SMTP
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: true, // Use SSL
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-    }
+  host: 'smtp.hostinger.com', // Hostinger's SMTP server
+  port: 465, // Port for SSL
+  secure: true, // Use SSL
+  auth: {
+      user: 'teamants@antsai.in', // Your email account
+      pass: 'teamAI@ants99&22' // Your email password
+  }
 });
-
 // Rest of your router code...
 
 
