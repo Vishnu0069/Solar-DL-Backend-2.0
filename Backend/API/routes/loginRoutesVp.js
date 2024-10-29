@@ -250,7 +250,7 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // Step 1: Retrieve user details from gsai_user
+    // Step 1: Retrieve user details from gsai_user, including entityid
     const [users] = await pool.query(`
       SELECT user_id, first_name, last_name, passwordhashcode, user_role, entityid 
       FROM gsai_user 
@@ -268,15 +268,6 @@ router.post('/', async (req, res) => {
       return res.status(401).json({ message: 'Password is incorrect.' });
     }
 
-    // Step 2: Retrieve masterentityid from EntityMaster using the user's entityid
-    const [entityResult] = await pool.query(`
-      SELECT masterentityid 
-      FROM EntityMaster 
-      WHERE entityid = ?
-    `, [user.entityid]);
-
-    const masterEntityId = entityResult.length > 0 ? entityResult[0].masterentityid : null;
-
     // Generate JWT token valid for 24 hours
     const token = jwt.sign(
       { userId: user.user_id, email: user.email },
@@ -284,14 +275,14 @@ router.post('/', async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    // Prepare the response with the user's details, role, masterEntityId, and JWT token
+    // Prepare the response with the user's details, role, entityId, and JWT token
     const userData = {
       firstName: user.first_name,
       lastName: user.last_name,
       email: email,
       role: user.user_role,
       userId: user.user_id,
-      masterEntityId: masterEntityId,  // This is the masterEntityId from EntityMaster
+      entityId: user.entityid,  // Including entityid instead of masterEntityId
       token: token
     };
 

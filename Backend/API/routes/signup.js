@@ -51,35 +51,42 @@
 //     }
 // });
 
-// module.exports = router;
+// In routes/Entity/signup.js
+// In routes/Entity/signup.js
+// In routes/Entity/newSignup.js
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const pool = require('../db');
+const pool = require('../db'); // Import the database connection
 const router = express.Router();
 
 router.post('/signup', async (req, res) => {
     const { firstName, lastName, email, password, mobileNumber, pinCode, country, entityName, otp_status } = req.body;
 
+    // Input validation
     if (!email || !password || !firstName || !lastName || !mobileNumber || otp_status === undefined || !entityName) {
         return res.status(400).json({ message: 'All required fields, including otp_status and entityName, must be filled!' });
     }
 
+    // Establish a database connection
     const connection = await pool.getConnection();
 
     try {
         await connection.beginTransaction();
 
+        // Check if the user already exists
         const [existingUser] = await connection.query('SELECT email FROM gsai_user WHERE email = ?', [email]);
         if (existingUser.length > 0) {
             await connection.rollback();
             return res.status(409).json({ message: 'User already registered with this email.' });
         }
 
-        // Generate unique Entity ID
+        // Generate a unique Entity ID
         let entityIdBase = entityName.replace(/\s+/g, '').toUpperCase();
         let entityId = entityIdBase;
         let counter = 1;
+
+        // Ensure uniqueness of `entityId` in `EntityMaster`
         while (true) {
             const [existingEntity] = await connection.query('SELECT entityid FROM EntityMaster WHERE entityid = ?', [entityId]);
             if (existingEntity.length === 0) break;
@@ -87,20 +94,13 @@ router.post('/signup', async (req, res) => {
             counter++;
         }
 
-        // Generate unique masterEntityId in the format ENTITYNAME-1111, ENTITYNAME-1112, etc.
-        let masterEntityId = `${entityIdBase}-1111`;
-        let masterCounter = 1111;
-        while (true) {
-            const [existingMasterEntity] = await connection.query('SELECT masterentityid FROM EntityMaster WHERE masterentityid = ?', [masterEntityId]);
-            if (existingMasterEntity.length === 0) break;
-            masterCounter++;
-            masterEntityId = `${entityIdBase}-${masterCounter}`;
-        }
+        // Set `masterEntityId` to a static value '1111'
+        const masterEntityId = '1111';
 
         // Define the namespace
         const namespace = `gsai.greentek.${entityName.toLowerCase().replace(/\s+/g, '')}`;
 
-        // Insert into EntityMaster, including dynamically generated masterEntityId
+        // Insert into EntityMaster with a hardcoded masterEntityId
         const entitySql = `
             INSERT INTO EntityMaster (
                 entityid, entityname, namespace, masterentityid, country, contactfirstname, 
@@ -112,13 +112,9 @@ router.post('/signup', async (req, res) => {
         ];
 
         await connection.query(entitySql, entityValues);
-
-        await connection.commit();
         console.log("Debug: EntityMaster insertion committed for entityId:", entityId);
 
-        // Disable foreign key checks temporarily
-        await connection.query('SET FOREIGN_KEY_CHECKS=0');
-
+        // Begin new transaction for user data insertion
         await connection.beginTransaction();
 
         // Generate UUID for user_id
@@ -128,11 +124,12 @@ router.post('/signup', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const otpStatusValue = otp_status ? 1 : 0;
 
-        // Insert user data into gsai_user with generated entityId as foreign key
+        // Insert user data into gsai_user with the entityId as a foreign key
         const userSql = `
             INSERT INTO gsai_user (
                 user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, pin_code, country, entity_name, user_role, otp_status
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sysadmin', ?)`;
+
 
         const userValues = [userId, entityId, firstName, lastName, email, hashedPassword, mobileNumber, pinCode, country, entityName, otpStatusValue];
         const [userResult] = await connection.query(userSql, userValues);
@@ -142,10 +139,8 @@ router.post('/signup', async (req, res) => {
             return res.status(500).json({ message: 'Failed to insert user in gsai_user.' });
         }
 
+        // Commit all changes if successful
         await connection.commit();
-
-        // Re-enable foreign key checks
-        await connection.query('SET FOREIGN_KEY_CHECKS=1');
 
         res.status(201).json({ message: 'User and Entity registered successfully!', entityId, masterEntityId });
 
@@ -159,3 +154,4 @@ router.post('/signup', async (req, res) => {
 });
 
 module.exports = router;
+
