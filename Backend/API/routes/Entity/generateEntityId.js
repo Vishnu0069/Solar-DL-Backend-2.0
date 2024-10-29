@@ -4,17 +4,15 @@ const pool = require('../../db');
 const router = express.Router();
 
 router.post('/generateEntityId', async (req, res) => {
-  const { masterentityid } = req.body;
+  const { entityid } = req.body;
 
-  if (!masterentityid) {
-    return res.status(400).json({ message: 'masterentityid is required' });
+  if (!entityid) {
+    return res.status(400).json({ message: 'entityid is required' });
   }
 
   try {
-    // Remove the suffix after the last dash in masterentityid to get the base prefix
-    const prefix = masterentityid.split('-').slice(0, -1).join('-');
-
-    // Start with 1001 for the new entity
+    // Use the provided `entityid` as the prefix
+    const prefix = entityid.toUpperCase().replace(/\s+/g, ''); // Convert to uppercase and remove spaces
     let suffix = 1001;
     let newEntityId;
 
