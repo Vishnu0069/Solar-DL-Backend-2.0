@@ -25,10 +25,12 @@ const Dis = require('./routes/District');
 const getEntityDetailsRoute = require('./routes/Entity/getEntityDetails');
 const getCategories = require('./routes/Entity/category');
 const generateentityid = require('./routes/Entity/generateEntityId')
+const disable=require('./routes/Entity/markEntityAsDeleted');
 const getCountry = require('./routes/getCountry');
 const getRegion = require('./routes/getRegion');
 const getState = require('./routes/getState');
 const getDistrict = require('./routes/getDistrict');
+
 
 
 
@@ -72,6 +74,7 @@ app.use('/api/entity', fetchAllRecordsRoute);
 app.use('/api/entity',editentity);
 app.use('/api/entity', getEntityDetailsRoute);
 app.use('/api/entity', generateentityid);
+app.use('/api/entity', disable);
 app.use('/', checkEmailRoute);
 app.use('/',states);
 app.use('/',Dis);

@@ -25,7 +25,7 @@ router.get('/fetchAllRecords', async (req, res) => {
         district AS "District",
         pincode AS "Pincode"
       FROM EntityMaster
-      WHERE masterentityid = ?
+      WHERE masterentityid = ? AND mark_deletion = 0
     `, [masterentityid]);
 
     res.status(200).json(rows);
