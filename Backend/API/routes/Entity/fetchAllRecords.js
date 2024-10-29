@@ -4,6 +4,12 @@ const pool = require('../../db');
 const router = express.Router();
 
 router.get('/fetchAllRecords', async (req, res) => {
+  const { masterentityid } = req.query;
+
+  if (!masterentityid) {
+    return res.status(400).json({ message: 'masterentityid parameter is required' });
+  }
+
   try {
     const [rows] = await pool.query(`
       SELECT 
@@ -19,7 +25,9 @@ router.get('/fetchAllRecords', async (req, res) => {
         district AS "District",
         pincode AS "Pincode"
       FROM EntityMaster
-    `);
+      WHERE masterentityid = ?
+    `, [masterentityid]);
+
     res.status(200).json(rows);
   } catch (error) {
     console.error('Error fetching records:', error);
