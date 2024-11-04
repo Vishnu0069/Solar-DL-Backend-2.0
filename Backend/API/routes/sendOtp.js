@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 465, // Port for SSL
   secure: true, // Use SSL
   auth: {
-    user: 'otp@antsai.in', // Your email account
-    pass: 'OTP@ants#123*321'  // Your email password
+    user: 'otp.solardl@antsai.in', // Your email account
+    pass: 'OTP@ants#123*123'  // Your email password
   }
 });
 
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 
     // Email options
     const mailOptions = {
-      from: 'otp@antsai.in',
+      from: 'otp.solardl@antsai.in',
       to: user_email,
       subject: 'Your OTP Code',
       text: `Your OTP code is ${otp}. It will expire in 3 minutes.`

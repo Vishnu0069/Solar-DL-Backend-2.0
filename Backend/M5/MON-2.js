@@ -12,6 +12,7 @@ const crypto = require('crypto');
 const { Container } = require('rhea-promise');
 const fs = require('fs');
 const { MongoClient } = require('mongodb');
+const path = require('path');
 const app = express();
 const port = 3000;
 
