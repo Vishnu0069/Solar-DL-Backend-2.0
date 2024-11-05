@@ -37,7 +37,7 @@ const entitynames = require('./routes/Plant/fetchEntityNames');
 const getEntityDetails = require('./routes/Plant/getEntityDetails')
 const addplant = require('./routes/Plant/addPlant')
 const plant_category = require('./routes/Plant/getPlantCategories')
-
+const fetch_plant = require('./routes/Plant/fetchPlantList');
 
 
 
@@ -93,6 +93,8 @@ app.use('/api/plant',entitynames);
 app.use('/api/plant',getEntityDetails);
 app.use('/api/plant',addplant);
 app.use('/api/plant',plant_category)
+app.use('/api/plant',fetch_plant)
+
 
 
 // Start server

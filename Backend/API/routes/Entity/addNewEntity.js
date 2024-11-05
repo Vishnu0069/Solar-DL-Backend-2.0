@@ -64,8 +64,8 @@ const transporter = nodemailer.createTransport({
   port: 465, // Port for SSL
   secure: true, // Use SSL
   auth: {
-      user: 'teamants@antsai.in', // Your email account
-      pass: 'teamAI@ants99&22' // Your email password
+      user: 'team.solardl@antsai.in', // Your email account
+      pass: 'TEamSOlarDL12301#' // Your email password
   }
 });
 // Rest of your router code...
@@ -124,7 +124,7 @@ router.post('/', async (req, res) => {
 
     // Send email notification to the user
     const mailOptions = {
-      from: 'teamants@antsai.in',
+      from: 'team.solardl@antsai.in',
       to: email,
       subject: 'New Entity added to SolarDL',
       text: `
