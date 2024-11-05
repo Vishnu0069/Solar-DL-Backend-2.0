@@ -35,10 +35,8 @@ const editentity = require('./routes/Entity/editEntity')
 const generateplantid = require('./routes/Plant/generatePlantId');
 const entitynames = require('./routes/Plant/fetchEntityNames');
 const getEntityDetails = require('./routes/Plant/getEntityDetails')
-
-
-
-
+const addplant = require('./routes/Plant/addPlant')
+const plant_category = require('./routes/Plant/getPlantCategories')
 
 
 
@@ -93,6 +91,9 @@ app.use('/api/entity', disable);
 app.use('/api/plant',generateplantid);
 app.use('/api/plant',entitynames);
 app.use('/api/plant',getEntityDetails);
+app.use('/api/plant',addplant);
+app.use('/api/plant',plant_category)
+
 
 // Start server
 app.listen(port, () => {
