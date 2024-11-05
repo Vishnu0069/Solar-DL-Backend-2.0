@@ -11,9 +11,9 @@ router.get('/fetchEntityNames', async (req, res) => {
   }
 
   try {
-    // Check if the masterentityid of the given entityid is '1111'
+    // Fetch the masterentityid and entityname for the given entityid
     const [entityCheck] = await pool.query(`
-      SELECT masterentityid 
+      SELECT masterentityid, entityname 
       FROM EntityMaster 
       WHERE entityid = ?
     `, [entityid]);
@@ -22,7 +22,7 @@ router.get('/fetchEntityNames', async (req, res) => {
       return res.status(404).json({ message: 'Entity not found' });
     }
 
-    const masterEntityId = entityCheck[0].masterentityid;
+    const { masterentityid: masterEntityId, entityname: currentEntityName } = entityCheck[0];
 
     let query;
     let params;
@@ -32,7 +32,7 @@ router.get('/fetchEntityNames', async (req, res) => {
       query = `
         SELECT entityid, entityname 
         FROM EntityMaster 
-        WHERE entityid LIKE CONCAT(?, '-%')
+        WHERE entityid LIKE CONCAT(?, '-%') AND mark_deletion = 0
       `;
       params = [entityid];
     } else {
@@ -40,13 +40,20 @@ router.get('/fetchEntityNames', async (req, res) => {
       query = `
         SELECT entityid, entityname 
         FROM EntityMaster 
-        WHERE entityid = ?
+        WHERE entityid = ? AND marked_deletion = 0
       `;
       params = [entityid];
     }
 
     const [rows] = await pool.query(query, params);
-    res.status(200).json(rows);
+
+    // Add the current entity information to the response
+    const response = {
+      currentEntity: { entityid, entityname: currentEntityName },
+      entities: rows
+    };
+
+    res.status(200).json(response);
   } catch (error) {
     console.error('Error fetching entity names:', error);
     res.status(500).json({ message: 'Error fetching entity names', error: error.message });
