@@ -95,7 +95,7 @@ router.post('/addPlant', async (req, res) => {
 
       // Hash default password and insert user
       const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
-      const [userResult] = await pool.query(
+      await pool.query(
         `INSERT INTO gsai_user (
           user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, 
           pin_code, country, entity_name, user_role, otp_status
@@ -106,8 +106,17 @@ router.post('/addPlant', async (req, res) => {
         ]
       );
 
-      // Get user_id for the new user
-      user_id = userResult.insertId;
+      // Retrieve newly created user_id to verify existence
+      const [userRecord] = await pool.query(
+        'SELECT user_id FROM gsai_user WHERE email = ? AND entityid = ?',
+        [owner_email, newEntityId]
+      );
+
+      if (userRecord.length === 0) {
+        return res.status(500).json({ message: 'User creation failed; user_id not found after insert.' });
+      }
+
+      user_id = userRecord[0].user_id;
 
       // Insert into Gsai_PlantUser
       await pool.query(

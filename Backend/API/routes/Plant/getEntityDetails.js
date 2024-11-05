@@ -12,7 +12,7 @@ router.get('/getEntityDetails', async (req, res) => {
 
   try {
     const [rows] = await pool.query(`
-      SELECT entityid, category, email 
+      SELECT entityid, category, email, contactfirstname AS firstName, contactlastname AS lastName
       FROM EntityMaster 
       WHERE entityname = ?
     `, [entityname]);
