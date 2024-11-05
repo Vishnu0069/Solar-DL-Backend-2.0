@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const { v4: uuidv4 } = require('uuid'); // Import the UUID generator
 const pool = require('../../db');
 const router = express.Router();
 require('dotenv').config();
@@ -49,9 +50,14 @@ router.post('/addPlant', async (req, res) => {
     return res.status(400).json({ message: 'plant_id is required.' });
   }
 
+  let connection;
+
   try {
-    // Insert plant details into Gsai_PlantMaster
-    await pool.query(
+    connection = await pool.getConnection();
+    await connection.beginTransaction();
+
+    // Step 1: Insert plant details into Gsai_PlantMaster
+    await connection.query(
       `INSERT INTO Gsai_PlantMaster (
         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type, 
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1, 
@@ -68,15 +74,15 @@ router.post('/addPlant', async (req, res) => {
 
     let newEntityId = entityid;
     let suffix = 1001;
-    let user_id;
 
+    // Step 2: If plant type is "Individual", create a new user with a unique entityid and UUID user_id
     if (plant_type.toLowerCase() === "individual") {
-      // Generate a unique entityid
       const baseEntityId = entityid.split('-')[0];
 
+      // Generate a unique `entityid`
       while (true) {
         newEntityId = `${baseEntityId}-${suffix}`;
-        const [existingEntity] = await pool.query(
+        const [existingEntity] = await connection.query(
           'SELECT entityid FROM EntityMaster WHERE entityid = ?',
           [newEntityId]
         );
@@ -85,45 +91,39 @@ router.post('/addPlant', async (req, res) => {
       }
 
       // Insert into EntityMaster
-      await pool.query(
-        `INSERT INTO EntityMaster (entityid, entityname, category, contactfirstname, 
-          contactlastname, email, mobile, country, state, district, pincode, 
-          namespace, creation_date, last_update_date, mark_deletion) 
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'gsai.greentek', NOW(), NOW(), 0)`,
+      await connection.query(
+        `INSERT INTO EntityMaster (
+          entityid, entityname, category, contactfirstname, contactlastname, email, mobile, 
+          country, state, district, pincode, namespace, creation_date, last_update_date, mark_deletion
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'gsai.greentek', NOW(), NOW(), 0)`,
         [newEntityId, plant_name, plant_category, owner_first_name, owner_last_name, owner_email, mobile_number, country, state, district, pincode]
       );
 
-      // Hash default password and insert user
+      // Generate a new UUID for user_id
+      const newUserId = uuidv4();
+
+      // Hash the default password
       const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
-      await pool.query(
+
+      // Insert the new user with generated user_id and entityid in gsai_user
+      await connection.query(
         `INSERT INTO gsai_user (
           user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, 
           pin_code, country, entity_name, user_role, otp_status
-        ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 1)`,
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 1)`,
         [
-          newEntityId, owner_first_name, owner_last_name, owner_email, hashedPassword,
+          newUserId, newEntityId, owner_first_name, owner_last_name, owner_email, hashedPassword,
           mobile_number || '0000000000', pincode, country, plant_name
         ]
       );
 
-      // Retrieve newly created user_id to verify existence
-      const [userRecord] = await pool.query(
-        'SELECT user_id FROM gsai_user WHERE email = ? AND entityid = ?',
-        [owner_email, newEntityId]
-      );
-
-      if (userRecord.length === 0) {
-        return res.status(500).json({ message: 'User creation failed; user_id not found after insert.' });
-      }
-
-      user_id = userRecord[0].user_id;
-
-      // Insert into Gsai_PlantUser
-      await pool.query(
+      // Link plant and user in Gsai_PlantUser with the new UUID user_id
+      await connection.query(
         'INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?)',
-        [plant_id, user_id]
+        [plant_id, newUserId]
       );
 
+      // Send email notification
       const mailOptions = {
         from: 'team.solardl@antsai.in',
         to: owner_email,
@@ -141,24 +141,29 @@ Best regards,
 Team GSAI`
       };
       await transporter.sendMail(mailOptions);
-
     } else {
-      const [sysadminUser] = await pool.query('SELECT user_id FROM gsai_user WHERE entityid = ?', [entityid]);
+      // Fetch sysadmin user_id for other plant types
+      const [sysadminUser] = await connection.query('SELECT user_id FROM gsai_user WHERE entityid = ?', [entityid]);
       if (sysadminUser.length === 0) {
         return res.status(404).json({ message: 'Sysadmin user not found for the given entity ID.' });
       }
-      user_id = sysadminUser[0].user_id;
+      const sysadminUserId = sysadminUser[0].user_id;
 
-      await pool.query(
+      // Link sysadmin to the plant
+      await connection.query(
         'INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?)',
-        [plant_id, user_id]
+        [plant_id, sysadminUserId]
       );
     }
 
+    await connection.commit();
     res.status(201).json({ message: 'Plant and user linked successfully', plant_id });
   } catch (error) {
+    if (connection) await connection.rollback();
     console.error('Error adding plant:', error);
     res.status(500).json({ message: 'Error adding plant', error: error.message });
+  } finally {
+    if (connection) connection.release();
   }
 });
 

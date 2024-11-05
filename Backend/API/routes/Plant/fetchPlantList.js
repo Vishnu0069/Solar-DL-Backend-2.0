@@ -12,15 +12,16 @@ router.get('/fetchPlantList', async (req, res) => {
   try {
     const [rows] = await pool.query(`
       SELECT 
+        plant_id AS "Plant ID",              
         plant_name AS "Plant Name",
         plant_type AS "Plant Type",
         CONCAT(capacity, ' ', capacity_unit) AS "Capacity",
-        "Peak Power" AS "Peak Power",  -- Placeholder, replace as needed
+        "Peak Power" AS "Peak Power",        
         district AS "District",
-        "alerts" AS "Alerts",            -- Assuming there's an alerts column in the table
-        "status" AS "Status"             -- Assuming there's a status column in the table
+        "alerts" AS "Alerts",                
+        "status" AS "Status"                 
       FROM Gsai_PlantMaster
-      WHERE entityid = ?
+      WHERE entityid = ? AND marked_deletion = 0  -- Exclude records marked for deletion
     `, [entityid]);
 
     res.status(200).json(rows);

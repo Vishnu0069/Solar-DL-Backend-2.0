@@ -38,7 +38,7 @@ const getEntityDetails = require('./routes/Plant/getEntityDetails')
 const addplant = require('./routes/Plant/addPlant')
 const plant_category = require('./routes/Plant/getPlantCategories')
 const fetch_plant = require('./routes/Plant/fetchPlantList');
-
+const disable_plant = require('./routes/Plant/markPlantAsDeleted')
 
 
 require('dotenv').config();  // Load environment variables
@@ -94,6 +94,7 @@ app.use('/api/plant',getEntityDetails);
 app.use('/api/plant',addplant);
 app.use('/api/plant',plant_category)
 app.use('/api/plant',fetch_plant)
+app.use('/api/plant',disable_plant)
 
 
 
