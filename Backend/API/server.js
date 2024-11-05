@@ -12,6 +12,18 @@ const verifyToken = require('./middleware/auth');  // JWT middleware
 const sendOtp = require('./routes/sendOtp');
 const verifyOtp = require('./routes/verifyOtp');
 const forgot = require('./routes/forgot-pass');
+const checkEmailRoute = require('./routes/checkemail');
+const states = require('./routes/States');
+const Dis = require('./routes/District');
+const getCountry = require('./routes/getCountry');
+const getRegion = require('./routes/getRegion');
+const getState = require('./routes/getState');
+const getDistrict = require('./routes/getDistrict');
+//Entity routes
+const getEntityDetailsRoute = require('./routes/Entity/getEntityDetails');
+const getCategories = require('./routes/Entity/category');
+const generateentityid = require('./routes/Entity/generateEntityId')
+const disable=require('./routes/Entity/markEntityAsDeleted');
 const addNewEntityRoute = require('./routes/Entity/addNewEntity');
 const fetchEntitiesRoute = require('./routes/Entity/fetchEntities');
 const fetchEntityByIdRoute = require('./routes/Entity/fetchEntityById');
@@ -19,17 +31,10 @@ const fetchEntityIdsRoute = require('./routes/Entity/fetchEntityIds');
 const fetchEntityNamesRoute = require('./routes/Entity/fetchEntityNames');
 const fetchAllRecordsRoute = require('./routes/Entity/fetchAllRecords');
 const editentity = require('./routes/Entity/editEntity')
-const checkEmailRoute = require('./routes/checkemail');
-const states = require('./routes/States');
-const Dis = require('./routes/District');
-const getEntityDetailsRoute = require('./routes/Entity/getEntityDetails');
-const getCategories = require('./routes/Entity/category');
-const generateentityid = require('./routes/Entity/generateEntityId')
-const disable=require('./routes/Entity/markEntityAsDeleted');
-const getCountry = require('./routes/getCountry');
-const getRegion = require('./routes/getRegion');
-const getState = require('./routes/getState');
-const getDistrict = require('./routes/getDistrict');
+//plant routes
+const generateplantid = require('./routes/Plant/generatePlantId');
+const entitynames = require('./routes/Plant/fetchEntityNames');
+const getEntityDetails = require('./routes/Plant/getEntityDetails')
 
 
 
@@ -64,6 +69,15 @@ app.use('/', signup);
 app.use('/send-otp', sendOtp);  // Uncomment OTP routes
 app.use('/verify-otp', verifyOtp);
 app.use('/forgot-pass',forgot);
+app.use('/', checkEmailRoute);
+app.use('/',states);
+app.use('/',Dis);
+app.use('/api', getCategories);
+app.use('/api', getCountry);
+app.use('/api', getRegion);
+app.use('/api', getState);
+app.use('/api', getDistrict);
+//Entity
 app.use('/api/entity', addNewEntityRoute);
 app.use('/add-entity',addNewEntityRoute);
 app.use('/api/entity', fetchEntitiesRoute);
@@ -75,15 +89,10 @@ app.use('/api/entity',editentity);
 app.use('/api/entity', getEntityDetailsRoute);
 app.use('/api/entity', generateentityid);
 app.use('/api/entity', disable);
-app.use('/', checkEmailRoute);
-app.use('/',states);
-app.use('/',Dis);
-app.use('/api', getCategories);
-app.use('/api', getCountry);
-app.use('/api', getRegion);
-app.use('/api', getState);
-app.use('/api', getDistrict);
-
+//PLant
+app.use('/api/plant',generateplantid);
+app.use('/api/plant',entitynames);
+app.use('/api/plant',getEntityDetails);
 
 // Start server
 app.listen(port, () => {
