@@ -10,20 +10,44 @@ router.get('/fetchPlantList', async (req, res) => {
   }
 
   try {
-    const [rows] = await pool.query(`
-      SELECT 
-        plant_id AS "Plant ID",              
-        plant_name AS "Plant Name",
-        plant_type AS "Plant Type",
-        CONCAT(capacity, ' ', capacity_unit) AS "Capacity",
-        "Peak Power" AS "Peak Power",        
-        district AS "District",
-        "alerts" AS "Alerts",                
-        "status" AS "Status"                 
-      FROM Gsai_PlantMaster
-      WHERE entityid = ? AND marked_deletion = 0  -- Exclude records marked for deletion
-    `, [entityid]);
+    let query;
+    let params;
 
+    if (entityid.includes('-')) {
+      // If entityid includes a suffix (e.g., 'LIFELINK-1003'), fetch details for that specific plant
+      query = `
+        SELECT 
+          plant_id AS "Plant ID",              
+          plant_name AS "Plant Name",
+          plant_type AS "Plant Type",
+          CONCAT(capacity, ' ', capacity_unit) AS "Capacity",
+          "Peak Power" AS "Peak Power",        
+          district AS "District",
+          "alerts" AS "Alerts",                
+          "status" AS "Status"                 
+        FROM Gsai_PlantMaster
+        WHERE plant_id = ? AND marked_deletion = 0  -- Exclude records marked for deletion
+      `;
+      params = [entityid];
+    } else {
+      // If entityid has no suffix, fetch all plants for the base entity
+      query = `
+        SELECT 
+          plant_id AS "Plant ID",              
+          plant_name AS "Plant Name",
+          plant_type AS "Plant Type",
+          CONCAT(capacity, ' ', capacity_unit) AS "Capacity",
+          "Peak Power" AS "Peak Power",        
+          district AS "District",
+          "alerts" AS "Alerts",                
+          "status" AS "Status"                 
+        FROM Gsai_PlantMaster
+        WHERE entityid = ? AND marked_deletion = 0  -- Exclude records marked for deletion
+      `;
+      params = [entityid];
+    }
+
+    const [rows] = await pool.query(query, params);
     res.status(200).json(rows);
   } catch (error) {
     console.error('Error fetching plant list:', error);

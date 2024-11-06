@@ -13,12 +13,12 @@ const sendOtp = require('./routes/sendOtp');
 const verifyOtp = require('./routes/verifyOtp');
 const forgot = require('./routes/forgot-pass');
 const checkEmailRoute = require('./routes/checkemail');
-const states = require('./routes/States');
-const Dis = require('./routes/District');
-const getCountry = require('./routes/getCountry');
-const getRegion = require('./routes/getRegion');
-const getState = require('./routes/getState');
-const getDistrict = require('./routes/getDistrict');
+const getCountry = require('./routes/Country,state,region,dis/getCountry');
+const getRegion1 = require('./routes/Country,state,region,dis/Region1');
+const getRegion2 = require('./routes/Country,state,region,dis/Region2');
+const getState1 = require('./routes/Country,state,region,dis/State1');
+const getState2 = require('./routes/Country,state,region,dis/State2');
+const getDistrict = require('./routes/Country,state,region,dis/getDistrict');
 //Entity routes
 const getEntityDetailsRoute = require('./routes/Entity/getEntityDetails');
 const getCategories = require('./routes/Entity/category');
@@ -68,12 +68,12 @@ app.use('/send-otp', sendOtp);  // Uncomment OTP routes
 app.use('/verify-otp', verifyOtp);
 app.use('/forgot-pass',forgot);
 app.use('/', checkEmailRoute);
-app.use('/',states);
-app.use('/',Dis);
 app.use('/api', getCategories);
 app.use('/api', getCountry);
-app.use('/api', getRegion);
-app.use('/api', getState);
+app.use('/api', getRegion1);
+app.use('/api', getRegion2);
+app.use('/api', getState1);
+app.use('/api', getState2);
 app.use('/api', getDistrict);
 //Entity
 app.use('/api/entity', addNewEntityRoute);

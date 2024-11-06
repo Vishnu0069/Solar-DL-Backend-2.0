@@ -1,8 +1,8 @@
 const express = require('express');
-const pool = require('../db');
+const pool = require('../../db');
 const router = express.Router();
 
-router.post('/states/:countryId', async (req, res) => {
+router.post('/state1/:countryId', async (req, res) => {
     const { countryId } = req.params;
     try {
         const [states] = await pool.query('SELECT state_id, state_name FROM state WHERE country_id = ?', [countryId]);
