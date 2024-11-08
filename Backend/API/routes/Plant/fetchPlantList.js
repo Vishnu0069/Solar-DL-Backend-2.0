@@ -20,11 +20,22 @@ router.get('/fetchPlantList', async (req, res) => {
           plant_id AS "Plant ID",              
           plant_name AS "Plant Name",
           plant_type AS "Plant Type",
-          CONCAT(capacity, ' ', capacity_unit) AS "Capacity",
-          "Peak Power" AS "Peak Power",        
+          plant_category AS "Plant Category",
+          capacity AS "Capacity",
+          capacity_unit AS "Capacity Unit",
+          country AS "Country",
+          region AS "Region",
+          state AS "State",
           district AS "District",
-          "alerts" AS "Alerts",                
-          "status" AS "Status"                 
+          pincode AS "Pincode",
+          longitude AS "Longitude",
+          latitude AS "Latitude",
+          install_date AS "Install Date",
+          azimuth_angle AS "Azimuth Angle",
+          tilt_angle AS "Tilt Angle",
+          owner_first_name AS "Owner First Name",
+          owner_last_name AS "Owner Last Name",
+          owner_email AS "Owner Email"
         FROM Gsai_PlantMaster
         WHERE plant_id = ? AND marked_deletion = 0  -- Exclude records marked for deletion
       `;
@@ -36,11 +47,22 @@ router.get('/fetchPlantList', async (req, res) => {
           plant_id AS "Plant ID",              
           plant_name AS "Plant Name",
           plant_type AS "Plant Type",
-          CONCAT(capacity, ' ', capacity_unit) AS "Capacity",
-          "Peak Power" AS "Peak Power",        
+          plant_category AS "Plant Category",
+          capacity AS "Capacity",
+          capacity_unit AS "Capacity Unit",
+          country AS "Country",
+          region AS "Region",
+          state AS "State",
           district AS "District",
-          "alerts" AS "Alerts",                
-          "status" AS "Status"                 
+          pincode AS "Pincode",
+          longitude AS "Longitude",
+          latitude AS "Latitude",
+          install_date AS "Install Date",
+          azimuth_angle AS "Azimuth Angle",
+          tilt_angle AS "Tilt Angle",
+          owner_first_name AS "Owner First Name",
+          owner_last_name AS "Owner Last Name",
+          owner_email AS "Owner Email"
         FROM Gsai_PlantMaster
         WHERE entityid = ? AND marked_deletion = 0  -- Exclude records marked for deletion
       `;
