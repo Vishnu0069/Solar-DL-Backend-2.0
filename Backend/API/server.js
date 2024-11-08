@@ -48,6 +48,13 @@ const addplant = require('./routes/Plant/addPlant')
 const plant_category = require('./routes/Plant/getPlantCategories')
 const fetch_plant = require('./routes/Plant/fetchPlantList');
 const disable_plant = require('./routes/Plant/markPlantAsDeleted')
+const verify_individual_user = require('./routes/Plant/VerifyIndividualUser');
+//User routes
+const Add_User1 = require('./routes/User/Add_User1');
+const Get_User_for_edit = require('./routes/User/Get_User_edit');
+const edit_user = require('./routes/User/Edit_User');
+
+
 
 
 require('dotenv').config();  // Load environment variables
@@ -99,12 +106,6 @@ app.use('/api/entity', get_entity_details3);
 app.use('/api/entity', get_entity_details4);
 app.use('/api/entity', get_entity_details5);
 app.use('/api/entity', get_entity_details6);
-
-
-
-
-
-
 app.use('/api/entity', generateentityid);
 app.use('/api/entity', disable);
 //PLant
@@ -112,9 +113,14 @@ app.use('/api/plant',generateplantid);
 app.use('/api/plant',entitynames);
 app.use('/api/plant',getEntityDetails);
 app.use('/api/plant',addplant);
-app.use('/api/plant',plant_category)
-app.use('/api/plant',fetch_plant)
-app.use('/api/plant',disable_plant)
+app.use('/api/plant',plant_category);
+app.use('/api/plant',fetch_plant);
+app.use('/api/plant',disable_plant);
+app.use('/api/plant',verify_individual_user);
+//User
+app.use('/api/user',Add_User1);
+app.use('/api/user',Get_User_for_edit);
+app.use('/api/user',edit_user);
 
 
 

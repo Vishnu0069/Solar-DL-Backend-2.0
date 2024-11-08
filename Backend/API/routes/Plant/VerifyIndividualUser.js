@@ -24,7 +24,7 @@ router.post('/verify_individual_user', async (req, res) => {
     // Step 2: Check entityid and role conditions
     if (user.entityid === entityid && user.user_role === 'individual') {
       // The user has the same entity ID and role is "individual"
-      return res.status(400).json({ message: 'Go ahead with verification, user already verified' });
+      return res.status(400).json({ message: 'User already verified' });
     } else if (user.entityid !== entityid) {
       // The user has a different entity ID
       return res.status(300).json({ message: 'Duplicate email, use different email' });
