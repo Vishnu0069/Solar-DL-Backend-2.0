@@ -21,6 +21,15 @@ const getState2 = require('./routes/Country,state,region,dis/State2');
 const getDistrict = require('./routes/Country,state,region,dis/getDistrict');
 //Entity routes
 const getEntityDetailsRoute = require('./routes/Entity/getEntityDetails');
+const get_entity_details2 = require('./routes/Entity/Get_Entity_details2');
+const get_entity_details3 = require('./routes/Entity/Get_Entity_details3');
+const get_entity_details4 = require('./routes/Entity/Get_Entity_details4');
+const get_entity_details5 = require('./routes/Entity/Get_Entity_details5');
+const get_entity_details6 = require('./routes/Entity/Get_Entity_details6');
+
+
+
+
 const getCategories = require('./routes/Entity/category');
 const generateentityid = require('./routes/Entity/generateEntityId')
 const disable=require('./routes/Entity/markEntityAsDeleted');
@@ -85,6 +94,17 @@ app.use('/api/entity', fetchEntityNamesRoute);
 app.use('/api/entity', fetchAllRecordsRoute);
 app.use('/api/entity',editentity);
 app.use('/api/entity', getEntityDetailsRoute);
+app.use('/api/entity', get_entity_details2);
+app.use('/api/entity', get_entity_details3);
+app.use('/api/entity', get_entity_details4);
+app.use('/api/entity', get_entity_details5);
+app.use('/api/entity', get_entity_details6);
+
+
+
+
+
+
 app.use('/api/entity', generateentityid);
 app.use('/api/entity', disable);
 //PLant
