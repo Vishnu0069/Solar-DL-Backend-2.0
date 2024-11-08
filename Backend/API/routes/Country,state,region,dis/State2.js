@@ -12,7 +12,7 @@ router.get('/state2', async (req, res) => {
 
   try {
     const [rows] = await pool.query(`
-      SELECT state_name 
+      SELECT state_id, state_name 
       FROM state 
       WHERE country_id = ? AND region = ?
     `, [country_id, region]);
