@@ -12,6 +12,7 @@ router.get('/getUsersByEntity', async (req, res) => {
   try {
     const [users] = await pool.query(
       `SELECT 
+          user_id AS user_id,
           first_name AS firstName,
           last_name AS lastName,
           email AS emailId,
