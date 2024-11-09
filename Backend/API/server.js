@@ -57,6 +57,8 @@ const Get_User_for_edit = require('./routes/User/Get_User_edit');
 const edit_user = require('./routes/User/Edit_User');
 const table_user = require('./routes/User/User_table');
 const edit_plant_user=require('./routes/User/Add_plat_user');
+const user_roles=require('./routes/User/User_roles');
+
 
 
 
@@ -129,6 +131,8 @@ app.use('/api/user',Get_User_for_edit);
 app.use('/api/user',edit_user);
 app.use('/api/user',table_user);
 app.use('/api/user',edit_plant_user)
+app.use('/api/user',user_roles)
+
 
 
 
