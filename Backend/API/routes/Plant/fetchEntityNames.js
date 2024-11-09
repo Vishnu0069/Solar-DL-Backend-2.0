@@ -40,7 +40,7 @@ router.get('/fetchEntityNames', async (req, res) => {
       query = `
         SELECT entityid, entityname 
         FROM EntityMaster 
-        WHERE entityid = ? AND marked_deletion = 0
+        WHERE entityid = ? AND mark_deletion = 0
       `;
       params = [entityid];
     }
