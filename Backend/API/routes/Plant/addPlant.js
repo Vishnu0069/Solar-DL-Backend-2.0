@@ -284,7 +284,7 @@ router.post('/addPlant', async (req, res) => {
       console.log("Plant type is not individual. Finding sysadmin for entity and linking to plant...");
       // Step 3: For non-individual plant types, find sysadmin and link to the plant
       const [sysadminUser] = await connection.query(
-        'SELECT user_id, email FROM gsai_user WHERE entityid = ? AND user_role = "sysadmin"', 
+        'SELECT user_id, email FROM gsai_user WHERE entityid = ? AND user_role = "sys admin"', 
         [entityid]
       );
 
