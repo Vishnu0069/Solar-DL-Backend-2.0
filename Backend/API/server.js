@@ -51,6 +51,12 @@ const disable_plant = require('./routes/Plant/markPlantAsDeleted')
 const verify_individual_user = require('./routes/Plant/VerifyIndividualUser');
 const Get_plant_type = require('./routes/Plant/Get_plant_type');
 const fetch_Make =require('./routes/Plant/Fetch_Make')
+const Get_Plant_details1 = require('./routes/Plant/Get_Plant_details1');
+const Get_Plant_details2 = require('./routes/Plant/Get_Plant_details2');
+const Get_Plant_details3 = require('./routes/Plant/Get_Plant_details3');
+
+
+
 //User routes
 const Add_User1 = require('./routes/User/Add_User1');
 const Get_User_for_edit = require('./routes/User/Get_User_edit');
@@ -127,6 +133,12 @@ app.use('/api/plant',disable_plant);
 app.use('/api/plant',verify_individual_user);
 app.use('/api/plant',Get_plant_type);
 app.use('/api/plant',fetch_Make);
+app.use('/api/plant',Get_Plant_details1);
+app.use('/api/plant',Get_Plant_details2);
+app.use('/api/plant',Get_Plant_details3);
+
+
+
 
 
 //User

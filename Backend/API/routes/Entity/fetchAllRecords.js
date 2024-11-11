@@ -42,7 +42,10 @@ router.get('/fetchAllRecords', async (req, res) => {
           country AS "Country",
           state AS "State",
           district AS "District",
-          pincode AS "Pincode"
+          pincode AS "Pincode",
+          GSTIN AS "GSTIN",
+          category AS "Category",
+          region AS "Region"
         FROM EntityMaster
         WHERE entityid LIKE CONCAT(?, '%') AND mark_deletion = 0
       `;
@@ -61,7 +64,10 @@ router.get('/fetchAllRecords', async (req, res) => {
           country AS "Country",
           state AS "State",
           district AS "District",
-          pincode AS "Pincode"
+          pincode AS "Pincode",
+          GSTIN AS "GSTIN",
+          category AS "Category",
+          region AS "Region"
         FROM EntityMaster
         WHERE entityid = ? AND mark_deletion = 0
       `;

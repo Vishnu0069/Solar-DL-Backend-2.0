@@ -10,6 +10,26 @@ router.post('/disable', async (req, res) => {
   }
 
   try {
+    // Fetch the masterentityid for the given userid
+    const [userResult] = await pool.query(
+      `SELECT masterentityid 
+       FROM gsai_user 
+       JOIN EntityMaster ON gsai_user.entityid = EntityMaster.entityid 
+       WHERE gsai_user.user_id = ?`,
+      [userid]
+    );
+
+    if (userResult.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const masterEntityId = userResult[0].masterentityid;
+
+    // Check if the masterentityid is '1111', indicating sysadmin
+    if (masterEntityId === '1111') {
+      return res.status(403).json({ message: "Can't disable the sysadmin user" });
+    }
+
     // Update the user to set the delete_flag to 1
     const [result] = await pool.query(
       `UPDATE gsai_user 
