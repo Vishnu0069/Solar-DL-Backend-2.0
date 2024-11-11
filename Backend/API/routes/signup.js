@@ -128,7 +128,7 @@ router.post('/signup', async (req, res) => {
         const userSql = `
             INSERT INTO gsai_user (
                 user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, pin_code, country, entity_name, user_role, otp_status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sysadmin', ?)`;
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sys admin', ?)`;
 
 
         const userValues = [userId, entityId, firstName, lastName, email, hashedPassword, mobileNumber, pinCode, country, entityName, otpStatusValue];
