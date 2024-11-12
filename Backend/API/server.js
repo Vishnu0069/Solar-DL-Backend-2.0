@@ -26,10 +26,6 @@ const get_entity_details3 = require('./routes/Entity/Get_Entity_details3');
 const get_entity_details4 = require('./routes/Entity/Get_Entity_details4');
 const get_entity_details5 = require('./routes/Entity/Get_Entity_details5');
 const get_entity_details6 = require('./routes/Entity/Get_Entity_details6');
-
-
-
-
 const getCategories = require('./routes/Entity/category');
 const generateentityid = require('./routes/Entity/generateEntityId')
 const disable=require('./routes/Entity/markEntityAsDeleted');
@@ -66,6 +62,9 @@ const edit_plant_user=require('./routes/User/Add_plat_user');
 const user_roles=require('./routes/User/User_roles');
 const disab_user=require('./routes/User/disable');
 
+//UserGroups
+const Add_User_groups = require('./routes/UserGroups/Add_User_groups');
+const Add_User_group_plants = require('./routes/UserGroups/Add_User_group_plant');
 
 
 
@@ -99,6 +98,7 @@ app.use('/verify-otp', verifyOtp);
 app.use('/forgot-pass',forgot);
 app.use('/', checkEmailRoute);
 app.use('/api', getCategories);
+//Country,region,states,Districts
 app.use('/api', getCountry);
 app.use('/api', getRegion1);
 app.use('/api', getRegion2);
@@ -137,10 +137,6 @@ app.use('/api/plant',Get_Plant_details1);
 app.use('/api/plant',Get_Plant_details2);
 app.use('/api/plant',Get_Plant_details3);
 
-
-
-
-
 //User
 app.use('/api/user',Add_User1);
 app.use('/api/user',Get_User_for_edit);
@@ -149,6 +145,10 @@ app.use('/api/user',table_user);
 app.use('/api/user',edit_plant_user)
 app.use('/api/user',user_roles)
 app.use('/api/user',disab_user)
+
+//User Groups
+app.use('/api/user-groups',Add_User_groups);
+app.use('/api/user-groups',Add_User_group_plants);
 
 
 

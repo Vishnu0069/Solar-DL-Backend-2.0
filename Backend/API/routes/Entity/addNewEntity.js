@@ -115,7 +115,7 @@ router.post('/', async (req, res) => {
       `INSERT INTO gsai_user (
         user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, 
         pin_code, country, entity_name, user_role, otp_status
-      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, 'user', 1)`,
+      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sys admin', 1)`,
       [entityid, contactfirstname, contactlastname, email, hashedPassword, mobile, pincode, country, entityname]
     );
 
