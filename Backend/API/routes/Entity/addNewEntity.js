@@ -291,6 +291,25 @@ router.post("/", async (req, res) => {
     await connection.commit();
     console.log("Transaction committed successfully.");
 
+    //     // Send email notification to the user
+    //     const mailOptions = {
+    //       from: "team.solardl@antsai.in",
+    //       to: email,
+    //       subject: "New Entity added to SolarDL",
+    //       text: `
+    // Dear ${contactfirstname} ${contactlastname},
+
+    // You have been added as Administrator to ${entityname} with EntityID: ${entityid}.
+
+    // Your Default password is ${defaultPassword}.
+
+    // Please login with the above credentials by clicking the link below:
+    // <Your_Login_Link_Here>
+
+    // With best regards,
+    // Team GSAI`,
+    //     };
+
     // Send email notification to the user
     const mailOptions = {
       from: "team.solardl@antsai.in",
@@ -299,16 +318,23 @@ router.post("/", async (req, res) => {
       text: `
 Dear ${contactfirstname} ${contactlastname},
 
-You have been added as Administrator to ${entityname} with EntityID: ${entityid}.
+You have been added as Administrator to ${entityname} with the following details:
 
-Your Default password is ${defaultPassword}.
+Entity ID: ${entityid}
 
-Please login with the above credentials by clicking the link below:
-<Your_Login_Link_Here>
+
+To access your account, please login using the link below:
+https://www.google.com
+
+To set your password, click the link below:
+https://www.youtube.com
 
 With best regards,
 Team GSAI`,
     };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Email sent successfully.");
 
     await transporter.sendMail(mailOptions);
     console.log("Email sent successfully.");
