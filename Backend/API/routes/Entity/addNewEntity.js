@@ -323,11 +323,11 @@ You have been added as Administrator to ${entityname} with the following details
 Entity ID: ${entityid}
 
 
-To access your account, please login using the link below:
-https://www.google.com
-
 To set your password, click the link below:
-https://www.youtube.com
+https://testsolardl.antsai.in/forgotpassword/setYourPassword
+
+To access your account, please login using the link below:
+https://testsolardl.antsai.in/login
 
 With best regards,
 Team GSAI`,
