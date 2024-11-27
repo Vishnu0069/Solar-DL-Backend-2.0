@@ -36,6 +36,9 @@ const fetchEntityIdsRoute = require("./routes/Entity/fetchEntityIds");
 const fetchEntityNamesRoute = require("./routes/Entity/fetchEntityNames");
 const fetchAllRecordsRoute = require("./routes/Entity/fetchAllRecords");
 const editentity = require("./routes/Entity/editEntity");
+const getdeletedEntity = require("./routes/Entity/fetchDeletedEntities");
+const enableEntity = require("./routes/Entity/enableEntity");
+
 //plant routes
 const generateplantid = require("./routes/Plant/generatePlantId");
 const entitynames = require("./routes/Plant/fetchEntityNames");
@@ -117,6 +120,8 @@ app.use("/api/entity", get_entity_details5);
 app.use("/api/entity", get_entity_details6);
 app.use("/api/entity", generateentityid);
 app.use("/api/entity", disable);
+app.use("/api/entity", getdeletedEntity);
+app.use("/api/entity", enableEntity);
 //PLant
 app.use("/api/plant", generateplantid);
 app.use("/api/plant", entitynames);

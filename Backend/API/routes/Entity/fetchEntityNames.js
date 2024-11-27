@@ -1,15 +1,17 @@
 // // In routes/Entity/fetchEntityNames.js
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
 
-router.get('/fetchEntityNames', async (req, res) => {
+router.get("/fetchEntityNames", async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT entityname FROM EntityMaster');
-    res.status(200).json(rows.map(row => row.entityname));
+    const [rows] = await pool.query("SELECT entityname FROM EntityMaster");
+    res.status(200).json(rows.map((row) => row.entityname));
   } catch (error) {
-    console.error('Error fetching entity names:', error);
-    res.status(500).json({ message: 'Error fetching entity names', error: error.message });
+    console.error("Error fetching entity names:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching entity names", error: error.message });
   }
 });
 
@@ -28,8 +30,8 @@ module.exports = router;
 //   try {
 //     // Check if the masterentityid of the given entityid is '1111'
 //     const [entityCheck] = await pool.query(`
-//       SELECT masterentityid 
-//       FROM EntityMaster 
+//       SELECT masterentityid
+//       FROM EntityMaster
 //       WHERE entityid = ?
 //     `, [entityid]);
 
@@ -45,16 +47,16 @@ module.exports = router;
 //     if (masterEntityId === '1111') {
 //       // If masterentityid is '1111', get all entities with the same prefix as the provided entityid
 //       query = `
-//         SELECT entityid, entityname 
-//         FROM EntityMaster 
+//         SELECT entityid, entityname
+//         FROM EntityMaster
 //         WHERE entityid LIKE CONCAT(?, '-%')
 //       `;
 //       params = [entityid];
 //     } else {
 //       // If masterentityid is not '1111', return only that specific entity
 //       query = `
-//         SELECT entityid, entityname 
-//         FROM EntityMaster 
+//         SELECT entityid, entityname
+//         FROM EntityMaster
 //         WHERE entityid = ?
 //       `;
 //       params = [entityid];
