@@ -23,24 +23,38 @@ router.get("/fetchDeletedEntities", async (req, res) => {
 
     // Check if there are any matching records
     if (rows.length === 0) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "No records found for the given entityid with mark_deletion set to 1",
-        });
+      return res.status(404).json({
+        message:
+          "No records found for the given entityid with mark_deletion set to 1",
+      });
     }
 
-    // Respond with the fetched data
-    res.status(200).json(rows);
+    // Transform the result into the required format
+    const transformedData = rows.map((row) => ({
+      id: row.entityid,
+      "Entity Name": row.entityname,
+      "First Name": row.contactfirstname,
+      "Last Name": row.contactlastname,
+      "Email Id": row.email,
+      "Mobile Number": row.mobile,
+      Namespace: row.namespace,
+      Country: row.country,
+      State: row.state,
+      District: row.district,
+      Pincode: row.pincode,
+      GSTIN: row.GSTIN,
+      Category: row.category,
+      Region: row.region,
+    }));
+
+    // Respond with the transformed data
+    res.status(200).json(transformedData);
   } catch (error) {
     console.error("Error fetching deleted entities:", error);
-    res
-      .status(500)
-      .json({
-        message: "Error fetching deleted entities",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error fetching deleted entities",
+      error: error.message,
+    });
   }
 });
 
