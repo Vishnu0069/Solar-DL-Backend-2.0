@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
 
-router.get("/getDeviceTypes", async (req, res) => {
+router.post("/getDeviceTypes", async (req, res) => {
   try {
     // Query to fetch all device types
     const [rows] = await pool.query(

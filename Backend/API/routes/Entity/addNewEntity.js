@@ -701,7 +701,11 @@ You have been added as Administrator to ${entityname} with the following details
 Entity ID: ${entityid}
 
 To set your password, click the link below:
+<<<<<<< HEAD
 https://testsolardl.antsai.in/forgotpassword/setYourPassword?${emailToken}
+=======
+https://testsolardl.antsai.in/forgotpassword/setYourPassword/
+>>>>>>> 1c51be1151bd5563b7025675dc02d3e0a0e34345
 
 To access your account, please login using the link below:
 https://testsolardl.antsai.in/login
