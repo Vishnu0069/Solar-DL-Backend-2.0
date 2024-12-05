@@ -660,6 +660,7 @@ router.post("/", async (req, res) => {
 
     // Hash the user's email for the password reset link
     const emailToken = await bcrypt.hash(email, 10);
+    console.log("Email token : ", emailToken);
 
     // Insert a new user into gsai_user table
     const [userResult] = await connection.query(
@@ -701,11 +702,7 @@ You have been added as Administrator to ${entityname} with the following details
 Entity ID: ${entityid}
 
 To set your password, click the link below:
-<<<<<<< HEAD
 https://testsolardl.antsai.in/forgotpassword/setYourPassword?${emailToken}
-=======
-https://testsolardl.antsai.in/forgotpassword/setYourPassword/
->>>>>>> 1c51be1151bd5563b7025675dc02d3e0a0e34345
 
 To access your account, please login using the link below:
 https://testsolardl.antsai.in/login

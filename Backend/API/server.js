@@ -69,6 +69,7 @@ const user_roles = require("./routes/User/User_roles");
 const disab_user = require("./routes/User/disable");
 const fetchDisabledUsers = require("./routes/User/fetchDisabledUsers");
 const enableUser = require("./routes/User/enableUser");
+const resetPassword = require("./routes/01_resetPassword");
 
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
@@ -158,6 +159,7 @@ app.use("/api/user", user_roles);
 app.use("/api/user", disab_user);
 app.use("/api/user", fetchDisabledUsers);
 app.use("/api/user", enableUser);
+app.use("/api/reset-password", resetPassword);
 //User Groups
 app.use("/api/user-groups", Add_User_groups);
 app.use("/api/user-groups", Add_User_group_plants);

@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 const pool = require("../db");
 const router = express.Router();
 
-router.post("/reset-password", async (req, res) => {
+router.post("/", async (req, res) => {
   const { token, password } = req.body;
 
   if (!token || !password) {
@@ -26,16 +26,18 @@ router.post("/reset-password", async (req, res) => {
     }
 
     const user_id = user[0].user_id;
+    console.log(user_id);
 
     //hashing the new password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     //Update the password in databse
     await pool.query(
-      "UPDATE gsai_user SET passwordhashcode = ?,  WHERE user_id=?",
+      "UPDATE gsai_user SET passwordhashcode = ?  WHERE user_id=?",
       [hashedPassword, user_id]
     );
-    console.log(`Password reset successfully for user ID: ${userId}`);
+    console.log(`Password reset successfully for user ID: ${user_id}`);
+    res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
     console.error("Error during password reset:", error);
     res
