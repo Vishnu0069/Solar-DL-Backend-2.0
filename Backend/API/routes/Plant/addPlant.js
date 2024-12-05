@@ -214,7 +214,7 @@ router.post("/addPlant", async (req, res) => {
     owner_first_name,
     owner_last_name,
     owner_email,
-    mobile_number = null,
+    mobileNumber = null,
   } = req.body;
 
   if (!plant_id) {
@@ -235,8 +235,8 @@ router.post("/addPlant", async (req, res) => {
         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type, 
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1, 
         address_line2, pincode, longitude, latitude, data_logger, inverter, owner_first_name, 
-        owner_last_name, owner_email
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        owner_last_name, owner_email,mobileno
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
       [
         plant_id,
         entityid,
@@ -262,6 +262,7 @@ router.post("/addPlant", async (req, res) => {
         owner_first_name,
         owner_last_name,
         owner_email,
+        mobileNumber,
       ]
     );
 
@@ -336,11 +337,9 @@ router.post("/addPlant", async (req, res) => {
           "Sysadmin user not found for the given entity ID:",
           entityid
         );
-        return res
-          .status(404)
-          .json({
-            message: "Sysadmin user not found for the given entity ID.",
-          });
+        return res.status(404).json({
+          message: "Sysadmin user not found for the given entity ID.",
+        });
       }
       const sysadminUserId = sysadminUser[0].user_id;
       const sysadminEmail = sysadminUser[0].email;
