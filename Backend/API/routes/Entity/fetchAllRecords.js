@@ -250,7 +250,9 @@ router.get("/fetchAllRecords", async (req, res) => {
           pincode AS "Pincode",
           GSTIN AS "GSTIN",
           category AS "Category",
-          region AS "Region"
+          region AS "Region",
+          device_count AS "Device Count",
+          expiry_date AS "Expiry Date"
         FROM EntityMaster
         WHERE masterentityid = ? AND mark_deletion = 0
         `,
@@ -274,8 +276,11 @@ router.get("/fetchAllRecords", async (req, res) => {
             pincode AS "Pincode",
             GSTIN AS "GSTIN",
             category AS "Category",
-            region AS "Region"
+            region AS "Region",
+            device_count AS "Device Count",
+            expiry_date AS "Expiry Date"
           FROM EntityMaster
+
           WHERE masterentityid = ? OR entityid = ?
         `;
         params = [entityid, entityid];
@@ -296,7 +301,9 @@ router.get("/fetchAllRecords", async (req, res) => {
             pincode AS "Pincode",
             GSTIN AS "GSTIN",
             category AS "Category",
-            region AS "Region"
+            region AS "Region",
+            device_count AS "Device Count",
+            expiry_date AS "Expiry Date"
           FROM EntityMaster
           WHERE entityid = ?
         `;

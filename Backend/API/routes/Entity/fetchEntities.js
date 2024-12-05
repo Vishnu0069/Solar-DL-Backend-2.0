@@ -1,16 +1,17 @@
 // In routes/Entity/fetchEntities.js
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
 
-router.get('/fetchEntities', async (req, res) => {
+router.get("/fetchEntities", async (req, res) => {
   const { search } = req.query;
-  
-  let query = 'SELECT entityid, entityname, address_line_1, address_line_2, GSTIN, Region FROM EntityMaster';
+
+  let query =
+    "SELECT entityid, entityname, address_line_1, address_line_2, GSTIN, Region FROM EntityMaster";
   const params = [];
 
   if (search) {
-    query += ' WHERE entityid = ? OR entityname = ?';
+    query += " WHERE entityid = ? OR entityname = ?";
     params.push(search, search);
   }
 
@@ -18,8 +19,10 @@ router.get('/fetchEntities', async (req, res) => {
     const [rows] = await pool.query(query, params);
     res.status(200).json(rows);
   } catch (error) {
-    console.error('Error fetching entities:', error);
-    res.status(500).json({ message: 'Error fetching entities', error: error.message });
+    console.error("Error fetching entities:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching entities", error: error.message });
   }
 });
 

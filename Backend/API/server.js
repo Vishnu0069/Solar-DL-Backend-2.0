@@ -54,7 +54,11 @@ const Get_Plant_details1 = require("./routes/Plant/Get_Plant_details1");
 const Get_Plant_details2 = require("./routes/Plant/Get_Plant_details2");
 const Get_Plant_details3 = require("./routes/Plant/Get_Plant_details3");
 const Get_Other_device = require("./routes/Plant/getOtherDevices");
-
+const fetchDeletedPlants = require("./routes/Plant/fetchDeletedPlants");
+const enablePlants = require("./routes/Plant/enablePlants");
+const updatePlant = require("./routes/Plant/updatePlant");
+const getPlantDetails = require("./routes/Plant/getPlantDetails");
+const fetchDeviceTypes = require("./routes/Plant/fetcDevice_Type");
 //User routes
 const Add_User1 = require("./routes/User/Add_User1");
 const Get_User_for_edit = require("./routes/User/Get_User_edit");
@@ -63,6 +67,8 @@ const table_user = require("./routes/User/User_table");
 const edit_plant_user = require("./routes/User/Add_plat_user");
 const user_roles = require("./routes/User/User_roles");
 const disab_user = require("./routes/User/disable");
+const fetchDisabledUsers = require("./routes/User/fetchDisabledUsers");
+const enableUser = require("./routes/User/enableUser");
 
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
@@ -137,6 +143,11 @@ app.use("/api/plant", Get_Plant_details1);
 app.use("/api/plant", Get_Plant_details2);
 app.use("/api/plant", Get_Plant_details3);
 app.use("/api/plant", Get_Other_device);
+app.use("/api/plant", fetchDeletedPlants);
+app.use("/api/plant", enablePlants);
+app.use("/api/plant", updatePlant);
+app.use("/api/plant", getPlantDetails);
+app.use("/api/plant", fetchDeviceTypes);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);
@@ -145,7 +156,8 @@ app.use("/api/user", table_user);
 app.use("/api/user", edit_plant_user);
 app.use("/api/user", user_roles);
 app.use("/api/user", disab_user);
-
+app.use("/api/user", fetchDisabledUsers);
+app.use("/api/user", enableUser);
 //User Groups
 app.use("/api/user-groups", Add_User_groups);
 app.use("/api/user-groups", Add_User_group_plants);
