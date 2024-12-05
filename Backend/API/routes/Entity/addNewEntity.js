@@ -356,6 +356,7 @@
 
 // module.exports = router;
 
+//expiry date and device count added
 const express = require("express");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");

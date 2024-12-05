@@ -227,7 +227,9 @@ router.get("/fetchAllRecords", async (req, res) => {
           pincode AS "Pincode",
           GSTIN AS "GSTIN",
           category AS "Category",
-          region AS "Region"
+          region AS "Region",
+          device_count AS "Device Count",
+          expiry_date AS "Expiry Date"
         FROM EntityMaster
         WHERE (masterentityid = ? OR entityid = ?) AND mark_deletion = 0
       `;
