@@ -15,11 +15,12 @@ router.get("/fetchDisabledUsers", async (req, res) => {
     const [rows] = await pool.query(
       `
       SELECT 
-        user_id AS "User ID",
-        first_name AS "First Name",
-        last_name AS "Last Name",
-        email AS "Email",
-        mobile_number AS "Mobile Number"
+        user_id AS "userID",
+        first_name AS "firstName",
+        last_name AS "lastName",
+        email AS "email",
+        mobile_number AS "mobileNumber",
+        role AS "role"
       FROM gsai_user
       WHERE entityid = ? AND delete_flag = 1
       `,
