@@ -20,7 +20,7 @@ router.get("/fetchDisabledUsers", async (req, res) => {
         last_name AS "lastName",
         email AS "email",
         mobile_number AS "mobileNumber",
-        role AS "role"
+        user_role AS "role"
       FROM gsai_user
       WHERE entityid = ? AND delete_flag = 1
       `,
