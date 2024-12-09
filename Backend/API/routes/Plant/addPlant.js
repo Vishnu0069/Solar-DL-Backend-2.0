@@ -274,6 +274,9 @@ router.post("/addPlant", async (req, res) => {
       const newUserId = uuidv4();
       const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
 
+      // hashing the email
+      const emailToken = await bcrypt.hash(owner_email, 10);
+
       // Insert the new user with role 'individual'
       console.log(
         "Inserting new individual user into gsai_user with ID:",
@@ -282,8 +285,8 @@ router.post("/addPlant", async (req, res) => {
       await connection.query(
         `INSERT INTO gsai_user (
           user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, 
-          pin_code, country, entity_name, user_role, otp_status
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 1)`,
+          pin_code, country, entity_name, user_role, otp_status,token
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 1,?)`,
         [
           newUserId,
           entityid,
@@ -295,6 +298,7 @@ router.post("/addPlant", async (req, res) => {
           pincode,
           country,
           plant_name,
+          emailToken,
         ]
       );
 
@@ -313,8 +317,8 @@ router.post("/addPlant", async (req, res) => {
         subject: "New Individual User Created for Plant",
         text: `Dear ${owner_first_name} ${owner_last_name},\n\nYou have been added as an individual user for the plant ${plant_name} 
         with EntityID: ${entityid}.\n\n 
-        click the link below:
-                                 https://testsolardl.antsai.in/forgotpassword/setYourPassword
+       To set your password, click the link below:
+                                https://testsolardl.antsai.in/forgotpassword/setYourPassword?${emailToken}
 
         To access your account, please login using the link below:
                                  https://testsolardl.antsai.in/login
