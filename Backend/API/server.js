@@ -59,6 +59,7 @@ const enablePlants = require("./routes/Plant/enablePlants");
 const updatePlant = require("./routes/Plant/updatePlant");
 const getPlantDetails = require("./routes/Plant/getPlantDetails");
 const fetchDeviceTypes = require("./routes/Plant/fetcDevice_Type");
+const email_status = require("./routes/Plant/email_status");
 //User routes
 const Add_User1 = require("./routes/User/Add_User1");
 const Get_User_for_edit = require("./routes/User/Get_User_edit");
@@ -149,6 +150,7 @@ app.use("/api/plant", enablePlants);
 app.use("/api/plant", updatePlant);
 app.use("/api/plant", getPlantDetails);
 app.use("/api/plant", fetchDeviceTypes);
+app.use("/api/plant", email_status);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);

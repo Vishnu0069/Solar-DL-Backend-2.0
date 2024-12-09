@@ -16,8 +16,8 @@
 //     if (entityid.includes('-')) {
 //       // If entityid includes a suffix (e.g., 'LIFELINK-1003'), fetch details for that specific plant
 //       query = `
-//         SELECT 
-//           plant_id AS "Plant ID",              
+//         SELECT
+//           plant_id AS "Plant ID",
 //           plant_name AS "Plant Name",
 //           plant_type AS "Plant Type",
 //           plant_category AS "Plant Category",
@@ -43,8 +43,8 @@
 //     } else {
 //       // If entityid has no suffix, fetch all plants for the base entity
 //       query = `
-//         SELECT 
-//           plant_id AS "Plant ID",              
+//         SELECT
+//           plant_id AS "Plant ID",
 //           plant_name AS "Plant Name",
 //           plant_type AS "Plant Type",
 //           plant_category AS "Plant Category",
@@ -78,24 +78,24 @@
 // });
 
 // module.exports = router;
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
 
-router.get('/fetchPlantList', async (req, res) => {
+router.get("/fetchPlantList", async (req, res) => {
   const { entityid } = req.query;
 
   if (!entityid) {
-    return res.status(400).json({ message: 'entityid parameter is required' });
+    return res.status(400).json({ message: "entityid parameter is required" });
   }
 
   try {
     let query;
     let params;
 
-    if (entityid.includes('-')) {
+    if (entityid.includes("-")) {
       // Extract prefix from the entityid (e.g., 'XYZPRIVATELIMITED' from 'XYZPRIVATELIMITED-1001')
-      const prefix = entityid.split('-')[0];
+      const prefix = entityid.split("-")[0];
 
       // Fetch all records with plant_id starting with this prefix followed by a dash
       query = `
@@ -118,7 +118,8 @@ router.get('/fetchPlantList', async (req, res) => {
           tilt_angle AS "Tilt Angle",
           owner_first_name AS "Owner First Name",
           owner_last_name AS "Owner Last Name",
-          owner_email AS "Owner Email"
+          owner_email AS "Owner Email",
+          mobileno AS "Mobile Number"
         FROM Gsai_PlantMaster
         WHERE plant_id LIKE CONCAT(?, '-%') AND marked_deletion = 0  -- Exclude records marked for deletion
       `;
@@ -145,7 +146,8 @@ router.get('/fetchPlantList', async (req, res) => {
           tilt_angle AS "Tilt Angle",
           owner_first_name AS "Owner First Name",
           owner_last_name AS "Owner Last Name",
-          owner_email AS "Owner Email"
+          owner_email AS "Owner Email",
+          mobileno AS "Mobile Number"
         FROM Gsai_PlantMaster
         WHERE entityid = ? AND marked_deletion = 0  -- Exclude records marked for deletion
       `;
@@ -155,8 +157,10 @@ router.get('/fetchPlantList', async (req, res) => {
     const [rows] = await pool.query(query, params);
     res.status(200).json(rows);
   } catch (error) {
-    console.error('Error fetching plant list:', error);
-    res.status(500).json({ message: 'Error fetching plant list', error: error.message });
+    console.error("Error fetching plant list:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching plant list", error: error.message });
   }
 });
 
