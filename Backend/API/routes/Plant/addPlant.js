@@ -291,7 +291,7 @@ router.post("/addPlant", async (req, res) => {
           owner_last_name,
           owner_email,
           hashedPassword,
-          mobile_number || "0000000000",
+          mobileNumber || "0000000000", // todo mobileNumber || "0000000000",
           pincode,
           country,
           plant_name,

@@ -687,8 +687,6 @@ router.post("/", async (req, res) => {
     await connection.commit();
     console.log("Transaction committed successfully.");
 
-    // Hash the user's email for the password reset link
-
     // Send email notification to the user
     const mailOptions = {
       from: "team.solardl@antsai.in",
