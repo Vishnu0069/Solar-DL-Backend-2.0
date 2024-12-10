@@ -619,7 +619,7 @@ router.post("/", async (req, res) => {
     console.log(`Generated unique entity ID: ${entityid}`);
 
     // todo Mark deletion default to 0
-    const mark_deletion = 0;
+    const mark_deletion = 1;
 
     // Insert the new entity into EntityMaster
     const [entityResult] = await connection.query(
@@ -666,7 +666,7 @@ router.post("/", async (req, res) => {
     console.log("Email token : ", emailToken);
 
     // todod   default delete flag to 0
-    const delete_flag = 0;
+    const delete_flag = 1;
 
     // Insert a new user into gsai_user table
     const [userResult] = await connection.query(

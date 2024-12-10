@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
     );
     console.log(`Password reset  for user ID: ${user_id}`);
 
-    await pool.query("UPDATE gsai_user SET  delete_flag=1 WHERE user_id=?", [
+    await pool.query("UPDATE gsai_user SET  delete_flag=0 WHERE user_id=?", [
       user_id,
     ]);
 
@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
     // todo update mark_deletion to 1 after resetting the password
 
     await pool.query(
-      "UPDATE EntityMaster SET mark_deletion =1 WHERE entityid=?",
+      "UPDATE EntityMaster SET mark_deletion =0 WHERE entityid=?",
       [entityid]
     );
     console.log(
