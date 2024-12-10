@@ -18,7 +18,7 @@ router.post("/enableUser", async (req, res) => {
       FROM gsai_user 
       WHERE user_id = ? AND delete_flag = 1
       `,
-      [user_id]
+      [user_Id]
     );
 
     if (checkUser.length === 0) {
@@ -34,7 +34,7 @@ router.post("/enableUser", async (req, res) => {
       SET delete_flag = 0, last_update_date = NOW() 
       WHERE user_id = ?
       `,
-      [user_id]
+      [user_Id]
     );
 
     if (updateResult.affectedRows > 0) {
