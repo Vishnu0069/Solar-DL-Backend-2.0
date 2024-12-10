@@ -15,7 +15,7 @@ router.get("/fetchDisabledUsers", async (req, res) => {
     const [rows] = await pool.query(
       `
       SELECT 
-        user_id AS "userID",
+        user_id AS "userId",
         first_name AS "firstName",
         last_name AS "lastName",
         email AS "email",
