@@ -618,6 +618,9 @@ router.post("/", async (req, res) => {
     }
     console.log(`Generated unique entity ID: ${entityid}`);
 
+    // todo Mark deletion default to 0
+    const mark_deletion = 0;
+
     // Insert the new entity into EntityMaster
     const [entityResult] = await connection.query(
       `INSERT INTO EntityMaster (
@@ -662,12 +665,15 @@ router.post("/", async (req, res) => {
     const emailToken = await bcrypt.hash(email, 10);
     console.log("Email token : ", emailToken);
 
+    // todod   default delete flag to 0
+    const delete_flag = 0;
+
     // Insert a new user into gsai_user table
     const [userResult] = await connection.query(
       `INSERT INTO gsai_user (
         user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, 
-        pin_code, country, entity_name, user_role, otp_status,token
-      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sys admin', 1,?)`,
+        pin_code, country, entity_name, user_role, otp_status,token,delete_flag
+      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sys admin', 1,?,?)`,
       [
         entityid,
         contactfirstname,
@@ -679,9 +685,20 @@ router.post("/", async (req, res) => {
         country,
         entityname,
         emailToken,
+        delete_flag,
       ]
     );
     console.log("User  inserted into gsai_user:", userResult);
+
+    const [entityupdate] = await connection.query(
+      "SELECT * FROM EntityMaster WHERE entityid=?",
+      [entityid]
+    );
+
+    const [userupdate] = await connection.query(
+      "SELECT * FROM gsai_user WHERE entityid=?",
+      [entityid]
+    );
 
     // Commit the transaction
     await connection.commit();
@@ -715,6 +732,8 @@ Team GSAI`,
     res.status(201).json({
       message: "Entity and user created successfully, and email sent",
       entityId: entityid,
+      entityupdate,
+      userupdate,
     });
   } catch (error) {
     if (connection) await connection.rollback(); // Rollback on error if connection exists
