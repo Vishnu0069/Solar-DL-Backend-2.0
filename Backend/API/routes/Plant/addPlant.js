@@ -215,6 +215,7 @@ router.post("/addPlant", async (req, res) => {
     owner_last_name,
     owner_email,
     mobileNumber = null,
+    entityname,
   } = req.body;
 
   if (!plant_id) {
@@ -235,8 +236,8 @@ router.post("/addPlant", async (req, res) => {
         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type, 
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1, 
         address_line2, pincode, longitude, latitude, data_logger, inverter, owner_first_name, 
-        owner_last_name, owner_email,mobileno
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        owner_last_name, owner_email,mobileno,entityname
+       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );`,
       [
         plant_id,
         entityid,
@@ -263,6 +264,7 @@ router.post("/addPlant", async (req, res) => {
         owner_last_name,
         owner_email,
         mobileNumber,
+        entityname,
       ]
     );
 

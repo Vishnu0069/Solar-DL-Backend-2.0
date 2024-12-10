@@ -101,7 +101,8 @@ router.get("/getPlantDetails", async (req, res) => {
         owner_first_name AS "Owner First Name",
         owner_last_name AS "Owner Last Name",
         owner_email AS "Owner Email",
-        mobileno AS "Mobile Number"
+        mobileno AS "Mobile Number",
+        entityname AS "Entity Name"
       FROM Gsai_PlantMaster
       WHERE plant_id = ?
       `,

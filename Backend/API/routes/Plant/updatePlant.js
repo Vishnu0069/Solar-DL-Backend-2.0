@@ -29,6 +29,7 @@ router.post("/updatePlant", async (req, res) => {
     "Owner Last Name": owner_last_name,
     "Owner Email": owner_email,
     "Mobile Number": mobileno,
+    "Entity Name": entityname,
   } = req.body;
 
   // Validate required field
@@ -65,7 +66,8 @@ router.post("/updatePlant", async (req, res) => {
         owner_first_name = ?,
         owner_last_name = ?,
         owner_email = ?,
-        mobileno = ?
+        mobileno = ?,
+        entityname = ?
       WHERE plant_id = ?
       `,
       [
@@ -93,6 +95,7 @@ router.post("/updatePlant", async (req, res) => {
         owner_last_name,
         owner_email,
         mobileno,
+        entityname,
         plant_id, // Ensure this is passed as the last parameter
       ]
     );
