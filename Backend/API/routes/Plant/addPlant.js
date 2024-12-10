@@ -215,6 +215,8 @@ router.post("/addPlant", async (req, res) => {
     owner_last_name,
     owner_email,
     mobileNumber = null,
+    email_status = null, // New field with default null
+    mail = null,         // New field with default null
     entityname,
   } = req.body;
 
@@ -228,6 +230,9 @@ router.post("/addPlant", async (req, res) => {
     connection = await pool.getConnection();
     await connection.beginTransaction();
     console.log("Starting transaction for adding plant...");
+
+    // Log email_status and mail to the console
+    console.log(`email_status: ${email_status}, mail: ${mail}`);
 
     // Step 1: Insert plant details into Gsai_PlantMaster
     console.log("Inserting plant details into Gsai_PlantMaster...");
