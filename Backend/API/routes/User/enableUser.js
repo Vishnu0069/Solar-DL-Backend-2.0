@@ -3,10 +3,10 @@ const pool = require("../../db"); // Ensure this points to your database connect
 const router = express.Router();
 
 router.post("/enableUser", async (req, res) => {
-  const { user_id } = req.body;
+  const { user_Id } = req.body;
 
   // Validate input
-  if (!user_id) {
+  if (!user_Id) {
     return res.status(400).json({ message: "user_id is required" });
   }
 
