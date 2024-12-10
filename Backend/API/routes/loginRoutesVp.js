@@ -62,9 +62,7 @@
 //       logToFile('UserService', 'Login', 'Failure', `Password is inccorect`);
 //       return res.status(401).send('Password is incorrect.');
 
-
 //     }
-
 
 //     /*// User password is valid, proceed to get user role and plants
 //     const queryUserRoles = 'SELECT userid, usertype, role FROM user_roles WHERE userid = ?';
@@ -92,10 +90,10 @@
 //           console.error('Error fetching plants:', err);
 //           return res.status(500).send('Internal server error.');
 //         }
- 
+
 //         // Format the plants into an array
 //         const plantArray = plants.map(plant => plant.plantid);
- 
+
 //         // Prepare the response object
 //         const userData = {
 //           userid: user.Userid,
@@ -105,7 +103,7 @@
 //           Plants: plantArray,
 //           logintimestamp: new Date().toISOString()
 //         };
- 
+
 //         // Send the successful login response
 //         res.json({
 //           message: 'Login successful!',
@@ -115,7 +113,7 @@
 //     });
 //   });
 // });
- 
+
 // module.exports = router;
 // */
 //       // Process the roles and associated plant IDs
@@ -133,7 +131,6 @@
 
 //       };
 
-
 //       // Send the login success response
 //       res.json({
 //         message: 'Login successful!',
@@ -150,8 +147,6 @@
 
 // module.exports = router;
 // // End of code block
-
-
 
 // const express = require('express');
 // const bcrypt = require('bcryptjs');
@@ -233,46 +228,127 @@
 
 // module.exports = router;
 
+// //28/10/2024
+// const express = require('express');
+// const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
+// const router = express.Router();
+// const pool = require('../db');
+// require('dotenv').config();
 
-//28/10/2024
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+// router.post('/', async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     return res.status(400).json({ message: 'Email and password are required.' });
+//   }
+
+//   try {
+//     // Step 1: Retrieve user details from gsai_user, including entityid
+//     const [users] = await pool.query(`
+//       SELECT user_id, first_name, last_name, passwordhashcode, user_role, entityid
+//       FROM gsai_user
+//       WHERE email = ?
+//     `, [email]);
+
+//     if (users.length === 0) {
+//       return res.status(401).json({ message: 'No user found with that email.' });
+//     }
+
+//     const user = users[0];
+//     const passwordIsValid = await bcrypt.compare(password, user.passwordhashcode);
+
+//     if (!passwordIsValid) {
+//       return res.status(401).json({ message: 'Password is incorrect.' });
+//     }
+
+//     // Generate JWT token valid for 24 hours
+//     const token = jwt.sign(
+//       { userId: user.user_id, email: user.email },
+//       process.env.JWT_SECRET,
+//       { expiresIn: '24h' }
+//     );
+
+//     // Prepare the response with the user's details, role, entityId, and JWT token
+//     const userData = {
+//       firstName: user.first_name,
+//       lastName: user.last_name,
+//       email: email,
+//       role: user.user_role,
+//       userId: user.user_id,
+//       entityId: user.entityid,  // Including entityid instead of masterEntityId
+//       token: token
+//     };
+
+//     res.status(200).json({
+//       message: 'Login successful!',
+//       userData: userData
+//     });
+
+//   } catch (err) {
+//     console.error('Internal server error:', err);
+//     res.status(500).json({ message: 'Internal server error.', error: err });
+//   }
+// });
+
+// module.exports = router;
+
+//Added With delete flag update
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
-const pool = require('../db');
-require('dotenv').config();
+const pool = require("../db");
+require("dotenv").config();
 
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required.' });
+    return res
+      .status(400)
+      .json({ message: "Email and password are required." });
   }
 
   try {
-    // Step 1: Retrieve user details from gsai_user, including entityid
-    const [users] = await pool.query(`
-      SELECT user_id, first_name, last_name, passwordhashcode, user_role, entityid 
+    // Step 1: Retrieve user details from gsai_user, including entityid and delete_flag
+    const [users] = await pool.query(
+      `
+      SELECT user_id, first_name, last_name, passwordhashcode, user_role, entityid, delete_flag 
       FROM gsai_user 
       WHERE email = ?
-    `, [email]);
+    `,
+      [email]
+    );
 
     if (users.length === 0) {
-      return res.status(401).json({ message: 'No user found with that email.' });
+      return res
+        .status(401)
+        .json({ message: "No user found with that email." });
     }
 
     const user = users[0];
-    const passwordIsValid = await bcrypt.compare(password, user.passwordhashcode);
 
-    if (!passwordIsValid) {
-      return res.status(401).json({ message: 'Password is incorrect.' });
+    // Check if the delete_flag is set to 1
+    if (user.delete_flag === 1) {
+      return res.status(401).json({ message: "User does not exist." });
     }
 
-    // Generate JWT token valid for 24 hours
+    // Step 2: Verify the password
+    const passwordIsValid = await bcrypt.compare(
+      password,
+      user.passwordhashcode
+    );
+
+    if (!passwordIsValid) {
+      return res.status(401).json({ message: "Password is incorrect." });
+    }
+
+    // Step 3: Generate JWT token valid for 24 hours
     const token = jwt.sign(
       { userId: user.user_id, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: '24h' }
+      { expiresIn: "24h" }
     );
 
     // Prepare the response with the user's details, role, entityId, and JWT token
@@ -282,18 +358,17 @@ router.post('/', async (req, res) => {
       email: email,
       role: user.user_role,
       userId: user.user_id,
-      entityId: user.entityid,  // Including entityid instead of masterEntityId
-      token: token
+      entityId: user.entityid, // Including entityid instead of masterEntityId
+      token: token,
     };
 
     res.status(200).json({
-      message: 'Login successful!',
-      userData: userData
+      message: "Login successful!",
+      userData: userData,
     });
-    
   } catch (err) {
-    console.error('Internal server error:', err);
-    res.status(500).json({ message: 'Internal server error.', error: err });
+    console.error("Internal server error:", err);
+    res.status(500).json({ message: "Internal server error.", error: err });
   }
 });
 
