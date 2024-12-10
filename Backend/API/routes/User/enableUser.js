@@ -3,10 +3,10 @@ const pool = require("../../db"); // Ensure this points to your database connect
 const router = express.Router();
 
 router.post("/enableUser", async (req, res) => {
-  const { user_Id } = req.body;
+  const { userId } = req.body;
 
   // Validate input
-  if (!user_Id) {
+  if (!userId) {
     return res.status(400).json({ message: "user_id is required" });
   }
 
@@ -18,7 +18,7 @@ router.post("/enableUser", async (req, res) => {
       FROM gsai_user 
       WHERE user_id = ? AND delete_flag = 1
       `,
-      [user_Id]
+      [userId]
     );
 
     if (checkUser.length === 0) {
@@ -34,13 +34,13 @@ router.post("/enableUser", async (req, res) => {
       SET delete_flag = 0, last_update_date = NOW() 
       WHERE user_id = ?
       `,
-      [user_Id]
+      [userId]
     );
 
     if (updateResult.affectedRows > 0) {
       return res
         .status(200)
-        .json({ message: `User ${user_id} enabled successfully` });
+        .json({ message: `User ${userId} enabled successfully` });
     } else {
       return res.status(500).json({ message: "Failed to enable the user" });
     }
