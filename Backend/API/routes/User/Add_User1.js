@@ -93,14 +93,16 @@ const pool = require("../../db");
 const router = express.Router();
 require("dotenv").config();
 
+require("dotenv").config();
+
 // Email configuration
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
-  port: 465,
-  secure: true,
+  host: process.env.SMTP_HOST, // Hostinger's SMTP server
+  port: process.env.PORT, // Port for SSL
+  secure: true, // Use SSL
   auth: {
-    user: "team.solardl@antsai.in",
-    pass: "TEamSOlarDL12301#",
+    user: process.env.USER, // Your email account
+    pass: process.env.PASS, // Your email password
   },
 });
 
