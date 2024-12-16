@@ -93,7 +93,7 @@ const pool = require("../../db");
 const router = express.Router();
 require("dotenv").config({ path: __dirname + "/.env" }); // Load environment variables from .env file
 
-require("dotenv").config();
+//require("dotenv").config();
 
 // Email configuration
 const transporter = nodemailer.createTransport({
