@@ -18,7 +18,6 @@ router.post("/updatePlantUserRelations", async (req, res) => {
   }
 
   let connection;
-
   try {
     connection = await pool.getConnection();
     await connection.beginTransaction();
