@@ -381,7 +381,7 @@ router.post("/addPlant", async (req, res) => {
       // Send email notification for non-individual plant type
       await transporter.sendMail({
         //from: "team.solardl@antsai.in",
-        from: process.env.FROM_EMAIL,
+        from: process.env.SMTP_USER,
         to: sysadminEmail,
         subject: "New Plant Added",
         text: `Login URL: https://testsolardl.antsai.in/login\n\nUsername: ${sysadminEmail}\nDefault password: Existing password user can use to login\n\nYours Truly,\nFrom Team GSAI`,
