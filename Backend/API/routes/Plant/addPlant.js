@@ -192,14 +192,13 @@ require("dotenv").config({ path: __dirname + "/.env" });
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT, 10),
-  secure: true, // Use SSL for port 465
+  secure: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  tls: {
-    rejectUnauthorized: false, // Allow self-signed or unverified certificates
-  },
+  debug: true, // Enable detailed logging
+  logger: true, // Log SMTP transactions
 });
 
 router.post("/addPlant", async (req, res) => {
