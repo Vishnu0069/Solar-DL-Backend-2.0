@@ -91,7 +91,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const pool = require("../../db");
 const router = express.Router();
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" }); // Load environment variables from .env file
 
 require("dotenv").config();
 
