@@ -68,11 +68,12 @@ jobs:
             rm env_files.tar
           "
 
-      # Step 4: Deploy to VPS and run necessary commands
+      # Step 4: Deploy to VPS with Git Pull, Stash Local Changes
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no root@145.223.18.97 "
             cd /var/www/Solar-DL-Backend-2.0 && \
+            git stash && \
             git pull origin main && \
             npm install --production && \
             pm2 restart all
