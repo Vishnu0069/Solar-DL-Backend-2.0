@@ -178,28 +178,28 @@ const router = express.Router();
 
 require("dotenv").config({ path: __dirname + "/.env" });
 
-// // Email configuration
-// const transporter = nodemailer.createTransport({
-//   host: "smtp.hostinger.com",
-//   port: 465,
-//   secure: true,
-//   auth: {
-//     user: "team.solardl@antsai.in",
-//     pass: "TEamSOlarDL12301#",
-//   },
-// });
-
+// Email configuration
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT, 10),
+  host: "smtp.hostinger.com",
+  port: 465,
   secure: true,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: "team.solardl@antsai.in",
+    pass: "TEamSOlarDL12301#",
   },
-  debug: true, // Enable detailed logging
-  logger: true, // Log SMTP transactions
 });
+
+// const transporter = nodemailer.createTransport({
+//   host: process.env.SMTP_HOST,
+//   port: parseInt(process.env.SMTP_PORT, 10),
+//   secure: true,
+//   auth: {
+//     user: process.env.SMTP_USER,
+//     pass: process.env.SMTP_PASS,
+//   },
+//   debug: true, // Enable detailed logging
+//   logger: true, // Log SMTP transactions
+// });
 
 router.post("/addPlant", async (req, res) => {
   const {
@@ -332,8 +332,8 @@ router.post("/addPlant", async (req, res) => {
       console.log("Sending email notification to the new individual user...");
       // Send email notification to the new individual user
       await transporter.sendMail({
-        //from: "team.solardl@antsai.in",
-        from: process.env.SMTP_USER,
+        from: "team.solardl@antsai.in",
+        //from: process.env.SMTP_USER,
         to: owner_email,
         subject: "New Individual User Created for Plant",
         text: `Dear ${owner_first_name} ${owner_last_name},\n\nYou have been added as an individual user for the plant ${plant_name} 
@@ -373,6 +373,7 @@ router.post("/addPlant", async (req, res) => {
       console.log("SMTP_HOST:", process.env.SMTP_HOST);
       console.log("SMTP_PORT:", process.env.SMTP_PORT);
       console.log("SMTP_USER:", process.env.SMTP_USER);
+      console.log("SMTP_PASS:", process.env.SMTP_PASS);
       await connection.query(
         "INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?)",
         [plant_id, sysadminUserId]
@@ -381,8 +382,8 @@ router.post("/addPlant", async (req, res) => {
       console.log("Sending email notification to the sysadmin user...");
       // Send email notification for non-individual plant type
       await transporter.sendMail({
-        //from: "team.solardl@antsai.in",
-        from: process.env.SMTP_USER,
+        from: "team.solardl@antsai.in",
+        //from: process.env.SMTP_USER,
         to: sysadminEmail,
         subject: "New Plant Added",
         text: `Login URL: https://testsolardl.antsai.in/login\n\nUsername: ${sysadminEmail}\nDefault password: Existing password user can use to login\n\nYours Truly,\nFrom Team GSAI`,
