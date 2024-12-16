@@ -97,6 +97,16 @@ require("dotenv").config({ path: __dirname + "/.env" }); // Load environment var
 
 // Email configuration
 const transporter = nodemailer.createTransport({
+  host: "smtp.hostinger.com", // Hostinger's SMTP server
+  port: 465, // Explicitly parse as integer
+  secure: true, // Use SSL
+  auth: {
+    user: "team.solardl@antsai.in", // Your email account
+    pass: "TEamSOlarDL12301#", // Your email password
+  },
+});
+
+/*const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST, // Hostinger's SMTP server
   port: parseInt(process.env.SMTP_PORT), // Explicitly parse as integer
   secure: true, // Use SSL
@@ -104,7 +114,7 @@ const transporter = nodemailer.createTransport({
     user: process.env.USER, // Your email account
     pass: process.env.PASS, // Your email password
   },
-});
+});*/
 
 router.post("/add_user1", async (req, res) => {
   const {
@@ -176,7 +186,7 @@ router.post("/add_user1", async (req, res) => {
     // - Default Password: ${defaultPassword}
     // Send email to the new user
     const mailOptions = {
-      from: process.env.USER,
+      from: "team.solardl@antsai.in",
       to: emailId,
       subject: "New Account Created - SolarDL",
       text: `
