@@ -55,8 +55,8 @@ jobs:
       # Step 3: Find all .env files, bundle them into a tar archive, and upload to VPS
       - name: Upload all .env files to VPS
         run: |
-          # Compress all .env files into a single archive
-          tar -cvf env_files.tar $(find . -name ".env")
+          # Compress all .env files into a single archive (handle spaces properly)
+          find . -name ".env" -print0 | tar --null -cvf env_files.tar --files-from=-
 
           # Upload the tar archive to the server
           scp -o StrictHostKeyChecking=no env_files.tar root@145.223.18.97:/var/www/Solar-DL-Backend-2.0/
