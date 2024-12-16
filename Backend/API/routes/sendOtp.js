@@ -1,6 +1,5 @@
 // module.exports = router;
-
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 const express = require("express");
 const nodemailer = require("nodemailer");
 const pool = require("../db/index");
