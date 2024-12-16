@@ -4,9 +4,9 @@ const connection = require("../../db/index");
 
 router.get("/", async (req, res) => {
   try {
-    await connection.query("SELECT * FROM currencies");
-
-    res.status(200).json({ message: "Working" });
+    const [timeZone] = await connection.query("SELECT * FROM timezones");
+    const result = timeZone.map((res) => `${res.timezone_name}`);
+    res.status(200).json(result);
   } catch (error) {
     console.error(error);
     res.json({ error_message: message.error });

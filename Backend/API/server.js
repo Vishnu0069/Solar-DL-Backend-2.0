@@ -73,13 +73,13 @@ const enableUser = require("./routes/User/enableUser");
 const resetPassword = require("./routes/01_resetPassword");
 
 //language
-const getLanguages = require("./routes/language_currency_timezone/language");
+const getLanguages = require("./routes/Settings/language");
 
 //currency
-const currency = require("./routes/language_currency_timezone/currency");
+const currency = require("./routes/Settings/currency");
 
 //timezone
-const timeZone = require("./routes/language_currency_timezone/timeZone");
+const timeZone = require("./routes/Settings/timeZone");
 
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
