@@ -332,7 +332,7 @@ router.post("/addPlant", async (req, res) => {
       // Send email notification to the new individual user
       await transporter.sendMail({
         //from: "team.solardl@antsai.in",
-        from: process.env.FROM_EMAIL,
+        from: process.env.SMTP_USER,
         to: owner_email,
         subject: "New Individual User Created for Plant",
         text: `Dear ${owner_first_name} ${owner_last_name},\n\nYou have been added as an individual user for the plant ${plant_name} 
