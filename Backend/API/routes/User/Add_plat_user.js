@@ -11,12 +11,10 @@ router.post("/updatePlantUserRelations", async (req, res) => {
     !Array.isArray(plant_ids) ||
     plant_ids.length === 0
   ) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "user_id and plant_ids are required, and plant_ids should be a non-empty array.",
-      });
+    return res.status(400).json({
+      message:
+        "user_id and plant_ids are required, and plant_ids should be a non-empty array.",
+    });
   }
 
   let connection;
@@ -44,12 +42,10 @@ router.post("/updatePlantUserRelations", async (req, res) => {
   } catch (error) {
     if (connection) await connection.rollback();
     console.error("Error updating plant-user relationships:", error);
-    res
-      .status(500)
-      .json({
-        message: "Error updating plant-user relationships",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error updating plant-user relationships",
+      error: error.message,
+    });
   } finally {
     if (connection) connection.release();
   }
