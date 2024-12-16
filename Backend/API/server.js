@@ -72,6 +72,15 @@ const fetchDisabledUsers = require("./routes/User/fetchDisabledUsers");
 const enableUser = require("./routes/User/enableUser");
 const resetPassword = require("./routes/01_resetPassword");
 
+//language
+const getLanguages = require("./routes/language_currency_timezone/language");
+
+//currency
+const currency = require("./routes/language_currency_timezone/currency");
+
+//timezone
+const timeZone = require("./routes/language_currency_timezone/timeZone");
+
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
 const Add_User_group_plants = require("./routes/UserGroups/Add_User_group_plant");
@@ -165,6 +174,15 @@ app.use("/api/reset-password", resetPassword);
 //User Groups
 app.use("/api/user-groups", Add_User_groups);
 app.use("/api/user-groups", Add_User_group_plants);
+
+//language
+app.use("/api/languages", getLanguages);
+
+//currency
+app.use("/api/currency", currency);
+
+//timeZone
+app.use("/api/timezone", timeZone);
 
 // Start server
 app.listen(port, () => {
