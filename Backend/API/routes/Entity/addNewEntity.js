@@ -553,15 +553,25 @@ const router = express.Router();
 require("dotenv").config({ path: __dirname + "/.env" }); // Load environment variables from .env file
 
 // Email configuration using Hostinger's SMTP
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST, // Hostinger's SMTP server
-  port: process.env.SMTP_PORT, // Port for SSL
+  host: "smtp.hostinger.com", // Hostinger's SMTP server
+  port: 465, // Port for SSL
   secure: true, // Use SSL
   auth: {
-    user: process.env.USER, // Your email account
-    pass: process.env.PASS, // Your email password
+    user: "team.solardl@antsai.in", // Your email account
+    pass: "TEamSOlarDL12301#", // Your email password
   },
 });
+// const transporter = nodemailer.createTransport({
+//   host: process.env.SMTP_HOST, // Hostinger's SMTP server
+//   port: process.env.SMTP_PORT, // Port for SSL
+//   secure: true, // Use SSL
+//   auth: {
+//     user: process.env.USER, // Your email account
+//     pass: process.env.PASS, // Your email password
+//   },
+// });
 console.log("PORT:", process.env.PORT);
 router.post("/", async (req, res) => {
   const {

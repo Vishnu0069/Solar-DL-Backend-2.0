@@ -98,7 +98,7 @@ require("dotenv").config({ path: __dirname + "/.env" }); // Load environment var
 // Email configuration
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST, // Hostinger's SMTP server
-  port: process.env.PORT, // Port for SSL
+  port: parseInt(process.env.SMTP_PORT), // Explicitly parse as integer
   secure: true, // Use SSL
   auth: {
     user: process.env.USER, // Your email account
@@ -176,7 +176,7 @@ router.post("/add_user1", async (req, res) => {
     // - Default Password: ${defaultPassword}
     // Send email to the new user
     const mailOptions = {
-      from: "team.solardl@antsai.in",
+      from: process.env.USER,
       to: emailId,
       subject: "New Account Created - SolarDL",
       text: `
