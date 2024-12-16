@@ -189,14 +189,16 @@ require("dotenv").config({ path: __dirname + "/.env" });
 //   },
 // });
 
-// Email configuration using environment variables
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT, 10),
-  secure: true, // Use SSL
+  secure: true, // Use SSL for port 465
   auth: {
-    user: process.env.USER,
-    pass: process.env.PASS,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false, // Allow self-signed or unverified certificates
   },
 });
 
