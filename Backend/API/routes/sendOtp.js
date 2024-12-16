@@ -1,12 +1,20 @@
 // module.exports = router;
+<<<<<<< HEAD
 require("dotenv").config();
 const express = require("express");
 const nodemailer = require("nodemailer");
 const pool = require("../db/index");
+=======
+const express = require('express');
+const nodemailer = require('nodemailer');
+const pool = require('../db/index');
+require('dotenv').config(); // Import and configure dotenv
+>>>>>>> 5d26d74400099096fef1ccea8e59e047e0aebd15
 const router = express.Router();
 
 // Configure NodeMailer
 const transporter = nodemailer.createTransport({
+<<<<<<< HEAD
   host: process.env.SMTP_HOST, // Hostinger's SMTP server
   port: process.env.SMTP_PORT, // Port for SSL
   secure: true, // Use SSL
@@ -15,6 +23,26 @@ const transporter = nodemailer.createTransport({
     pass: process.env.OTP_SMTP_PASS, // Your email password
   },
 });
+=======
+  host: process.env.SMTP_HOST, // SMTP host from .env
+  port: Number(process.env.SMTP_PORT), // SMTP port from .env (convert to number)
+  secure: process.env.SMTP_SECURE === 'true', // Secure connection boolean from .env
+  auth: {
+    user: process.env.SMTP_USER, // Email user from .env
+    pass: process.env.SMTP_PASS, // Email password from .env
+  },
+});
+
+/*const transporter = nodemailer.createTransport({
+  host: 'smtp.hostinger.com', // Hostinger's SMTP server
+  port: 465, // Port for SSL
+  secure: true, // Use SSL
+  auth: {
+    user: 'otp.solardl@antsai.in', // Your email account
+    pass: 'OTP@ants#123*123'  // Your email password
+  }
+});*/
+>>>>>>> 5d26d74400099096fef1ccea8e59e047e0aebd15
 
 // Periodically delete expired OTPs
 setInterval(async () => {
