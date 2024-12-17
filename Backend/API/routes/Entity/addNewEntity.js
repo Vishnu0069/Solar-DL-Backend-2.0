@@ -560,7 +560,7 @@ const transporter = nodemailer.createTransport({
   secure: true, // Use SSL
   auth: {
     user: "team.solardl@antsai.in", // Your email account
-    pass: "TEamSOlarDL12301#", // Your email password
+    pass: "TEamSOlarDL12301@", // Your email password
   },
 });
 

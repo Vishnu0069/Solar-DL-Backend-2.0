@@ -4,9 +4,11 @@ const connection = require("../../db/index");
 
 router.get("/", async (req, res) => {
   try {
-    await connection.query("SELECT * FROM languages");
+    const [languages] = await connection.query("SELECT * FROM languages");
 
-    res.status(200).json({ message: "Working" });
+    const result = languages.map((row) => `${row.name}`);
+
+    res.status(200).json(result);
   } catch (error) {
     console.error(error);
     res.json({ error_message: message.error });
