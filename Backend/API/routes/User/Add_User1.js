@@ -150,6 +150,9 @@ router.post("/add_user1", async (req, res) => {
       // If the email exists, return 300 status with a message
       return res.status(300).json({ message: "User already exists" });
     }
+    // hash the email
+    const emailToken = await bcrypt.hash(emailId, 10);
+    console.log("Email token : ", emailToken);
 
     // Hash the default password
     const defaultPassword = "DefaultPass@123";
@@ -159,9 +162,18 @@ router.post("/add_user1", async (req, res) => {
     const [userResult] = await connection.query(
       `INSERT INTO gsai_user (
         user_id, entityid, first_name, last_name, email, passwordhashcode, 
-        mobile_number, user_role, otp_status
-      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, 0)`,
-      [entityId, firstName, lastName, emailId, hashedPassword, mobileNo, role]
+        mobile_number, user_role, otp_status,token
+      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, 0,?)`,
+      [
+        entityId,
+        firstName,
+        lastName,
+        emailId,
+        hashedPassword,
+        mobileNo,
+        role,
+        emailToken,
+      ]
     );
 
     // Retrieve the newly created user_id by fetching it from the gsai_user table
@@ -201,7 +213,7 @@ Login Details:
 - Role: ${role}
 
 To set your password, click the link below:
-https://testsolardl.antsai.in/forgotpassword/setYourPassword
+https://testsolardl.antsai.in/forgotpassword/setYourPassword${emailToken}
 
 To access your account, please login using the link below:
 https://testsolardl.antsai.in/login
