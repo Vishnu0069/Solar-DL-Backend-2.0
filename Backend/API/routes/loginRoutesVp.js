@@ -294,6 +294,88 @@
 // module.exports = router;
 
 //Added With delete flag update
+// const express = require("express");
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
+// const router = express.Router();
+// const pool = require("../db");
+// require("dotenv").config();
+
+// router.post("/", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     return res
+//       .status(400)
+//       .json({ message: "Email and password are required." });
+//   }
+
+//   try {
+//     // Step 1: Retrieve user details from gsai_user, including entityid and delete_flag
+//     const [users] = await pool.query(
+//       `
+//       SELECT user_id, first_name, last_name, passwordhashcode, user_role, entityid, delete_flag
+//       FROM gsai_user
+//       WHERE email = ?
+//     `,
+//       [email]
+//     );
+
+//     if (users.length === 0) {
+//       return res
+//         .status(401)
+//         .json({ message: "No user found with that email." });
+//     }
+
+//     const user = users[0];
+
+//     // Check if the delete_flag is set to 1
+//     if (user.delete_flag === 1) {
+//       return res.status(401).json({ message: "User does not exist." });
+//     }
+
+//     // Step 2: Verify the password
+//     const passwordIsValid = await bcrypt.compare(
+//       password,
+//       user.passwordhashcode
+//     );
+
+//     if (!passwordIsValid) {
+//       return res.status(401).json({ message: "Password is incorrect." });
+//     }
+
+//     // Step 3: Generate JWT token valid for 24 hours
+//     const token = jwt.sign(
+//       { userId: user.user_id, email: user.email },
+//       process.env.JWT_SECRET,
+//       { expiresIn: "24h" }
+//     );
+
+//     // Prepare the response with the user's details, role, entityId, and JWT token
+//     const userData = {
+//       firstName: user.first_name,
+//       lastName: user.last_name,
+//       entityName: user.entityname,
+//       email: email,
+//       role: user.user_role,
+//       userId: user.user_id,
+//       entityId: user.entityid, // Including entityid instead of masterEntityId
+//       token: token,
+//     };
+
+//     res.status(200).json({
+//       message: "Login successful!",
+//       userData: userData,
+//     });
+//   } catch (err) {
+//     console.error("Internal server error:", err);
+//     res.status(500).json({ message: "Internal server error.", error: err });
+//   }
+// });
+
+// module.exports = router;
+
+// todo   using join to get entity name
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -311,12 +393,15 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    // Step 1: Retrieve user details from gsai_user, including entityid and delete_flag
+    // Step 1: Retrieve user details from gsai_user along with entity name from entityMaster
     const [users] = await pool.query(
       `
-      SELECT user_id, first_name, last_name, passwordhashcode, user_role, entityid, delete_flag 
-      FROM gsai_user 
-      WHERE email = ?
+      SELECT 
+        u.user_id, u.first_name, u.last_name, u.passwordhashcode, u.user_role, u.entityid, u.delete_flag,
+        e.entityname
+      FROM gsai_user u
+      LEFT JOIN EntityMaster e ON u.entityid = e.entityid
+      WHERE u.email = ?
     `,
       [email]
     );
@@ -351,14 +436,15 @@ router.post("/", async (req, res) => {
       { expiresIn: "24h" }
     );
 
-    // Prepare the response with the user's details, role, entityId, and JWT token
+    // Prepare the response with the user's details, role, entityName, entityId, and JWT token
     const userData = {
       firstName: user.first_name,
       lastName: user.last_name,
+      entityName: user.entityname, // Now sending entityname
       email: email,
       role: user.user_role,
       userId: user.user_id,
-      entityId: user.entityid, // Including entityid instead of masterEntityId
+      entityId: user.entityid,
       token: token,
     };
 
