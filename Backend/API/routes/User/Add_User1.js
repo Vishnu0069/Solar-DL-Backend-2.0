@@ -159,11 +159,16 @@ router.post("/add_user1", async (req, res) => {
     const hashedPassword = await bcrypt.hash(defaultPassword, 10);
 
     // Insert the new user into the gsai_user table
+
+    //def
+    // todod   default delete flag to 1
+    const delete_flag = 1;
+
     const [userResult] = await connection.query(
       `INSERT INTO gsai_user (
         user_id, entityid, first_name, last_name, email, passwordhashcode, 
-        mobile_number, user_role, otp_status,token
-      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, 0,?)`,
+        mobile_number, user_role, otp_status,token,delete_flag
+      ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, 0,?,?)`,
       [
         entityId,
         firstName,
@@ -173,9 +178,15 @@ router.post("/add_user1", async (req, res) => {
         mobileNo,
         role,
         emailToken,
+        delete_flag,
       ]
     );
 
+    // to view the user
+    const [view_User] = await connection.query(
+      "SELECT * FROM gsai_user WHERE email=?",
+      [emailId]
+    );
     // Retrieve the newly created user_id by fetching it from the gsai_user table
     const [newUser] = await connection.query(
       "SELECT user_id FROM gsai_user WHERE email = ?",
@@ -230,7 +241,7 @@ Team GSAI`,
     await connection.commit();
     res
       .status(200)
-      .json({ message: "User added successfully, and email sent" });
+      .json({ message: "User added succesfully", result: view_User });
   } catch (error) {
     if (connection) await connection.rollback();
     console.error("Error adding user:", error);

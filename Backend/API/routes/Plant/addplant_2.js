@@ -45,7 +45,7 @@ router.post("/addPlant", async (req, res) => {
     owner_email,
     mobileNumber = null,
     email_status = null, // New field with default null
-    mail = null,         // New field with default null
+    mail = null, // New field with default null
     entityname,
   } = req.body;
 

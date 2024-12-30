@@ -44,14 +44,14 @@ router.post("/", async (req, res) => {
 
     console.log(` delete_flag set to 1 for user ID: ${user_id}`);
 
-    // todo update mark_deletion to 1 after resetting the password
+    // todo update mark_deletion to 0 after resetting the password
 
     await pool.query(
       "UPDATE EntityMaster SET mark_deletion =0 WHERE entityid=?",
       [entityid]
     );
     console.log(
-      `Mark deletion set to 1 for entities associated with enityId: ${entityid}`
+      `Mark deletion set to 0 for entities associated with enityId: ${entityid}`
     );
 
     console.log(`Password reset successfully for user ID: ${user_id}`);
