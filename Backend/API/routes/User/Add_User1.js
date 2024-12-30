@@ -224,7 +224,7 @@ Login Details:
 - Role: ${role}
 
 To set your password, click the link below:
-https://testsolardl.antsai.in/forgotpassword/setYourPassword${emailToken}
+https://testsolardl.antsai.in/forgotpassword/setYourPassword?${emailToken}
 
 To access your account, please login using the link below:
 https://testsolardl.antsai.in/login
