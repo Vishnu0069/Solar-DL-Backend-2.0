@@ -35,7 +35,7 @@ const fetchEntityByIdRoute = require("./routes/Entity/fetchEntityById");
 const fetchEntityIdsRoute = require("./routes/Entity/fetchEntityIds");
 const fetchEntityNamesRoute = require("./routes/Entity/fetchEntityNames");
 const fetchAllRecordsRoute = require("./routes/Entity/fetchAllRecords");
-const editentity = require("./routes/Entity/editEntity");
+const editentity = require("./routes/Entity/editEntity_1");
 const getdeletedEntity = require("./routes/Entity/fetchDeletedEntities");
 const enableEntity = require("./routes/Entity/enableEntity");
 
