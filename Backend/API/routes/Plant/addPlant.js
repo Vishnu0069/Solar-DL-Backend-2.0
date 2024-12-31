@@ -253,7 +253,7 @@ router.post("/addPlant", async (req, res) => {
       `INSERT INTO Gsai_PlantMaster (
         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type,
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1,
-        address_line2, pincode, longitude, latitude, data_logger, inverter, owner_first_name,
+        address_line2, pincode, longitude, latitude,  owner_first_name,
         owner_last_name, owner_email,mobileno,entityname
        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );`,
       [
