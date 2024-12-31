@@ -19,7 +19,7 @@ router.get("/getUsersByEntity", async (req, res) => {
           mobile_number AS mobileNo,
           user_role AS role
        FROM gsai_user
-       WHERE entityid = ? AND delete_flag = 1`, // Excluding deleted users
+       WHERE entityid = ? AND delete_flag = 0`, // Excluding deleted users
       [entityid]
     );
 
