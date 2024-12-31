@@ -222,8 +222,8 @@ router.post("/addPlant", async (req, res) => {
     pincode,
     longitude,
     latitude,
-    data_logger,
-    inverter,
+    // data_logger,
+    // inverter,
     owner_first_name,
     owner_last_name,
     owner_email,
@@ -251,11 +251,11 @@ router.post("/addPlant", async (req, res) => {
     console.log("Inserting plant details into Gsai_PlantMaster...");
     await connection.query(
       `INSERT INTO Gsai_PlantMaster (
-        plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type, 
-        plant_category, capacity, capacity_unit, country, region, state, district, address_line1, 
-        address_line2, pincode, longitude, latitude, data_logger, inverter, owner_first_name, 
+        plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type,
+        plant_category, capacity, capacity_unit, country, region, state, district, address_line1,
+        address_line2, pincode, longitude, latitude, data_logger, inverter, owner_first_name,
         owner_last_name, owner_email,mobileno,entityname
-       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );`,
+       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );`,
       [
         plant_id,
         entityid,
@@ -276,8 +276,8 @@ router.post("/addPlant", async (req, res) => {
         pincode,
         longitude,
         latitude,
-        data_logger,
-        inverter,
+        // data_logger,
+        // inverter,
         owner_first_name,
         owner_last_name,
         owner_email,
@@ -304,7 +304,7 @@ router.post("/addPlant", async (req, res) => {
       );
       await connection.query(
         `INSERT INTO gsai_user (
-          user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, 
+          user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number,
           pin_code, country, entity_name, user_role, otp_status,token
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 1,?)`,
         [
@@ -336,14 +336,13 @@ router.post("/addPlant", async (req, res) => {
         from: process.env.SMTP_USER,
         to: owner_email,
         subject: "New Individual User Created for Plant",
-        text: `Dear ${owner_first_name} ${owner_last_name},\n\nYou have been added as an individual user for the plant ${plant_name} 
-        with EntityID: ${entityid}.\n\n 
+        text: `Dear ${owner_first_name} ${owner_last_name},\n\nYou have been added as an individual user for the plant ${plant_name}
+        with EntityID: ${entityid}.\n\n
        To set your password, click the link below:
                                 https://testsolardl.antsai.in/forgotpassword/setYourPassword?${emailToken}
 
         To access your account, please login using the link below:
                                  https://testsolardl.antsai.in/login
-
 
 .\n\nPlease log in with the above credentials.\n\nBest regards,\nTeam GSAI`,
       });
