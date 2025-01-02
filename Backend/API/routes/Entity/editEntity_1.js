@@ -344,7 +344,6 @@ router.put("/edit", async (req, res) => {
         to: email,
         subject: "Your Entity Details Have Been Updated",
         text: `Dear ${contactfirstname} ${contactlastname},
-Dear ${contactfirstname} ${contactlastname}
 Your entity details have been successfully updated. Please reset your password to login to your account.
 
 To set your password, click the link below:
