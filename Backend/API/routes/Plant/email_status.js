@@ -130,7 +130,11 @@ router.post("/checkEmailStatus", async (req, res) => {
         );
 
         // Condition 1: Email exists, Selected EntityID === entityid in DB, and role === individual
-        if (user.entityid === EntityID && user.user_role === "individual") {
+        if (
+          LoginEntityID === EntityID &&
+          user.entityid === EntityID &&
+          user.user_role === "individual"
+        ) {
           return res
             .status(200)
             .json({ email_status: 1, mail: 2, condition: 1 });
@@ -200,7 +204,11 @@ router.post("/checkEmailStatus", async (req, res) => {
             .json({ message: "User already exists", condition: 1 });
         }
 
-        if (LoginEntityID === EntityID && user.user_role === "sys admin") {
+        if (
+          LoginEntityID === EntityID &&
+          user.entityid === EntityID &&
+          user.user_role === "sys admin"
+        ) {
           return res
             .status(200)
             .json({ email_status: 5, mail: 2, condition: 2 });
