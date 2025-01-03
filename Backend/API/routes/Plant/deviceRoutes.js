@@ -48,7 +48,7 @@ router.post('/deviceInfo', async (req, res) => {
                      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
         // Log the parameters being passed to the query
-        console.log("Inserting values:", [
+       /* console.log("Inserting values:", [
             Device_id,
             null,
             Device_type || null,
@@ -65,7 +65,7 @@ router.post('/deviceInfo', async (req, res) => {
             Quantity || null,
             Serial_Nos || null,
             current_date_time
-        ]);
+        ]);*/
 
         // You need to ensure you have 16 values for the 16 columns listed.
         /*await db.execute(sql, [
