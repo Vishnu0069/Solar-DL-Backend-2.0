@@ -47,6 +47,26 @@ router.post('/deviceInfo', async (req, res) => {
                         System_date_time
                      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
+        // Log the parameters being passed to the query
+        console.log("Inserting values:", [
+            Device_id,
+            null,
+            Device_type || null,
+            Make || null,
+            null,
+            current_date_time,
+            current_date_time,
+            user_id,             // This should be populated
+            user_id,             // This should be populated
+            0,
+            null,
+            Plant_id || null,
+            Rating || null,
+            Quantity || null,
+            Serial_Nos || null,
+            current_date_time
+        ]);
+
         // You need to ensure you have 16 values for the 16 columns listed.
         /*await db.execute(sql, [
             Device_id,                // Use the newly generated UUID
