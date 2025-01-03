@@ -21,10 +21,10 @@ router.post('/deviceInfo', async (req, res) => {
     const Device_id = uuidv4(); 
 
     // Generate the system & current date and time in the format YYYY-MM-DD HH:MM:SS
-    //const system_date_time = new Date().toISOString().slice(0, 19).replace('T', ' '); 
-    //const current_date_time = new Date().toISOString().slice(0, 19).replace('T', ' '); 
     const system_date_time = new Date().toISOString(); // UTC format
     const current_date_time = new Date().toISOString(); // UTC format
+    //const system_date_time = new Date().toISOString().slice(0, 19).replace('T', ' '); 
+    //const current_date_time = new Date().toISOString().slice(0, 19).replace('T', ' '); 
 
     try {
         const sql = `INSERT INTO gsai_device_master (
