@@ -407,6 +407,7 @@
 
 // module.exports = router;
 
+//below with dymaic mailing
 const express = require("express");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
@@ -448,8 +449,7 @@ router.post("/addPlant", async (req, res) => {
     pincode,
     longitude,
     latitude,
-    data_logger,
-    inverter,
+
     owner_first_name,
     owner_last_name,
     owner_email,
@@ -479,9 +479,9 @@ router.post("/addPlant", async (req, res) => {
       `INSERT INTO Gsai_PlantMaster (
         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type, 
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1, 
-        address_line2, pincode, longitude, latitude, data_logger, inverter, owner_first_name, 
+        address_line2, pincode, longitude, latitude,  owner_first_name, 
         owner_last_name, owner_email, mobileno, entityname
-       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
       [
         plant_id,
         entityid,
@@ -502,8 +502,7 @@ router.post("/addPlant", async (req, res) => {
         pincode,
         longitude,
         latitude,
-        data_logger,
-        inverter,
+
         owner_first_name,
         owner_last_name,
         owner_email,
@@ -517,16 +516,7 @@ router.post("/addPlant", async (req, res) => {
     if (plant_type.toLowerCase() === "individual") {
       console.log("Fetching email status conditions...");
 
-      // Fetch email status and conditions
-      const [emailStatusResponse] = await pool.query(
-        `
-          SELECT entityid, user_role
-          FROM gsai_user
-          WHERE LOWER(email) = LOWER(?);
-        `,
-        [Email]
-      );
-
+      // Handle conditions based on email_status and mail
       if (email_status === 1 && mail === 2) {
         console.log("Condition 1: Email exists, sending two emails...");
         const [selectedEntityUser] = await pool.query(
@@ -584,6 +574,85 @@ router.post("/addPlant", async (req, res) => {
         }
 
         console.log("Sending emails for email_status: 2, mail: 3...");
+        await Promise.all([
+          transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to: loginEntityUser[0].email,
+            subject: "Plant Added Notification",
+            text: `The plant ${plant_name} has been added.`,
+          }),
+          transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to: selectedEntityUser[0].email,
+            subject: "Plant Added Notification",
+            text: `The plant ${plant_name} has been added with a user as individual.`,
+          }),
+          transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to: owner_email,
+            subject: "Plant Added",
+            text: `You have been added as an individual user for the plant ${plant_name}.`,
+          }),
+        ]);
+      } else if (email_status === 3 && mail === 2) {
+        console.log("Condition 3: Email does not exist, sending two emails...");
+        const [loginEntityUser] = await pool.query(
+          "SELECT user_id, email FROM gsai_user WHERE entityid = ? LIMIT 1;",
+          [LoginEntityID]
+        );
+
+        if (loginEntityUser.length > 0) {
+          userIdsToLink.push({
+            userId: loginEntityUser[0].user_id,
+            email: loginEntityUser[0].email,
+          });
+        }
+
+        console.log("Sending emails for email_status: 3, mail: 2...");
+        await Promise.all([
+          transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to: loginEntityUser[0].email,
+            subject: "Plant Added Notification",
+            text: `The plant ${plant_name} has been added.`,
+          }),
+          transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to: owner_email,
+            subject: "Plant Added",
+            text: `You have been added as an individual user for the plant ${plant_name}.`,
+          }),
+        ]);
+      } else if (email_status === 4 && mail === 3) {
+        console.log(
+          "Condition 4: Email does not exist, sending three emails..."
+        );
+
+        const [loginEntityUser] = await pool.query(
+          "SELECT user_id, email FROM gsai_user WHERE entityid = ? LIMIT 1;",
+          [LoginEntityID]
+        );
+
+        const [selectedEntityUser] = await pool.query(
+          "SELECT user_id, email FROM gsai_user WHERE entityid = ? LIMIT 1;",
+          [EntityID]
+        );
+
+        if (loginEntityUser.length > 0) {
+          userIdsToLink.push({
+            userId: loginEntityUser[0].user_id,
+            email: loginEntityUser[0].email,
+          });
+        }
+
+        if (selectedEntityUser.length > 0) {
+          userIdsToLink.push({
+            userId: selectedEntityUser[0].user_id,
+            email: selectedEntityUser[0].email,
+          });
+        }
+
+        console.log("Sending emails for email_status: 4, mail: 3...");
         await Promise.all([
           transporter.sendMail({
             from: process.env.SMTP_USER,
