@@ -10,6 +10,7 @@ const { v4: uuidv4 } = require('uuid'); // Importing uuidv4 to generate UUIDs
 router.post('/deviceInfo', async (req, res) => {
     const { 
         Plant_id, 
+        user_id ,// Extract user_id from request
         Device_type, // This will be used for device_type_id, 
         Make, 
         Rating, 
@@ -47,7 +48,7 @@ router.post('/deviceInfo', async (req, res) => {
                      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
         // You need to ensure you have 16 values for the 16 columns listed.
-        await db.execute(sql, [
+        /*await db.execute(sql, [
             Device_id,                // Use the newly generated UUID
             //Device_id || null,           // UUID for device_id
             null,                        // master_device_id set to null (assuming no value provided)
@@ -66,8 +67,28 @@ router.post('/deviceInfo', async (req, res) => {
             Quantity || null,            // Quantity from the request body
             Serial_Nos || null,          // Serial_Nos from the request body
             system_date_time             // System_date_time
-        ]);
+        ]);*/
 
+        // Execute the SQL query with appropriate values
+        await db.execute(sql, [
+            Device_id,                // Use the generated UUID
+            null,                     // master_device_id
+            Device_type || null,     // device_type_id from incoming request
+            Make || null,            // Make
+            null,                    // Model
+            current_date_time,       // create_date
+            current_date_time,       // last_update_date
+            user_id,                 // Set create_by_userid to user_id from request
+            user_id,                 // Set last_update_userid to user_id from request
+            0,                       // delete_flag
+            null,                    // uom
+            Plant_id || null,        // Plant_id
+            Rating || null,          // Rating
+            Quantity || null,        // Quantity
+            Serial_Nos || null,      // Serial_Nos
+            system_date_time         // System_date_time
+        ]);
+        
         //console.log({ message: 'Device information stored successfully'});
         return res.status(201).json({ message: 'Device information stored successfully' });
     } catch (error) {
