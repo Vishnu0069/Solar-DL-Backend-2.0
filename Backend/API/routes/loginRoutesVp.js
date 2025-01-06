@@ -376,6 +376,92 @@
 // module.exports = router;
 
 // todo   using join to get entity name
+// const express = require("express");
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
+// const router = express.Router();
+// const pool = require("../db");
+// require("dotenv").config();
+
+// router.post("/", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     return res
+//       .status(400)
+//       .json({ message: "Email and password are required." });
+//   }
+
+//   try {
+//     // Step 1: Retrieve user details from gsai_user along with entity name from entityMaster
+//     const [users] = await pool.query(
+//       `
+//       SELECT
+//         u.user_id, u.first_name, u.last_name, u.passwordhashcode, u.user_role, u.entityid, u.delete_flag,
+//         e.entityname
+//       FROM gsai_user u
+//       LEFT JOIN EntityMaster e ON u.entityid = e.entityid
+//       WHERE u.email = ?
+//     `,
+//       [email]
+//     );
+
+//     if (users.length === 0) {
+//       return res
+//         .status(401)
+//         .json({ message: "No user found with that email." });
+//     }
+
+//     const user = users[0];
+
+//     // Check if the delete_flag is set to 1
+//     if (user.delete_flag === 1) {
+//       return res.status(401).json({ message: "User does not exist." });
+//     }
+
+//     // Step 2: Verify the password
+//     const passwordIsValid = await bcrypt.compare(
+//       password,
+//       user.passwordhashcode
+//     );
+
+//     if (!passwordIsValid) {
+//       return res.status(401).json({ message: "Password is incorrect." });
+//     }
+
+//     // Step 3: Generate JWT token valid for 24 hours
+//     const token = jwt.sign(
+//       { userId: user.user_id, email: user.email },
+//       process.env.JWT_SECRET,
+//       { expiresIn: "24h" }
+//     );
+
+//     // Prepare the response with the user's details, role, entityName, entityId, and JWT token
+//     const userData = {
+//       firstName: user.first_name,
+//       lastName: user.last_name,
+//       entityName: user.entityname, // Now sending entityname
+//       email: email,
+//       role: user.user_role,
+//       userId: user.user_id,
+//       entityId: user.entityid,
+//       token: token,
+//     };
+
+//     res.status(200).json({
+//       message: "Login successful!",
+//       userData: userData,
+//     });
+//   } catch (err) {
+//     console.error("Internal server error:", err);
+//     res.status(500).json({ message: "Internal server error.", error: err });
+//   }
+// });
+
+// module.exports = router;
+
+//With adeed L0,L1 and L2 determination -Vishnu 07/01/2025
+
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -398,7 +484,7 @@ router.post("/", async (req, res) => {
       `
       SELECT 
         u.user_id, u.first_name, u.last_name, u.passwordhashcode, u.user_role, u.entityid, u.delete_flag,
-        e.entityname
+        e.entityname, e.namespace
       FROM gsai_user u
       LEFT JOIN EntityMaster e ON u.entityid = e.entityid
       WHERE u.email = ?
@@ -429,6 +515,19 @@ router.post("/", async (req, res) => {
       return res.status(401).json({ message: "Password is incorrect." });
     }
 
+    // Determine user_value based on namespace
+    let userValue;
+    const namespaceParts = user.namespace ? user.namespace.split("-") : [];
+    if (namespaceParts.length === 1) {
+      userValue = "L0";
+    } else if (namespaceParts.length === 2) {
+      userValue = "L1";
+    } else if (namespaceParts.length === 3) {
+      userValue = "L2";
+    } else {
+      userValue = "Unknown";
+    }
+
     // Step 3: Generate JWT token valid for 24 hours
     const token = jwt.sign(
       { userId: user.user_id, email: user.email },
@@ -445,6 +544,7 @@ router.post("/", async (req, res) => {
       role: user.user_role,
       userId: user.user_id,
       entityId: user.entityid,
+      userValue: userValue, // Adding user_value to the response
       token: token,
     };
 
