@@ -495,7 +495,8 @@ router.get("/fetchAllRecords", async (req, res) => {
   try {
     // Step 1: Fetch the namespace of the entity
     const [entityData] = await pool.query(
-      `SELECT namespace FROM EntityMaster WHERE entityid = ?`,
+      `SELECT namespace, entityid, entityname, contactfirstname, contactlastname, email, mobile, country, state, district, pincode, GSTIN, category, region, device_count, expiry_date, mark_deletion
+       FROM EntityMaster WHERE entityid = ?`,
       [entityid]
     );
 
@@ -503,7 +504,13 @@ router.get("/fetchAllRecords", async (req, res) => {
       return res.status(404).json({ message: "Entity not found" });
     }
 
-    const namespace = entityData[0].namespace;
+    const currentEntity = entityData[0];
+
+    if (currentEntity.mark_deletion !== 0) {
+      return res.status(400).json({ message: "Entity is marked as deleted." });
+    }
+
+    const namespace = currentEntity.namespace;
     const namespaceParts = namespace.split("-");
 
     let query;
@@ -587,9 +594,33 @@ router.get("/fetchAllRecords", async (req, res) => {
       return res.status(400).json({ message: "Invalid namespace structure." });
     }
 
-    // Execute the query
+    // Execute the query to fetch additional records
     const [rows] = await pool.query(query, params);
-    res.status(200).json(rows);
+
+    // Add the current entity to the top of the results
+    const result = [
+      {
+        id: currentEntity.entityid,
+        "Entity Name": currentEntity.entityname,
+        "First Name": currentEntity.contactfirstname,
+        "Last Name": currentEntity.contactlastname,
+        "Email Id": currentEntity.email,
+        "Mobile Number": currentEntity.mobile,
+        Namespace: currentEntity.namespace,
+        Country: currentEntity.country,
+        State: currentEntity.state,
+        District: currentEntity.district,
+        Pincode: currentEntity.pincode,
+        GSTIN: currentEntity.GSTIN,
+        Category: currentEntity.category,
+        Region: currentEntity.region,
+        "Device Count": currentEntity.device_count,
+        "Expiry Date": currentEntity.expiry_date,
+      },
+      ...rows,
+    ];
+
+    res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching records:", error);
     res
