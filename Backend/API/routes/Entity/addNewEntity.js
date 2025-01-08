@@ -762,7 +762,6 @@
 
 // module.exports = router;
 
-//Updated with namespace
 const express = require("express");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
@@ -828,19 +827,17 @@ router.post("/", async (req, res) => {
     // Generate a unique entity ID
     let entityid = entityname.replace(/\s+/g, "").toUpperCase();
     let counter = 1000;
-    let isUnique = false;
 
-    while (!isUnique) {
+    while (true) {
       const [existingEntities] = await connection.query(
         "SELECT entityid FROM EntityMaster WHERE entityid = ?",
         [`${entityid}-${counter}`]
       );
       if (existingEntities.length === 0) {
-        isUnique = true;
         entityid = `${entityid}-${counter}`;
-      } else {
-        counter++;
+        break;
       }
+      counter++;
     }
 
     // Insert the new entity into EntityMaster
@@ -855,6 +852,7 @@ router.post("/", async (req, res) => {
          creation_date, created_by_user_id, last_update_date, mark_deletion, 
          address_line_1, address_line_2, GSTIN, Region, device_count, expiry_date
        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+
       [
         entityid,
         entityname,
@@ -894,6 +892,7 @@ router.post("/", async (req, res) => {
         user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number, 
         pin_code, country, entity_name, user_role, otp_status, token, delete_flag
       ) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sys admin', 1, ?, ?)`,
+
       [
         entityid,
         contactfirstname,
