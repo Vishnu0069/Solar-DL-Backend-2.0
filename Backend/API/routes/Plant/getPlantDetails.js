@@ -96,8 +96,7 @@ router.get("/getPlantDetails", async (req, res) => {
         pincode AS "Pincode",
         longitude AS "Longitude",
         latitude AS "Latitude",
-        data_logger AS "Data Logger",
-        inverter AS "Inverter",
+      
         owner_first_name AS "Owner First Name",
         owner_last_name AS "Owner Last Name",
         owner_email AS "Owner Email",

@@ -60,7 +60,7 @@ const updatePlant = require("./routes/Plant/updatePlant");
 const getPlantDetails = require("./routes/Plant/getPlantDetails");
 const fetchDeviceTypes = require("./routes/Plant/fetcDevice_Type");
 const email_status = require("./routes/Plant/email_status");
-const deviceRoutes = require('./routes/Plant/deviceRoutes');
+const deviceRoutes = require("./routes/Plant/deviceRoutes");
 
 //User routes
 const Add_User1 = require("./routes/User/Add_User1");
@@ -74,13 +74,15 @@ const fetchDisabledUsers = require("./routes/User/fetchDisabledUsers");
 const enableUser = require("./routes/User/enableUser");
 const resetPassword = require("./routes/01_resetPassword");
 
-//language
+//maintenance
+const get_user = require("./routes/maintenance/get_user");
+const get_entity = require("./routes/maintenance/get_entity");
+const get_plant = require("./routes/maintenance/get_plant");
+const get_plant_user = require("./routes/maintenance/get_plants_userid");
+
+//Settings
 const getLanguages = require("./routes/Settings/language");
-
-//currency
 const currency = require("./routes/Settings/currency");
-
-//timezone
 const timeZone = require("./routes/Settings/timeZone");
 
 //UserGroups
@@ -162,7 +164,7 @@ app.use("/api/plant", updatePlant);
 app.use("/api/plant", getPlantDetails);
 app.use("/api/plant", fetchDeviceTypes);
 app.use("/api/plant", email_status);
-app.use('/api/device', deviceRoutes);
+app.use("/api/device", deviceRoutes);
 
 //User
 app.use("/api/user", Add_User1);
@@ -179,13 +181,15 @@ app.use("/api/reset-password", resetPassword);
 app.use("/api/user-groups", Add_User_groups);
 app.use("/api/user-groups", Add_User_group_plants);
 
-//language
+//maintenance
+app.use("/api/maintenance", get_user);
+app.use("/api/maintenance", get_entity);
+app.use("/api/maintenance", get_plant);
+app.use("/api/maintenance", get_plant_user);
+
+//settings
 app.use("/api/languages", getLanguages);
-
-//currency
 app.use("/api/currency", currency);
-
-//timeZone
 app.use("/api/timezone", timeZone);
 
 // Start server
