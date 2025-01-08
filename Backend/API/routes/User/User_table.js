@@ -125,8 +125,9 @@ router.get("/getUsersByEntity", async (req, res) => {
           u.email AS emailId,
           u.mobile_number AS mobileNo,
           u.user_role AS role,
-          u.user_type AS userType,  -- Added user_type
-          e.namespace AS namespace
+          u.user_type AS userType,
+          e.namespace AS namespace,
+          e.entityname AS entityName
         FROM gsai_user u
         INNER JOIN EntityMaster e ON u.entityid = e.entityid
         WHERE e.namespace LIKE CONCAT(?, '-%') AND u.delete_flag = 0
@@ -143,8 +144,9 @@ router.get("/getUsersByEntity", async (req, res) => {
           u.email AS emailId,
           u.mobile_number AS mobileNo,
           u.user_role AS role,
-          u.user_type AS userType,  -- Added user_type
-          e.namespace AS namespace
+          u.user_type AS userType,
+          e.namespace AS namespace,
+          e.entityname AS entityName
         FROM gsai_user u
         INNER JOIN EntityMaster e ON u.entityid = e.entityid
         WHERE e.namespace LIKE CONCAT(?, '-%') AND u.delete_flag = 0
@@ -161,8 +163,9 @@ router.get("/getUsersByEntity", async (req, res) => {
           u.email AS emailId,
           u.mobile_number AS mobileNo,
           u.user_role AS role,
-          u.user_type AS userType,  -- Added user_type
-          e.namespace AS namespace
+          u.user_type AS userType,
+          e.namespace AS namespace,
+          e.entityname AS entityName
         FROM gsai_user u
         INNER JOIN EntityMaster e ON u.entityid = e.entityid
         WHERE e.namespace = ? AND u.delete_flag = 0
@@ -182,7 +185,7 @@ router.get("/getUsersByEntity", async (req, res) => {
         .json({ message: "No users found for the specified namespace" });
     }
 
-    res.status(200).json(users);
+    res.status(200).json(users); // Returning users with entity name included in each record
   } catch (error) {
     console.error("Error fetching users by namespace:", error);
     res
