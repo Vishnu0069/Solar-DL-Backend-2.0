@@ -168,6 +168,107 @@
 
 //Assigned and Unassigned
 
+// const express = require("express");
+// const pool = require("../../db");
+// const router = express.Router();
+// require("dotenv").config();
+
+// router.get("/fetchPlantList", async (req, res) => {
+//   const { entityid } = req.query;
+
+//   if (!entityid) {
+//     return res.status(400).json({ message: "entityid parameter is required" });
+//   }
+
+//   try {
+//     let query;
+//     let params;
+
+//     if (entityid.includes("-")) {
+//       // Extract prefix from the entityid (e.g., 'XYZPRIVATELIMITED' from 'XYZPRIVATELIMITED-1001')
+//       const prefix = entityid.split("-")[0];
+
+//       // Fetch all records with plant_id starting with this prefix and include assignment status
+//       query = `
+//         SELECT
+//           pm.plant_id AS "Plant ID",
+//           pm.plant_name AS "Plant Name",
+//           pm.plant_type AS "Plant Type",
+//           pm.plant_category AS "Plant Category",
+//           pm.capacity AS "Capacity",
+//           pm.capacity_unit AS "Capacity Unit",
+//           pm.country AS "Country",
+//           pm.region AS "Region",
+//           pm.state AS "State",
+//           pm.district AS "District",
+//           pm.pincode AS "Pincode",
+//           pm.longitude AS "Longitude",
+//           pm.latitude AS "Latitude",
+//           pm.install_date AS "Install Date",
+//           pm.azimuth_angle AS "Azimuth Angle",
+//           pm.tilt_angle AS "Tilt Angle",
+//           pm.owner_first_name AS "Owner First Name",
+//           pm.owner_last_name AS "Owner Last Name",
+//           pm.owner_email AS "Owner Email",
+//           pm.mobileno AS "Mobile Number",
+//           CASE
+//             WHEN gpu.plant_id IS NOT NULL THEN 'Assigned'
+//             ELSE 'Unassigned'
+//           END AS "Assignment Status"
+//         FROM Gsai_PlantMaster pm
+//         LEFT JOIN Gsai_PlantUser gpu ON pm.plant_id = gpu.plant_id
+//         WHERE pm.plant_id LIKE CONCAT(?, '-%') AND pm.marked_deletion = 0
+//       `;
+//       params = [prefix];
+//     } else {
+//       // If entityid has no suffix, fetch all plants for the base entity
+//       query = `
+//         SELECT
+//           pm.plant_id AS "Plant ID",
+//           pm.plant_name AS "Plant Name",
+//           pm.plant_type AS "Plant Type",
+//           pm.plant_category AS "Plant Category",
+//           pm.capacity AS "Capacity",
+//           pm.capacity_unit AS "Capacity Unit",
+//           pm.country AS "Country",
+//           pm.region AS "Region",
+//           pm.state AS "State",
+//           pm.district AS "District",
+//           pm.pincode AS "Pincode",
+//           pm.longitude AS "Longitude",
+//           pm.latitude AS "Latitude",
+//           pm.install_date AS "Install Date",
+//           pm.azimuth_angle AS "Azimuth Angle",
+//           pm.tilt_angle AS "Tilt Angle",
+//           pm.owner_first_name AS "Owner First Name",
+//           pm.owner_last_name AS "Owner Last Name",
+//           pm.owner_email AS "Owner Email",
+//           pm.mobileno AS "Mobile Number",
+//           CASE
+//             WHEN gpu.plant_id IS NOT NULL THEN 'Assigned'
+//             ELSE 'Unassigned'
+//           END AS "Assignment Status"
+//         FROM Gsai_PlantMaster pm
+//         LEFT JOIN Gsai_PlantUser gpu ON pm.plant_id = gpu.plant_id
+//         WHERE pm.entityid = ? AND pm.marked_deletion = 0
+//       `;
+//       params = [entityid];
+//     }
+
+//     const [rows] = await pool.query(query, params);
+//     res.status(200).json(rows);
+//   } catch (error) {
+//     console.error("Error fetching plant list:", error);
+//     res
+//       .status(500)
+//       .json({ message: "Error fetching plant list", error: error.message });
+//   }
+// });
+
+// module.exports = router;
+
+//Updated with enitityName
+
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
@@ -188,7 +289,7 @@ router.get("/fetchPlantList", async (req, res) => {
       // Extract prefix from the entityid (e.g., 'XYZPRIVATELIMITED' from 'XYZPRIVATELIMITED-1001')
       const prefix = entityid.split("-")[0];
 
-      // Fetch all records with plant_id starting with this prefix and include assignment status
+      // Fetch all records with plant_id starting with this prefix and include assignment status and entity name
       query = `
         SELECT 
           pm.plant_id AS "Plant ID",              
@@ -211,12 +312,14 @@ router.get("/fetchPlantList", async (req, res) => {
           pm.owner_last_name AS "Owner Last Name",
           pm.owner_email AS "Owner Email",
           pm.mobileno AS "Mobile Number",
+          em.entityname AS "Entity Name",
           CASE 
             WHEN gpu.plant_id IS NOT NULL THEN 'Assigned'
             ELSE 'Unassigned'
           END AS "Assignment Status"
         FROM Gsai_PlantMaster pm
         LEFT JOIN Gsai_PlantUser gpu ON pm.plant_id = gpu.plant_id
+        LEFT JOIN EntityMaster em ON pm.entityid = em.entityid
         WHERE pm.plant_id LIKE CONCAT(?, '-%') AND pm.marked_deletion = 0
       `;
       params = [prefix];
@@ -244,12 +347,14 @@ router.get("/fetchPlantList", async (req, res) => {
           pm.owner_last_name AS "Owner Last Name",
           pm.owner_email AS "Owner Email",
           pm.mobileno AS "Mobile Number",
+          em.entityname AS "Entity Name",
           CASE 
             WHEN gpu.plant_id IS NOT NULL THEN 'Assigned'
             ELSE 'Unassigned'
           END AS "Assignment Status"
         FROM Gsai_PlantMaster pm
         LEFT JOIN Gsai_PlantUser gpu ON pm.plant_id = gpu.plant_id
+        LEFT JOIN EntityMaster em ON pm.entityid = em.entityid
         WHERE pm.entityid = ? AND pm.marked_deletion = 0
       `;
       params = [entityid];
