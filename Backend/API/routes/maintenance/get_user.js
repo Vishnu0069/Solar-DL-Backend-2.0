@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../../db"); // Assuming 'pool' is configured for MySQL connection
-
+//Small test
 // Get user details by email
 router.get("/user", async (req, res) => {
   const email = req.query.email;
