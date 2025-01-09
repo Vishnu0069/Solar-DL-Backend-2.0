@@ -72,9 +72,9 @@ router.get("/fetchEntityNames", async (req, res) => {
   }
 
   try {
-    // Fetch namespace and entity name for the given entityid
+    // Fetch the namespace and entity name for the given entityid
     const [entityData] = await pool.query(
-      "SELECT namespace, entityname FROM EntityMaster WHERE entityid = ?",
+      `SELECT namespace, entityname FROM EntityMaster WHERE entityid = ?`,
       [entityid]
     );
 
@@ -104,8 +104,13 @@ router.get("/fetchEntityNames", async (req, res) => {
       `;
       params = [namespace, namespace];
     } else {
-      // Invalid namespace structure for deeper levels
-      return res.status(400).json({ message: "Invalid namespace structure" });
+      // L2 or deeper: Fetch entities at this level
+      query = `
+        SELECT entityid, entityname
+        FROM EntityMaster
+        WHERE namespace LIKE CONCAT(?, '-%') AND mark_deletion = 0
+      `;
+      params = [namespace];
     }
 
     const [linkedEntities] = await pool.query(query, params);
