@@ -467,7 +467,7 @@ const transporter = nodemailer.createTransport({
   debug: true,
 });
 
-router.post("/addPlant", async (req, res) => {
+router.post("/addPlant2", async (req, res) => {
   const {
     plant_id,
     entityid,
