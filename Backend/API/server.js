@@ -44,6 +44,8 @@ const generateplantid = require("./routes/Plant/generatePlantId");
 const entitynames = require("./routes/Plant/fetchEntityNames");
 const getEntityDetails = require("./routes/Plant/getEntityDetails");
 const addplant = require("./routes/Plant/addPlant");
+const addPlant2 = require("./routes/Plant/addplant2");
+
 const plant_category = require("./routes/Plant/getPlantCategories");
 const fetch_plant = require("./routes/Plant/fetchPlantList");
 const disable_plant = require("./routes/Plant/markPlantAsDeleted");
@@ -149,6 +151,7 @@ app.use("/api/plant", generateplantid);
 app.use("/api/plant", entitynames);
 app.use("/api/plant", getEntityDetails);
 app.use("/api/plant", addplant);
+app.use("/api/plant", addPlant2);
 app.use("/api/plant", plant_category);
 app.use("/api/plant", fetch_plant);
 app.use("/api/plant", disable_plant);
