@@ -61,6 +61,7 @@ const getPlantDetails = require("./routes/Plant/getPlantDetails");
 const fetchDeviceTypes = require("./routes/Plant/fetcDevice_Type");
 const email_status = require("./routes/Plant/email_status");
 const deviceRoutes = require("./routes/Plant/deviceRoutes");
+const assigned = require("./routes/Plant/assigned");
 
 //User routes
 const Add_User1 = require("./routes/User/Add_User1");
@@ -165,6 +166,7 @@ app.use("/api/plant", getPlantDetails);
 app.use("/api/plant", fetchDeviceTypes);
 app.use("/api/plant", email_status);
 app.use("/api/device", deviceRoutes);
+app.use("/api/plant", assigned);
 
 //User
 app.use("/api/user", Add_User1);
