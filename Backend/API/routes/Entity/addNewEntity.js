@@ -762,6 +762,7 @@
 
 // module.exports = router;
 
+//addNewEntity
 const express = require("express");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
