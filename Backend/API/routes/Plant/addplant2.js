@@ -427,7 +427,7 @@ const transporter = nodemailer.createTransport({
   debug: true, // Enable detailed logging
 });
 
-router.post("/addPlant2", async (req, res) => {
+router.post("/addPlant", async (req, res) => {
   const {
     plant_id,
     entityid,
@@ -480,7 +480,7 @@ router.post("/addPlant2", async (req, res) => {
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1,
         address_line2, pincode, longitude, latitude, owner_first_name,
         owner_last_name, owner_email, mobileno, entityname
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
       [
         plant_id,
         entityid,
@@ -515,52 +515,48 @@ router.post("/addPlant2", async (req, res) => {
     // Step 2: Handle Individual or Non-Individual Plant Type
     if (plant_type.toLowerCase() === "individual") {
       console.log("Handling individual plant type...");
-      if (
-        email_status === 1 ||
-        email_status === 2 ||
-        email_status === 3 ||
-        email_status === 4
-      ) {
-        console.log("Creating a new individual user...");
-        newUserId = uuidv4();
+      console.log("Creating a new individual user...");
+      newUserId = uuidv4();
 
-        const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
+      const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
 
-        await connection.query(
-          `INSERT INTO gsai_user (
-            user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number,
-            pin_code, country, entity_name, user_role, user_type, otp_status
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 'plant_user', 1)`,
-          [
-            newUserId,
-            EntityID,
-            owner_first_name,
-            owner_last_name,
-            owner_email,
-            hashedPassword,
-            mobileNumber || "0000000000",
-            pincode,
-            country,
-            plant_name,
-          ]
-        );
+      await connection.query(
+        `INSERT INTO gsai_user (
+          user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number,
+          pin_code, country, entity_name, user_role, user_type, otp_status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 'plant_user', 1)`,
+        [
+          newUserId,
+          EntityID,
+          owner_first_name,
+          owner_last_name,
+          owner_email,
+          hashedPassword,
+          mobileNumber || "0000000000",
+          pincode,
+          country,
+          plant_name,
+        ]
+      );
 
-        console.log("Linking individual user to the plant...");
-        await connection.query(
-          "INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?);",
-          [plant_id, newUserId]
-        );
+      console.log("Linking individual user to the plant...");
+      await connection.query(
+        "INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?);",
+        [plant_id, newUserId]
+      );
 
-        userIdsToLink.push({ userId: newUserId, email: owner_email });
-      }
+      userIdsToLink.push({ userId: newUserId, email: owner_email });
     } else {
       console.log("Handling non-individual plant type...");
       const [sysadminUser] = await connection.query(
-        "SELECT user_id, email FROM gsai_user WHERE entityid = ? AND user_role = 'sys admin' LIMIT 1;",
+        "SELECT user_id, email, user_role FROM gsai_user WHERE entityid = ? LIMIT 1;",
         [EntityID]
       );
 
-      if (sysadminUser.length === 0) {
+      if (
+        sysadminUser.length === 0 ||
+        sysadminUser[0].user_role !== "sys admin"
+      ) {
         console.log("Sysadmin not found, creating a new sysadmin...");
         newUserId = uuidv4();
 
@@ -622,18 +618,54 @@ router.post("/addPlant2", async (req, res) => {
           })
         )
       );
-    } else if (email_status === 3 || email_status === 4) {
-      console.log("Conditions 3 or 4: Sending emails...");
+    } else if (email_status === 3 && mail === 2) {
+      console.log("Condition 3: Sending email for mismatched LoginEntityID...");
       await Promise.all(
         userIdsToLink.map(({ email }) =>
           transporter.sendMail({
             from: process.env.SMTP_USER,
             to: email,
-            subject: "Plant Added Notification",
-            text: `Dear User,\n\nThe plant ${plant_name} has been successfully added.`,
+            subject: "Entity Mismatch Notification",
+            text: `Dear User,\n\nThere was a mismatch with the selected entity (${entityid}) and login entity (${LoginEntityID}).`,
           })
         )
       );
+    } else if (email_status === 4 && mail === 3) {
+      console.log("Condition 4: Sending email for non-existent entity...");
+      await Promise.all(
+        userIdsToLink.map(({ email }) =>
+          transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to: email,
+            subject: "Entity Not Found",
+            text: `Dear User,\n\nThe entity associated with the plant (${entityid}) does not exist.`,
+          })
+        )
+      );
+    } else if (email_status === 5 && mail === 2) {
+      console.log("Condition 5: Sending email for sysadmin notification...");
+      await transporter.sendMail({
+        from: process.env.SMTP_USER,
+        to: owner_email,
+        subject: "Sysadmin Notification",
+        text: `Dear Admin,\n\nA new plant (${plant_name}) has been added under your entity (${EntityID}).`,
+      });
+    } else if (email_status === 6 && mail === 3) {
+      console.log("Condition 6: Sending admin alert email...");
+      await transporter.sendMail({
+        from: process.env.SMTP_USER,
+        to: owner_email,
+        subject: "Admin Alert",
+        text: `Dear Admin,\n\nThe plant (${plant_name}) was added with non-standard configurations.`,
+      });
+    } else if (email_status === 7 && mail === 3) {
+      console.log("Condition 7: Sending fallback notification...");
+      await transporter.sendMail({
+        from: process.env.SMTP_USER,
+        to: owner_email,
+        subject: "Fallback Notification",
+        text: `Dear User,\n\nThe plant (${plant_name}) has been successfully added. Please review the details.`,
+      });
     }
 
     await connection.commit();
