@@ -64,7 +64,7 @@ const fetchDeviceTypes = require("./routes/Plant/fetcDevice_Type");
 const email_status = require("./routes/Plant/email_status");
 const deviceRoutes = require("./routes/Plant/deviceRoutes");
 const assigned = require("./routes/Plant/assigned");
-
+const unassigned = require("./routes/Plant/unassigned");
 //User routes
 const Add_User1 = require("./routes/User/Add_User1");
 const Get_User_for_edit = require("./routes/User/Get_User_edit");
@@ -91,6 +91,9 @@ const timeZone = require("./routes/Settings/timeZone");
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
 const Add_User_group_plants = require("./routes/UserGroups/Add_User_group_plant");
+
+//roles
+const fectory_roles = require("./routes/roles/factory_roles");
 
 require("dotenv").config(); // Load environment variables
 
@@ -170,7 +173,7 @@ app.use("/api/plant", fetchDeviceTypes);
 app.use("/api/plant", email_status);
 app.use("/api/device", deviceRoutes);
 app.use("/api/plant", assigned);
-
+app.use("/api/plant", unassigned);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);
@@ -182,9 +185,13 @@ app.use("/api/user", disab_user);
 app.use("/api/user", fetchDisabledUsers);
 app.use("/api/user", enableUser);
 app.use("/api/reset-password", resetPassword);
+
 //User Groups
 app.use("/api/user-groups", Add_User_groups);
 app.use("/api/user-groups", Add_User_group_plants);
+
+//Roles
+app.use("/api/role", fectory_roles);
 
 //maintenance
 app.use("/api/maintenance", get_user);

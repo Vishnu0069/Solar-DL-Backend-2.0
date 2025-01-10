@@ -91,7 +91,7 @@ const express = require("express");
 const pool = require("../../db"); // Database connection
 const router = express.Router();
 
-router.get("/getAssignedPlants/:entityid", async (req, res) => {
+router.get("/assignedPlants/:entityid", async (req, res) => {
   const { entityid } = req.params;
 
   try {
