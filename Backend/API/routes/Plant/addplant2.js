@@ -1018,13 +1018,397 @@
 // module.exports = router;
 
 // todo new code with email configuration
+// const express = require("express");
+// const bcrypt = require("bcrypt");
+// const nodemailer = require("nodemailer");
+// const { v4: uuidv4 } = require("uuid");
+// const pool = require("../../db");
+// const router = express.Router();
+// // const num
+
+// require("dotenv").config({ path: __dirname + "/.env" });
+
+// const transporter = nodemailer.createTransport({
+//   host: process.env.SMTP_HOST,
+//   port: parseInt(process.env.SMTP_PORT, 10),
+//   secure: true,
+//   auth: {
+//     user: process.env.SMTP_USER,
+//     pass: process.env.SMTP_PASS,
+//   },
+//   tls: {
+//     rejectUnauthorized: false,
+//   },
+//   debug: true,
+// });
+
+// const emailTemplates = {
+//   newUser: {
+//     subject: "Welcome to Plant Management System",
+//     text: (plantName) => `Dear User,
+
+// Welcome to the Plant Management System! A new account has been created for you for the plant "${plantName}".
+// Your default password is: DefaultPass@123
+// Please change your password upon first login.
+
+// Best regards,
+// Plant Management Team`,
+//   },
+//   existingUser: {
+//     subject: "Plant Added Successfully",
+//     text: (plantName) => `Dear User,
+
+// A new plant "${plantName}" has been successfully added to your account.
+
+// Best regards,
+// Plant Management Team`,
+//   },
+//   adminNotification: {
+//     subject: "New Plant Added Notification",
+//     text: (plantName, ownerEmail) => `Dear Admin,
+
+// A new plant "${plantName}" has been added to the system by user ${ownerEmail}.
+
+// Best regards,
+// Plant Management Team`,
+//   },
+// };
+
+// async function sendEmail(recipient, template, plantName, ownerEmail = null) {
+//   try {
+//     await transporter.sendMail({
+//       from: process.env.SMTP_USER,
+//       to: recipient,
+//       subject: template.subject,
+//       text: ownerEmail
+//         ? template.text(plantName, ownerEmail)
+//         : template.text(plantName),
+//     });
+//     console.log(`Email sent successfully to ${recipient}`);
+//   } catch (error) {
+//     console.error(`Error sending email to ${recipient}:`, error);
+//     throw error;
+//   }
+// }
+
+// async function handleEmailSending(
+//   connection,
+//   emailStatus,
+//   mail,
+//   plant_name,
+//   owner_email,
+//   EntityID,
+//   LoginEntityID,
+//   isNewUser
+// ) {
+//   try {
+//     const emailPromises = [];
+//     console.log(
+//       `Processing emails for emailStatus=${emailStatus}, mail=${mail}`
+//     );
+
+//     // Individual Plant Type Cases (emailStatus 1-4)
+//     if (emailStatus >= 1 && emailStatus <= 4) {
+//       // Always send email to owner
+//       if (isNewUser) {
+//         emailPromises.push(
+//           sendEmail(owner_email, emailTemplates.newUser, plant_name)
+//         );
+//       } else {
+//         emailPromises.push(
+//           sendEmail(owner_email, emailTemplates.existingUser, plant_name)
+//         );
+//       }
+
+//       // Case 1: Same entity admin notification (emailStatus = 1, mail = 2)
+//       if (emailStatus === 1 && mail === 2) {
+//         const [sameEntityAdmins] = await connection.query(
+//           `SELECT DISTINCT email
+//            FROM gsai_user
+//            WHERE user_role = 'sys admin'
+//            AND entityid = ?
+//            AND email != ?`,
+//           [EntityID, owner_email]
+//         );
+
+//         console.log(`Found ${sameEntityAdmins.length} same entity admins`);
+//         for (const admin of sameEntityAdmins) {
+//           emailPromises.push(
+//             sendEmail(
+//               admin.email,
+//               emailTemplates.adminNotification,
+//               plant_name,
+//               owner_email
+//             )
+//           );
+//         }
+//       }
+
+//       // Case 2 & 4: Cross-entity admin notification (emailStatus = 2 or 4, mail = 3)
+//       else if ((emailStatus === 2 || emailStatus === 4) && mail === 3) {
+//         const [crossEntityAdmins] = await connection.query(
+//           `SELECT DISTINCT email
+//            FROM gsai_user
+//            WHERE user_role = 'sys admin'
+//            AND entityid IN (?, ?)
+//            AND email != ?`,
+//           [EntityID, LoginEntityID, owner_email]
+//         );
+
+//         console.log(`Found ${crossEntityAdmins.length} cross-entity admins`);
+//         for (const admin of crossEntityAdmins) {
+//           emailPromises.push(
+//             sendEmail(
+//               admin.email,
+//               emailTemplates.adminNotification,
+//               plant_name,
+//               owner_email
+//             )
+//           );
+//         }
+//       }
+//     }
+//     // Non-Individual Plant Type Cases (emailStatus 5-7)
+//     else if (emailStatus >= 5 && emailStatus <= 7) {
+//       // Send to owner/sys admin
+//       if (isNewUser) {
+//         emailPromises.push(
+//           sendEmail(owner_email, emailTemplates.newUser, plant_name)
+//         );
+//       } else {
+//         emailPromises.push(
+//           sendEmail(owner_email, emailTemplates.existingUser, plant_name)
+//         );
+//       }
+
+//       // Additional admin notifications for mail = 3
+//       if (mail === 3) {
+//         const [admins] = await connection.query(
+//           `SELECT DISTINCT email
+//            FROM gsai_user
+//            WHERE user_role = 'sys admin'
+//            AND entityid IN (?, ?)
+//            AND email != ?`,
+//           [EntityID, LoginEntityID, owner_email]
+//         );
+
+//         console.log(`Found ${admins.length} admins for non-individual plant`);
+//         for (const admin of admins) {
+//           emailPromises.push(
+//             sendEmail(
+//               admin.email,
+//               emailTemplates.adminNotification,
+//               plant_name,
+//               owner_email
+//             )
+//           );
+//         }
+//       }
+//     }
+
+//     await Promise.all(emailPromises);
+//     console.log(`Successfully sent ${emailPromises.length} emails`);
+//   } catch (error) {
+//     console.error("Error in handleEmailSending:", error);
+//     // Continue with the transaction even if email sending fails
+//   }
+// }
+
+// router.post("/addPlant2", async (req, res) => {
+//   const {
+//     plant_id,
+//     entityid,
+//     plant_name,
+//     install_date,
+//     azimuth_angle,
+//     tilt_angle,
+//     plant_type,
+//     plant_category,
+//     capacity,
+//     capacity_unit,
+//     country,
+//     region,
+//     state,
+//     district,
+//     address_line1,
+//     address_line2,
+//     pincode,
+//     longitude,
+//     latitude,
+//     owner_first_name,
+//     owner_last_name,
+//     owner_email,
+//     mobileNumber = null,
+//     email_status,
+//     mail,
+//     entityname,
+//     Email,
+//     EntityID,
+//     LoginEntityID,
+//   } = req.body;
+
+//   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
+//     return res.status(400).json({ message: "Missing required fields." });
+//   }
+
+//   let connection;
+
+//   try {
+//     connection = await pool.getConnection();
+//     await connection.beginTransaction();
+
+//     let userId;
+//     let isNewUser = false;
+
+//     // Step 1: Handle User Creation/Retrieval
+//     if (plant_type.toLowerCase() === "individual") {
+//       const [existingUser] = await connection.query(
+//         "SELECT user_id, email FROM gsai_user WHERE LOWER(email) = LOWER(?)",
+//         [owner_email]
+//       );
+
+//       if (existingUser.length > 0) {
+//         userId = existingUser[0].user_id;
+//       } else if ([1, 2, 3, 4].includes(email_status)) {
+//         userId = uuidv4();
+//         const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
+//         isNewUser = true;
+
+//         await connection.query(
+//           `INSERT INTO gsai_user (
+//             user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number,
+//             pin_code, country, entity_name, user_role, user_type, otp_status
+//           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'individual', 'plant_user', 1)`,
+//           [
+//             userId,
+//             EntityID,
+//             owner_first_name,
+//             owner_last_name,
+//             owner_email,
+//             hashedPassword,
+//             mobileNumber || "0000000000",
+//             pincode,
+//             country,
+//             plant_name,
+//           ]
+//         );
+//       }
+//     } else {
+//       const [existingSysAdmin] = await connection.query(
+//         "SELECT user_id, email FROM gsai_user WHERE entityid = ? AND user_role = 'sys admin' LIMIT 1;",
+//         [EntityID]
+//       );
+
+//       if (existingSysAdmin.length > 0) {
+//         userId = existingSysAdmin[0].user_id;
+//       } else {
+//         userId = uuidv4();
+//         const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
+//         isNewUser = true;
+
+//         await connection.query(
+//           `INSERT INTO gsai_user (
+//             user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number,
+//             pin_code, country, entity_name, user_role, user_type, otp_status
+//           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'sys admin', 'plant_user', 1)`,
+//           [
+//             userId,
+//             EntityID,
+//             owner_first_name,
+//             owner_last_name,
+//             owner_email,
+//             hashedPassword,
+//             mobileNumber || "0000000000",
+//             pincode,
+//             country,
+//             entityname,
+//           ]
+//         );
+//       }
+//     }
+
+//     // Step 2: Insert plant details
+//     await connection.query(
+//       `INSERT INTO Gsai_PlantMaster (
+//         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type,
+//         plant_category, capacity, capacity_unit, country, region, state, district, address_line1,
+//         address_line2, pincode, longitude, latitude, owner_first_name,
+//         owner_last_name, owner_email, mobileno, entityname
+//       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+//       [
+//         plant_id,
+//         entityid,
+//         plant_name,
+//         install_date,
+//         azimuth_angle,
+//         tilt_angle,
+//         plant_type,
+//         plant_category,
+//         capacity,
+//         capacity_unit,
+//         country,
+//         region,
+//         state,
+//         district,
+//         address_line1,
+//         address_line2,
+//         pincode,
+//         longitude,
+//         latitude,
+//         owner_first_name,
+//         owner_last_name,
+//         owner_email,
+//         mobileNumber,
+//         entityname,
+//       ]
+//     );
+
+//     // Step 3: Link user to plant
+//     if (userId) {
+//       await connection.query(
+//         "INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?);",
+//         [plant_id, userId]
+//       );
+//     }
+
+//     // Step 4: Handle email sending based on conditions
+//     await handleEmailSending(
+//       connection,
+//       email_status,
+//       mail,
+//       plant_name,
+//       owner_email,
+//       EntityID,
+//       LoginEntityID,
+//       isNewUser
+//     );
+
+//     await connection.commit();
+//     res.status(201).json({
+//       message: "Plant and user(s) linked successfully",
+//       plant_id,
+//     });
+//   } catch (error) {
+//     if (connection) await connection.rollback();
+//     console.error("Error adding plant:", error);
+//     res.status(500).json({
+//       message: "Error adding plant.",
+//       error: error.message,
+//     });
+//   } finally {
+//     if (connection) connection.release();
+//   }
+// });
+
+// module.exports = router;
+
+// todo new email configuration
 const express = require("express");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 const pool = require("../../db");
 const router = express.Router();
-// const num
 
 require("dotenv").config({ path: __dirname + "/.env" });
 
@@ -1109,19 +1493,15 @@ async function handleEmailSending(
 
     // Individual Plant Type Cases (emailStatus 1-4)
     if (emailStatus >= 1 && emailStatus <= 4) {
-      // Always send email to owner
+      // Send welcome email only for new users
       if (isNewUser) {
         emailPromises.push(
           sendEmail(owner_email, emailTemplates.newUser, plant_name)
         );
-      } else {
-        emailPromises.push(
-          sendEmail(owner_email, emailTemplates.existingUser, plant_name)
-        );
       }
 
-      // Case 1: Same entity admin notification (emailStatus = 1, mail = 2)
-      if (emailStatus === 1 && mail === 2) {
+      // Case 1: Same entity admin notification (emailStatus = 1 or 3, mail = 2)
+      if ((emailStatus === 1 || emailStatus === 3) && mail === 2) {
         const [sameEntityAdmins] = await connection.query(
           `SELECT DISTINCT email 
            FROM gsai_user 
@@ -1131,7 +1511,6 @@ async function handleEmailSending(
           [EntityID, owner_email]
         );
 
-        console.log(`Found ${sameEntityAdmins.length} same entity admins`);
         for (const admin of sameEntityAdmins) {
           emailPromises.push(
             sendEmail(
@@ -1145,7 +1524,7 @@ async function handleEmailSending(
       }
 
       // Case 2 & 4: Cross-entity admin notification (emailStatus = 2 or 4, mail = 3)
-      else if ((emailStatus === 2 || emailStatus === 4) && mail === 3) {
+      if ((emailStatus === 2 || emailStatus === 4) && mail === 3) {
         const [crossEntityAdmins] = await connection.query(
           `SELECT DISTINCT email 
            FROM gsai_user 
@@ -1155,7 +1534,6 @@ async function handleEmailSending(
           [EntityID, LoginEntityID, owner_email]
         );
 
-        console.log(`Found ${crossEntityAdmins.length} cross-entity admins`);
         for (const admin of crossEntityAdmins) {
           emailPromises.push(
             sendEmail(
@@ -1170,20 +1548,39 @@ async function handleEmailSending(
     }
     // Non-Individual Plant Type Cases (emailStatus 5-7)
     else if (emailStatus >= 5 && emailStatus <= 7) {
-      // Send to owner/sys admin
+      // Send welcome email only for new users
       if (isNewUser) {
         emailPromises.push(
           sendEmail(owner_email, emailTemplates.newUser, plant_name)
         );
-      } else {
-        emailPromises.push(
-          sendEmail(owner_email, emailTemplates.existingUser, plant_name)
-        );
       }
 
-      // Additional admin notifications for mail = 3
-      if (mail === 3) {
-        const [admins] = await connection.query(
+      // Case 5: Same entity admin notification (mail = 2)
+      if (emailStatus === 5 && mail === 2) {
+        const [sameEntityAdmins] = await connection.query(
+          `SELECT DISTINCT email 
+           FROM gsai_user 
+           WHERE user_role = 'sys admin' 
+           AND entityid = ? 
+           AND email != ?`,
+          [EntityID, owner_email]
+        );
+
+        for (const admin of sameEntityAdmins) {
+          emailPromises.push(
+            sendEmail(
+              admin.email,
+              emailTemplates.adminNotification,
+              plant_name,
+              owner_email
+            )
+          );
+        }
+      }
+
+      // Case 6 & 7: Cross-entity admin notification (mail = 3)
+      if ((emailStatus === 6 || emailStatus === 7) && mail === 3) {
+        const [crossEntityAdmins] = await connection.query(
           `SELECT DISTINCT email 
            FROM gsai_user 
            WHERE user_role = 'sys admin' 
@@ -1192,8 +1589,7 @@ async function handleEmailSending(
           [EntityID, LoginEntityID, owner_email]
         );
 
-        console.log(`Found ${admins.length} admins for non-individual plant`);
-        for (const admin of admins) {
+        for (const admin of crossEntityAdmins) {
           emailPromises.push(
             sendEmail(
               admin.email,
@@ -1245,6 +1641,9 @@ router.post("/addPlant2", async (req, res) => {
     Email,
     EntityID,
     LoginEntityID,
+    yield_value = null, // Added field
+    currency = null,    // Added field
+    timezone = null,    // Added field
   } = req.body;
 
   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
@@ -1327,14 +1726,14 @@ router.post("/addPlant2", async (req, res) => {
       }
     }
 
-    // Step 2: Insert plant details
+    // Step 2: Insert plant details with new columns
     await connection.query(
       `INSERT INTO Gsai_PlantMaster (
         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type,
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1,
-        address_line2, pincode, longitude, latitude, owner_first_name,
-        owner_last_name, owner_email, mobileno, entityname
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        address_line2, pincode, longitude, latitude, owner_first_name, owner_last_name, owner_email,
+        mobileno, entityname, yield_value, currency, timezone
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
       [
         plant_id,
         entityid,
@@ -1360,6 +1759,9 @@ router.post("/addPlant2", async (req, res) => {
         owner_email,
         mobileNumber,
         entityname,
+        yield_value,  // New field
+        currency,     // New field
+        timezone,     // New field
       ]
     );
 

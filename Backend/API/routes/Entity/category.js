@@ -16,6 +16,7 @@
 const express = require("express");
 const pool = require("../../db"); // Database connection
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 router.get("/categories", async (req, res) => {
   const { entityid } = req.query;
@@ -51,11 +52,9 @@ router.get("/categories", async (req, res) => {
       [country]
     );
 
-    res
-      .status(200)
-      .json({
-        categories: categories.map((category) => category.category_name),
-      });
+    res.status(200).json({
+      categories: categories.map((category) => category.category_name),
+    });
   } catch (error) {
     console.error("Error fetching entity categories:", error);
     res.status(500).json({ message: "Internal server error" });
