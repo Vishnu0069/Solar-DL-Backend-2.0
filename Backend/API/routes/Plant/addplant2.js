@@ -1017,13 +1017,14 @@
 
 // module.exports = router;
 
-// todo new code with email configurations
+// todo new code with email configuration
 const express = require("express");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 const pool = require("../../db");
 const router = express.Router();
+// const num
 
 require("dotenv").config({ path: __dirname + "/.env" });
 
