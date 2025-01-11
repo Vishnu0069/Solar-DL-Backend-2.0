@@ -1638,8 +1638,12 @@ router.post("/addPlant2", async (req, res) => {
     email_status,
     mail,
     entityname,
+    Email,
     EntityID,
     LoginEntityID,
+    yield_value = null, // Added field
+    currency = null,    // Added field
+    timezone = null,    // Added field
   } = req.body;
 
   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
@@ -1722,14 +1726,14 @@ router.post("/addPlant2", async (req, res) => {
       }
     }
 
-    // Step 2: Insert plant details
+    // Step 2: Insert plant details with new columns
     await connection.query(
       `INSERT INTO Gsai_PlantMaster (
         plant_id, entityid, plant_name, install_date, azimuth_angle, tilt_angle, plant_type,
         plant_category, capacity, capacity_unit, country, region, state, district, address_line1,
-        address_line2, pincode, longitude, latitude, owner_first_name,
-        owner_last_name, owner_email, mobileno, entityname
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        address_line2, pincode, longitude, latitude, owner_first_name, owner_last_name, owner_email,
+        mobileno, entityname, yield_value, currency, timezone
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
       [
         plant_id,
         entityid,
@@ -1755,6 +1759,9 @@ router.post("/addPlant2", async (req, res) => {
         owner_email,
         mobileNumber,
         entityname,
+        yield_value,  // New field
+        currency,     // New field
+        timezone,     // New field
       ]
     );
 
