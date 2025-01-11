@@ -86,6 +86,7 @@
 
 // module.exports = router;
 
+//emailStatus
 // with added conditions
 const express = require("express");
 const pool = require("../../db"); // Database connection
@@ -141,7 +142,7 @@ router.post("/checkEmailStatus", async (req, res) => {
         }
 
         // Condition 2: Email exists, Selected EntityID !== entityid in DB, and role === individual
-        if (user.entityid !== EntityID && user.user_role === "individual") {
+        if (LoginEntityID !== EntityID && user.user_role === "individual") {
           return res
             .status(200)
             .json({ email_status: 2, mail: 3, condition: 2 });
