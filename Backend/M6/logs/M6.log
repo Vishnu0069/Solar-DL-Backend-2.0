@@ -2925,3 +2925,6 @@
 2025-01-11T04:51:52.820Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b82f
 2025-01-11T04:51:52.873Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b822
 2025-01-11T04:51:52.902Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b823
+2025-01-11T11:22:48.270Z	L1	Mon6	M6 Service	success	started Successfully...
+2025-01-11T11:22:48.353Z	L2	Mon6	database	success	Connected to MongoDB.
+2025-01-11T11:22:48.824Z	L2	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...

@@ -93,8 +93,9 @@ const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
 const Add_User_group_plants = require("./routes/UserGroups/Add_User_group_plant");
 
 //roles
-const fectory_roles = require("./routes/roles/factory_roles");
-const fectory_modules = require("./routes/roles/factorymodules");
+const factory_roles = require("./routes/roles/factory_roles");
+const factory_modules = require("./routes/roles/factorymodules");
+const factory_all = require("./routes/roles/get_all");
 
 require("dotenv").config(); // Load environment variables
 
@@ -192,8 +193,9 @@ app.use("/api/user-groups", Add_User_groups);
 app.use("/api/user-groups", Add_User_group_plants);
 
 //Roles
-app.use("/api/role", fectory_roles);
-app.use("/api/role", fectory_modules);
+app.use("/api/role", factory_roles);
+app.use("/api/role", factory_modules);
+app.use("/api/role", factory_all);
 
 //maintenance
 app.use("/api/maintenance", get_user);
