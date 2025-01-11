@@ -1,416 +1,188 @@
-2025-01-11T11:21:39.580Z - Connected to MySQL.
-2025-01-11T11:21:39.632Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: solaredge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:11 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.634Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:11 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.640Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:45:52 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.645Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:26 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.654Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:20 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.660Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:47 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.666Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: solaredge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:45:52 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.674Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: solaredge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:20 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.734Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:20 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.774Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: solaredge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:26 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.800Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:45:52 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.877Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:47 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.881Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: solaredge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:46 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.884Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:11 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.887Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1002
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 11:46:26 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.910Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1007
-          Make: solaredge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 12:18:17 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.929Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1007
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 12:18:17 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.933Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1007
-          Make: SolarEdge
-          Model: null
-          User Name: mohana
-          API Key: 58G0DE59GK1XD9AHGBPWDU4SOF06VFM2
-          System Date Time: Fri Jan 10 2025 12:18:17 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.937Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1008
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 12:19:58 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.950Z - 
-          Device Serial No: SN-001, SN-002, SN-003
-          Plant ID: GREENTEK-P-1001
-          Make: Solar
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: 0000-00-00 00:00:00
-        
-2025-01-11T11:21:39.952Z - 
-          Device Serial No: VP5469
-          Plant ID: plant-010
-          Make: Solar man
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Wed Jan 08 2025 05:04:44 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.958Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: LIFELINK-P-1001
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 09 2025 18:53:06 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.971Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1006
-          Make: solaredge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:52:19 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.976Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1001
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:40:08 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.981Z - 
-          Device Serial No: SN12345
-          Plant ID: plant-006
-          Make: Solar
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Wed Jan 08 2025 04:40:27 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.984Z - 
-          Device Serial No: SN12345
-          Plant ID: plant-004
-          Make: Solar
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 03 2025 08:33:14 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.987Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1005
-          Make: solaredge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:42:36 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.995Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1001
-          Make: solaredge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:40:08 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:39.998Z - 
-          Device Serial No: SN-001, SN-002, SN-003
-          Plant ID: GREENTEK-P-1001
-          Make: Solar
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 02 2025 07:15:26 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.000Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1008
-          Make: solaredge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 12:19:58 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.002Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1006
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:52:19 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.008Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1008
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 12:19:58 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.013Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: LIFELINK-P-1001
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 09 2025 18:53:06 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.016Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: SHASHIDHAR-P-1012
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 09 2025 15:57:44 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.018Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: LIFELINK-P-1001
-          Make: solaredge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 09 2025 18:53:06 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.023Z - 
-          Device Serial No: SN6789
-          Plant ID: plant-007
-          Make: Solar edge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Wed Jan 08 2025 04:41:46 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.027Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: SHASHIDHAR-P-1012
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 09 2025 15:57:44 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.032Z - 
-          Device Serial No: SN12345
-          Plant ID: plant-006
-          Make: Solar
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 03 2025 08:56:04 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.035Z - 
-          Device Serial No: SN-12345
-          Plant ID: GREENTEK-P-1001
-          Make: Solar
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 02 2025 06:35:08 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.041Z - 
-          Device Serial No: SN12345
-          Plant ID: plant-006
-          Make: Solar
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Wed Jan 08 2025 04:37:52 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.047Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: SHASHIDHAR-P-1012
-          Make: solaredge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 09 2025 15:57:44 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.049Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1005
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:42:36 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.052Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1005
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:42:36 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.059Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: RISHEEK-P-1006
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:52:19 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.064Z - 
-          Device Serial No: VP5469
-          Plant ID: plant-010
-          Make: Solar man
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Thu Jan 09 2025 15:52:25 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.066Z - 
-          Device Serial No: IN000NNN2, 7E13A813-4C, 7E13A7F5-2D
-          Plant ID: MOHANA-P-1001
-          Make: SolarEdge
-          Model: null
-          User Name: N/A
-          API Key: N/A
-          System Date Time: Fri Jan 10 2025 11:40:09 GMT+0530 (India Standard Time)
-        
-2025-01-11T11:21:40.091Z - MySQL connection closed.
+2025-01-11T18:14:14.917Z - L1 - MON-1 - MongoDB - SUCCESS - Connected to MongoDB.
+2025-01-11T18:14:14.990Z - L1 - MON-1 - MySQL - SUCCESS - Connected to MySQL.
+2025-01-11T18:14:15.019Z - L0 - MON-1 - Fetch - SUCCESS - Fetched devices from MySQL.
+2025-01-11T18:14:15.020Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.047Z - L1 - MON-1 - MySQL - SUCCESS - MySQL connection closed.
+2025-01-11T18:14:15.090Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d91"}
+2025-01-11T18:14:15.092Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.123Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d92"}
+2025-01-11T18:14:15.124Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.153Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d93"}
+2025-01-11T18:14:15.154Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.185Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d94"}
+2025-01-11T18:14:15.185Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.215Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d95"}
+2025-01-11T18:14:15.216Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.244Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d96"}
+2025-01-11T18:14:15.245Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.273Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d97"}
+2025-01-11T18:14:15.274Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.304Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d98"}
+2025-01-11T18:14:15.305Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.336Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d99"}
+2025-01-11T18:14:15.337Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.366Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d9a"}
+2025-01-11T18:14:15.367Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.394Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d9b"}
+2025-01-11T18:14:15.395Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.423Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d9c"}
+2025-01-11T18:14:15.424Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:46.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.452Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:46.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d9d"}
+2025-01-11T18:14:15.453Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.480Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d9e"}
+2025-01-11T18:14:15.480Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.509Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0d9f"}
+2025-01-11T18:14:15.510Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.538Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0da0"}
+2025-01-11T18:14:15.539Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.567Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0da1"}
+2025-01-11T18:14:15.568Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:14:15.755Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b4f7906711a4e30e0da2"}
+2025-01-11T18:14:15.756Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.784Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0da3"}
+2025-01-11T18:14:15.785Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-07T23:34:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.820Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-07T23:34:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0da4"}
+2025-01-11T18:14:15.821Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.848Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0da5"}
+2025-01-11T18:14:15.849Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.876Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0da6"}
+2025-01-11T18:14:15.877Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.904Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0da7"}
+2025-01-11T18:14:15.904Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:10:27.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.931Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:10:27.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0da8"}
+2025-01-11T18:14:15.932Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-004","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:03:14.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.960Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-004","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:03:14.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0da9"}
+2025-01-11T18:14:15.961Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:15.990Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0daa"}
+2025-01-11T18:14:15.991Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.020Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f7906711a4e30e0dab"}
+2025-01-11T18:14:16.021Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN-001, SN-002, SN-003","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:45:26.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.049Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN-001, SN-002, SN-003","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:45:26.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0dac"}
+2025-01-11T18:14:16.050Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.077Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0dad"}
+2025-01-11T18:14:16.078Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.106Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0dae"}
+2025-01-11T18:14:16.107Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.134Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0daf"}
+2025-01-11T18:14:16.134Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.161Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db0"}
+2025-01-11T18:14:16.162Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.191Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db1"}
+2025-01-11T18:14:16.193Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.221Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db2"}
+2025-01-11T18:14:16.221Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN6789","plantId":"plant-007","make":"Solar edge","model":null,"systemDateTime":"2025-01-07T23:11:46.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.249Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN6789","plantId":"plant-007","make":"Solar edge","model":null,"systemDateTime":"2025-01-07T23:11:46.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db3"}
+2025-01-11T18:14:16.250Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.278Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db4"}
+2025-01-11T18:14:16.278Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:26:04.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.306Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:26:04.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db5"}
+2025-01-11T18:14:16.306Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN-12345","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:05:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.333Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN-12345","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:05:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db6"}
+2025-01-11T18:14:16.334Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:07:52.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.361Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:07:52.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db7"}
+2025-01-11T18:14:16.362Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"solaredge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.627Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"solaredge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db8"}
+2025-01-11T18:14:16.628Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.656Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0db9"}
+2025-01-11T18:14:16.657Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.687Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0dba"}
+2025-01-11T18:14:16.688Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.715Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0dbb"}
+2025-01-11T18:14:16.715Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-09T10:22:25.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.744Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-09T10:22:25.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0dbc"}
+2025-01-11T18:14:16.744Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:09.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:14:16.772Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:09.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b4f8906711a4e30e0dbd"}
+2025-01-11T18:23:40.766Z - L1 - MON-1 - MongoDB - SUCCESS - Connected to MongoDB.
+2025-01-11T18:23:40.887Z - L1 - MON-1 - MySQL - SUCCESS - Connected to MySQL.
+2025-01-11T18:23:40.914Z - L0 - MON-1 - Fetch - SUCCESS - Fetched devices from MySQL.
+2025-01-11T18:23:40.915Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":" 7E13A813-4C,7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:40.940Z - L1 - MON-1 - MySQL - SUCCESS - MySQL connection closed.
+2025-01-11T18:23:40.955Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":" 7E13A813-4C,7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72ca08f41452b94cf29"}
+2025-01-11T18:23:40.955Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:40.981Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72ca08f41452b94cf2a"}
+2025-01-11T18:23:40.982Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.008Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72ca08f41452b94cf2b"}
+2025-01-11T18:23:41.009Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.036Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf2c"}
+2025-01-11T18:23:41.037Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.068Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf2d"}
+2025-01-11T18:23:41.069Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.094Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf2e"}
+2025-01-11T18:23:41.095Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.120Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf2f"}
+2025-01-11T18:23:41.120Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.147Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf30"}
+2025-01-11T18:23:41.148Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.175Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:20.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf31"}
+2025-01-11T18:23:41.176Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.201Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf32"}
+2025-01-11T18:23:41.202Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.226Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:15:52.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf33"}
+2025-01-11T18:23:41.226Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.250Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:47.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf34"}
+2025-01-11T18:23:41.251Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:46.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.275Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:16:46.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf35"}
+2025-01-11T18:23:41.276Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.300Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:11.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf36"}
+2025-01-11T18:23:41.301Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.324Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1002","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:16:26.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf37"}
+2025-01-11T18:23:41.325Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.349Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf38"}
+2025-01-11T18:23:41.350Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.374Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf39"}
+2025-01-11T18:23:41.375Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password"}
+2025-01-11T18:23:41.399Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1007","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:48:17.000Z","url":"https://monitoringapi.solaredge.com/equipment/","userName":"mohana","apiKey":"58G0DE59GK1XD9AHGBPWDU4SOF06VFM2","password":"password","_id":"6782b72da08f41452b94cf3a"}
+2025-01-11T18:23:41.400Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.424Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf3b"}
+2025-01-11T18:23:41.425Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-07T23:34:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.449Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-07T23:34:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf3c"}
+2025-01-11T18:23:41.450Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.473Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf3d"}
+2025-01-11T18:23:41.474Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.498Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf3e"}
+2025-01-11T18:23:41.499Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.535Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf3f"}
+2025-01-11T18:23:41.536Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:10:27.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.561Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:10:27.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf40"}
+2025-01-11T18:23:41.562Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-004","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:03:14.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.587Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-004","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:03:14.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf41"}
+2025-01-11T18:23:41.588Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.615Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf42"}
+2025-01-11T18:23:41.616Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.640Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:10:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf43"}
+2025-01-11T18:23:41.641Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN-001, SN-002, SN-003","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:45:26.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.666Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN-001, SN-002, SN-003","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:45:26.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf44"}
+2025-01-11T18:23:41.667Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.692Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"solaredge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf45"}
+2025-01-11T18:23:41.693Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.717Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf46"}
+2025-01-11T18:23:41.718Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.742Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1008","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:49:58.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf47"}
+2025-01-11T18:23:41.743Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.768Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf48"}
+2025-01-11T18:23:41.769Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.793Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf49"}
+2025-01-11T18:23:41.794Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.820Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"LIFELINK-P-1001","make":"solaredge","model":null,"systemDateTime":"2025-01-09T13:23:06.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf4a"}
+2025-01-11T18:23:41.821Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN6789","plantId":"plant-007","make":"Solar edge","model":null,"systemDateTime":"2025-01-07T23:11:46.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.847Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN6789","plantId":"plant-007","make":"Solar edge","model":null,"systemDateTime":"2025-01-07T23:11:46.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf4b"}
+2025-01-11T18:23:41.857Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.890Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"SolarEdge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf4c"}
+2025-01-11T18:23:41.891Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:26:04.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.915Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-03T03:26:04.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf4d"}
+2025-01-11T18:23:41.917Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN-12345","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:05:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.941Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN-12345","plantId":"GREENTEK-P-1001","make":"Solar","model":null,"systemDateTime":"2025-01-02T01:05:08.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf4e"}
+2025-01-11T18:23:41.942Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:07:52.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.966Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"SN12345","plantId":"plant-006","make":"Solar","model":null,"systemDateTime":"2025-01-07T23:07:52.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf4f"}
+2025-01-11T18:23:41.967Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"solaredge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:41.992Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"SHASHIDHAR-P-1012","make":"solaredge","model":null,"systemDateTime":"2025-01-09T10:27:44.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf50"}
+2025-01-11T18:23:41.993Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:42.018Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72da08f41452b94cf51"}
+2025-01-11T18:23:42.019Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:42.044Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1005","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:12:36.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72ea08f41452b94cf52"}
+2025-01-11T18:23:42.045Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:42.069Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"RISHEEK-P-1006","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:22:19.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72ea08f41452b94cf53"}
+2025-01-11T18:23:42.070Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-09T10:22:25.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:42.100Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"VP5469","plantId":"plant-010","make":"Solar man","model":null,"systemDateTime":"2025-01-09T10:22:25.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72ea08f41452b94cf54"}
+2025-01-11T18:23:42.101Z - L2 - MON-1 - Process - SUCCESS - Processed device: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:09.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A"}
+2025-01-11T18:23:42.125Z - L1 - MON-1 - MongoDB - SUCCESS - Inserted device into MongoDB: {"serialNumber":"IN000NNN2, 7E13A813-4C, 7E13A7F5-2D","plantId":"MOHANA-P-1001","make":"SolarEdge","model":null,"systemDateTime":"2025-01-10T06:10:09.000Z","url":"N/A","userName":"N/A","apiKey":"N/A","password":"N/A","_id":"6782b72ea08f41452b94cf55"}

@@ -483,7 +483,7 @@ router.post("/", async (req, res) => {
     const [users] = await pool.query(
       `
       SELECT 
-        u.user_id, u.first_name, u.last_name, u.passwordhashcode, u.user_role, u.entityid, u.delete_flag,
+        u.user_id, u.first_name, u.last_name, u.passwordhashcode, u.user_role, u.entityid, u.delete_flag, u.user_type,
         e.entityname, e.namespace
       FROM gsai_user u
       LEFT JOIN EntityMaster e ON u.entityid = e.entityid
@@ -541,7 +541,8 @@ router.post("/", async (req, res) => {
       lastName: user.last_name,
       entityName: user.entityname, // Now sending entityname
       email: email,
-      role: user.user_role,
+      user_role: user.user_role,
+      user_type: user.user_type,
       userId: user.user_id,
       entityId: user.entityid,
       userValue: userValue, // Adding user_value to the response
