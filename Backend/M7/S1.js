@@ -3,10 +3,10 @@
 // Import necessary modules for environment configurations, MongoDB operations, logging, and file operations
 // Written by Vishnu Prasad S
 // Written at date: 10-04-2024
-require('dotenv').config();
-const { MongoClient } = require('mongodb');
-const { log } = require('util');
-const fs = require('fs').promises;
+require("dotenv").config();
+const { MongoClient } = require("mongodb");
+const { log } = require("util");
+const fs = require("fs").promises;
 
 // Function to log messages to a file, including the timestamp and the message content
 // Useful for tracking application behavior and diagnosing issues
@@ -22,32 +22,38 @@ const fs = require('fs').promises;
 //     }
 // }
 
-async function logToFile(serviceName, logLevel, operationType, status, message) {
-    const timestamp = new Date().toISOString();
-    const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+async function logToFile(
+  serviceName,
+  logLevel,
+  operationType,
+  status,
+  message
+) {
+  const timestamp = new Date().toISOString();
+  const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
 
-    // Ensure the logs directory exists
-    const logDirectory = path.join(__dirname, 'logs');
-    try {
-        if (!await fs.access(logDirectory)) {
-            await fs.mkdir(logDirectory);
-        }
-    } catch (err) {
-        if (err.code === 'ENOENT') {
-            await fs.mkdir(logDirectory);
-        } else {
-            console.error('Error creating logs directory:', err);
-            return;
-        }
+  // Ensure the logs directory exists
+  const logDirectory = path.join(__dirname, "logs");
+  try {
+    if (!(await fs.access(logDirectory))) {
+      await fs.mkdir(logDirectory);
     }
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      await fs.mkdir(logDirectory);
+    } else {
+      console.error("Error creating logs directory:", err);
+      return;
+    }
+  }
 
-    // Write the log message to M7.log inside the logs directory
-    const logFilePath = path.join(logDirectory, 'M7.log');
-    try {
-        await fs.appendFile(logFilePath, logMessage);
-    } catch (err) {
-        console.error('Error writing to log file:', err);
-    }
+  // Write the log message to M7.log inside the logs directory
+  const logFilePath = path.join(logDirectory, "M7.log");
+  try {
+    await fs.appendFile(logFilePath, logMessage);
+  } catch (err) {
+    console.error("Error writing to log file:", err);
+  }
 }
 /*async function aggregateDeviceData(database) {
     const sourceCollection = database.collection(process.env.MONGODB_COLLECTION_NAME);
@@ -81,68 +87,88 @@ async function logToFile(serviceName, logLevel, operationType, status, message) 
 // Processes data to group by plant ID and collects device UUIDs for each plant
 // Written by Vishnu Prasad S
 // Written at date: 10-04-2024
-async function aggregateDeviceData(database)
-// Access the source and temporary collections from the MongoDB database
-// These collections are used to read raw data and store aggregated results, respectively
-// Written by Vishnu Prasad S
-// Written at date: 10-04-2024
-{
-    const sourceCollection = database.collection(process.env.MONGODB_COLLECTION_NAME);
-    const tempCollection = database.collection(process.env.MONGODB_TEMP_COLLECTION_NAME);
-    logToFile("M7(S1)", "L1","S1 Service", "success", "Started Successfully...")
-    // Define the aggregation pipeline to group data by PlantID and collect associated DeviceUUIDs
-    // This operation groups all device identifiers under their respective plant identifiers
+async function aggregateDeviceData(database) {
+  // Access the source and temporary collections from the MongoDB database
+  // These collections are used to read raw data and store aggregated results, respectively
+  // Written by Vishnu Prasad S
+  // Written at date: 10-04-2024
+  const sourceCollection = database.collection(
+    process.env.MONGODB_COLLECTION_NAME
+  );
+  const tempCollection = database.collection(
+    process.env.MONGODB_TEMP_COLLECTION_NAME
+  );
+  logToFile("M7(S1)", "L1", "S1 Service", "success", "Started Successfully...");
+  // Define the aggregation pipeline to group data by PlantID and collect associated DeviceUUIDs
+  // This operation groups all device identifiers under their respective plant identifiers
+  // Written by Vishnu Prasad S
+  // Written at date: 10-04-2024
+  const aggregationPipeline = [
+    {
+      $group: {
+        _id: "$PlantID",
+        DeviceUUIDs: { $push: "$DeviceUUID" },
+      },
+    },
+  ];
+
+  // Calculate the current local date and time in IST (Indian Standard Time, UTC+5:30)
+  // The LocalDateTime is used to timestamp the aggregated data entries uniquely
+  // Written by Vishnu Prasad S
+  // Written at date: 10-04-2024
+  const currentUtcDate = new Date();
+  const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours and 30 minutes converted to milliseconds
+  const istDate = new Date(currentUtcDate.getTime() + istOffset);
+  const LocalDateTime = istDate
+    .toISOString()
+    .replace("T", " ")
+    .substring(0, 16)
+    .replace(":", "-");
+
+  // Execute the aggregation pipeline and process the results
+  // Each result is checked against existing entries to avoid duplicates before insertion
+  // Written by Vishnu Prasad S
+  // Written at date: 10-04-2024
+  const results = await sourceCollection
+    .aggregate(aggregationPipeline)
+    .toArray();
+  for (let result of results) {
+    // Check if this aggregate already exists in tempCollection for the current LocalDateTime
+    const existingAggregate = await tempCollection.findOne({
+      PlantId: result._id,
+      LocalDateTime: LocalDateTime,
+    });
+
+    // Insert the new aggregated data if it does not already exist for the current LocalDateTime
     // Written by Vishnu Prasad S
     // Written at date: 10-04-2024
-    const aggregationPipeline = [
-        {
-            $group: {
-                _id: "$PlantID",
-                DeviceUUIDs: { $push: "$DeviceUUID" }
-            }
-        }
-    ];
-
-    // Calculate the current local date and time in IST (Indian Standard Time, UTC+5:30)
-    // The LocalDateTime is used to timestamp the aggregated data entries uniquely
-    // Written by Vishnu Prasad S
-    // Written at date: 10-04-2024
-    const currentUtcDate = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours and 30 minutes converted to milliseconds
-    const istDate = new Date(currentUtcDate.getTime() + istOffset);
-    const LocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
-
-    // Execute the aggregation pipeline and process the results
-    // Each result is checked against existing entries to avoid duplicates before insertion
-    // Written by Vishnu Prasad S
-    // Written at date: 10-04-2024
-    const results = await sourceCollection.aggregate(aggregationPipeline).toArray();
-    for (let result of results) {
-        // Check if this aggregate already exists in tempCollection for the current LocalDateTime
-        const existingAggregate = await tempCollection.findOne({
-            PlantId: result._id,
-            LocalDateTime: LocalDateTime
-        });
-
-        // Insert the new aggregated data if it does not already exist for the current LocalDateTime
-        // Written by Vishnu Prasad S
-        // Written at date: 10-04-2024
-        if (!existingAggregate) {
-            const document = {
-                LocalDateTime: LocalDateTime,
-                PlantId: result._id,
-                DeviceId: result.DeviceUUIDs
-            };
-            await tempCollection.insertOne(document);
-            await logToFile("M7(S1)", "L2","S1 Service", "Success", `Aggregated data inserted for PlantId: ${result._id}`);
-        } else {
-            await logToFile("M7(S1)", "L2","S1 Service", "Skipped", `Aggregated data already exists for PlantId: ${result._id} at LocalDateTime: ${LocalDateTime}`);
-        }
+    if (!existingAggregate) {
+      const document = {
+        LocalDateTime: LocalDateTime,
+        PlantId: result._id,
+        DeviceId: result.DeviceUUIDs,
+      };
+      await tempCollection.insertOne(document);
+      await logToFile(
+        "M7(S1)",
+        "L2",
+        "S1 Service",
+        "Success",
+        `Aggregated data inserted for PlantId: ${result._id}`
+      );
+    } else {
+      await logToFile(
+        "M7(S1)",
+        "L2",
+        "S1 Service",
+        "Skipped",
+        `Aggregated data already exists for PlantId: ${result._id} at LocalDateTime: ${LocalDateTime}`
+      );
     }
+  }
 }
 
 // ...
-
 
 // ... [other parts of your script remain unchanged] ...
 
@@ -211,7 +237,6 @@ async function aggregateDeviceData(database)
 // Ensure to call dfn_temp_devicedata within the context of a database connection, just like the main() function setup.
 */
 // ... [other parts of your script remain unchanged] ...
-
 
 //working part
 /*async function dfn_temp_devicedata(database) {
@@ -291,87 +316,120 @@ async function aggregateDeviceData(database)
 // This function retrieves relevant device data, calculates energy output, and stores the results in a MongoDB collection.
 // Written by Vishnu Prasad S
 // Written at date: 10-04-2024
-async function dfn_temp_devicedata(database)
-// Retrieve collection references from MongoDB for temporary, raw, and device data storage
-// These collections are used to fetch and store device data
-// Written by Vishnu Prasad S
-// Written at date: 10-04-2024
-{
-    const tempCollection = database.collection(process.env.MONGODB_TEMP_COLLECTION_NAME);
-    const rawDataCollection = database.collection(process.env.MONGODB_RAW_DATA_COLLECTION_NAME);
-    const deviceDataCollection = database.collection(process.env.MONGODB_DEVICE_DATA_COLLECTION_NAME);
+async function dfn_temp_devicedata(database) {
+  // Retrieve collection references from MongoDB for temporary, raw, and device data storage
+  // These collections are used to fetch and store device data
+  // Written by Vishnu Prasad S
+  // Written at date: 10-04-2024
+  const tempCollection = database.collection(
+    process.env.MONGODB_TEMP_COLLECTION_NAME
+  );
+  const rawDataCollection = database.collection(
+    process.env.MONGODB_RAW_DATA_COLLECTION_NAME
+  );
+  const deviceDataCollection = database.collection(
+    process.env.MONGODB_DEVICE_DATA_COLLECTION_NAME
+  );
 
-    // Calculate the current local date and time in IST timezone (UTC+5:30)
-    // This timestamp is used to retrieve and record data relevant to the local time context
-    // Written by Vishnu Prasad S
-    // Written at date: 10-04-2024    
-    const currentUtcDate = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
-    const istDate = new Date(currentUtcDate.getTime() + istOffset);
-    const currentLocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
+  // Calculate the current local date and time in IST timezone (UTC+5:30)
+  // This timestamp is used to retrieve and record data relevant to the local time context
+  // Written by Vishnu Prasad S
+  // Written at date: 10-04-2024
+  const currentUtcDate = new Date();
+  const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
+  const istDate = new Date(currentUtcDate.getTime() + istOffset);
+  const currentLocalDateTime = istDate
+    .toISOString()
+    .replace("T", " ")
+    .substring(0, 16)
+    .replace(":", "-");
 
-    // Find documents in the temporary collection that match the current local date and time
-    // These documents are processed to calculate energy outputs based on AC voltage and current readings
-    // Written by Vishnu Prasad S
-    // Written at date: 10-04-2024
-    const tempDevicesWithCurrentTime = await tempCollection.find({ LocalDateTime: currentLocalDateTime }).toArray();
+  // Find documents in the temporary collection that match the current local date and time
+  // These documents are processed to calculate energy outputs based on AC voltage and current readings
+  // Written by Vishnu Prasad S
+  // Written at date: 10-04-2024
+  const tempDevicesWithCurrentTime = await tempCollection
+    .find({ LocalDateTime: currentLocalDateTime })
+    .toArray();
 
-    for (const device of tempDevicesWithCurrentTime) {
-        for (const uuid of device.DeviceId) {
-            const trimmedUuid = String(uuid).trim();
+  for (const device of tempDevicesWithCurrentTime) {
+    for (const uuid of device.DeviceId) {
+      const trimmedUuid = String(uuid).trim();
 
-            const query = {
-                "DeviceUUIDMap.DeviceUUID": trimmedUuid,
-                "DeviceUUIDMap.LocalDateTime": device.LocalDateTime
-            };
-            // Fetch raw device data from the database based on the Device UUID and LocalDateTime
-            // Written by Vishnu Prasad S
-            // Written at date: 10-04-2024
-            const rawDeviceData = await rawDataCollection.findOne(query);
+      const query = {
+        "DeviceUUIDMap.DeviceUUID": trimmedUuid,
+        "DeviceUUIDMap.LocalDateTime": device.LocalDateTime,
+      };
+      // Fetch raw device data from the database based on the Device UUID and LocalDateTime
+      // Written by Vishnu Prasad S
+      // Written at date: 10-04-2024
+      const rawDeviceData = await rawDataCollection.findOne(query);
 
-            // Process AC voltage and current data if available
-            // Calculates energy output by multiplying voltage and current readings and integrating over time
-            // Written by Vishnu Prasad S
-            // Written at date: 10-04-2024
-            if (rawDeviceData) {
-                const ACVoltageTargetFields = rawDeviceData.DeviceUUIDMap.ACVoltageTargetFields;
-                const ACCurrentTargetFields = rawDeviceData.DeviceUUIDMap.ACCurrentTargetFields;
-                //passing header object
-                const header = rawDeviceData.DeviceUUIDMap.HeaderTarget || {};
+      // Process AC voltage and current data if available
+      // Calculates energy output by multiplying voltage and current readings and integrating over time
+      // Written by Vishnu Prasad S
+      // Written at date: 10-04-2024
+      if (rawDeviceData) {
+        const ACVoltageTargetFields =
+          rawDeviceData.DeviceUUIDMap.ACVoltageTargetFields;
+        const ACCurrentTargetFields =
+          rawDeviceData.DeviceUUIDMap.ACCurrentTargetFields;
+        //passing header object
+        const header = rawDeviceData.DeviceUUIDMap.HeaderTarget || {};
 
-                if (ACVoltageTargetFields && ACCurrentTargetFields) {
-                    const vac = ACVoltageTargetFields;
-                    const iac = ACCurrentTargetFields;
+        if (ACVoltageTargetFields && ACCurrentTargetFields) {
+          const vac = ACVoltageTargetFields;
+          const iac = ACCurrentTargetFields;
 
-                    const energyOutput = (vac.vACR * iac.iACR + vac.vACS * iac.iACS + vac.vACT * iac.iACT) * 900 / 1000;
+          const energyOutput =
+            ((vac.vACR * iac.iACR + vac.vACS * iac.iACS + vac.vACT * iac.iACT) *
+              900) /
+            1000;
 
-                    // Construct a new document for insertion into the device data collection
-                    // Written by Vishnu Prasad S
-                    // Written at date: 10-04-2024
-                    const newDoc = {
-                        Deviceuid: trimmedUuid,
-                        Localdatetime: device.LocalDateTime,
-                        Plantid: device.PlantId,
-                        GridStatus:device.GridStatus,
-                        Energyoutput: parseFloat(energyOutput.toFixed(2)),
-                        EnergyUOM: "KWH",
-                        Header: header // Directly passing the header object
-                    };
+          // Construct a new document for insertion into the device data collection
+          // Written by Vishnu Prasad S
+          // Written at date: 10-04-2024
+          const newDoc = {
+            Deviceuid: trimmedUuid,
+            Localdatetime: device.LocalDateTime,
+            Plantid: device.PlantId,
+            GridStatus: device.GridStatus,
+            Energyoutput: parseFloat(energyOutput.toFixed(2)),
+            EnergyUOM: "KWH",
+            Header: header, // Directly passing the header object
+          };
 
-                    // Insert the new document into the MongoDB collection and log the operation
-                    // Written by Vishnu Prasad S
-                    // Written at date: 10-04-2024
-                    await deviceDataCollection.insertOne(newDoc);
-                    await logToFile("M7(S1)", "L2","S1 Service", "Info", `Inserted calculated data for DeviceUUID: ${trimmedUuid} into Temp_devicedata`);
-                } else {
-                    await logToFile("M7(S1)", "L2","S1 Service", "Error", `ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: ${trimmedUuid} at LocaldateTime: ${device.LocalDateTime}`);
-                }
-
-            } else {
-                await logToFile("M7(S1)", "L2","S1 Service", "Error", `No raw data found for DeviceUUID: ${trimmedUuid} at LocalDateTime: ${device.LocalDateTime}`);
-            }
+          // Insert the new document into the MongoDB collection and log the operation
+          // Written by Vishnu Prasad S
+          // Written at date: 10-04-2024
+          await deviceDataCollection.insertOne(newDoc);
+          await logToFile(
+            "M7(S1)",
+            "L2",
+            "S1 Service",
+            "Info",
+            `Inserted calculated data for DeviceUUID: ${trimmedUuid} into Temp_devicedata`
+          );
+        } else {
+          await logToFile(
+            "M7(S1)",
+            "L2",
+            "S1 Service",
+            "Error",
+            `ACVoltageTargetFields or ACCurrentTargetFields are empty for DeviceUUID: ${trimmedUuid} at LocaldateTime: ${device.LocalDateTime}`
+          );
         }
+      } else {
+        await logToFile(
+          "M7(S1)",
+          "L2",
+          "S1 Service",
+          "Error",
+          `No raw data found for DeviceUUID: ${trimmedUuid} at LocalDateTime: ${device.LocalDateTime}`
+        );
+      }
     }
+  }
 }
 
 // Main function to run the aggregation logic and handle database connections
@@ -379,24 +437,38 @@ async function dfn_temp_devicedata(database)
 // Written by Vishnu Prasad S
 // Written at date: 10-04-2024
 async function main() {
-    const uri = process.env.MONGODB_URI;
-    const dbName = process.env.MONGODB_DB_NAME;
-    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  const uri = process.env.MONGODB_URI;
+  const dbName = process.env.MONGODB_DB_NAME;
+  const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
-    try {
-        await client.connect();
-        logToFile("M7(S1)", "L2","S1 Service", "success","Connected to MongoDB");
-        const database = client.db(dbName);
-        await aggregateDeviceData(database);
-        await dfn_temp_devicedata(database);
-
-    } catch (err) {
-        logToFile("M7(S1)", "L1","S1 Service","Error","Error in main:", err);
-    } finally {
-        await client.close();
-        logToFile("M7(S1)", "L2","S1 Service","database","Closed MongoDB connection");
-        logToFile("M7(S1)", "L1","S1 Service", "success", "Executed Successfully...")
-    }
+  try {
+    await client.connect();
+    logToFile("M7(S1)", "L2", "S1 Service", "success", "Connected to MongoDB");
+    const database = client.db(dbName);
+    await aggregateDeviceData(database);
+    await dfn_temp_devicedata(database);
+  } catch (err) {
+    logToFile("M7(S1)", "L1", "S1 Service", "Error", "Error in main:", err);
+  } finally {
+    await client.close();
+    logToFile(
+      "M7(S1)",
+      "L2",
+      "S1 Service",
+      "database",
+      "Closed MongoDB connection"
+    );
+    logToFile(
+      "M7(S1)",
+      "L1",
+      "S1 Service",
+      "success",
+      "Executed Successfully..."
+    );
+  }
 }
 // Execute the main function and handle any uncaught exceptions
 // Central execution point for the MongoDB aggregation logic
@@ -404,6 +476,4 @@ async function main() {
 // Written at date: 10-04-2024
 main().catch(console.error);
 
-
 // End of code block
-

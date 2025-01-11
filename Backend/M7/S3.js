@@ -4,15 +4,18 @@
 // Sets up MongoDB client for database interactions and configures environment variables
 // Written by Vishnu Prasad S
 // Written at date: 23-04-2024
-require('dotenv').config();
-const { MongoClient } = require('mongodb');
-const fs = require('fs').promises;
+require("dotenv").config();
+const { MongoClient } = require("mongodb");
+const fs = require("fs").promises;
 // Define MongoDB connection URI and client with proper configuration for useUnifiedTopology and useNewUrlParser
 // MongoClient is used to connect to the MongoDB database where all operations are performed
 // Written by Vishnu Prasad S
 // Written at date: 23-04-2024
 const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Database and collection names are retrieved from environment variables for modularity and security
 // These collections are used throughout the script for various data operations
@@ -20,9 +23,12 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 // Written at date: 23-04-2024
 const dbName = process.env.MONGODB_DB_NAME;
 const plantDataCollectionName = process.env.MONGODB_TEMP_PLANT_COLLECTION_NAME;
-const plantEnergyCollectionName = process.env.MONGODB_PLANT_ENERGY_COLLECTION_NAME;
-const deviceDataCollectionName = process.env.MONGODB_DEVICE_DATA_COLLECTION_NAME;
-const deviceEnergyCollectionName = process.env.MONGODB_DEVICE_ENERGY_COLLECTION_NAME;
+const plantEnergyCollectionName =
+  process.env.MONGODB_PLANT_ENERGY_COLLECTION_NAME;
+const deviceDataCollectionName =
+  process.env.MONGODB_DEVICE_DATA_COLLECTION_NAME;
+const deviceEnergyCollectionName =
+  process.env.MONGODB_DEVICE_ENERGY_COLLECTION_NAME;
 
 // Function to log messages to a file with timestamp, enhancing traceability and error handling
 // Logs include service name, operation type, status, and detailed messages for auditing purposes
@@ -37,32 +43,38 @@ const deviceEnergyCollectionName = process.env.MONGODB_DEVICE_ENERGY_COLLECTION_
 //         console.error('Error writing to log file:', err);
 //     }
 // }
-async function logToFile(serviceName, logLevel, operationType, status, message) {
-    const timestamp = new Date().toISOString();
-    const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
+async function logToFile(
+  serviceName,
+  logLevel,
+  operationType,
+  status,
+  message
+) {
+  const timestamp = new Date().toISOString();
+  const logMessage = `${timestamp}\t${logLevel}\t${serviceName}\t${operationType}\t${status}\t${message}\n`;
 
-    // Ensure the logs directory exists
-    const logDirectory = path.join(__dirname, 'logs');
-    try {
-        if (!await fs.access(logDirectory)) {
-            await fs.mkdir(logDirectory);
-        }
-    } catch (err) {
-        if (err.code === 'ENOENT') {
-            await fs.mkdir(logDirectory);
-        } else {
-            console.error('Error creating logs directory:', err);
-            return;
-        }
+  // Ensure the logs directory exists
+  const logDirectory = path.join(__dirname, "logs");
+  try {
+    if (!(await fs.access(logDirectory))) {
+      await fs.mkdir(logDirectory);
     }
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      await fs.mkdir(logDirectory);
+    } else {
+      console.error("Error creating logs directory:", err);
+      return;
+    }
+  }
 
-    // Write the log message to M7.log inside the logs directory
-    const logFilePath = path.join(logDirectory, 'M7.log');
-    try {
-        await fs.appendFile(logFilePath, logMessage);
-    } catch (err) {
-        console.error('Error writing to log file:', err);
-    }
+  // Write the log message to M7.log inside the logs directory
+  const logFilePath = path.join(logDirectory, "M7.log");
+  try {
+    await fs.appendFile(logFilePath, logMessage);
+  } catch (err) {
+    console.error("Error writing to log file:", err);
+  }
 }
 
 // Main function to execute database operations and calculations for plant and device energy
@@ -70,29 +82,51 @@ async function logToFile(serviceName, logLevel, operationType, status, message) 
 // Written by Vishnu Prasad S
 // Written at date: 23-04-2024
 async function main() {
-    try {
-        console.log("M7(S3)", "L1","S3 Service", "success","Started Successfully..");
-        await client.connect();
-        console.log("M7(S3)", "L2","S3 Service", "success","Connected correctly to server");
-        const db = client.db(dbName);
-        // Calculate the current LocalDateTime in IST (UTC+5:30) to be used in subsequent operations
+  try {
+    console.log(
+      "M7(S3)",
+      "L1",
+      "S3 Service",
+      "success",
+      "Started Successfully.."
+    );
+    await client.connect();
+    console.log(
+      "M7(S3)",
+      "L2",
+      "S3 Service",
+      "success",
+      "Connected correctly to server"
+    );
+    const db = client.db(dbName);
+    // Calculate the current LocalDateTime in IST (UTC+5:30) to be used in subsequent operations
 
-        const currentUtcDate = new Date();
-        const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
-        const istDate = new Date(currentUtcDate.getTime() + istOffset);
-        const currentLocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
-        const specifiedDate = currentLocalDateTime;
-        // Perform energy calculations for both plant and device data
-        await calculateAndStorePlantTotalEnergy(db, currentLocalDateTime);
-        await calculateAndStoreDeviceTotalEnergy(db, currentLocalDateTime);
+    const currentUtcDate = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
+    const istDate = new Date(currentUtcDate.getTime() + istOffset);
+    const currentLocalDateTime = istDate
+      .toISOString()
+      .replace("T", " ")
+      .substring(0, 16)
+      .replace(":", "-");
+    const specifiedDate = currentLocalDateTime;
+    // Perform energy calculations for both plant and device data
+    await calculateAndStorePlantTotalEnergy(db, currentLocalDateTime);
+    await calculateAndStoreDeviceTotalEnergy(db, currentLocalDateTime);
 
-        logToFile("M7(S3)", "L2","S3 Service", "success","Operations completed successfully.");
-    } catch (err) {
-        //console.error('An error occurred:', err);
-        await logToFile("M7(S3)", "L2","S3 Service", "Error", err.message);
-    } finally {
-        await client.close();
-    }
+    logToFile(
+      "M7(S3)",
+      "L2",
+      "S3 Service",
+      "success",
+      "Operations completed successfully."
+    );
+  } catch (err) {
+    //console.error('An error occurred:', err);
+    await logToFile("M7(S3)", "L2", "S3 Service", "Error", err.message);
+  } finally {
+    await client.close();
+  }
 }
 
 /*async function calculateAndStorePlantTotalEnergy(db, currentLocalDateTime) {
@@ -128,27 +162,32 @@ async function main() {
 }
 */
 
-
 async function calculateAndStorePlantTotalEnergy(db, currentLocalDateTime) {
-    logToFile("M7(S3)", "L2","S3 Service", "success",'calculateAndStorePlantTotalEnergy started'); // Log start
-    // Retrieve the MongoDB collections for plant data and energy
-    // These collections are utilized to fetch raw plant data and store aggregated energy results
-    // Written by Vishnu Prasad S
-    // Written at date: 23-04-2024
-    const plantDataCollection = db.collection(plantDataCollectionName);
-    const plantEnergyCollection = db.collection(plantEnergyCollectionName);
+  logToFile(
+    "M7(S3)",
+    "L2",
+    "S3 Service",
+    "success",
+    "calculateAndStorePlantTotalEnergy started"
+  ); // Log start
+  // Retrieve the MongoDB collections for plant data and energy
+  // These collections are utilized to fetch raw plant data and store aggregated energy results
+  // Written by Vishnu Prasad S
+  // Written at date: 23-04-2024
+  const plantDataCollection = db.collection(plantDataCollectionName);
+  const plantEnergyCollection = db.collection(plantEnergyCollectionName);
 
-    // Extract only the date part (YYYY-MM-DD) for matching documents by date, ensuring data is aggregated daily
-    // This simplifies the matching process in the MongoDB query
-    // Written by Vishnu Prasad S
-    // Written at date: 23-04-2024
-    const dateOnly = specifiedDate.slice(0, 10);
+  // Extract only the date part (YYYY-MM-DD) for matching documents by date, ensuring data is aggregated daily
+  // This simplifies the matching process in the MongoDB query
+  // Written by Vishnu Prasad S
+  // Written at date: 23-04-2024
+  const dateOnly = specifiedDate.slice(0, 10);
 
-    // Define the MongoDB aggregation pipeline for processing plant energy data
-    // The pipeline matches documents by date, unwinds the data, groups by plant ID, and computes total energy and performance ratio (PR)
-    // Written by Vishnu Prasad S
-    // Written at date: 23-04-2024    
-    /*const pipeline = [
+  // Define the MongoDB aggregation pipeline for processing plant energy data
+  // The pipeline matches documents by date, unwinds the data, groups by plant ID, and computes total energy and performance ratio (PR)
+  // Written by Vishnu Prasad S
+  // Written at date: 23-04-2024
+  /*const pipeline = [
         {
             $match: {
                 // Match entries by date, using a regex pattern to include all entries from the specified date
@@ -215,10 +254,10 @@ async function calculateAndStorePlantTotalEnergy(db, currentLocalDateTime) {
     }
     logToFile("M7(S3)", "L2","S3 Service", "success",'calculateAndStorePlantTotalEnergy finished'); // Log finish
 }*/
-// Split the date from the local datetime to filter records from the same day
-const currentDate = currentLocalDateTime.split(' ')[0];
+  // Split the date from the local datetime to filter records from the same day
+  const currentDate = currentLocalDateTime.split(" ")[0];
 
-/*const pipeline = [
+  /*const pipeline = [
     { $match: { "Plantdata.LocalDateTime": { $regex: `^${currentDate}` } } }, // Filter to current day
     { $unwind: "$Plantdata" },
     { $sort: { "Plantdata.LocalDateTime": -1 } }, // Sort to ensure latest entries are processed first
@@ -230,21 +269,23 @@ const currentDate = currentLocalDateTime.split(' ')[0];
         Header: { $first: "$Header" } ,// Maintain the first encountered Header for completeness
         Capacity: { $first: "$Header.PlantCapacity" } // Correctly accessing PlantCapacity from Header
     }},*/
-    const pipeline = [
-        { $match: { "Plantdata.LocalDateTime": { $regex: `^${currentDate}` } } }, // Filter to current day
-        { $unwind: "$Plantdata" },
-        { $match: { "Plantdata.LocalDateTime": { $regex: `^${currentDate}` } } }, // Filter to current day again after unwinding
-        { $group: {
-            _id: "$Plantid",
-            TotalEnergy: { $sum: "$Plantdata.OutputEnergy" }, // Sum of all output energy for the day
-            LatestOutputEnergy: { $first: "$Plantdata.OutputEnergy" }, // Capture the latest output energy
-            LatestDateTime: { $first: "$Plantdata.LocalDateTime" }, // Capture the datetime of the latest output
-            Header: { $first: "$Header" }, // Maintain the first encountered Header for completeness
-            Capacity: { $first: "$Header.PlantCapacity" } // Correctly accessing PlantCapacity from Header
-        }},
-   
-    
-    { $project: {
+  const pipeline = [
+    { $match: { "Plantdata.LocalDateTime": { $regex: `^${currentDate}` } } }, // Filter to current day
+    { $unwind: "$Plantdata" },
+    { $match: { "Plantdata.LocalDateTime": { $regex: `^${currentDate}` } } }, // Filter to current day again after unwinding
+    {
+      $group: {
+        _id: "$Plantid",
+        TotalEnergy: { $sum: "$Plantdata.OutputEnergy" }, // Sum of all output energy for the day
+        LatestOutputEnergy: { $first: "$Plantdata.OutputEnergy" }, // Capture the latest output energy
+        LatestDateTime: { $first: "$Plantdata.LocalDateTime" }, // Capture the datetime of the latest output
+        Header: { $first: "$Header" }, // Maintain the first encountered Header for completeness
+        Capacity: { $first: "$Header.PlantCapacity" }, // Correctly accessing PlantCapacity from Header
+      },
+    },
+
+    {
+      $project: {
         _id: 0, // Let MongoDB handle _id creation
         Plantid: "$_id",
         Date: "$LatestDateTime", // Use the datetime from the latest entry
@@ -253,37 +294,47 @@ const currentDate = currentLocalDateTime.split(' ')[0];
         EnergyUnits: "KWH",
         Header: "$Header",
         PRPercent: {
-            $cond: {
-                if: { $eq: ["$Capacity", 0] }, // Check to prevent division by zero
-                then: 0,
-                else: {
-                    $multiply: [
-                        {
-                            $divide: [
-                                "$TotalEnergy",
-                                { $multiply: ["$Capacity", 1000, 5.5] } // Convert capacity from MW to KWH if necessary
-                            ]
-                        },
-                        100
-                    ]
-                }
-            }
-        }
-    }}
-];
+          $cond: {
+            if: { $eq: ["$Capacity", 0] }, // Check to prevent division by zero
+            then: 0,
+            else: {
+              $multiply: [
+                {
+                  $divide: [
+                    "$TotalEnergy",
+                    { $multiply: ["$Capacity", 1000, 5.5] }, // Convert capacity from MW to KWH if necessary
+                  ],
+                },
+                100,
+              ],
+            },
+          },
+        },
+      },
+    },
+  ];
 
-const results = await plantDataCollection.aggregate(pipeline).toArray();
+  const results = await plantDataCollection.aggregate(pipeline).toArray();
 
-for (const result of results) {
+  for (const result of results) {
     await plantEnergyCollection.insertOne(result);
-    logToFile("M7(S3)", "L2", "S3 Service", "success", `Processed total energy for plant ${result.Plantid} with latest output at ${result.Date}`);
+    logToFile(
+      "M7(S3)",
+      "L2",
+      "S3 Service",
+      "success",
+      `Processed total energy for plant ${result.Plantid} with latest output at ${result.Date}`
+    );
+  }
+
+  logToFile(
+    "M7(S3)",
+    "L2",
+    "S3 Service",
+    "complete",
+    "calculateAndStorePlantTotalEnergy finished"
+  );
 }
-
-logToFile("M7(S3)", "L2", "S3 Service", "complete", 'calculateAndStorePlantTotalEnergy finished');
-}
-
-
-
 
 /*async function calculateAndStoreDeviceTotalEnergy(db, specifiedDate) {
   const deviceDataCollection = db.collection(deviceDataCollectionName);
@@ -327,79 +378,88 @@ logToFile("M7(S3)", "L2", "S3 Service", "complete", 'calculateAndStorePlantTotal
 // Written by Vishnu Prasad S
 // Written at date: 23-04-2024
 const currentUtcDate = new Date();
-        const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
-        const istDate = new Date(currentUtcDate.getTime() + istOffset);
-        const currentLocalDateTime = istDate.toISOString().replace('T', ' ').substring(0, 16).replace(':', '-');
-        const specifiedDate = currentLocalDateTime;
+const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds
+const istDate = new Date(currentUtcDate.getTime() + istOffset);
+const currentLocalDateTime = istDate
+  .toISOString()
+  .replace("T", " ")
+  .substring(0, 16)
+  .replace(":", "-");
+const specifiedDate = currentLocalDateTime;
 
-async function calculateAndStoreDeviceTotalEnergy(db, specifiedDate)
-// Retrieve device data and device energy collections from the MongoDB database
-// These collections are used to read raw data and store aggregated energy results
-// Written by Vishnu Prasad S
-// Written at date: 23-04-2024
-{
-    const deviceDataCollection = db.collection(deviceDataCollectionName);
-    const deviceEnergyCollection = db.collection(deviceEnergyCollectionName);
+async function calculateAndStoreDeviceTotalEnergy(db, specifiedDate) {
+  // Retrieve device data and device energy collections from the MongoDB database
+  // These collections are used to read raw data and store aggregated energy results
+  // Written by Vishnu Prasad S
+  // Written at date: 23-04-2024
+  const deviceDataCollection = db.collection(deviceDataCollectionName);
+  const deviceEnergyCollection = db.collection(deviceEnergyCollectionName);
 
-    // Extract only the date part (YYYY-MM-DD) for matching documents by date, ensuring data is aggregated daily
-    // This ensures that the energy data is summarized by each day without including time variations
+  // Extract only the date part (YYYY-MM-DD) for matching documents by date, ensuring data is aggregated daily
+  // This ensures that the energy data is summarized by each day without including time variations
+  // Written by Vishnu Prasad S
+  // Written at date: 23-04-2024
+  const dateOnly = specifiedDate.slice(0, 10);
+  // Define the aggregation pipeline for processing device energy data
+  // Pipeline matches documents by date, groups by device ID to sum energy outputs, and formats the results for storage
+  // Written by Vishnu Prasad S
+  // Written at date: 23-04-2024
+  const pipeline = [
+    {
+      $match: {
+        // Match entries only by date, assuming Localdatetime is stored as 'YYYY-MM-DD HH-MM'
+        Localdatetime: { $regex: `^${dateOnly}` },
+      },
+    },
+    {
+      $group: {
+        _id: "$Deviceuid", // Group by device ID
+        TotalEnergy: { $sum: "$Energyoutput" }, // Sum the energy outputs for the device
+        Header: { $first: "$Header" }, // Capture header from the first document of each group
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        DeviceID: "$_id",
+        Date: { $concat: [dateOnly, " 00-00"] }, // Format date with '00-00' for time
+        EnergyOutput: "$TotalEnergy",
+        EnergyUnits: "KWH",
+        Header: "$Header",
+      },
+    },
+  ];
+  // Execute the aggregation pipeline and process the results
+  // Each result is upserted into the device energy collection, ensuring data is current and accurate
+  // Written by Vishnu Prasad S
+  // Written at date: 23-04-2024
+  const results = await deviceDataCollection.aggregate(pipeline).toArray();
+
+  for (const result of results) {
+    // Upsert the summarized daily energy data into the deviceEnergyCollection
+    // Upserts ensure that existing entries are updated or new entries are created if they do not exist
     // Written by Vishnu Prasad S
     // Written at date: 23-04-2024
-    const dateOnly = specifiedDate.slice(0, 10);
-    // Define the aggregation pipeline for processing device energy data
-    // Pipeline matches documents by date, groups by device ID to sum energy outputs, and formats the results for storage
+    await deviceEnergyCollection.updateOne(
+      {
+        DeviceID: result.DeviceID,
+        Date: result.Date,
+      },
+      { $set: result },
+      { upsert: true }
+    );
+    // Log the successful update or insertion of device energy data
+    // Logging provides traceability and helps in monitoring the operation's success
     // Written by Vishnu Prasad S
     // Written at date: 23-04-2024
-    const pipeline = [
-        {
-            $match: {
-                // Match entries only by date, assuming Localdatetime is stored as 'YYYY-MM-DD HH-MM'
-                "Localdatetime": { $regex: `^${dateOnly}` }
-            }
-        },
-        {
-            $group: {
-                _id: "$Deviceuid",  // Group by device ID
-                TotalEnergy: { $sum: "$Energyoutput" },  // Sum the energy outputs for the device
-                Header: { $first: "$Header" }  // Capture header from the first document of each group
-            }
-        },
-        {
-            $project: {
-                _id: 0,
-                DeviceID: "$_id",
-                Date: { $concat: [dateOnly, " 00-00"] },  // Format date with '00-00' for time
-                EnergyOutput: "$TotalEnergy",
-                EnergyUnits: "KWH",
-                Header: "$Header"
-            }
-        }
-    ];
-    // Execute the aggregation pipeline and process the results
-    // Each result is upserted into the device energy collection, ensuring data is current and accurate
-    // Written by Vishnu Prasad S
-    // Written at date: 23-04-2024
-    const results = await deviceDataCollection.aggregate(pipeline).toArray();
-
-    for (const result of results) {
-        // Upsert the summarized daily energy data into the deviceEnergyCollection
-        // Upserts ensure that existing entries are updated or new entries are created if they do not exist
-        // Written by Vishnu Prasad S
-        // Written at date: 23-04-2024
-        await deviceEnergyCollection.updateOne(
-            {
-                DeviceID: result.DeviceID,
-                Date: result.Date
-            },
-            { $set: result },
-            { upsert: true }
-        );
-        // Log the successful update or insertion of device energy data
-        // Logging provides traceability and helps in monitoring the operation's success
-        // Written by Vishnu Prasad S
-        // Written at date: 23-04-2024
-        await logToFile("M7(S3)", "L2","S3 Service", "success", `Processed total energy for device ${result.DeviceID} on ${result.Date}`);
-    }
+    await logToFile(
+      "M7(S3)",
+      "L2",
+      "S3 Service",
+      "success",
+      `Processed total energy for device ${result.DeviceID} on ${result.Date}`
+    );
+  }
 }
 
 // Execute the main function and handle any uncaught exceptions
