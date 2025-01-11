@@ -2825,3 +2825,103 @@
 2024-05-14T12:30:20.469Z	L2	Mon6	database	success	Received message:
 2024-05-14T12:30:20.883Z	L2	Mon6	database	success	Inserted document with _id: 6643595cc1cee468c7ff982b
 2024-05-14T12:30:20.907Z	L2	Mon6	database	success	Inserted document with _id: 6643595cc1cee468c7ff982c
+2025-01-11T04:51:24.084Z	L1	Mon6	M6 Service	success	started Successfully...
+2025-01-11T04:51:24.126Z	L2	Mon6	database	success	Connected to MongoDB.
+2025-01-11T04:51:26.414Z	L2	Mon6	connect	error	Failed to connect or listen to topic: connect ECONNREFUSED 148.72.245.47:5672
+2025-01-11T04:51:51.607Z	L1	Mon6	M6 Service	success	started Successfully...
+2025-01-11T04:51:51.651Z	L2	Mon6	database	success	Connected to MongoDB.
+2025-01-11T04:51:51.844Z	L2	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2025-01-11T04:51:51.868Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.040Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.043Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.050Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.052Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.054Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.059Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.061Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.065Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.068Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.072Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.074Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.075Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.076Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.078Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.081Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.082Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.084Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.085Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.086Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.088Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.089Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.090Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.091Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.093Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.097Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.100Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.101Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.104Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.104Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.106Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.108Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.109Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.110Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.119Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.120Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.121Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.122Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.123Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.124Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.141Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.142Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.143Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.144Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.147Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.149Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.155Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.155Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.156Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.157Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.158Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.158Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.160Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.160Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.161Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.164Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.165Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.168Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.170Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-11T04:51:52.171Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-11T04:51:52.172Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.172Z	L2	Mon6	database	success	Received message:
+2025-01-11T04:51:52.517Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b811
+2025-01-11T04:51:52.519Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b812
+2025-01-11T04:51:52.540Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b815
+2025-01-11T04:51:52.544Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b816
+2025-01-11T04:51:52.565Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b817
+2025-01-11T04:51:52.568Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b818
+2025-01-11T04:51:52.589Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b819
+2025-01-11T04:51:52.592Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b81a
+2025-01-11T04:51:52.616Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b81b
+2025-01-11T04:51:52.618Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b81c
+2025-01-11T04:51:52.639Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b81d
+2025-01-11T04:51:52.647Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b81e
+2025-01-11T04:51:52.673Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b81f
+2025-01-11T04:51:52.684Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b820
+2025-01-11T04:51:52.705Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b821
+2025-01-11T04:51:52.723Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b824
+2025-01-11T04:51:52.729Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b814
+2025-01-11T04:51:52.745Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b813
+2025-01-11T04:51:52.747Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b825
+2025-01-11T04:51:52.749Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b826
+2025-01-11T04:51:52.762Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b827
+2025-01-11T04:51:52.770Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b829
+2025-01-11T04:51:52.773Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b82a
+2025-01-11T04:51:52.779Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b828
+2025-01-11T04:51:52.792Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b82b
+2025-01-11T04:51:52.793Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b82c
+2025-01-11T04:51:52.797Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b82d
+2025-01-11T04:51:52.807Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b82e
+2025-01-11T04:51:52.819Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b830
+2025-01-11T04:51:52.820Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b82f
+2025-01-11T04:51:52.873Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b822
+2025-01-11T04:51:52.902Z	L2	Mon6	database	success	Inserted document with _id: 6781f8e82732c2be61c8b823
