@@ -36,14 +36,13 @@
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get("/getUserDetails", async (req, res) => {
-  const { userid, entityid } = req.query;
+router.get("/getUserDetails", auth, async (req, res) => {
+  const { userid } = req.query;
 
-  if (!userid || !entityid) {
-    return res
-      .status(400)
-      .json({ message: "userid and entityid are required" });
+  if (!userid) {
+    return res.status(400).json({ message: "userid are required" });
   }
 
   try {
@@ -52,8 +51,8 @@ router.get("/getUserDetails", async (req, res) => {
       `SELECT first_name AS firstName, last_name AS lastName, mobile_number AS mobileNo, 
               user_role AS role, email, delete_flag AS disableUser,user_type
        FROM gsai_user
-       WHERE user_id = ? AND entityid = ?`,
-      [userid, entityid]
+       WHERE user_id = ?`,
+      [userid]
     );
 
     if (userRows.length === 0) {

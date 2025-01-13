@@ -1,48 +1,50 @@
 // routes/deviceRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const db = require("../../db"); // Database connection
-const { v4: uuidv4 } = require('uuid'); // Importing uuidv4 to generate UUIDs
-const { body, validationResult } = require('express-validator');
-
+const { v4: uuidv4 } = require("uuid"); // Importing uuidv4 to generate UUIDs
+const { body, validationResult } = require("express-validator");
+const auth = require("../../middleware/auth");
 
 // Updated route for device information
-router.post('/deviceInfo',
-    
-    [
-        body('Plant_id').notEmpty().withMessage('Plant_id is required'),
-        body('user_id').notEmpty().withMessage('user_id is required'),
-        body('Device_type').notEmpty().withMessage('Device_type is required'),
-        // Add other validations if needed
-    ],
-    
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        
-        const { 
-            Plant_id, 
-            user_id ,// Extract user_id from request
-            Device_type, // This will be used for device_type_id, 
-            Make, 
-            Rating, 
-            Quantity, 
-            Serial_Nos 
-        } = req.body;
+router.post(
+  "/deviceInfo",
+  auth,
 
-        // Generate a new UUID for Device_id
-        const Device_id = uuidv4(); 
+  [
+    body("Plant_id").notEmpty().withMessage("Plant_id is required"),
+    body("user_id").notEmpty().withMessage("user_id is required"),
+    body("Device_type").notEmpty().withMessage("Device_type is required"),
+    // Add other validations if needed
+  ],
 
-        // Generate the system & current date and time in the format YYYY-MM-DD HH:MM:SS
-        const system_date_time = new Date().toISOString(); // UTC format
-        const current_date_time = new Date().toISOString(); // UTC format
-        //const system_date_time = new Date().toISOString().slice(0, 19).replace('T', ' '); 
-        //const current_date_time = new Date().toISOString().slice(0, 19).replace('T', ' '); 
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-        try {
-            const sql = `INSERT INTO gsai_device_master (
+    const {
+      Plant_id,
+      user_id, // Extract user_id from request
+      Device_type, // This will be used for device_type_id,
+      Make,
+      Rating,
+      Quantity,
+      Serial_Nos,
+    } = req.body;
+
+    // Generate a new UUID for Device_id
+    const Device_id = uuidv4();
+
+    // Generate the system & current date and time in the format YYYY-MM-DD HH:MM:SS
+    const system_date_time = new Date().toISOString(); // UTC format
+    const current_date_time = new Date().toISOString(); // UTC format
+    //const system_date_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    //const current_date_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    try {
+      const sql = `INSERT INTO gsai_device_master (
                             device_id, 
                             master_device_id, 
                             device_type_id,  
@@ -61,8 +63,8 @@ router.post('/deviceInfo',
                             System_date_time
                         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-            // Log the parameters being passed to the query
-        /* console.log("Inserting values:", [
+      // Log the parameters being passed to the query
+      /* console.log("Inserting values:", [
                 Device_id,
                 null,
                 Device_type || null,
@@ -103,32 +105,37 @@ router.post('/deviceInfo',
                 system_date_time             // System_date_time
             ]);*/
 
-            // Execute the SQL query with appropriate values
-            await db.execute(sql, [
-                Device_id,                // Use the generated UUID
-                null,                     // master_device_id
-                Device_type || null,     // device_type_id from incoming request
-                Make || null,            // Make
-                null,                    // Model
-                current_date_time,       // create_date
-                current_date_time,       // last_update_date
-                user_id,                 // Set create_by_userid to user_id from request
-                user_id,                 // Set last_update_userid to user_id from request
-                0,                       // delete_flag
-                null,                    // uom
-                Plant_id || null,        // Plant_id
-                Rating || null,          // Rating
-                Quantity || null,        // Quantity
-                Serial_Nos || null,      // Serial_Nos
-                system_date_time         // System_date_time
-            ]);
-            
-            //console.log({ message: 'Device information stored successfully'});
-            return res.status(201).json({ message: 'Device information stored successfully' });
-        } catch (error) {
-            console.error('Error inserting data into the database:', error);
-            return res.status(500).json({ message: 'Error storing device information' });
-        }
-});
+      // Execute the SQL query with appropriate values
+      await db.execute(sql, [
+        Device_id, // Use the generated UUID
+        null, // master_device_id
+        Device_type || null, // device_type_id from incoming request
+        Make || null, // Make
+        null, // Model
+        current_date_time, // create_date
+        current_date_time, // last_update_date
+        user_id, // Set create_by_userid to user_id from request
+        user_id, // Set last_update_userid to user_id from request
+        0, // delete_flag
+        null, // uom
+        Plant_id || null, // Plant_id
+        Rating || null, // Rating
+        Quantity || null, // Quantity
+        Serial_Nos || null, // Serial_Nos
+        system_date_time, // System_date_time
+      ]);
+
+      //console.log({ message: 'Device information stored successfully'});
+      return res
+        .status(201)
+        .json({ message: "Device information stored successfully" });
+    } catch (error) {
+      console.error("Error inserting data into the database:", error);
+      return res
+        .status(500)
+        .json({ message: "Error storing device information" });
+    }
+  }
+);
 
 module.exports = router;

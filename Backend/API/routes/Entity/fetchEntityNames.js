@@ -2,8 +2,9 @@
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get("/fetchEntityNames", async (req, res) => {
+router.get("/fetchEntityNames", auth, async (req, res) => {
   try {
     const [rows] = await pool.query("SELECT entityname FROM EntityMaster");
     res.status(200).json(rows.map((row) => row.entityname));

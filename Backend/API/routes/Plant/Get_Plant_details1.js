@@ -1,12 +1,13 @@
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get('/Get_Plant_details1', async (req, res) => {
+router.get("/Get_Plant_details1", auth, async (req, res) => {
   const { entityid } = req.query;
 
   if (!entityid) {
-    return res.status(400).json({ message: 'entityid parameter is required' });
+    return res.status(400).json({ message: "entityid parameter is required" });
   }
 
   try {
@@ -22,13 +23,17 @@ router.get('/Get_Plant_details1', async (req, res) => {
     );
 
     if (plantRows.length === 0) {
-      return res.status(404).json({ message: 'No plants found for the specified entity ID' });
+      return res
+        .status(404)
+        .json({ message: "No plants found for the specified entity ID" });
     }
 
     res.status(200).json(plantRows);
   } catch (error) {
-    console.error('Error fetching plant details:', error);
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    console.error("Error fetching plant details:", error);
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 });
 

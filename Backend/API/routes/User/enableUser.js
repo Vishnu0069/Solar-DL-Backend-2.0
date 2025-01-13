@@ -1,8 +1,9 @@
 const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post("/enableUser", async (req, res) => {
+router.post("/enableUser", auth, async (req, res) => {
   const { userId } = req.body;
 
   // Validate input

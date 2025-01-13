@@ -1,8 +1,9 @@
 const express = require("express");
 const pool = require("../../db"); // Database connection
 const router = express.Router();
+const auth = require("../../middleware/auth");
 //test
-router.get("/unassignedPlants/:entityid", async (req, res) => {
+router.get("/unassignedPlants/:entityid", auth, async (req, res) => {
   const { entityid } = req.params;
 
   try {

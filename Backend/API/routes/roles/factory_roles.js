@@ -1,8 +1,9 @@
 const express = require("express");
 const pool = require("../../db"); // Database connection
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post("/factoryroles", async (req, res) => {
+router.post("/factoryroles", auth, async (req, res) => {
   const { user_role, user_type, module_name } = req.body;
 
   // Validate input

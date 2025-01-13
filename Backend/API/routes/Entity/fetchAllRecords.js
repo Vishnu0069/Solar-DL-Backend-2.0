@@ -483,9 +483,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const pool = require("../../db");
+const auth = require("../../middleware/auth");
 require("dotenv").config();
 
-router.get("/fetchAllRecords", async (req, res) => {
+router.get("/fetchAllRecords", auth, async (req, res) => {
   const { entityid } = req.query;
 
   if (!entityid) {

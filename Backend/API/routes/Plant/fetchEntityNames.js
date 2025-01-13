@@ -142,8 +142,9 @@ const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
 require("dotenv").config();
+const auth = require("../../middleware/auth");
 
-router.get("/fetchEntityNames", async (req, res) => {
+router.get("/fetchEntityNames", auth, async (req, res) => {
   const { entityid } = req.query;
 
   if (!entityid) {

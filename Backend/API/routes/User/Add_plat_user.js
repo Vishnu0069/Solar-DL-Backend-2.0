@@ -1,8 +1,9 @@
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post("/updatePlantUserRelations", async (req, res) => {
+router.post("/updatePlantUserRelations", auth, async (req, res) => {
   const { user_id, plant_ids } = req.body;
 
   if (

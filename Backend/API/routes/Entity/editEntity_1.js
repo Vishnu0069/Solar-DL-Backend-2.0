@@ -204,6 +204,7 @@ const pool = require("../../db");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.hostinger.com", // Hostinger's SMTP server
@@ -215,7 +216,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.put("/edit", async (req, res) => {
+router.put("/edit", auth, async (req, res) => {
   const {
     entityid,
     entityname,

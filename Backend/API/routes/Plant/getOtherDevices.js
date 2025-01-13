@@ -1,8 +1,8 @@
 const express = require("express");
 const pool = require("../../db"); // Assuming the database connection is set up in db.js
 const router = express.Router();
-
-router.get("/getOtherDevices", async (req, res) => {
+const auth = require("../../middleware/auth");
+router.get("/getOtherDevices", auth, async (req, res) => {
   try {
     // Query to fetch all devices from the Other_Devices table
     const [rows] = await pool.query(

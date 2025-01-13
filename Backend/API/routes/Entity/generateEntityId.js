@@ -1,18 +1,19 @@
 // In routes/Entity/generateEntityId.js
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post('/generateEntityId', async (req, res) => {
+router.post("/generateEntityId", auth, async (req, res) => {
   const { entityid } = req.body;
 
   if (!entityid) {
-    return res.status(400).json({ message: 'entityid is required' });
+    return res.status(400).json({ message: "entityid is required" });
   }
 
   try {
     // Use the provided `entityid` as the prefix
-    const prefix = entityid.toUpperCase().replace(/\s+/g, ''); // Convert to uppercase and remove spaces
+    const prefix = entityid.toUpperCase().replace(/\s+/g, ""); // Convert to uppercase and remove spaces
     let suffix = 1001;
     let newEntityId;
 
@@ -21,7 +22,7 @@ router.post('/generateEntityId', async (req, res) => {
 
       // Check if this entityid already exists in the database
       const [rows] = await pool.query(
-        'SELECT entityid FROM EntityMaster WHERE entityid = ?', 
+        "SELECT entityid FROM EntityMaster WHERE entityid = ?",
         [newEntityId]
       );
 
@@ -36,8 +37,10 @@ router.post('/generateEntityId', async (req, res) => {
 
     res.status(200).json({ entityid: newEntityId });
   } catch (error) {
-    console.error('Error generating entity ID:', error);
-    res.status(500).json({ message: 'Error generating entity ID', error: error.message });
+    console.error("Error generating entity ID:", error);
+    res
+      .status(500)
+      .json({ message: "Error generating entity ID", error: error.message });
   }
 });
 

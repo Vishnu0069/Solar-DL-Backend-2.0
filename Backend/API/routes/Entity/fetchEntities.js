@@ -2,8 +2,9 @@
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get("/fetchEntities", async (req, res) => {
+router.get("/fetchEntities", auth, async (req, res) => {
   const { search } = req.query;
 
   let query =

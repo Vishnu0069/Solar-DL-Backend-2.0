@@ -768,6 +768,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 // Configure Nodemailer with Hostinger SMTP
 const transporter = nodemailer.createTransport({
@@ -780,7 +781,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const {
     entityname,
     category,

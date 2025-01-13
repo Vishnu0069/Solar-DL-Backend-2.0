@@ -1409,6 +1409,7 @@ const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 require("dotenv").config({ path: __dirname + "/.env" });
 
@@ -1432,8 +1433,7 @@ const emailTemplates = {
     text: (plantName) => `Dear User,
 
 Welcome to the Plant Management System! A new account has been created for you for the plant "${plantName}".
-Your default password is: DefaultPass@123
-Please change your password upon first login.
+
 
 Best regards,
 Plant Management Team`,
@@ -1610,7 +1610,7 @@ async function handleEmailSending(
   }
 }
 
-router.post("/addPlant2", async (req, res) => {
+router.post("/addPlant2", auth, async (req, res) => {
   const {
     plant_id,
     entityid,
@@ -1642,8 +1642,8 @@ router.post("/addPlant2", async (req, res) => {
     EntityID,
     LoginEntityID,
     yield_value = null, // Added field
-    currency = null,    // Added field
-    timezone = null,    // Added field
+    currency = null, // Added field
+    timezone = null, // Added field
   } = req.body;
 
   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
@@ -1759,9 +1759,9 @@ router.post("/addPlant2", async (req, res) => {
         owner_email,
         mobileNumber,
         entityname,
-        yield_value,  // New field
-        currency,     // New field
-        timezone,     // New field
+        yield_value, // New field
+        currency, // New field
+        timezone, // New field
       ]
     );
 

@@ -54,8 +54,9 @@
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post("/disable", async (req, res) => {
+router.post("/disable", auth, async (req, res) => {
   const { userId } = req.body;
 
   if (!userId) {

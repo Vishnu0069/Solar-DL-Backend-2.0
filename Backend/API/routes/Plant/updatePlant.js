@@ -128,6 +128,7 @@ const pool = require("../../db"); // Ensure this points to your database connect
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 // Nodemailer transporter configuration
 const transporter = nodemailer.createTransport({
@@ -140,7 +141,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.post("/updatePlant", async (req, res) => {
+router.post("/updatePlant", auth, async (req, res) => {
   const {
     "Plant ID": plant_id,
     "Entity ID": entityid,

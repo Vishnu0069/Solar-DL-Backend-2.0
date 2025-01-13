@@ -77,8 +77,9 @@
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post("/updateUser", async (req, res) => {
+router.post("/updateUser", auth, async (req, res) => {
   const {
     userid,
     entityid,

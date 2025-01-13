@@ -64,8 +64,9 @@
 const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get("/fetchDeletedEntities", async (req, res) => {
+router.get("/fetchDeletedEntities", auth, async (req, res) => {
   const { entityid } = req.query;
 
   // Validate the input

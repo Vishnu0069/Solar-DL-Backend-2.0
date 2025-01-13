@@ -259,6 +259,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 require("dotenv").config({ path: __dirname + "/.env" }); // Load environment variables from .env file
 
 // Email configuration
@@ -272,7 +273,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.post("/add_user1", async (req, res) => {
+router.post("/add_user1", auth, async (req, res) => {
   const {
     firstName,
     lastName,

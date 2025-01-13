@@ -1,15 +1,20 @@
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get('/getPlantTypes', async (req, res) => {
+router.get("/getPlantTypes", auth, async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT type_id, type_name FROM Gsai_PlantType');
-    
+    const [rows] = await pool.query(
+      "SELECT type_id, type_name FROM Gsai_PlantType"
+    );
+
     res.status(200).json(rows);
   } catch (error) {
-    console.error('Error fetching plant types:', error);
-    res.status(500).json({ message: 'Error fetching plant types', error: error.message });
+    console.error("Error fetching plant types:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching plant types", error: error.message });
   }
 });
 

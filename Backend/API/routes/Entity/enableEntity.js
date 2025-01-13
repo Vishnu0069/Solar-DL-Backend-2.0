@@ -1,8 +1,9 @@
 const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post("/restoreEntity", async (req, res) => {
+router.post("/restoreEntity", auth, async (req, res) => {
   const { entityid } = req.body;
 
   // Validate the input

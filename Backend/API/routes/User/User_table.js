@@ -90,8 +90,9 @@
 const express = require("express");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get("/getUsersByEntity", async (req, res) => {
+router.get("/getUsersByEntity", auth, async (req, res) => {
   const { entityid } = req.query;
 
   if (!entityid) {

@@ -63,8 +63,9 @@
 const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get("/getPlantDetails", async (req, res) => {
+router.get("/getPlantDetails", auth, async (req, res) => {
   const { plant_id } = req.query;
 
   // Validate input

@@ -1,12 +1,13 @@
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get('/Get_Plant_details3', async (req, res) => {
+router.get("/Get_Plant_details3", auth, async (req, res) => {
   const { district } = req.query;
 
   if (!district) {
-    return res.status(400).json({ message: 'District parameter is required' });
+    return res.status(400).json({ message: "District parameter is required" });
   }
 
   try {
@@ -34,13 +35,17 @@ router.get('/Get_Plant_details3', async (req, res) => {
     );
 
     if (rows.length === 0) {
-      return res.status(404).json({ message: 'No plants found for the specified district' });
+      return res
+        .status(404)
+        .json({ message: "No plants found for the specified district" });
     }
 
     res.status(200).json(rows);
   } catch (error) {
-    console.error('Error fetching plant details by district:', error);
-    res.status(500).json({ message: 'Internal server error', error: error.message });
+    console.error("Error fetching plant details by district:", error);
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 });
 

@@ -12,8 +12,8 @@
 //   try {
 //     // Get the country associated with the entityid from EntityMaster
 //     const [entityRows] = await pool.query(`
-//       SELECT country 
-//       FROM EntityMaster 
+//       SELECT country
+//       FROM EntityMaster
 //       WHERE entityid = ?
 //     `, [entityid]);
 
@@ -25,8 +25,8 @@
 
 //     // Fetch categories based on the country
 //     const [categories] = await pool.query(`
-//       SELECT category_name 
-//       FROM Plant_Category 
+//       SELECT category_name
+//       FROM Plant_Category
 //       WHERE country = ?
 //     `, [country]);
 
@@ -39,11 +39,12 @@
 
 // module.exports = router;
 // In routes/Plant/getAllCategories.js
-const express = require('express');
-const pool = require('../../db');
+const express = require("express");
+const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.get('/getPlantCategories', async (req, res) => {
+router.get("/getPlantCategories", auth, async (req, res) => {
   try {
     // Fetch all categories from Plant_category table
     const [categories] = await pool.query(`
@@ -53,8 +54,13 @@ router.get('/getPlantCategories', async (req, res) => {
 
     res.status(200).json({ categories });
   } catch (error) {
-    console.error('Error fetching plant categories:', error);
-    res.status(500).json({ message: 'Error fetching plant categories', error: error.message });
+    console.error("Error fetching plant categories:", error);
+    res
+      .status(500)
+      .json({
+        message: "Error fetching plant categories",
+        error: error.message,
+      });
   }
 });
 

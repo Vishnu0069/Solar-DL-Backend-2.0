@@ -1,8 +1,9 @@
 const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
-router.post("/enablePlant", async (req, res) => {
+router.post("/enablePlant", auth, async (req, res) => {
   const { plant_id } = req.body;
 
   // Validate input
