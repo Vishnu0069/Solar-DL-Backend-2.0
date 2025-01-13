@@ -42,7 +42,12 @@ router.put("/editPlant", auth, async (req, res) => {
     yield_value, // Editable
     currency, // Editable
     timezone, // Editable
-    owner_email, // Email address to notify
+    owner_first_name,  // Editable
+    owner_last_name,   // Editable
+    owner_email,       // Editable
+    mobileNumber = null, // Editable
+    EntityID,          // Editable
+    LoginEntityID      // Editable
   } = req.body;
 
   // Validate required field
