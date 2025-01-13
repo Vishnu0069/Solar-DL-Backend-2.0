@@ -1609,6 +1609,7 @@ async function handleEmailSending(
     // Continue with the transaction even if email sending fails
   }
 }
+
 router.post("/addPlant2", auth, async (req, res) => {
   const {
     plant_id,
@@ -1640,16 +1641,14 @@ router.post("/addPlant2", auth, async (req, res) => {
     Email,
     EntityID,
     LoginEntityID,
-    yield_value,
-    currency,
-    timezone,
+    yield_value, // Added field from frontend
+    currency,    // Added field from frontend
+    timezone,    // Added field from frontend
   } = req.body;
 
   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
     return res.status(400).json({ message: "Missing required fields." });
   }
-
-  const intYieldValue = parseInt(yield_value, 10) || null; // Convert yield_value to integer
 
   let connection;
 
@@ -1760,13 +1759,19 @@ router.post("/addPlant2", auth, async (req, res) => {
         owner_email,
         mobileNumber,
         entityname,
-        intYieldValue, // Pass the integer value
-        currency || null,
-        timezone || null,
+        yield_value || null, // Ensure null is handled if value is not sent
+        currency || null,    // Ensure null is handled if value is not sent
+        timezone || null,    // Ensure null is handled if value is not sent
       ]
     );
 
-    // Link user to plant
+    console.log("Executing SQL Query with Values:", {
+      yield_value,
+      currency,
+      timezone,
+    });
+
+    // Step 3: Link user to plant
     if (userId) {
       await connection.query(
         "INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?);",
@@ -1774,7 +1779,18 @@ router.post("/addPlant2", auth, async (req, res) => {
       );
     }
 
-    // Commit transaction
+    // Step 4: Handle email sending based on conditions
+    await handleEmailSending(
+      connection,
+      email_status,
+      mail,
+      plant_name,
+      owner_email,
+      EntityID,
+      LoginEntityID,
+      isNewUser
+    );
+
     await connection.commit();
     res.status(201).json({
       message: "Plant and user(s) linked successfully",
