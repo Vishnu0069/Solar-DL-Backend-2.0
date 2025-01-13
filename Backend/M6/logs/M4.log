@@ -1,0 +1,980 @@
+2025-01-12T16:26:09.782Z	L1	Mon4	M4 Service	success	Started Successfully...
+2025-01-12T16:26:10.394Z	L2	Mon4	database	success	Connected to MongoDB.
+2025-01-12T16:26:11.256Z	L2	Mon4	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2025-01-12T16:26:11.281Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "396699e6-5ad1-4b3f-9348-be1f97d16a52",
+    "DeviceMake": "SolarEdge",
+    "plant_id": "RISHEEK-P-1005",
+    "plant_name": "Update PLant ",
+    "latitude": 14.3727,
+    "longitude": 76.8301,
+    "capacity": 23,
+    "capacity_unit": "Kwp",
+    "plant_category": "PV+Grid",
+    "make": "SolarEdge",
+    "model": "2081598",
+    "serial_number": "7E13A813-4C",
+    "system_date_time": "2025-01-10T06:12:36.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 3,
+      "telemetries": [
+        {
+          "date": "2025-01-12 16:28:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.438,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.6142,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 390.625,
+          "vL2To3": 31.1562,
+          "vL3To1": 387.969,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 262.688,
+            "acFrequency": 49.96,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 128.672,
+            "acFrequency": 49.9594,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 126.297,
+            "acFrequency": 49.9604,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:33:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.312,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.544,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 428.344,
+          "vL2To3": 138.188,
+          "vL3To1": 361.344,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 261.938,
+            "acFrequency": 50.1041,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 172.969,
+            "acFrequency": 50.1066,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 111.734,
+            "acFrequency": 50.1194,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:38:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.875,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.4465,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 443.938,
+          "vL2To3": 158.938,
+          "vL3To1": 350.188,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 260.969,
+            "acFrequency": 49.9546,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 189.453,
+            "acFrequency": 49.9457,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 104.891,
+            "acFrequency": 49.981,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        }
+      ]
+    }
+  }
+}
+2025-01-12T16:26:11.384Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "81d3844d-1800-4345-b589-0adf15fd8631",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1004",
+    "plant_name": "Pruthvi",
+    "latitude": 15.1334,
+    "longitude": 78.6805,
+    "capacity": 1000,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A7F5-2D",
+    "system_date_time": "2025-01-12T06:59:20.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 3,
+      "telemetries": [
+        {
+          "date": "2025-01-12 16:28:10",
+          "totalActivePower": 0,
+          "dcVoltage": 867,
+          "powerLimit": 100,
+          "totalEnergy": 157420992,
+          "temperature": 41.479,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 390.875,
+          "vL2To3": 30.6562,
+          "vL3To1": 388.719,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 262.875,
+            "acFrequency": 49.9615,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 128.734,
+            "acFrequency": 49.9619,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 126.406,
+            "acFrequency": 49.9578,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:33:10",
+          "totalActivePower": 0,
+          "dcVoltage": 866.938,
+          "powerLimit": 100,
+          "totalEnergy": 157420992,
+          "temperature": 41.4465,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 430.094,
+          "vL2To3": 145.344,
+          "vL3To1": 357.531,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 260.859,
+            "acFrequency": 50.1049,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 176.766,
+            "acFrequency": 50.0962,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 110.438,
+            "acFrequency": 50.1026,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:38:10",
+          "totalActivePower": 0,
+          "dcVoltage": 866.938,
+          "powerLimit": 100,
+          "totalEnergy": 157420992,
+          "temperature": 41.3489,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 399.938,
+          "vL2To3": 80.0938,
+          "vL3To1": 385.125,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 263.344,
+            "acFrequency": 49.9574,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 140.469,
+            "acFrequency": 49.9588,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 125.625,
+            "acFrequency": 49.9482,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        }
+      ]
+    }
+  }
+}
+2025-01-12T16:26:11.388Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "81d3844d-1800-4345-b589-0adf15fd8631",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1004",
+    "plant_name": "Pruthvi",
+    "latitude": 15.1334,
+    "longitude": 78.6805,
+    "capacity": 1000,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A813-4C",
+    "system_date_time": "2025-01-12T06:59:20.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 3,
+      "telemetries": [
+        {
+          "date": "2025-01-12 16:28:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.438,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.6142,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 390.625,
+          "vL2To3": 31.1562,
+          "vL3To1": 387.969,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 262.688,
+            "acFrequency": 49.96,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 128.672,
+            "acFrequency": 49.9594,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 126.297,
+            "acFrequency": 49.9604,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:33:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.312,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.544,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 428.344,
+          "vL2To3": 138.188,
+          "vL3To1": 361.344,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 261.938,
+            "acFrequency": 50.1041,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 172.969,
+            "acFrequency": 50.1066,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 111.734,
+            "acFrequency": 50.1194,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:38:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.875,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.4465,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 443.938,
+          "vL2To3": 158.938,
+          "vL3To1": 350.188,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 260.969,
+            "acFrequency": 49.9546,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 189.453,
+            "acFrequency": 49.9457,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 104.891,
+            "acFrequency": 49.981,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        }
+      ]
+    }
+  }
+}
+2025-01-12T16:26:11.392Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "e8655017-2233-4526-9187-5af79eac6004",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1003",
+    "plant_name": "sanjay",
+    "latitude": 14.5302,
+    "longitude": 75.7452,
+    "capacity": 100,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "IN000NNN2",
+    "system_date_time": "2025-01-12T06:55:51.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "String": "Cannot find given serial"
+  }
+}
+2025-01-12T16:26:11.394Z	L2	Mon4	database	error	Error processing message: Cannot read properties of undefined (reading 'telemetries')
+2025-01-12T16:26:11.397Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "e8655017-2233-4526-9187-5af79eac6004",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1003",
+    "plant_name": "sanjay",
+    "latitude": 14.5302,
+    "longitude": 75.7452,
+    "capacity": 100,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A7F5-2D",
+    "system_date_time": "2025-01-12T06:55:51.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 3,
+      "telemetries": [
+        {
+          "date": "2025-01-12 16:28:10",
+          "totalActivePower": 0,
+          "dcVoltage": 867,
+          "powerLimit": 100,
+          "totalEnergy": 157420992,
+          "temperature": 41.479,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 390.875,
+          "vL2To3": 30.6562,
+          "vL3To1": 388.719,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 262.875,
+            "acFrequency": 49.9615,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 128.734,
+            "acFrequency": 49.9619,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 126.406,
+            "acFrequency": 49.9578,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:33:10",
+          "totalActivePower": 0,
+          "dcVoltage": 866.938,
+          "powerLimit": 100,
+          "totalEnergy": 157420992,
+          "temperature": 41.4465,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 430.094,
+          "vL2To3": 145.344,
+          "vL3To1": 357.531,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 260.859,
+            "acFrequency": 50.1049,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 176.766,
+            "acFrequency": 50.0962,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 110.438,
+            "acFrequency": 50.1026,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:38:10",
+          "totalActivePower": 0,
+          "dcVoltage": 866.938,
+          "powerLimit": 100,
+          "totalEnergy": 157420992,
+          "temperature": 41.3489,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 399.938,
+          "vL2To3": 80.0938,
+          "vL3To1": 385.125,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 263.344,
+            "acFrequency": 49.9574,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 140.469,
+            "acFrequency": 49.9588,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 125.625,
+            "acFrequency": 49.9482,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        }
+      ]
+    }
+  }
+}
+2025-01-12T16:26:11.400Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "81d3844d-1800-4345-b589-0adf15fd8631",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1004",
+    "plant_name": "Pruthvi",
+    "latitude": 15.1334,
+    "longitude": 78.6805,
+    "capacity": 1000,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "IN000NNN2",
+    "system_date_time": "2025-01-12T06:59:20.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "String": "Cannot find given serial"
+  }
+}
+2025-01-12T16:26:11.401Z	L2	Mon4	database	error	Error processing message: Cannot read properties of undefined (reading 'telemetries')
+2025-01-12T16:26:11.409Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "e8655017-2233-4526-9187-5af79eac6004",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1003",
+    "plant_name": "sanjay",
+    "latitude": 14.5302,
+    "longitude": 75.7452,
+    "capacity": 100,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A813-4C",
+    "system_date_time": "2025-01-12T06:55:51.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 3,
+      "telemetries": [
+        {
+          "date": "2025-01-12 16:28:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.438,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.6142,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 390.625,
+          "vL2To3": 31.1562,
+          "vL3To1": 387.969,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 262.688,
+            "acFrequency": 49.96,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 128.672,
+            "acFrequency": 49.9594,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 126.297,
+            "acFrequency": 49.9604,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:33:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.312,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.544,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 428.344,
+          "vL2To3": 138.188,
+          "vL3To1": 361.344,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 261.938,
+            "acFrequency": 50.1041,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 172.969,
+            "acFrequency": 50.1066,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 111.734,
+            "acFrequency": 50.1194,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        },
+        {
+          "date": "2025-01-12 16:38:11",
+          "totalActivePower": 0,
+          "dcVoltage": 890.875,
+          "powerLimit": 100,
+          "totalEnergy": 119501000,
+          "temperature": 41.4465,
+          "inverterMode": "FAULT",
+          "operationMode": 0,
+          "vL1To2": 443.938,
+          "vL2To3": 158.938,
+          "vL3To1": 350.188,
+          "L1Data": {
+            "acCurrent": 0,
+            "acVoltage": 260.969,
+            "acFrequency": 49.9546,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L2Data": {
+            "acCurrent": 0,
+            "acVoltage": 189.453,
+            "acFrequency": 49.9457,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          },
+          "L3Data": {
+            "acCurrent": 0,
+            "acVoltage": 104.891,
+            "acFrequency": 49.981,
+            "apparentPower": 0,
+            "activePower": 0,
+            "reactivePower": 0,
+            "cosPhi": 0
+          }
+        }
+      ]
+    }
+  }
+}
+2025-01-12T16:26:11.444Z	L2	Mon4	database	success	Inserted document with _id: 6783ed2315a88117ebf1893d
+2025-01-12T16:26:11.469Z	L2	Mon4	database	success	Inserted document with _id: 6783ed2315a88117ebf18940
+2025-01-12T16:26:11.565Z	L2	Mon4	database	success	Inserted document with _id: 6783ed2315a88117ebf18941
+2025-01-12T16:26:11.877Z	L2	Mon4	database	success	Inserted document with _id: 6783ed2315a88117ebf1893f
+2025-01-12T16:26:11.880Z	L2	Mon4	database	success	Inserted document with _id: 6783ed2315a88117ebf1893e
+2025-01-12T16:46:48.164Z	L1	Mon4	M4 Service	success	Started Successfully...
+2025-01-12T16:46:48.932Z	L2	Mon4	database	success	Connected to MongoDB.
+2025-01-12T16:46:49.216Z	L2	Mon4	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2025-01-13T05:16:39.400Z	L1	Mon4	M4 Service	success	Started Successfully...
+2025-01-13T05:16:39.844Z	L2	Mon4	database	success	Connected to MongoDB.
+2025-01-13T05:16:40.042Z	L2	Mon4	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2025-01-13T05:16:40.065Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "81d3844d-1800-4345-b589-0adf15fd8631",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1004",
+    "plant_name": "Pruthvi",
+    "latitude": 15.1334,
+    "longitude": 78.6805,
+    "capacity": 1000,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A813-4C",
+    "system_date_time": "2025-01-12T06:59:20.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 0,
+      "telemetries": []
+    }
+  }
+}
+2025-01-13T05:16:40.264Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "81d3844d-1800-4345-b589-0adf15fd8631",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1004",
+    "plant_name": "Pruthvi",
+    "latitude": 15.1334,
+    "longitude": 78.6805,
+    "capacity": 1000,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "IN000NNN2",
+    "system_date_time": "2025-01-12T06:59:20.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "String": "Cannot find given serial"
+  }
+}
+2025-01-13T05:16:40.266Z	L2	Mon4	database	error	Error processing message: Cannot read properties of undefined (reading 'telemetries')
+2025-01-13T05:16:40.268Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "81d3844d-1800-4345-b589-0adf15fd8631",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1004",
+    "plant_name": "Pruthvi",
+    "latitude": 15.1334,
+    "longitude": 78.6805,
+    "capacity": 1000,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A7F5-2D",
+    "system_date_time": "2025-01-12T06:59:20.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 0,
+      "telemetries": []
+    }
+  }
+}
+2025-01-13T05:16:40.269Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "396699e6-5ad1-4b3f-9348-be1f97d16a52",
+    "DeviceMake": "SolarEdge",
+    "plant_id": "RISHEEK-P-1005",
+    "plant_name": "Update PLant ",
+    "latitude": 14.3727,
+    "longitude": 76.8301,
+    "capacity": 23,
+    "capacity_unit": "Kwp",
+    "plant_category": "PV+Grid",
+    "make": "SolarEdge",
+    "model": "2081598",
+    "serial_number": "7E13A813-4C",
+    "system_date_time": "2025-01-10T06:12:36.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 0,
+      "telemetries": []
+    }
+  }
+}
+2025-01-13T05:16:40.272Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "e8655017-2233-4526-9187-5af79eac6004",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1003",
+    "plant_name": "sanjay",
+    "latitude": 14.5302,
+    "longitude": 75.7452,
+    "capacity": 100,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A7F5-2D",
+    "system_date_time": "2025-01-12T06:55:51.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 0,
+      "telemetries": []
+    }
+  }
+}
+2025-01-13T05:16:40.285Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "e8655017-2233-4526-9187-5af79eac6004",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1003",
+    "plant_name": "sanjay",
+    "latitude": 14.5302,
+    "longitude": 75.7452,
+    "capacity": 100,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "IN000NNN2",
+    "system_date_time": "2025-01-12T06:55:51.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "String": "Cannot find given serial"
+  }
+}
+2025-01-13T05:16:40.288Z	L2	Mon4	database	error	Error processing message: Cannot read properties of undefined (reading 'telemetries')
+2025-01-13T05:16:40.289Z	L2	Mon4	read	success	Received message: {
+  "deviceMake": "solaredge",
+  "metadata": {
+    "DeviceUUID": "e8655017-2233-4526-9187-5af79eac6004",
+    "DeviceMake": "solaredge",
+    "plant_id": "MOHANA-P-1003",
+    "plant_name": "sanjay",
+    "latitude": 14.5302,
+    "longitude": 75.7452,
+    "capacity": 100,
+    "capacity_unit": "Kwp",
+    "plant_category": "Hybrid",
+    "make": "solaredge",
+    "model": "2081598",
+    "serial_number": "7E13A813-4C",
+    "system_date_time": "2025-01-12T06:55:51.000Z",
+    "api_url": "https://monitoringapi.solaredge.com/equipment/",
+    "api_key": "58G0DE59GK1XD9AHGBPWDU4SOF06VFM2"
+  },
+  "responseData": {
+    "data": {
+      "count": 0,
+      "telemetries": []
+    }
+  }
+}
+2025-01-13T05:16:40.336Z	L2	Mon4	database	success	Inserted document with _id: 6784a1b8408d68585c39458b
+2025-01-13T05:16:40.371Z	L2	Mon4	database	success	Inserted document with _id: 6784a1b8408d68585c39458e
+2025-01-13T05:16:40.411Z	L2	Mon4	database	success	Inserted document with _id: 6784a1b8408d68585c39458f
+2025-01-13T05:16:40.523Z	L2	Mon4	database	success	Inserted document with _id: 6784a1b8408d68585c39458c
+2025-01-13T05:16:40.528Z	L2	Mon4	database	success	Inserted document with _id: 6784a1b8408d68585c39458d

@@ -2928,3 +2928,51 @@
 2025-01-11T11:22:48.270Z	L1	Mon6	M6 Service	success	started Successfully...
 2025-01-11T11:22:48.353Z	L2	Mon6	database	success	Connected to MongoDB.
 2025-01-11T11:22:48.824Z	L2	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2025-01-11T18:43:52.558Z	L1	Mon6	M6 Service	success	started Successfully...
+2025-01-11T18:43:52.578Z	L2	Mon6	database	success	Connected to MongoDB.
+2025-01-11T18:43:52.753Z	L2	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2025-01-12T14:04:14.621Z	L1	Mon6	M6 Service	success	started Successfully...
+2025-01-12T14:04:14.651Z	L2	Mon6	database	success	Connected to MongoDB.
+2025-01-12T14:04:14.858Z	L2	Mon6	ActiveMQ	subscribe	Subscribed to /response topic and waiting for messages...
+2025-01-12T14:04:14.881Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:14.882Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-12T14:04:14.883Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-12T14:04:14.884Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:14.885Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-12T14:04:14.886Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-12T14:04:14.887Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:14.888Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-12T14:04:14.888Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-12T14:04:14.894Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.076Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.095Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'telemetries')
+2025-01-12T14:04:15.097Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.104Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'data')
+2025-01-12T14:04:15.109Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.118Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'data')
+2025-01-12T14:04:15.120Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.151Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'data')
+2025-01-12T14:04:15.153Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.167Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'data')
+2025-01-12T14:04:15.179Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.195Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'data')
+2025-01-12T14:04:15.197Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.259Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'data')
+2025-01-12T14:04:15.261Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.287Z	L2	Mon6	read	error	DeviceMake not recognized. No API call made.
+2025-01-12T14:04:15.292Z	L1	Mon6	M6 Service	success	Executed Successfully...
+2025-01-12T14:04:15.293Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.300Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'telemetries')
+2025-01-12T14:04:15.301Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.310Z	L2	Mon6	database	error	Error processing message: Cannot read properties of undefined (reading 'telemetries')
+2025-01-12T14:04:15.311Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.316Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.318Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.319Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.339Z	L2	Mon6	database	success	Received message:
+2025-01-12T14:04:15.796Z	L2	Mon6	database	success	Inserted document with _id: 6783cbdfebe35906757ed1a7
+2025-01-12T14:04:15.799Z	L2	Mon6	database	success	Inserted document with _id: 6783cbdfebe35906757ed1a8
+2025-01-12T14:04:15.827Z	L2	Mon6	database	success	Inserted document with _id: 6783cbdfebe35906757ed1ab
+2025-01-12T14:04:15.932Z	L2	Mon6	database	success	Inserted document with _id: 6783cbdfebe35906757ed1ac
+2025-01-12T14:04:16.078Z	L2	Mon6	database	success	Inserted document with _id: 6783cbdfebe35906757ed1a9
+2025-01-12T14:04:16.124Z	L2	Mon6	database	success	Inserted document with _id: 6783cbdfebe35906757ed1aa
