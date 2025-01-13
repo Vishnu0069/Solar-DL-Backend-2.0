@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 const pool = require("../../db");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 
 require("dotenv").config({ path: __dirname + "/.env" });
 
@@ -23,30 +24,32 @@ const transporter = nodemailer.createTransport({
 });
 
 // Edit Plant API
-router.put("/editPlant", async (req, res) => {
+router.put("/editPlant", auth, async (req, res) => {
   const {
-    plant_id,          // Required for identifying the plant to edit
-    plant_name,        // Editable
-    install_date,      // Editable
-    azimuth_angle,     // Editable
-    tilt_angle,        // Editable
-    plant_type,        // Editable
-    plant_category,    // Editable
-    capacity,          // Editable
-    capacity_unit,     // Editable
-    address_line1,     // Editable
-    address_line2,     // Editable
-    longitude,         // Editable
-    latitude,          // Editable
-    yield_value,       // Editable
-    currency,          // Editable
-    timezone,          // Editable
-    owner_email        // Email address to notify
+    plant_id, // Required for identifying the plant to edit
+    plant_name, // Editable
+    install_date, // Editable
+    azimuth_angle, // Editable
+    tilt_angle, // Editable
+    plant_type, // Editable
+    plant_category, // Editable
+    capacity, // Editable
+    capacity_unit, // Editable
+    address_line1, // Editable
+    address_line2, // Editable
+    longitude, // Editable
+    latitude, // Editable
+    yield_value, // Editable
+    currency, // Editable
+    timezone, // Editable
+    owner_email, // Email address to notify
   } = req.body;
 
   // Validate required field
   if (!plant_id) {
-    return res.status(400).json({ message: "Missing required field: plant_id." });
+    return res
+      .status(400)
+      .json({ message: "Missing required field: plant_id." });
   }
 
   let connection;
@@ -61,7 +64,9 @@ router.put("/editPlant", async (req, res) => {
     );
 
     if (existingPlant.length === 0) {
-      return res.status(404).json({ message: `Plant with ID '${plant_id}' not found.` });
+      return res
+        .status(404)
+        .json({ message: `Plant with ID '${plant_id}' not found.` });
     }
 
     // Update only editable plant details
@@ -102,11 +107,13 @@ router.put("/editPlant", async (req, res) => {
       yield_value,
       currency,
       timezone,
-      plant_id
+      plant_id,
     ]);
 
     if (result.affectedRows === 0) {
-      return res.status(400).json({ message: `Failed to update plant with ID '${plant_id}'.` });
+      return res
+        .status(400)
+        .json({ message: `Failed to update plant with ID '${plant_id}'.` });
     }
 
     // Send email notification
