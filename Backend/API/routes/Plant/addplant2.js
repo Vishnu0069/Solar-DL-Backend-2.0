@@ -1609,7 +1609,6 @@ async function handleEmailSending(
     // Continue with the transaction even if email sending fails
   }
 }
-
 router.post("/addPlant2", auth, async (req, res) => {
   const {
     plant_id,
@@ -1641,14 +1640,16 @@ router.post("/addPlant2", auth, async (req, res) => {
     Email,
     EntityID,
     LoginEntityID,
-    yield_value , 
-    currency , 
-    timezone , 
+    yield_value,
+    currency,
+    timezone,
   } = req.body;
 
   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
     return res.status(400).json({ message: "Missing required fields." });
   }
+
+  const intYieldValue = parseInt(yield_value, 10) || null; // Convert yield_value to integer
 
   let connection;
 
@@ -1759,48 +1760,13 @@ router.post("/addPlant2", auth, async (req, res) => {
         owner_email,
         mobileNumber,
         entityname,
-        yield_value || null,
+        intYieldValue, // Pass the integer value
         currency || null,
         timezone || null,
       ]
     );
 
-    console.log("Executing SQL Query:", {
-      query: `INSERT INTO Gsai_PlantMaster (...) VALUES (?, ?, ..., ?);`,
-      parameters: [
-        plant_id,
-        entityid,
-        plant_name,
-        install_date,
-        azimuth_angle,
-        tilt_angle,
-        plant_type,
-        plant_category,
-        capacity,
-        capacity_unit,
-        country,
-        region,
-        state,
-        district,
-        address_line1,
-        address_line2,
-        pincode,
-        longitude,
-        latitude,
-        owner_first_name,
-        owner_last_name,
-        owner_email,
-        mobileNumber,
-        entityname,
-        yield_value,
-        currency,
-        timezone,
-      ],
-    });
-    
-    
-
-    // Step 3: Link user to plant
+    // Link user to plant
     if (userId) {
       await connection.query(
         "INSERT INTO Gsai_PlantUser (plant_id, user_id) VALUES (?, ?);",
@@ -1808,18 +1774,7 @@ router.post("/addPlant2", auth, async (req, res) => {
       );
     }
 
-    // Step 4: Handle email sending based on conditions
-    await handleEmailSending(
-      connection,
-      email_status,
-      mail,
-      plant_name,
-      owner_email,
-      EntityID,
-      LoginEntityID,
-      isNewUser
-    );
-
+    // Commit transaction
     await connection.commit();
     res.status(201).json({
       message: "Plant and user(s) linked successfully",
