@@ -546,7 +546,7 @@ router.post("/", async (req, res) => {
       userId: user.user_id,
       entityId: user.entityid,
       userValue: userValue, // Adding user_value to the response
-      token: token,
+      authToken: token,
     };
 
     res.status(200).json({
