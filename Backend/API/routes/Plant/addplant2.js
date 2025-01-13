@@ -1759,11 +1759,46 @@ router.post("/addPlant2", auth, async (req, res) => {
         owner_email,
         mobileNumber,
         entityname,
-        yield_value, 
-        currency, 
-        timezone, 
+        yield_value || null,
+        currency || null,
+        timezone || null,
       ]
     );
+
+    console.log("Executing SQL Query:", {
+      query: `INSERT INTO Gsai_PlantMaster (...) VALUES (?, ?, ..., ?);`,
+      parameters: [
+        plant_id,
+        entityid,
+        plant_name,
+        install_date,
+        azimuth_angle,
+        tilt_angle,
+        plant_type,
+        plant_category,
+        capacity,
+        capacity_unit,
+        country,
+        region,
+        state,
+        district,
+        address_line1,
+        address_line2,
+        pincode,
+        longitude,
+        latitude,
+        owner_first_name,
+        owner_last_name,
+        owner_email,
+        mobileNumber,
+        entityname,
+        yield_value,
+        currency,
+        timezone,
+      ],
+    });
+    
+    
 
     // Step 3: Link user to plant
     if (userId) {
