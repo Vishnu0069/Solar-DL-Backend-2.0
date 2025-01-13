@@ -32,6 +32,7 @@ router.post(
       Rating,
       Quantity,
       Serial_Nos,
+      //model,
     } = req.body;
 
     // Generate a new UUID for Device_id
@@ -111,7 +112,7 @@ router.post(
         null, // master_device_id
         Device_type || null, // device_type_id from incoming request
         Make || null, // Make
-        null, // Model
+        model, // Model
         current_date_time, // create_date
         current_date_time, // last_update_date
         user_id, // Set create_by_userid to user_id from request

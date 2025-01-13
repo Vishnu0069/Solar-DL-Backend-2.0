@@ -1641,9 +1641,9 @@ router.post("/addPlant2", auth, async (req, res) => {
     Email,
     EntityID,
     LoginEntityID,
-    yield_value, // Added field from frontend
-    currency,    // Added field from frontend
-    timezone,    // Added field from frontend
+    yield_value, 
+    currency,    
+    timezone,    
   } = req.body;
 
   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
