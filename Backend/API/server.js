@@ -45,6 +45,7 @@ const entitynames = require("./routes/Plant/fetchEntityNames");
 const getEntityDetails = require("./routes/Plant/getEntityDetails");
 const addplant = require("./routes/Plant/addPlant");
 const addPlant2 = require("./routes/Plant/addplant2");
+const editPlant = require("./routes/Plant/editPlant");
 
 const plant_category = require("./routes/Plant/getPlantCategories");
 const fetch_plant = require("./routes/Plant/fetchPlantList");
@@ -176,6 +177,7 @@ app.use("/api/plant", email_status);
 app.use("/api/device", deviceRoutes);
 app.use("/api/plant", assigned);
 app.use("/api/plant", unassigned);
+app.use('/api/plant', editPlant);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);
