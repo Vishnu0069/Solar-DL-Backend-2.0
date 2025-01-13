@@ -97,6 +97,7 @@ const Add_User_group_plants = require("./routes/UserGroups/Add_User_group_plant"
 const factory_roles = require("./routes/roles/factory_roles");
 const factory_modules = require("./routes/roles/factorymodules");
 const factory_all = require("./routes/roles/get_all");
+const factory_all_roles = require("./routes/roles/get_all_for_page");
 
 require("dotenv").config(); // Load environment variables
 
@@ -177,7 +178,7 @@ app.use("/api/plant", email_status);
 app.use("/api/device", deviceRoutes);
 app.use("/api/plant", assigned);
 app.use("/api/plant", unassigned);
-app.use('/api/plant', editPlant);
+app.use("/api/plant", editPlant);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);
@@ -198,7 +199,7 @@ app.use("/api/user-groups", Add_User_group_plants);
 app.use("/api/role", factory_roles);
 app.use("/api/role", factory_modules);
 app.use("/api/role", factory_all);
-
+app.use("/api/role", factory_all_roles);
 //maintenance
 app.use("/api/maintenance", get_user);
 app.use("/api/maintenance", get_entity);
