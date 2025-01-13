@@ -1641,9 +1641,9 @@ router.post("/addPlant2", auth, async (req, res) => {
     Email,
     EntityID,
     LoginEntityID,
-    yield_value = null, // Added field
-    currency = null, // Added field
-    timezone = null, // Added field
+    yield_value , 
+    currency , 
+    timezone , 
   } = req.body;
 
   if (!plant_id || !email_status || !mail || !LoginEntityID || !EntityID) {
@@ -1759,9 +1759,9 @@ router.post("/addPlant2", auth, async (req, res) => {
         owner_email,
         mobileNumber,
         entityname,
-        yield_value, // New field
-        currency, // New field
-        timezone, // New field
+        yield_value, 
+        currency, 
+        timezone, 
       ]
     );
 
