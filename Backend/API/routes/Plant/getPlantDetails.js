@@ -105,7 +105,7 @@ router.get("/getPlantDetails", auth, async (req, res) => {
         entityname AS "Entity Name",
         yield_value AS "Yield Value",       
         currency AS "Currency",          
-        timezone AS "Timezone"   
+        timezone AS "Time zone"   
       FROM Gsai_PlantMaster
       WHERE plant_id = ?
       `,
