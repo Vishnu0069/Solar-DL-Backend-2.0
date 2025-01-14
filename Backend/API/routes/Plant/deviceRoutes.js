@@ -15,7 +15,7 @@ router.post(
     body("Plant_id").notEmpty().withMessage("Plant_id is required"),
     body("user_id").notEmpty().withMessage("user_id is required"),
     body("Device_type").notEmpty().withMessage("Device_type is required"),
-    //body("model").notEmpty().withMessage("Model is required"), // Added validation for model
+    body("model").notEmpty().withMessage("Model is required"), // Ensure model validation
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -43,7 +43,6 @@ router.post(
     const current_date_time = new Date().toISOString();
 
     try {
-      // SQL query to insert data into the database
       const sql = `
         INSERT INTO gsai_device_master (
           device_id, 
@@ -62,7 +61,8 @@ router.post(
           Quantity, 
           Serial_Nos, 
           System_date_time
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `;
 
       // Execute the SQL query
       await pool.execute(sql, [
@@ -70,7 +70,7 @@ router.post(
         null, // master_device_id
         Device_type || null, // Device type
         Make || null, // Make
-        model || null, // Model
+        model || null, // Model from the request body
         current_date_time, // Creation date
         current_date_time, // Last update date
         user_id, // Created by user ID
