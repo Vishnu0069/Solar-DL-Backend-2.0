@@ -11,10 +11,11 @@ router.post(
   "/deviceInfo",
   auth,
   [
+    // Validation rules
     body("Plant_id").notEmpty().withMessage("Plant_id is required"),
     body("user_id").notEmpty().withMessage("user_id is required"),
     body("Device_type").notEmpty().withMessage("Device_type is required"),
-    //body("model").notEmpty().withMessage("Model is required"),
+    //body("model").notEmpty().withMessage("Model is required"), // Added validation for model
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -22,6 +23,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    // Extract data from the request body
     const {
       Plant_id,
       user_id,
@@ -30,60 +32,62 @@ router.post(
       Rating,
       Quantity,
       Serial_Nos,
-      model, // Extract model from the request body
+      model,
     } = req.body;
 
     // Generate a new UUID for Device_id
     const Device_id = uuidv4();
-    const system_date_time = new Date().toISOString(); // UTC format
-    const current_date_time = new Date().toISOString(); // UTC format
+
+    // Generate timestamps
+    const system_date_time = new Date().toISOString();
+    const current_date_time = new Date().toISOString();
 
     try {
-      const sql = `INSERT INTO gsai_device_master (
-        device_id, 
-        master_device_id, 
-        device_type_id,  
-        make, 
-        model, 
-        create_date, 
-        last_update_date, 
-        create_by_userid, 
-        last_update_userid, 
-        delete_flag, 
-        uom, 
-        Plant_id, 
-        Rating, 
-        Quantity, 
-        Serial_Nos, 
-        System_date_time
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      // SQL query to insert data into the database
+      const sql = `
+        INSERT INTO gsai_device_master (
+          device_id, 
+          master_device_id, 
+          device_type_id,  
+          make, 
+          model, 
+          create_date, 
+          last_update_date, 
+          create_by_userid, 
+          last_update_userid, 
+          delete_flag, 
+          uom, 
+          Plant_id, 
+          Rating, 
+          Quantity, 
+          Serial_Nos, 
+          System_date_time
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-      // Execute the SQL query with the `model` value included
-      for (const serial of Serial_Nos) {
-        await pool.execute(sql, [
-          uuidv4(), // Generate a unique device_id for each serial number
-          null, // master_device_id
-          Device_type || null, // Device type
-          Make || null, // Make
-          model || null, // Model value from the request body
-          current_date_time, // Creation date
-          current_date_time, // Last update date
-          user_id, // Created by user ID
-          user_id, // Last updated by user ID
-          0, // delete_flag
-          null, // uom (if applicable)
-          Plant_id || null, // Plant ID
-          Rating || null, // Rating
-          Quantity || 1, // Each serial number is stored with quantity 1
-          serial, // Serial number
-          system_date_time, // System date-time
-        ]);
-      }
+      // Execute the SQL query
+      await pool.execute(sql, [
+        Device_id, // Generated UUID for the device
+        null, // master_device_id
+        Device_type || null, // Device type
+        Make || null, // Make
+        model || null, // Model
+        current_date_time, // Creation date
+        current_date_time, // Last update date
+        user_id, // Created by user ID
+        user_id, // Last updated by user ID
+        0, // delete_flag
+        null, // uom (Unit of Measure, if any)
+        Plant_id || null, // Plant ID
+        Rating || null, // Rating
+        Quantity || null, // Quantity
+        Serial_Nos || null, // Serial numbers
+        system_date_time, // System date-time
+      ]);
 
-      res.status(201).json({ message: "Device information stored successfully" });
+      return res.status(201).json({ message: "Device information stored successfully" });
     } catch (error) {
       console.error("Error inserting data into the database:", error);
-      res.status(500).json({ message: "Error storing device information" });
+      return res.status(500).json({ message: "Error storing device information" });
     }
   }
 );
