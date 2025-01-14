@@ -32,12 +32,12 @@ router.post(
       Make,
       Rating,
       Quantity,
-      Serial_Nos,
+      Serial_Nos, // Array of serial numbers
       model,
     } = req.body;
 
     // Generate a new UUID for Device_id
-    const Device_id = uuidv4();
+    //const Device_id = uuidv4();
 
     // Generate the system & current date and time in the format YYYY-MM-DD HH:MM:SS
     const system_date_time = new Date().toISOString(); // UTC format
@@ -108,6 +108,10 @@ router.post(
                 system_date_time             // System_date_time
             ]);*/
 
+      // Iterate over each serial number and insert it as a separate record
+      for (const serial of Serial_Nos) {
+        const Device_id = uuidv4(); // Generate a unique device_id for each record
+
       // Execute the SQL query with appropriate values
       await db.execute(sql, [
         Device_id, // Use the generated UUID
@@ -123,7 +127,7 @@ router.post(
         null, // uom
         Plant_id || null, // Plant_id
         Rating || null, // Rating
-        Quantity || null, // Quantity
+        Quantity || 1 , // Quantity
         Serial_Nos || null, // Serial_Nos
         system_date_time, // System_date_time
       ]);
