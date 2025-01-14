@@ -10,17 +10,12 @@ const auth = require("../../middleware/auth");
 router.post(
   "/deviceInfo",
   auth,
-
   [
     body("Plant_id").notEmpty().withMessage("Plant_id is required"),
     body("user_id").notEmpty().withMessage("user_id is required"),
     body("Device_type").notEmpty().withMessage("Device_type is required"),
-    //body("model").notEmpty().withMessage("Model is required"), // Added validation for model
-    //body("Serial_Nos").isArray().withMessage("Serial_Nos must be an array"),
-
-    // Add other validations if needed
+    body("model").notEmpty().withMessage("Model is required"),
   ],
-
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -29,43 +24,71 @@ router.post(
 
     const {
       Plant_id,
-      user_id, // Extract user_id from request
-      Device_type, // This will be used for device_type_id,
+      user_id,
+      Device_type,
       Make,
       Rating,
       Quantity,
       Serial_Nos,
-      model,
+      model, // Extract model from the request body
     } = req.body;
 
     // Generate a new UUID for Device_id
     const Device_id = uuidv4();
-
-    // Generate the system & current date and time in the format YYYY-MM-DD HH:MM:SS
     const system_date_time = new Date().toISOString(); // UTC format
     const current_date_time = new Date().toISOString(); // UTC format
-    //const system_date_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    //const current_date_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     try {
       const sql = `INSERT INTO gsai_device_master (
-                            device_id, 
-                            master_device_id, 
-                            device_type_id,  
-                            make, 
-                            model, 
-                            create_date, 
-                            last_update_date, 
-                            create_by_userid, 
-                            last_update_userid, 
-                            delete_flag, 
-                            uom, 
-                            Plant_id, 
-                            Rating, 
-                            Quantity, 
-                            Serial_Nos, 
-                            System_date_time
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        device_id, 
+        master_device_id, 
+        device_type_id,  
+        make, 
+        model, 
+        create_date, 
+        last_update_date, 
+        create_by_userid, 
+        last_update_userid, 
+        delete_flag, 
+        uom, 
+        Plant_id, 
+        Rating, 
+        Quantity, 
+        Serial_Nos, 
+        System_date_time
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+      // Execute the SQL query with the `model` value included
+      for (const serial of Serial_Nos) {
+        await pool.execute(sql, [
+          uuidv4(), // Generate a unique device_id for each serial number
+          null, // master_device_id
+          Device_type || null, // Device type
+          Make || null, // Make
+          model || null, // Model value from the request body
+          current_date_time, // Creation date
+          current_date_time, // Last update date
+          user_id, // Created by user ID
+          user_id, // Last updated by user ID
+          0, // delete_flag
+          null, // uom (if applicable)
+          Plant_id || null, // Plant ID
+          Rating || null, // Rating
+          Quantity || 1, // Each serial number is stored with quantity 1
+          serial, // Serial number
+          system_date_time, // System date-time
+        ]);
+      }
+
+      res.status(201).json({ message: "Device information stored successfully" });
+    } catch (error) {
+      console.error("Error inserting data into the database:", error);
+      res.status(500).json({ message: "Error storing device information" });
+    }
+  }
+);
+
+module.exports = router;
 
       // Log the parameters being passed to the query
       /* console.log("Inserting values:", [
@@ -107,7 +130,7 @@ router.post(
                 Quantity || null,            // Quantity from the request body
                 Serial_Nos || null,          // Serial_Nos from the request body
                 system_date_time             // System_date_time
-            ]);*/
+            ]);
 
       // Execute the SQL query with appropriate values
       await pool.execute(sql, [
@@ -137,4 +160,4 @@ router.post(
   }
 );
 
-module.exports = router;
+module.exports = router;*/
