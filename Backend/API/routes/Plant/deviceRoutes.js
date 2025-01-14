@@ -15,6 +15,7 @@ router.post(
     body("Plant_id").notEmpty().withMessage("Plant_id is required"),
     body("user_id").notEmpty().withMessage("user_id is required"),
     body("Device_type").notEmpty().withMessage("Device_type is required"),
+    body("model").notEmpty().withMessage("Model is required"), // Added validation for model
     // Add other validations if needed
   ],
 
@@ -32,7 +33,7 @@ router.post(
       Rating,
       Quantity,
       Serial_Nos,
-      //model,
+      model,
     } = req.body;
 
     // Generate a new UUID for Device_id
@@ -112,7 +113,7 @@ router.post(
         null, // master_device_id
         Device_type || null, // device_type_id from incoming request
         Make || null, // Make
-        model, // Model
+        model || null, // Model
         current_date_time, // create_date
         current_date_time, // last_update_date
         user_id, // Set create_by_userid to user_id from request
