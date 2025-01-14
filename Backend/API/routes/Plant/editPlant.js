@@ -178,9 +178,7 @@ router.put("/editPlant", auth, async (req, res) => {
     owner_first_name,  // Editable
     owner_last_name,   // Editable
     owner_email,       // Editable
-    mobileNumber = null, // Editable
-    EntityID,          // Editable
-    LoginEntityID      // Editable
+    mobileNumber = null // Editable
   } = req.body;
 
   // Validate required fields
@@ -230,7 +228,6 @@ router.put("/editPlant", auth, async (req, res) => {
         owner_last_name = COALESCE(?, owner_last_name),
         owner_email = COALESCE(?, owner_email),
         mobileno = COALESCE(?, mobileno)
-                
       WHERE plant_id = ?;
     `;
 
@@ -254,9 +251,7 @@ router.put("/editPlant", auth, async (req, res) => {
       owner_last_name,
       owner_email,
       mobileNumber,
-      EntityID,
-      LoginEntityID,
-      plant_id,
+      plant_id
     ]);
 
     if (result.affectedRows === 0) {
