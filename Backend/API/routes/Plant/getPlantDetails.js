@@ -76,8 +76,7 @@ router.get("/getPlantDetails", auth, async (req, res) => {
   try {
     // Query to fetch all details for the given plant_id
     const [rows] = await pool.query(
-      `
-      SELECT 
+      `SELECT 
         plant_id AS "Plant ID",
         entityid AS "Entity ID",
         plant_name AS "Plant Name",
