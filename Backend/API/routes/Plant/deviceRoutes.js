@@ -68,6 +68,13 @@ router.post(
 
       // Iterate over each serial number and insert it as a separate record
       for (const serial of Serial_Nos) {
+        // Ensure the serial number is a string and not null or empty
+        if (typeof serial !== "string" || serial.trim() === "") {
+          return res.status(400).json({
+            message: `Invalid serial number detected: '${serial}'`,
+          });
+        }
+        
         const Device_id = uuidv4(); // Generate a unique device_id for each record
 
         // Execute the SQL query with appropriate values
@@ -105,7 +112,7 @@ router.post(
 
     /*try {
             // SQL query to insert data into the database
-      const sql = `INSERT INTO gsai_device_master (
+        const sql = `INSERT INTO gsai_device_master (
                             device_id, 
                             master_device_id, 
                             device_type_id,  
@@ -194,7 +201,7 @@ router.post(
       return res
         .status(201)
         .json({ message: "Device information stored successfully" });
-      } catch (error) {
+    } catch (error) {
       console.error("Error inserting data into the database:", error);
       return res
         .status(500)
