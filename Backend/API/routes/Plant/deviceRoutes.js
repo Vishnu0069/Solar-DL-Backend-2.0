@@ -16,6 +16,8 @@ router.post(
     body("user_id").notEmpty().withMessage("user_id is required"),
     body("Device_type").notEmpty().withMessage("Device_type is required"),
     //body("model").notEmpty().withMessage("Model is required"), // Added validation for model
+    //body("Serial_Nos").isArray().withMessage("Serial_Nos must be an array"),
+
     // Add other validations if needed
   ],
 
@@ -32,12 +34,12 @@ router.post(
       Make,
       Rating,
       Quantity,
-      Serial_Nos, // Array of serial numbers
+      Serial_Nos,
       model,
     } = req.body;
 
     // Generate a new UUID for Device_id
-    //const Device_id = uuidv4();
+    const Device_id = uuidv4();
 
     // Generate the system & current date and time in the format YYYY-MM-DD HH:MM:SS
     const system_date_time = new Date().toISOString(); // UTC format
@@ -46,7 +48,6 @@ router.post(
     //const current_date_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     try {
-      // SQL query to insert data into the database
       const sql = `INSERT INTO gsai_device_master (
                             device_id, 
                             master_device_id, 
@@ -66,73 +67,8 @@ router.post(
                             System_date_time
                         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-      // Iterate over each serial number and insert it as a separate record
-      for (const serial of Serial_Nos) {
-        // Ensure the serial number is a string and not null or empty
-        if (typeof serial !== "string" || serial.trim() === "") {
-          return res.status(400).json({
-            message: `Invalid serial number detected: '${serial}'`,
-          });
-        }
-        
-        const Device_id = uuidv4(); // Generate a unique device_id for each record
-
-        // Execute the SQL query with appropriate values
-        await db.execute(sql, [
-          Device_id, // Use the generated UUID
-          null, // master_device_id
-          Device_type || null, // device_type_id from incoming request
-          Make || null, // Make
-          model || null, // Model
-          current_date_time, // create_date
-          current_date_time, // last_update_date
-          user_id, // Set create_by_userid to user_id from request
-          user_id, // Set last_update_userid to user_id from request
-          0, // delete_flag
-          null, // uom
-          Plant_id || null, // Plant_id
-          Rating || null, // Rating
-          Quantity || 1, // Quantity
-          serial || null, // Serial number
-          system_date_time, // System_date_time
-        ]);
-      }
-
-      return res
-        .status(201)
-        .json({ message: "Device information stored successfully" });
-    } catch (error) {
-      console.error("Error inserting data into the database:", error);
-      return res
-        .status(500)
-        .json({ message: "Error storing device information" });
-    }
-  }
-);
-
-    /*try {
-            // SQL query to insert data into the database
-        const sql = `INSERT INTO gsai_device_master (
-                            device_id, 
-                            master_device_id, 
-                            device_type_id,  
-                            make, 
-                            model, 
-                            create_date, 
-                            last_update_date, 
-                            create_by_userid, 
-                            last_update_userid, 
-                            delete_flag, 
-                            uom, 
-                            Plant_id, 
-                            Rating, 
-                            Quantity, 
-                            Serial_Nos, 
-                            System_date_time
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
       // Log the parameters being passed to the query
-      console.log("Inserting values:", [
+      /* console.log("Inserting values:", [
                 Device_id,
                 null,
                 Device_type || null,
@@ -171,11 +107,7 @@ router.post(
                 Quantity || null,            // Quantity from the request body
                 Serial_Nos || null,          // Serial_Nos from the request body
                 system_date_time             // System_date_time
-            ]);
-
-      // Iterate over each serial number and insert it as a separate record
-      for (const serial of Serial_Nos) {
-        const Device_id = uuidv4(); // Generate a unique device_id for each record
+            ]);*/
 
       // Execute the SQL query with appropriate values
       await db.execute(sql, [
@@ -192,7 +124,7 @@ router.post(
         null, // uom
         Plant_id || null, // Plant_id
         Rating || null, // Rating
-        Quantity || 1 , // Quantity
+        Quantity || 1, // Quantity
         Serial_Nos || null, // Serial_Nos
         system_date_time, // System_date_time
       ]);
@@ -208,6 +140,6 @@ router.post(
         .json({ message: "Error storing device information" });
     }
   }
-);*/
+);
 
 module.exports = router;
