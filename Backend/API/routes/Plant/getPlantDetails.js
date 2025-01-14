@@ -119,6 +119,11 @@ router.get("/getPlantDetails", auth, async (req, res) => {
         .json({ message: "Plant not found for the given plant_id" });
     }
 
+     // Clean the timezone field to remove any unwanted characters like \r\n
+    if (rows[0]["Time zone"] && typeof rows[0]["Time zone"] === "string") {
+      rows[0]["Time zone"] = rows[0]["Time zone"].replace(/\r|\n/g, "");
+    }
+
     // Respond with the plant details
     res.status(200).json(rows[0]);
   } catch (error) {
