@@ -110,34 +110,29 @@ router.post(
             ]);*/
 
       // Execute the SQL query with appropriate values
-      await db.execute(sql, [
-        Device_id, // Use the generated UUID
+      await pool.execute(sql, [
+        Device_id, // Generated UUID for the device
         null, // master_device_id
-        Device_type || null, // device_type_id from incoming request
+        Device_type || null, // Device type
         Make || null, // Make
         model || null, // Model
-        current_date_time, // create_date
-        current_date_time, // last_update_date
-        user_id, // Set create_by_userid to user_id from request
-        user_id, // Set last_update_userid to user_id from request
+        current_date_time, // Creation date
+        current_date_time, // Last update date
+        user_id, // Created by user ID
+        user_id, // Last updated by user ID
         0, // delete_flag
-        null, // uom
-        Plant_id || null, // Plant_id
+        null, // uom (Unit of Measure, if any)
+        Plant_id || null, // Plant ID
         Rating || null, // Rating
-        Quantity || 1, // Quantity
-        Serial_Nos || null, // Serial_Nos
-        system_date_time, // System_date_time
+        Quantity || null, // Quantity
+        Serial_Nos || null, // Serial numbers
+        system_date_time, // System date-time
       ]);
 
-      //console.log({ message: 'Device information stored successfully'});
-      return res
-        .status(201)
-        .json({ message: "Device information stored successfully" });
+      return res.status(201).json({ message: "Device information stored successfully" });
     } catch (error) {
       console.error("Error inserting data into the database:", error);
-      return res
-        .status(500)
-        .json({ message: "Error storing device information" });
+      return res.status(500).json({ message: "Error storing device information" });
     }
   }
 );
