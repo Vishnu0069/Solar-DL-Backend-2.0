@@ -14,7 +14,7 @@ router.post(
     body("Plant_id").notEmpty().withMessage("Plant_id is required"),
     body("user_id").notEmpty().withMessage("user_id is required"),
     body("Device_type").notEmpty().withMessage("Device_type is required"),
-    body("model").notEmpty().withMessage("Model is required"),
+    //body("model").notEmpty().withMessage("Model is required"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
