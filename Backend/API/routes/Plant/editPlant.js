@@ -229,7 +229,7 @@ router.put("/editPlant", auth, async (req, res) => {
         owner_first_name = COALESCE(?, owner_first_name),
         owner_last_name = COALESCE(?, owner_last_name),
         owner_email = COALESCE(?, owner_email),
-        mobileno = COALESCE(?, mobileno),
+        mobileno = COALESCE(?, mobileno)
                 
       WHERE plant_id = ?;
     `;
