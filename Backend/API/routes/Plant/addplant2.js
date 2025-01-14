@@ -1673,7 +1673,7 @@ router.post("/addPlant2", auth, async (req, res) => {
         const hashedPassword = await bcrypt.hash("DefaultPass@123", 10);
         isNewUser = true;
 
-        // Execute the SQL query with values
+        // Execute the SQL query to Insert User values
         await connection.query(
           `INSERT INTO gsai_user (
             user_id, entityid, first_name, last_name, email, passwordhashcode, mobile_number,
