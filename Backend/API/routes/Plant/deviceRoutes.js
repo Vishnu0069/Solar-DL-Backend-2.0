@@ -1,7 +1,7 @@
 // routes/deviceRoutes.js
 const express = require("express");
 const router = express.Router();
-const db = require("../../db"); // Database connection
+const pool = require("../../db"); // Database connection
 const { v4: uuidv4 } = require("uuid"); // Importing uuidv4 to generate UUIDs
 const { body, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
