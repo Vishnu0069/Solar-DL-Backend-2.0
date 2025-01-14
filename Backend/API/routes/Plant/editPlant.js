@@ -230,8 +230,7 @@ router.put("/editPlant", auth, async (req, res) => {
         owner_last_name = COALESCE(?, owner_last_name),
         owner_email = COALESCE(?, owner_email),
         mobileno = COALESCE(?, mobileno),
-        entityid = COALESCE(?, entityid),
-        LoginEntityID = COALESCE(?, LoginEntityID)
+                
       WHERE plant_id = ?;
     `;
 
