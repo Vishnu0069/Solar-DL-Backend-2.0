@@ -1,0 +1,6 @@
+1. catalogId 
+2. make
+3. deviceType
+4. deviceVersion,
+5. deviceModel
+

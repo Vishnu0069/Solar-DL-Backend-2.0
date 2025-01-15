@@ -46,7 +46,7 @@ router.post(
     //const current_date_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     try {
-            // SQL query to insert data into the database
+      // SQL query to insert data into the database
       const sql = `INSERT INTO gsai_device_master (
                             device_id, 
                             master_device_id, 

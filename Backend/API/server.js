@@ -39,6 +39,14 @@ const editentity = require("./routes/Entity/editEntity_1");
 const getdeletedEntity = require("./routes/Entity/fetchDeletedEntities");
 const enableEntity = require("./routes/Entity/enableEntity");
 
+//catalog
+const fetchCatalog = require("./routes/Catalog/fetchCatalog");
+const enableCatalog = require("./routes/Catalog/enableCatalog");
+const disableCatalog = require("./routes/Catalog/disableCatalog");
+const fetchDisabledCatalog = require("./routes/Catalog/fetchDisabledCatalog");
+const generateCatalogId = require("./routes/Catalog/generateCatalogId");
+const addNewCatalog = require("./routes/Catalog/addNewCatalog");
+
 //plant routes
 const generateplantid = require("./routes/Plant/generatePlantId");
 const entitynames = require("./routes/Plant/fetchEntityNames");
@@ -210,6 +218,15 @@ app.use("/api/maintenance", get_plant_user);
 app.use("/api/languages", getLanguages);
 app.use("/api/currency", currency);
 app.use("/api/timezone", timeZone);
+
+//catalog
+
+app.use("/api", fetchCatalog);
+app.use("/api", enableCatalog);
+app.use("/api", disableCatalog);
+app.use("/api", fetchDisabledCatalog);
+app.use("/api", generateCatalogId);
+app.use("/api", addNewCatalog);
 
 // Start server
 app.listen(port, () => {
