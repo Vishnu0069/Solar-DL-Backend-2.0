@@ -1,3 +1,4 @@
+// // Load environment variables from .env file
 // require("dotenv").config();
 // const express = require("express");
 // const crypto = require("crypto");
@@ -72,8 +73,7 @@
 
 //   while (await cursor.hasNext()) {
 //     const document = await cursor.next();
-//     let constructedUrl = "",
-//       headers = {};
+//     let headers = {};
 
 //     // Construct URL based on `make`
 //     switch (document.make.toLowerCase()) {
@@ -109,7 +109,41 @@
 //           .toString()
 //           .padStart(2, "0")}:00`;
 
-//         constructedUrl = `${document.api_url}${document.model}/${document.serial_number}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.api_key}`;
+//         // Handle multiple serial numbers
+//         const serialNumbers = document.serial_number
+//           .split(",")
+//           .map((sn) => sn.trim());
+//         for (const serialNumber of serialNumbers) {
+//           const constructedUrl = `${document.api_url}${document.model}/${serialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.api_key}`;
+
+//           const messageData = {
+//             deviceMake: document.make,
+//             device_id: document.device_id,
+//             master_device_id: document.master_device_id,
+//             constructedUrl,
+//             headers,
+//             metadata: {
+//               entityid: document.entityid,
+//               DeviceUUID: document.device_id,
+//               DeviceMake: document.make,
+//               plant_id: document.plant_id,
+//               plant_name: document.plant_name,
+//               latitude: document.latitude,
+//               longitude: document.longitude,
+//               capacity: document.capacity,
+//               capacity_unit: document.capacity_unit,
+//               plant_category: document.plant_category,
+//               make: document.make,
+//               model: document.model,
+//               serial_number: serialNumber,
+//               system_date_time: document.system_date_time,
+//               api_url: document.api_url,
+//               api_key: document.api_key,
+//             },
+//           };
+
+//           await sendMessageToQueue("/request", messageData);
+//         }
 //         break;
 
 //       case "solis":
@@ -131,11 +165,62 @@
 //           Signature: signature,
 //           Api_key: document.api_key,
 //         };
-//         constructedUrl = document.api_url;
+//         const constructedUrl = document.api_url;
+
+//         const messageData = {
+//           deviceMake: document.make,
+//           device_id: document.device_id,
+//           master_device_id: document.master_device_id,
+//           constructedUrl,
+//           headers,
+//           metadata: {
+//             entityid: document.entityid,
+//             plant_id: document.plant_id,
+//             plant_name: document.plant_name,
+//             latitude: document.latitude,
+//             longitude: document.longitude,
+//             capacity: document.capacity,
+//             capacity_unit: document.capacity_unit,
+//             plant_category: document.plant_category,
+//             make: document.make,
+//             model: document.model,
+//             serial_number: document.serial_number,
+//             system_date_time: document.system_date_time,
+//             api_url: document.api_url,
+//             api_key: document.api_key,
+//           },
+//         };
+
+//         await sendMessageToQueue("/request", messageData);
 //         break;
 
 //       case "solarman":
-//         constructedUrl = `${document.api_url}?api_key=${document.api_key}`;
+//         const solarmanUrl = `${document.api_url}?api_key=${document.api_key}`;
+//         const solarmanMessageData = {
+//           deviceMake: document.make,
+//           device_id: document.device_id,
+//           master_device_id: document.master_device_id,
+//           constructedUrl: solarmanUrl,
+//           headers,
+//           metadata: {
+//             entityid: document.entityid,
+//             plant_id: document.plant_id,
+//             plant_name: document.plant_name,
+//             latitude: document.latitude,
+//             longitude: document.longitude,
+//             capacity: document.capacity,
+//             capacity_unit: document.capacity_unit,
+//             plant_category: document.plant_category,
+//             make: document.make,
+//             model: document.model,
+//             serial_number: document.serial_number,
+//             system_date_time: document.system_date_time,
+//             api_url: document.api_url,
+//             api_key: document.api_key,
+//           },
+//         };
+
+//         await sendMessageToQueue("/request", solarmanMessageData);
 //         break;
 
 //       default:
@@ -149,30 +234,6 @@
 //         continue;
 //     }
 
-//     const messageData = {
-//       deviceMake: document.make,
-//       device_id: document.device_id,
-//       master_device_id: document.master_device_id,
-//       constructedUrl,
-//       headers,
-//       metadata: {
-//         plant_id: document.plant_id,
-//         plant_name: document.plant_name,
-//         latitude: document.latitude,
-//         longitude: document.longitude,
-//         capacity: document.capacity,
-//         capacity_unit: document.capacity_unit,
-//         plant_category: document.plant_category,
-//         make: document.make,
-//         model: document.model,
-//         serial_number: document.serial_number,
-//         system_date_time: document.system_date_time,
-//         api_url: document.api_url,
-//         api_key: document.api_key,
-//       },
-//     };
-
-//     await sendMessageToQueue("/request", messageData);
 //     logToFile(
 //       "M2",
 //       "L1",
@@ -187,6 +248,7 @@
 
 // fetchAndProcessData().catch(console.error);
 
+//Update one below
 // Load environment variables from .env file
 require("dotenv").config();
 const express = require("express");
@@ -267,34 +329,36 @@ async function fetchAndProcessData() {
     // Construct URL based on `make`
     switch (document.make.toLowerCase()) {
       case "solaredge":
-        const nowUtc = new Date();
-        const formattedStartTime = `${nowUtc.getUTCFullYear()}-${(
-          nowUtc.getUTCMonth() + 1
+        const nowLocal = new Date();
+        const startTimeLocal = new Date(nowLocal.getTime() - 15 * 60000); // 15 minutes ago
+
+        const formattedStartTime = `${startTimeLocal.getFullYear()}-${(
+          startTimeLocal.getMonth() + 1
         )
           .toString()
-          .padStart(2, "0")}-${nowUtc
-          .getUTCDate()
+          .padStart(2, "0")}-${startTimeLocal
+          .getDate()
           .toString()
-          .padStart(2, "0")}%20${nowUtc
-          .getUTCHours()
+          .padStart(2, "0")} ${startTimeLocal
+          .getHours()
           .toString()
-          .padStart(2, "0")}:${nowUtc
-          .getUTCMinutes()
+          .padStart(2, "0")}:${startTimeLocal
+          .getMinutes()
           .toString()
           .padStart(2, "0")}:00`;
-        const endTimeUtc = new Date(nowUtc.getTime() + 15 * 60000);
-        const formattedEndTime = `${endTimeUtc.getUTCFullYear()}-${(
-          endTimeUtc.getUTCMonth() + 1
+
+        const formattedEndTime = `${nowLocal.getFullYear()}-${(
+          nowLocal.getMonth() + 1
         )
           .toString()
-          .padStart(2, "0")}-${endTimeUtc
-          .getUTCDate()
+          .padStart(2, "0")}-${nowLocal
+          .getDate()
           .toString()
-          .padStart(2, "0")}%20${endTimeUtc
-          .getUTCHours()
+          .padStart(2, "0")} ${nowLocal
+          .getHours()
           .toString()
-          .padStart(2, "0")}:${endTimeUtc
-          .getUTCMinutes()
+          .padStart(2, "0")}:${nowLocal
+          .getMinutes()
           .toString()
           .padStart(2, "0")}:00`;
 
@@ -303,7 +367,14 @@ async function fetchAndProcessData() {
           .split(",")
           .map((sn) => sn.trim());
         for (const serialNumber of serialNumbers) {
-          const constructedUrl = `${document.api_url}${document.model}/${serialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.api_key}`;
+          //const constructedUrl = `${document.api_url}${document.model}/${serialNumber}/data?startTime=${formattedStartTime}&endTime=${formattedEndTime}&api_key=${document.api_key}`;
+          const constructedUrl = `${document.api_url}${
+            document.model
+          }/${serialNumber}/data?startTime=${encodeURIComponent(
+            formattedStartTime
+          )}&endTime=${encodeURIComponent(formattedEndTime)}&api_key=${
+            document.api_key
+          }`;
 
           const messageData = {
             deviceMake: document.make,
@@ -312,6 +383,7 @@ async function fetchAndProcessData() {
             constructedUrl,
             headers,
             metadata: {
+              entityid: document.entityid,
               DeviceUUID: document.device_id,
               DeviceMake: document.make,
               plant_id: document.plant_id,
@@ -362,6 +434,7 @@ async function fetchAndProcessData() {
           constructedUrl,
           headers,
           metadata: {
+            entityid: document.entityid,
             plant_id: document.plant_id,
             plant_name: document.plant_name,
             latitude: document.latitude,
@@ -390,6 +463,7 @@ async function fetchAndProcessData() {
           constructedUrl: solarmanUrl,
           headers,
           metadata: {
+            entityid: document.entityid,
             plant_id: document.plant_id,
             plant_name: document.plant_name,
             latitude: document.latitude,
