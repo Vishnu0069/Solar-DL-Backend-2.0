@@ -10,6 +10,196 @@ const auth = require("../../middleware/auth");
 router.post(
   "/deviceInfo",
   auth,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { Plant_id, user_id, model, devices } = req.body;
+
+    if (!Array.isArray(devices) || devices.length === 0) {
+      return res.status(400).json({ message: "Devices array is required" });
+    }
+
+    const current_date_time = new Date().toISOString();
+    const system_date_time = new Date().toISOString();
+
+    try {
+      const deviceMap = new Map(); // To store Data Logger device UUIDs by type
+      const deviceData = []; // To batch insert data
+
+      for (const device of devices) {
+        const Device_id = uuidv4(); // Generate a unique UUID for the device
+        let masterDeviceId = null;
+
+        // If the device is a Data Logger, store its Device_id
+        if (device.Device_type === "Data Logger") {
+          //console.log("Storing Data Logger device_id:", Device_id);
+          deviceMap.set("Data Logger", Device_id); // Save Data Logger's device_id
+        }
+
+        // If the device is an Inverter, assign masterDeviceId from Data Logger
+        if (device.Device_type === "Inverter") {
+          masterDeviceId = deviceMap.get("Data Logger") || null;
+          //console.log("Assigning master_device_id to Inverter:", masterDeviceId);
+        }
+
+        // Prepare device data for insertion
+        deviceData.push([
+          Device_id, // Generated UUID for the device
+          masterDeviceId, // master_device_id (Data Logger for Inverter)
+          device.Device_type || null, // Device type
+          device.Make || null, // Make
+          model || null, // Global model applied to all devices
+          current_date_time, // create_date
+          current_date_time, // last_update_date
+          user_id, // Created by user ID
+          user_id, // Last updated by user ID
+          0, // delete_flag
+          null, // uom
+          Plant_id || null, // Plant ID
+          device.Rating || null, // Rating
+          device.Quantity || null, // Quantity
+          device.Serial_Nos || null, // Serial numbers
+          system_date_time, // System date-time
+        ]);
+      }
+
+      // Insert all devices into the database
+      const sql = `
+        INSERT INTO gsai_device_master (
+          device_id, 
+          master_device_id, 
+          device_type_id,  
+          make, 
+          model, 
+          create_date, 
+          last_update_date, 
+          create_by_userid, 
+          last_update_userid, 
+          delete_flag, 
+          uom, 
+          Plant_id, 
+          Rating, 
+          Quantity, 
+          Serial_Nos, 
+          System_date_time
+        ) VALUES ?
+      `;
+      await pool.query(sql, [deviceData]);
+
+      res.status(201).json({ message: "Device information stored successfully" });
+    } catch (error) {
+      console.error("Error inserting data into the database:", error);
+      res.status(500).json({ message: "Error storing device information" });
+    }
+  }
+);
+
+
+
+
+/*
+router.post(
+  "/deviceInfo",
+  auth,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { Plant_id, user_id, model, devices } = req.body;
+
+    if (!Array.isArray(devices) || devices.length === 0) {
+      return res.status(400).json({ message: "Devices array is required" });
+    }
+
+    if (!model) {
+      return res.status(400).json({ message: "Model is required" });
+    }
+
+    const current_date_time = new Date().toISOString();
+    const system_date_time = new Date().toISOString();
+
+    try {
+      const deviceMap = new Map(); // To store logger device UUIDs
+      const deviceData = []; // To batch insert data
+
+      for (const device of devices) {
+        const Device_id = uuidv4(); // Generate a unique UUID for the device
+        let masterDeviceId = null;
+
+        // Assign master_device_id if device is dependent (e.g., inverter)
+        if (device.Device_type === "Inverter" && device.loggerId) {
+          masterDeviceId = deviceMap.get(device.loggerId) || null;
+        }
+
+        // If it's a logger, save the UUID in the map for future references
+        if (device.Device_type === "Logger" && device.uniqueId) {
+          deviceMap.set(device.uniqueId, Device_id);
+        }
+
+        deviceData.push([
+          Device_id, // Generated UUID for the device
+          masterDeviceId, // master_device_id for dependent devices
+          device.Device_type || null, // Device type
+          device.Make || null, // Make
+          model || null, // Global model applied to all devices
+          current_date_time, // create_date
+          current_date_time, // last_update_date
+          user_id, // Created by user ID
+          user_id, // Last updated by user ID
+          0, // delete_flag
+          null, // uom
+          Plant_id || null, // Plant ID
+          device.Rating || null, // Rating
+          device.Quantity || null, // Quantity
+          device.Serial_Nos || null, // Serial numbers
+          system_date_time, // System date-time
+        ]);
+      }
+
+      // Insert all devices into the database
+      const sql = `
+        INSERT INTO gsai_device_master (
+          device_id, 
+          master_device_id, 
+          device_type_id,  
+          make, 
+          model, 
+          create_date, 
+          last_update_date, 
+          create_by_userid, 
+          last_update_userid, 
+          delete_flag, 
+          uom, 
+          Plant_id, 
+          Rating, 
+          Quantity, 
+          Serial_Nos, 
+          System_date_time
+        ) VALUES ?
+      `;
+      await pool.query(sql, [deviceData]);
+
+      res.status(201).json({ message: "Device information stored successfully" });
+    } catch (error) {
+      console.error("Error inserting data into the database:", error);
+      res.status(500).json({ message: "Error storing device information" });
+    }
+  }
+);*/
+
+
+module.exports = router;
+
+//just load the device data in one record 
+/*
+router.post(
+  "/deviceInfo",
+  auth,
   [
     // Validation rules
     body("Plant_id").notEmpty().withMessage("Plant_id is required"),
@@ -92,7 +282,7 @@ router.post(
   }
 );
 
-module.exports = router;
+module.exports = router;*/
 
       // Log the parameters being passed to the query
       /* console.log("Inserting values:", [
@@ -162,6 +352,5 @@ module.exports = router;
       return res.status(500).json({ message: "Error storing device information" });
     }
   }
-);
+);*/
 
-module.exports = router;*/
