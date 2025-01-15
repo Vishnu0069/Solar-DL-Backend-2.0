@@ -14,7 +14,7 @@ router.post("/fetchDisabledCatalog", async (req, res) => {
       `
       SELECT catalogId, make, deviceType, targetFields,sourceFields,summaryFields,aggregates,deviceVersion, deviceModel, delete_flag
       FROM fetchCatalog
-      WHERE entityid = ? AND delete_flag = 1
+      WHERE entityid = ? AND delete_flag = 03
       `,
       [entityid] // Pass the entityid to the query
     );
