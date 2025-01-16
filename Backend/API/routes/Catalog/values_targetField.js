@@ -19,7 +19,7 @@ router.get("/fetchFields", async (req, res) => {
 
     // Split the fields into an array for frontend ease
     const fieldList = fields[0].fields.split(",");
-    res.status(200).json({ header, fields: fieldList });
+    res.status(200).json({ fields: fieldList });
   } catch (error) {
     console.error("Error fetching fields:", error);
     res

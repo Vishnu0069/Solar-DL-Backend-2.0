@@ -108,6 +108,7 @@ router.post("/addTargetSource", async (req, res) => {
     }
 
     const transid = targetFieldResult[0].transid;
+    console.log(`TransID : ${transid}`);
 
     // Step 2: Always update the fetchCatalog table
     const updateCatalogQuery = `
