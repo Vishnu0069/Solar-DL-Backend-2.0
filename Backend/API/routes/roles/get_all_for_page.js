@@ -78,7 +78,6 @@ router.post("/factoryroles/allroles", async (req, res) => {
     // Return empty array if user_value is not provided
     return res.status(200).json({
       user_type,
-      user_value: null,
       roles: [],
     });
   }
@@ -96,7 +95,6 @@ router.post("/factoryroles/allroles", async (req, res) => {
       // Return empty array if no matching records are found
       return res.status(200).json({
         user_type,
-        user_value,
         roles: [],
       });
     }
@@ -120,7 +118,6 @@ router.post("/factoryroles/allroles", async (req, res) => {
     // Format the response
     const formattedResponse = {
       user_type,
-      user_value,
       roles: groupedRoles,
     };
 
