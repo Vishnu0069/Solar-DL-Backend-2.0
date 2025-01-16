@@ -162,8 +162,6 @@ router.post("/updatePlant", auth, async (req, res) => {
     Pincode: pincode,
     Longitude: longitude,
     Latitude: latitude,
-    "Data Logger": data_logger,
-    Inverter: inverter,
     "Owner First Name": owner_first_name,
     "Owner Last Name": owner_last_name,
     "Owner Email": owner_email,
