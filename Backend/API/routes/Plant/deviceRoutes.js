@@ -7,67 +7,64 @@ const { body, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 
 // Updated route for device information
-router.post(
-  "/deviceInfo",
-  auth,
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+router.post("/deviceInfo", auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-    const { Plant_id, user_id, model, devices } = req.body;
+  const { Plant_id, user_id, model, devices } = req.body;
 
-    if (!Array.isArray(devices) || devices.length === 0) {
-      return res.status(400).json({ message: "Devices array is required" });
-    }
+  if (!Array.isArray(devices) || devices.length === 0) {
+    return res.status(400).json({ message: "Devices array is required" });
+  }
 
-    const current_date_time = new Date().toISOString();
-    const system_date_time = new Date().toISOString();
+  const current_date_time = new Date().toISOString();
+  const system_date_time = new Date().toISOString();
 
-    try {
-      const deviceMap = new Map(); // To store Data Logger device UUIDs by type
-      const deviceData = []; // To batch insert data
+  try {
+    const deviceMap = new Map(); // To store Data Logger device UUIDs by type
+    const deviceData = []; // To batch insert data
 
-      for (const device of devices) {
-        const Device_id = uuidv4(); // Generate a unique UUID for the device
-        let masterDeviceId = null;
+    for (const device of devices) {
+      const Device_id = uuidv4(); // Generate a unique UUID for the device
+      let masterDeviceId = null;
 
-        // If the device is a Data Logger, store its Device_id
-        if (device.Device_type === "Data Logger") {
-          //console.log("Storing Data Logger device_id:", Device_id);
-          deviceMap.set("Data Logger", Device_id); // Save Data Logger's device_id
-        }
-
-        // If the device is an Inverter, assign masterDeviceId from Data Logger
-        if (device.Device_type === "Inverter") {
-          masterDeviceId = deviceMap.get("Data Logger") || null;
-          //console.log("Assigning master_device_id to Inverter:", masterDeviceId);
-        }
-
-        // Prepare device data for insertion
-        deviceData.push([
-          Device_id, // Generated UUID for the device
-          masterDeviceId, // master_device_id (Data Logger for Inverter)
-          device.Device_type || null, // Device type
-          device.Make || null, // Make
-          model || null, // Global model applied to all devices
-          current_date_time, // create_date
-          current_date_time, // last_update_date
-          user_id, // Created by user ID
-          user_id, // Last updated by user ID
-          0, // delete_flag
-          null, // uom
-          Plant_id || null, // Plant ID
-          device.Rating || null, // Rating
-          device.Quantity || null, // Quantity
-          device.Serial_Nos || null, // Serial numbers
-          system_date_time, // System date-time
-        ]);
+      // If the device is a Data Logger, store its Device_id
+      if (device.Device_type === "Data Logger") {
+        //console.log("Storing Data Logger device_id:", Device_id);
+        deviceMap.set("Data Logger", Device_id); // Save Data Logger's device_id
       }
 
-      // Insert all devices into the database
-      const sql = `
+      // If the device is an Inverter, assign masterDeviceId from Data Logger
+      if (device.Device_type === "Inverter") {
+        masterDeviceId = deviceMap.get("Data Logger") || null;
+        //console.log("Assigning master_device_id to Inverter:", masterDeviceId);
+      }
+
+      // Prepare device data for insertion
+      deviceData.push([
+        Device_id, // Generated UUID for the device
+        masterDeviceId, // master_device_id (Data Logger for Inverter)
+        device.Device_type || null, // Device type
+        device.Make || null, // Make
+        model || null, // Global model applied to all devices
+        current_date_time, // create_date
+        current_date_time, // last_update_date
+        user_id, // Created by user ID
+        user_id, // Last updated by user ID
+        0, // delete_flag
+        null, // uom
+        Plant_id || null, // Plant ID
+        device.Rating || null, // Rating
+        device.Quantity || null, // Quantity
+        device.Serial_Nos || null, // Serial numbers
+        system_date_time, // System date-time
+      ]);
+    }
+
+    // Insert all devices into the database
+    const sql = `
         INSERT INTO gsai_device_master (
           device_id, 
           master_device_id, 
@@ -87,18 +84,14 @@ router.post(
           System_date_time
         ) VALUES ?
       `;
-      await pool.query(sql, [deviceData]);
+    await pool.query(sql, [deviceData]);
 
-      res.status(201).json({ message: "Device information stored successfully" });
-    } catch (error) {
-      console.error("Error inserting data into the database:", error);
-      res.status(500).json({ message: "Error storing device information" });
-    }
+    res.status(201).json({ message: "Device information stored successfully" });
+  } catch (error) {
+    console.error("Error inserting data into the database:", error);
+    res.status(500).json({ message: "Error storing device information" });
   }
-);
-
-
-
+});
 
 /*
 router.post(
@@ -192,10 +185,9 @@ router.post(
   }
 );*/
 
-
 module.exports = router;
 
-//just load the device data in one record 
+//just load the device data in one record
 /*
 router.post(
   "/deviceInfo",
@@ -304,10 +296,9 @@ router.post(
 );
 
 module.exports = router;*/
->>>>>>> 067cb99b23ccd8687f20b54eee3955823f770602
 
-      // Log the parameters being passed to the query
-      /* console.log("Inserting values:", [
+// Log the parameters being passed to the query
+/* console.log("Inserting values:", [
                 Device_id,
                 null,
                 Device_type || null,
@@ -375,4 +366,3 @@ module.exports = router;*/
     }
   }
 );*/
-

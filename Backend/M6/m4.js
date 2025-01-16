@@ -93,8 +93,8 @@ const listenToTopic = async () => {
               .replace(":", "-");
 
             // Extract telemetry fields
-            const DCVoltageTargetFields = responseData.data.telemetries.map(
-              (telemetry) => telemetry.dcVoltage
+            const DCOutput = responseData.data.telemetries.map(
+              (telemetry) => telemetry.totalActivePower
             );
             const DCCurrentTargetFields = responseData.data.telemetries.map(
               (telemetry) => telemetry.dcCurrent
@@ -144,6 +144,7 @@ const listenToTopic = async () => {
 
             const result = await collection.insertOne({
               DeviceUUIDMap: {
+                entityid: metadata.entityid,
                 DeviceUUID: metadata.DeviceUUID,
                 DeviceMake: metadata.DeviceMake,
                 LocalDateTime: currentLocalDateTime,
@@ -156,7 +157,7 @@ const listenToTopic = async () => {
                     .replace(/T/, " ")
                     .replace(/\..+/, ""),
                 },
-                DCVoltageTargetFields,
+                DCOutput,
                 DCCurrentTargetFields,
                 ACVoltageTargetFields: avgACVoltage,
                 ACCurrentTargetFields: avgACCurrent,

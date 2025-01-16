@@ -413,6 +413,7 @@ async function initializeAndInsertData() {
         );
 
         const document = {
+          entityid: plant?.entityid,
           device_id: device.device_id,
           master_device_id: device.master_device_id,
           device_type_id: device.device_type_id,
@@ -510,6 +511,7 @@ async function fetchAndInsertData() {
     } else {
       for (const device of devices) {
         const document = {
+          entityid: plant?.entityid,
           device_id: device.device_id,
           master_device_id: device.master_device_id,
           device_type_id: device.device_type_id,
@@ -519,7 +521,24 @@ async function fetchAndInsertData() {
           plant_id: device.Plant_id,
           serial_number: device.Serial_Nos,
           system_date_time: device.System_date_time,
-          create_date: device.create_date,
+          plant_name: plant?.plant_name || null,
+          latitude: plant?.latitude || null,
+          longitude: plant?.longitude || null,
+          plant_category: plant?.plant_category || null,
+          capacity: plant?.capacity || null,
+          capacity_unit: plant?.capacity_unit || null,
+          country: plant?.country || null,
+          region: plant?.region || null,
+          state: plant?.state || null,
+          district: plant?.district || null,
+          category: plant?.plant_category || null,
+          type: plant?.plant_type || null,
+          api_url: apiSetting?.url || null,
+          api_key: apiSetting?.api_key || null,
+          api_token: apiSetting?.token || null,
+          username: apiSetting?.user_name || null,
+          password: apiSetting?.password || null,
+          headers: apiSetting?.header || null,
         };
 
         // Insert the constructed document into MongoDB
