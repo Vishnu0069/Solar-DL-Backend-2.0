@@ -107,6 +107,13 @@ const factory_modules = require("./routes/roles/factorymodules");
 const factory_all = require("./routes/roles/get_all");
 const factory_all_roles = require("./routes/roles/get_all_for_page");
 
+//DASHBOARD
+
+//PlantsOverview
+const peak_power = require("./routes/Dashboard/Plants_Overview/Plants");
+const energy_output = require("./routes/Dashboard/Plants_Overview/monthly_summary");
+const table = require("./routes/Dashboard/Plants_Overview/table");
+
 require("dotenv").config(); // Load environment variables
 
 const app = express();
@@ -228,6 +235,12 @@ app.use("/api", fetchDisabledCatalog);
 app.use("/api", generateCatalogId);
 app.use("/api", addNewCatalog);
 
+//DASHBOARD
+
+//PlantOverview
+app.use("/api", peak_power);
+app.use("/api", energy_output);
+app.use("/api", table);
 // Start server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
