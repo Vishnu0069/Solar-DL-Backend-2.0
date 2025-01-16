@@ -46,7 +46,9 @@ const disableCatalog = require("./routes/Catalog/disableCatalog");
 const fetchDisabledCatalog = require("./routes/Catalog/fetchDisabledCatalog");
 const generateCatalogId = require("./routes/Catalog/generateCatalogId");
 const addNewCatalog = require("./routes/Catalog/addNewCatalog");
-
+const fetchHeaders = require("./routes/Catalog/dropdown_targetField");
+const valuesField = require("./routes/Catalog/values_targetField");
+const sourceFields = require("./routes/Catalog/save_sourceField");
 //plant routes
 const generateplantid = require("./routes/Plant/generatePlantId");
 const entitynames = require("./routes/Plant/fetchEntityNames");
@@ -227,6 +229,9 @@ app.use("/api", disableCatalog);
 app.use("/api", fetchDisabledCatalog);
 app.use("/api", generateCatalogId);
 app.use("/api", addNewCatalog);
+app.use("/api", fetchHeaders);
+app.use("/api", valuesField);
+app.use("/api", sourceFields);
 
 // Start server
 app.listen(port, () => {

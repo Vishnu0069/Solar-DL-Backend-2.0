@@ -58,7 +58,7 @@ router.post("/generateCatalogId", async (req, res) => {
     let newCatalogId;
 
     while (true) {
-      newCatalogId = `${prefix}-C-${suffix}`;
+      newCatalogId = `${prefix}-GSAI-C-${suffix}`;
 
       // Check if this catalog_id already exists in the database
       const [rows] = await pool.query(
