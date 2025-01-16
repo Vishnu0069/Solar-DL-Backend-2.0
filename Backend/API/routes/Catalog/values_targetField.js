@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
 // Fetch fields for a specific header
-router.get("/fetchFields", async (req, res) => {
+router.post("/fetchFields", async (req, res) => {
   const { header } = req.body;
 
   try {
