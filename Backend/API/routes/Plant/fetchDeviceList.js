@@ -39,19 +39,17 @@ router.get("/fetchDeviceList", auth, async (req, res) => {
     try {
         // SQL query to fetch the limited fields
         const query = `
-          SELECT 
-            dt.Device_type AS "Device Type",
+                    SELECT 
+            dm.device_type_id AS "Device Type",
             dm.make AS "Make",
             dm.model AS "Model",
             dm.Rating AS "Rating",
             dm.Quantity AS "Quantity",
             dm.Serial_Nos AS "Serial Numbers"
-          FROM 
+            FROM 
             gsai_device_master dm
-          LEFT JOIN 
-            gsai_device_types dt ON dm.device_type_id = dt.Device_type_id
-          WHERE 
-            dm.Plant_id = ?;
+            WHERE 
+            dm.Plant_id = ?
         `;
 
     // Execute the query
