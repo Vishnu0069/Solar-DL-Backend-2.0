@@ -12,7 +12,7 @@ router.get("/fetchDeviceList", auth, async (req, res) => {
     return res.status(400).json({ message: "plant_id parameter is required" });
   }
 
-  try {
+ /* try {
     // SQL query to fetch device list
     const query = `
       SELECT 
@@ -34,7 +34,25 @@ router.get("/fetchDeviceList", auth, async (req, res) => {
         gsai_device_types dt ON dm.device_type_id = dt.Device_type_id
       WHERE 
         dm.Plant_id = ?;
-    `;
+    `;*/
+
+    try {
+        // SQL query to fetch the limited fields
+        const query = `
+          SELECT 
+            dt.Device_type AS "Device Type",
+            dm.make AS "Make",
+            dm.model AS "Model",
+            dm.Rating AS "Rating",
+            dm.Quantity AS "Quantity",
+            dm.Serial_Nos AS "Serial Numbers"
+          FROM 
+            gsai_device_master dm
+          LEFT JOIN 
+            gsai_device_types dt ON dm.device_type_id = dt.Device_type_id
+          WHERE 
+            dm.Plant_id = ?;
+        `;
 
     // Execute the query
     const [rows] = await pool.query(query, [plant_id]);
