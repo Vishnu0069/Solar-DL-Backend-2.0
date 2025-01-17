@@ -98,6 +98,8 @@ const get_plant_user = require("./routes/maintenance/get_plants_userid");
 const getLanguages = require("./routes/Settings/language");
 const currency = require("./routes/Settings/currency");
 const timeZone = require("./routes/Settings/timeZone");
+const update_location = require("./routes/Settings/locations");
+const update_language = require("./routes/Settings/update_language");
 
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
@@ -227,6 +229,8 @@ app.use("/api/maintenance", get_plant_user);
 app.use("/api/languages", getLanguages);
 app.use("/api/currency", currency);
 app.use("/api/timezone", timeZone);
+app.use("/api", update_location);
+app.use("/api", update_language);
 
 //catalog
 
