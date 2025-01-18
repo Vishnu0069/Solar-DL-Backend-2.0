@@ -76,6 +76,7 @@ const email_status = require("./routes/Plant/email_status");
 const deviceRoutes = require("./routes/Plant/deviceRoutes");
 const assigned = require("./routes/Plant/assigned");
 const unassigned = require("./routes/Plant/unassigned");
+const fetchDeviceList = require("./routes/Plant/fetchDeviceList");
 //User routes
 const Add_User1 = require("./routes/User/Add_User1");
 const Get_User_for_edit = require("./routes/User/Get_User_edit");
@@ -198,6 +199,7 @@ app.use("/api/device", deviceRoutes);
 app.use("/api/plant", assigned);
 app.use("/api/plant", unassigned);
 app.use("/api/plant", editPlant);
+app.use("/api/plant",fetchDeviceList);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);

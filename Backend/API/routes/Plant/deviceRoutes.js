@@ -116,11 +116,17 @@ router.put(
   "/deviceInfo/:device_id",
   auth,
   [
+    body("Make").optional(), // Optional, no additional validation
+    body("Rating").optional().isInt().withMessage("Quantity must be a number"), // Optional, no additional validation
+    body("Quantity").optional().isInt().withMessage("Quantity must be a number"), // Optional, ensures Quantity is a number if provided
+    body("Serial_Nos").optional() // Optional, no additional validation
+  ],
+  /*[
     body("Make").optional().notEmpty().withMessage("Make is required"),
     body("Rating").optional().notEmpty().withMessage("Rating is required"),
     body("Quantity").optional().isInt().withMessage("Quantity must be a number"),
     body("Serial_Nos").optional().notEmpty().withMessage("Serial_Nos is required"),
-  ],
+  ],*/
   async (req, res) => {
     const { device_id } = req.params;
     const { Make, Rating, Quantity, Serial_Nos } = req.body;
