@@ -76,7 +76,6 @@
 // });
 
 // module.exports = router;
-
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
@@ -101,7 +100,8 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const { entity_id, make } = req.body;
     const ext = path.extname(file.originalname); // Get file extension
-    cb(null, `${entity_id}-${make}-${Date.now()}${ext}`); // Filename format: entity_id-make-timestamp.extension
+    const timestamp = Date.now();
+    cb(null, `${entity_id}-${make}-${timestamp}${ext}`); // Filename format: entity_id-make-timestamp.extension
   },
 });
 
@@ -128,15 +128,15 @@ router.post("/upload-log", auth, upload.single("file"), async (req, res) => {
   const { entity_id, make } = req.body;
 
   // Validate request body
-  if (!entity_id || !make) {
+  if (!entity_id || !make || !req.file) {
     return res.status(400).json({
-      error_message: "Please provide entity_id and make.",
+      error_message: "Please provide entity_id, make, and a valid file.",
     });
   }
 
   try {
     // Build the absolute file path
-    const filePath = path.join(uploadFolder, req.file.filename);
+    const filePath = `/ErrorLogs/${req.file.filename}`;
 
     // Insert file details into the database
     const query = `
@@ -154,7 +154,9 @@ router.post("/upload-log", auth, upload.single("file"), async (req, res) => {
     console.error(error);
 
     // Delete the uploaded file if the database operation fails
-    fs.unlinkSync(req.file.path);
+    if (req.file && req.file.path) {
+      fs.unlinkSync(req.file.path);
+    }
 
     res.status(500).json({
       error_message: "An error occurred while saving file information.",

@@ -47,10 +47,10 @@ const connection = require("../../db/index");
 const auth = require("../../middleware/auth");
 
 router.post("/savelocation", auth, async (req, res) => {
-  const { entity_id, country_locations } = req.body;
+  const { entityId, country_locations } = req.body;
 
   // Validate request body
-  if (!entity_id || !country_locations) {
+  if (!entityId || !country_locations) {
     return res.status(400).json({
       error_message: "Please provide entity_id and country_locations.",
     });
@@ -68,11 +68,10 @@ router.post("/savelocation", auth, async (req, res) => {
         country_locations = VALUES(country_locations)
     `;
 
-    await connection.query(query, [entity_id, countryLocationsJson]);
+    await connection.query(query, [entityId, countryLocationsJson]);
 
     res.status(200).json({
       message: "Country locations updated successfully.",
-      entity_id,
     });
   } catch (error) {
     console.error(error);

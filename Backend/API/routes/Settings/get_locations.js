@@ -26,7 +26,6 @@ router.post("/getlocations/:entity_id", auth, async (req, res) => {
     const country_locations = JSON.parse(rows[0].country_locations);
 
     res.status(200).json({
-      entity_id,
       country_locations,
     });
   } catch (error) {

@@ -23,7 +23,6 @@ router.post("/getlanguages/:entity_id", auth, async (req, res) => {
     }
 
     res.status(200).json({
-      entity_id,
       languages: rows[0].languages,
     });
   } catch (error) {
