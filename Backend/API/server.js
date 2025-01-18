@@ -101,6 +101,9 @@ const currency = require("./routes/Settings/currency");
 const timeZone = require("./routes/Settings/timeZone");
 const update_location = require("./routes/Settings/locations");
 const update_language = require("./routes/Settings/update_language");
+const get_languages = require("./routes/Settings/get_languages");
+const get_locations = require("./routes/Settings/get_locations");
+const error_log = require("./routes/Settings/error");
 
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
@@ -199,7 +202,7 @@ app.use("/api/device", deviceRoutes);
 app.use("/api/plant", assigned);
 app.use("/api/plant", unassigned);
 app.use("/api/plant", editPlant);
-app.use("/api/plant",fetchDeviceList);
+app.use("/api/plant", fetchDeviceList);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);
@@ -233,6 +236,9 @@ app.use("/api/currency", currency);
 app.use("/api/timezone", timeZone);
 app.use("/api", update_location);
 app.use("/api", update_language);
+app.use("/api", get_locations);
+app.use("/api", get_languages);
+app.use("/api", error_log);
 
 //catalog
 
