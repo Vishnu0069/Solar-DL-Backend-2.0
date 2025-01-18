@@ -84,6 +84,7 @@
 
 // module.exports = router;
 
+// Todo
 const express = require("express");
 const pool = require("../../db"); // Ensure this points to your database connection file
 const router = express.Router();
@@ -113,12 +114,14 @@ router.post("/addTargetSource", async (req, res) => {
     // Step 2: Always update the fetchCatalog table
     const updateCatalogQuery = `
       UPDATE fetchCatalog 
-      SET targetFields = ?, sourceFields = ? 
+      SET targetFields = ?, sourceFields = ? ,targetHeader=?, sourceHeader=?
       WHERE catalogId = ?
     `;
     const [updateCatalogResult] = await pool.query(updateCatalogQuery, [
       targetfields,
       sourceFields,
+      targetHeader,
+      sourceHeader,
       catalogId,
     ]);
 
