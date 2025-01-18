@@ -54,29 +54,24 @@ router.post("/savelanguages", auth, async (req, res) => {
   }
 
   try {
-    // Update only the languages field for the given entity_id
+    // Insert a new record or update the languages field if the entity_id already exists
     const query = `
-      UPDATE gsai_entity_settings
-      SET languages = ?
-      WHERE entity_id = ?
+      INSERT INTO gsai_entity_settings (entity_id, languages)
+      VALUES (?, ?)
+      ON DUPLICATE KEY UPDATE
+        languages = VALUES(languages)
     `;
 
-    const [result] = await connection.query(query, [languages, entity_id]);
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({
-        error_message: `No record found for entity_id: ${entity_id}`,
-      });
-    }
+    await connection.query(query, [entity_id, languages]);
 
     res.status(200).json({
-      message: "Languages updated successfully.",
+      message: "Languages saved successfully.",
       entity_id,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      error_message: "An error occurred while updating languages.",
+      error_message: "An error occurred while saving languages.",
     });
   }
 });
