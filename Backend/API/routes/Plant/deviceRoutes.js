@@ -7,6 +7,7 @@ const { body, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 
 // Updated route for device information
+// POST: Create Devices
 router.post("/deviceInfo", auth, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -25,6 +26,7 @@ router.post("/deviceInfo", auth, async (req, res) => {
   try {
     const deviceMap = new Map(); // To store Data Logger device UUIDs by type
     const deviceData = []; // To batch insert data
+    const responseDevices = []; // To hold response data with device_id
 
     for (const device of devices) {
       const Device_id = uuidv4(); // Generate a unique UUID for the device
@@ -61,7 +63,19 @@ router.post("/deviceInfo", auth, async (req, res) => {
         device.Serial_Nos || null, // Serial numbers
         system_date_time, // System date-time
       ]);
+
+         // Add device info to the response
+         responseDevices.push({
+          device_id: Device_id,
+          Device_type: device.Device_type,
+          Make: device.Make,
+          Rating: device.Rating,
+          Quantity: device.Quantity,
+          Serial_Nos: device.Serial_Nos,
+        });
     }
+
+    
 
     // Insert all devices into the database
     const sql = `
@@ -86,12 +100,74 @@ router.post("/deviceInfo", auth, async (req, res) => {
       `;
     await pool.query(sql, [deviceData]);
 
-    res.status(201).json({ message: "Device information stored successfully" });
+    res.status(201).json({ 
+      message: "Device information stored successfully" ,
+      devices: responseDevices, // Include device_id for each device
+    });
   } catch (error) {
     console.error("Error inserting data into the database:", error);
     res.status(500).json({ message: "Error storing device information" });
   }
 });
+
+
+// PUT: Update Device Information
+router.put(
+  "/deviceInfo/:device_id",
+  auth,
+  [
+    body("Make").optional(), // Optional, no additional validation
+    body("Rating").optional().isInt().withMessage("Quantity must be a number"), // Optional, no additional validation
+    body("Quantity").optional().isInt().withMessage("Quantity must be a number"), // Optional, ensures Quantity is a number if provided
+    body("Serial_Nos").optional() // Optional, no additional validation
+  ],
+  /*[
+    body("Make").optional().notEmpty().withMessage("Make is required"),
+    body("Rating").optional().notEmpty().withMessage("Rating is required"),
+    body("Quantity").optional().isInt().withMessage("Quantity must be a number"),
+    body("Serial_Nos").optional().notEmpty().withMessage("Serial_Nos is required"),
+  ],*/
+  async (req, res) => {
+    const { device_id } = req.params;
+    const { Make, Rating, Quantity, Serial_Nos } = req.body;
+
+    try {
+      const sql = `
+        UPDATE gsai_device_master
+        SET 
+          make = COALESCE(?, make),
+          Rating = COALESCE(?, Rating),
+          Quantity = COALESCE(?, Quantity),
+          Serial_Nos = COALESCE(?, Serial_Nos),
+          last_update_date = ?
+        WHERE 
+          device_id = ?
+      `;
+
+      const last_update_date = new Date().toISOString();
+
+      const [result] = await pool.execute(sql, [
+        Make || null,
+        Rating || null,
+        Quantity || null,
+        Serial_Nos || null,
+        last_update_date,
+        device_id,
+      ]);
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Device not found" });
+      }
+
+      res.status(200).json({ 
+        message: "Device information updated successfully", 
+      });
+    } catch (error) {
+      console.error("Error updating device information:", error);
+      res.status(500).json({ message: "Error updating device information" });
+    }
+  }
+);
 
 /*
 router.post(

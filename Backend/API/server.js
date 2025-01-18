@@ -78,6 +78,7 @@ const email_status = require("./routes/Plant/email_status");
 const deviceRoutes = require("./routes/Plant/deviceRoutes");
 const assigned = require("./routes/Plant/assigned");
 const unassigned = require("./routes/Plant/unassigned");
+const fetchDeviceList = require("./routes/Plant/fetchDeviceList");
 //User routes
 const Add_User1 = require("./routes/User/Add_User1");
 const Get_User_for_edit = require("./routes/User/Get_User_edit");
@@ -100,6 +101,8 @@ const get_plant_user = require("./routes/maintenance/get_plants_userid");
 const getLanguages = require("./routes/Settings/language");
 const currency = require("./routes/Settings/currency");
 const timeZone = require("./routes/Settings/timeZone");
+const update_location = require("./routes/Settings/locations");
+const update_language = require("./routes/Settings/update_language");
 
 //UserGroups
 const Add_User_groups = require("./routes/UserGroups/Add_User_groups");
@@ -198,6 +201,7 @@ app.use("/api/device", deviceRoutes);
 app.use("/api/plant", assigned);
 app.use("/api/plant", unassigned);
 app.use("/api/plant", editPlant);
+app.use("/api/plant",fetchDeviceList);
 //User
 app.use("/api/user", Add_User1);
 app.use("/api/user", Get_User_for_edit);
@@ -229,6 +233,8 @@ app.use("/api/maintenance", get_plant_user);
 app.use("/api/languages", getLanguages);
 app.use("/api/currency", currency);
 app.use("/api/timezone", timeZone);
+app.use("/api", update_location);
+app.use("/api", update_language);
 
 //catalog
 

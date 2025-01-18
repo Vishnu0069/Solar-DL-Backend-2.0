@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../../db/index");
+const auth = require("../../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const [languages] = await connection.query("SELECT * FROM languages");
 
