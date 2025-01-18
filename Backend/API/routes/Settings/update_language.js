@@ -43,7 +43,7 @@ const router = express.Router();
 const connection = require("../../db/index");
 const auth = require("../../middleware/auth");
 
-router.post("/updatelanguages", auth, async (req, res) => {
+router.post("/savelanguages", auth, async (req, res) => {
   const { entity_id, languages } = req.body;
 
   // Validate request body
