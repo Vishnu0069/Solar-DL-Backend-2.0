@@ -49,6 +49,8 @@ const addNewCatalog = require("./routes/Catalog/addNewCatalog");
 const fetchHeaders = require("./routes/Catalog/dropdown_targetField");
 const valuesField = require("./routes/Catalog/values_targetField");
 const sourceFields = require("./routes/Catalog/save_sourceField");
+const deviceData = require("./routes/Catalog/deviceData");
+
 //plant routes
 const generateplantid = require("./routes/Plant/generatePlantId");
 const entitynames = require("./routes/Plant/fetchEntityNames");
@@ -239,6 +241,7 @@ app.use("/api", addNewCatalog);
 app.use("/api", fetchHeaders);
 app.use("/api", valuesField);
 app.use("/api", sourceFields);
+app.use("/api", deviceData);
 
 //DASHBOARD
 
